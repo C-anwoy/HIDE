@@ -96,83 +96,9 @@ def get_hsic_score_mid(hidden_states):
     
     return float(hsic_score_svd)
 
-def get_hsic_score_second_last(hidden_states):
-    # selected_layer = int(len(hidden_states[0])/2)
-    selected_layer = -2
-    # print(f"generation length {len(hidden_states)}")
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states] # (num_tokens, num_seq, num_input_tokens/1, embedding_size)
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    # print(X.dtype)
-    # print(X.shape)
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    # print(Y.dtype)
-    # print(Y.shape)
-    # sample_result = {}
-
-    # for kernel in KERNEL_FUNCTIONS:
-        # Select kernel functions
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    hsic_score_svd = compute_hsic(X, Y, kernel_X, kernel_Y, svd=True, k=20)
-
-    # sample_result[kernel] = float(hsic_score_svd)
-    
-    return float(hsic_score_svd)
-
-# hidden_states shape (num_tokens, num_layers, num_seq, num_input_tokens/1, embedding_size)
-def get_hsic_score_mid_meanpool(hidden_states):
-    selected_layer = int(len(hidden_states[0])/2)
-    # selected_layer = -2
-    # print(f"generation length {len(hidden_states)}")
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states] # (num_tokens, num_seq, num_input_tokens/1, embedding_size)
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    # print(X.dtype)
-    # print(X.shape)
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    # Apply mean pooling to X and Y
-    X_mean = torch.mean(X, dim=0, keepdim=True)  # Mean across tokens, result shape: (1, 4096)
-    Y_mean = torch.mean(Y, dim=0, keepdim=True)  # Mean across tokens, result shape: (1, 4096)
-    print(X.shape, X_mean.shape)
-    print(Y.shape, Y_mean.shape)
-    # Calculate cosine similarity
-    cos_sim = torch.nn.functional.cosine_similarity(X_mean, Y_mean, dim=1)
-    
-    return float(cos_sim)
-
-def get_hsic_score_second_last_meanpool(hidden_states):
-    # selected_layer = int(len(hidden_states[0])/2)
-    selected_layer = -2
-    # print(f"generation length {len(hidden_states)}")
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states] # (num_tokens, num_seq, num_input_tokens/1, embedding_size)
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    # print(X.dtype)
-    # print(X.shape)
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    # Apply mean pooling to X and Y
-    X_mean = torch.mean(X, dim=0, keepdim=True)  # Mean across tokens, result shape: (1, 4096)
-    Y_mean = torch.mean(Y, dim=0, keepdim=True)  # Mean across tokens, result shape: (1, 4096)
-    
-    # Calculate cosine similarity
-    cos_sim = torch.nn.functional.cosine_similarity(X_mean, Y_mean, dim=1)
-    
-    return float(cos_sim)
-
-
 def extract_keyword_representation(X, Y, tokenizer, input_tokens, output_tokens, k=20):
     # Initialize KeyBERT
-    kw_model = KeyBERT(model="all-MiniLM-L6-v2")
+    kw_model = KeyBERT(model=os.path.join(_settings.MODEL_PATH, 'all-MiniLM-L6-v2'))
     
     # Decoding text from input ids
     input_text = tokenizer.decode(input_tokens, skip_special_tokens=True)
@@ -423,9 +349,9 @@ def compute_hsic_with_keywords(X, Y, tokenizer, input_tokens, output_tokens, ker
     hsic = torch.trace(K_X_centered @ K_Y_centered) / (n ** 2)
     return hsic, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
 
-def get_hsic_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
+def get_hsic_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
     
-    selected_layer = int(len(hidden_states[0])/2)
+    selected_layer = layer
     selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
 
     X = selected_states[0][0,:,:]
@@ -438,33 +364,12 @@ def get_hsic_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_to
     # print(f"length of input tokens : {len(input_tokens)}")
     # print(f"length of output tokens : {len(output_tokens)}")
     
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
+    kernel_X = KERNEL_FUNCTIONS[kernel]
+    kernel_Y = KERNEL_FUNCTIONS[kernel]
     # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
     hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_hsic_with_keywords(
         X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
-    )
-    
-    return float(hsic_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_hsic_score_second_last_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
-    
-    selected_layer = -2  # Second to last layer
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_hsic_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
+        kernel_X, kernel_Y, k=keywords, **kwargs
     )
     
     return float(hsic_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
@@ -500,9 +405,9 @@ def compute_cka_with_keywords(X, Y, tokenizer, input_tokens, output_tokens, kern
 
     return cka_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
 
-def get_cka_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
+def get_cka_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
     
-    selected_layer = int(len(hidden_states[0])/2)
+    selected_layer = layer
     selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
 
     X = selected_states[0][0,:,:]
@@ -515,33 +420,12 @@ def get_cka_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tok
     # print(f"length of input tokens : {len(input_tokens)}")
     # print(f"length of output tokens : {len(output_tokens)}")
     
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
+    kernel_X = KERNEL_FUNCTIONS[kernel]
+    kernel_Y = KERNEL_FUNCTIONS[kernel]
     # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
     cka_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_cka_with_keywords(
         X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
-    )
-    
-    return float(cka_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_cka_score_second_last_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
-    
-    selected_layer = -2  # Second to last layer
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    cka_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_cka_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
+        kernel_X, kernel_Y, k=keywords, **kwargs
     )
     
     return float(cka_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
@@ -667,9 +551,108 @@ def get_unbiased_hsic_score_keybert(hidden_states, tokenizer, input_tokens, outp
     
     return float(hsic_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
 
-def get_unbiased_hsic_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords):
+def l1_norm_distance(A, B):
+    """
+    Calculates the L1 norm (Manhattan distance) between two matrices A and B.
+    """
+    if A.shape != B.shape:
+        raise ValueError("Matrices must have the same shape.")
+    return np.sum(np.abs(A - B))
+
+def l2_norm_distance(A, B):
+    """
+    Calculates the L2 norm (Frobenius norm) distance between two matrices A and B.
+    """
+    if A.shape != B.shape:
+        raise ValueError("Matrices must have the same shape.")
+    # np.linalg.norm with 'fro' (Frobenius) is the standard way
+    return np.linalg.norm(A - B, 'fro')
+
+def cosine_similarity(A, B):
+    """
+    Calculates the cosine similarity between two matrices A and B.
+    The matrices are flattened into vectors before comparison.
+    """
+    if A.shape != B.shape:
+        raise ValueError("Matrices must have the same shape.")
+    print(A.shape, B.shape)
+    # Flatten the matrices into 1D vectors
+    A_flat = A.ravel()
+    B_flat = B.ravel()
+    print(A_flat.shape, B_flat.shape)
+    # Calculate cosine similarity
+    dot_product = np.dot(A_flat, B_flat)
+    norm_A = np.linalg.norm(A_flat)
+    norm_B = np.linalg.norm(B_flat)
     
-    selected_layer = int(len(hidden_states[0])/2)
+    # Avoid division by zero if one of the vectors is all zeros
+    if norm_A == 0 or norm_B == 0:
+        return 0.0
+    
+    return dot_product / (norm_A * norm_B)
+
+def get_cosine_sim_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, **kwargs):
+    selected_layer = layer
+    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
+    X = selected_states[0][0,:,:]
+    X = X.to(torch.float32)
+
+    try:
+        Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
+    except:
+        return 0, 0, 0, 0, 0
+    Y = Y.to(torch.float32)
+    
+    # Extract keyword representations
+    X_keywords, Y_keywords, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = extract_keyword_representation(X, Y, tokenizer, input_tokens, output_tokens[:-1], k=keywords)
+    
+    sim_score = cosine_similarity(X_keywords.cpu().numpy(), Y_keywords.cpu().numpy())
+    print(f"sim_score : {sim_score}")
+    return float(sim_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
+
+def get_l1norm_sim_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, **kwargs):
+    selected_layer = layer
+    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
+    X = selected_states[0][0,:,:]
+    X = X.to(torch.float32)
+
+    try:
+        Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
+    except:
+        return 0, 0, 0, 0, 0
+    Y = Y.to(torch.float32)
+    
+    # Extract keyword representations
+    X_keywords, Y_keywords, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = extract_keyword_representation(X, Y, tokenizer, input_tokens, output_tokens[:-1], k=keywords)
+    
+    sim_score = l1_norm_distance(X_keywords.cpu().numpy(), Y_keywords.cpu().numpy())
+    print(f"sim_score : {sim_score}")
+    return float(sim_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
+
+
+def get_l2norm_sim_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, **kwargs):
+    selected_layer = layer
+    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
+    X = selected_states[0][0,:,:]
+    X = X.to(torch.float32)
+
+    try:
+        Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
+    except:
+        return 0, 0, 0, 0, 0
+    Y = Y.to(torch.float32)
+    
+    # Extract keyword representations
+    X_keywords, Y_keywords, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = extract_keyword_representation(X, Y, tokenizer, input_tokens, output_tokens[:-1], k=keywords)
+    
+    sim_score = l2_norm_distance(X_keywords.cpu().numpy(), Y_keywords.cpu().numpy())
+    print(f"sim_score : {sim_score}")
+    return float(sim_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
+
+
+def get_unbiased_hsic_score_keybert_duplication(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
+    
+    selected_layer = layer
     selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
 
     X = selected_states[0][0,:,:]
@@ -685,64 +668,12 @@ def get_unbiased_hsic_score_mid_keybert(hidden_states, tokenizer, input_tokens, 
     # print(f"length of input tokens : {len(input_tokens)}")
     # print(f"length of output tokens : {len(output_tokens)}")
     
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-    # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
-    hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_hsic_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=keywords
-    )
-    
-    return float(hsic_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_unbiased_hsic_score_mid_keybert_duplication(hidden_states, tokenizer, input_tokens, output_tokens, keywords):
-    
-    selected_layer = int(len(hidden_states[0])/2)
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    # print(f"X.shape {X.shape}")
-
-    try:
-        Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    except:
-        return 0, 0, 0, 0, 0
-    Y = Y.to(torch.float32)
-    # print(f"Y.shape {Y.shape}")
-    # print(f"length of input tokens : {len(input_tokens)}")
-    # print(f"length of output tokens : {len(output_tokens)}")
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
+    kernel_X = KERNEL_FUNCTIONS[kernel]
+    kernel_Y = KERNEL_FUNCTIONS[kernel]
     # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
     hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_hsic_with_keywords_duplication(
         X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=keywords
-    )
-    
-    return float(hsic_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_unbiased_hsic_score_second_last_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords):
-    
-    selected_layer = -2  # Second to last layer
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    
-    try:
-        Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    except:
-        return 0, 0, 0, 0, 0
-    Y = Y.to(torch.float32)
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_hsic_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=keywords
+        kernel_X, kernel_Y, k=keywords, **kwargs
     )
     
     return float(hsic_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
@@ -841,9 +772,9 @@ def compute_unbiased_cka_with_keywords(X, Y, tokenizer, input_tokens, output_tok
 
     return cka_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
 
-def get_unbiased_cka_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
+def get_unbiased_cka_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
     
-    selected_layer = int(len(hidden_states[0])/2)
+    selected_layer = layer
     selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
 
     X = selected_states[0][0,:,:]
@@ -856,33 +787,12 @@ def get_unbiased_cka_score_mid_keybert(hidden_states, tokenizer, input_tokens, o
     # print(f"length of input tokens : {len(input_tokens)}")
     # print(f"length of output tokens : {len(output_tokens)}")
     
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
+    kernel_X = KERNEL_FUNCTIONS[kernel]
+    kernel_Y = KERNEL_FUNCTIONS[kernel]
     # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
     cka_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_cka_with_keywords(
         X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
-    )
-    
-    return float(cka_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_unbiased_cka_score_second_last_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
-    
-    selected_layer = -2  # Second to last layer
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    cka_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_cka_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
+        kernel_X, kernel_Y, k=keywords, **kwargs
     )
     
     return float(cka_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
@@ -897,9 +807,9 @@ def compute_dcor_with_keywords(X, Y, tokenizer, input_tokens, output_tokens, ker
 
     return dcor_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
 
-def get_dcor_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
+def get_dcor_score_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
     
-    selected_layer = int(len(hidden_states[0])/2)
+    selected_layer = layer
     selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
 
     X = selected_states[0][0,:,:]
@@ -912,33 +822,12 @@ def get_dcor_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_to
     # print(f"length of input tokens : {len(input_tokens)}")
     # print(f"length of output tokens : {len(output_tokens)}")
     
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
+    kernel_X = KERNEL_FUNCTIONS[kernel]
+    kernel_Y = KERNEL_FUNCTIONS[kernel]
     # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
     score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_dcor_with_keywords(
         X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
-    )
-    
-    return float(score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_dcor_score_second_last_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
-    
-    selected_layer = -2  # Second to last layer
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_dcor_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
+        kernel_X, kernel_Y, k=keywords, **kwargs
     )
     
     return float(score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
@@ -953,9 +842,9 @@ def compute_unbiased_dcor_with_keywords(X, Y, tokenizer, input_tokens, output_to
 
     return score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
 
-def get_unbiased_dcor_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
+def get_unbiased_dcor_score_mid_keybert(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
     
-    selected_layer = int(len(hidden_states[0])/2)
+    selected_layer = layer
     selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
 
     X = selected_states[0][0,:,:]
@@ -968,33 +857,12 @@ def get_unbiased_dcor_score_mid_keybert(hidden_states, tokenizer, input_tokens, 
     # print(f"length of input tokens : {len(input_tokens)}")
     # print(f"length of output tokens : {len(output_tokens)}")
     
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
+    kernel_X = KERNEL_FUNCTIONS[kernel]
+    kernel_Y = KERNEL_FUNCTIONS[kernel]
     # print(tokenizer.decode(output_tokens, skip_special_tokens=False))
     score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_dcor_with_keywords(
         X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
-    )
-    
-    return float(score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
-
-def get_unbiased_dcor_score_second_last_keybert(hidden_states, tokenizer, input_tokens, output_tokens):
-    
-    selected_layer = -2  # Second to last layer
-    selected_states = [token_tuple[selected_layer] for token_tuple in hidden_states]
-
-    X = selected_states[0][0,:,:]
-    X = X.to(torch.float32)
-    
-    Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
-    Y = Y.to(torch.float32)
-    
-    kernel_X = KERNEL_FUNCTIONS['rbf']
-    kernel_Y = KERNEL_FUNCTIONS['rbf']
-
-    score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = compute_unbiased_dcor_with_keywords(
-        X, Y, tokenizer, input_tokens, output_tokens[:-1], 
-        kernel_X, kernel_Y, k=20
+        kernel_X, kernel_Y, k=keywords, **kwargs
     )
     
     return float(score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
