@@ -12,6 +12,8 @@ import _settings
 import os
 from sklearn.feature_extraction.text import CountVectorizer
 from .dcor import *
+from .probe_utils import *
+from pathlib import Path
 
 rougeEvaluator = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
 
@@ -648,6 +650,33 @@ def get_l2norm_sim_score_keybert(hidden_states, tokenizer, input_tokens, output_
     sim_score = l2_norm_distance(X_keywords.cpu().numpy(), Y_keywords.cpu().numpy())
     print(f"sim_score : {sim_score}")
     return float(sim_score), input_keywords, output_keywords, input_tokens_topk, output_tokens_topk
+
+
+def get_max_token_probe_score(hidden_states, model, device):
+    probe_id = model_probe_config[model]
+    probe_dir = Path(os.path.join(_settings.PROBE_FOLDER, probe_id))
+    print(f"Loading probe from {probe_dir}")
+    probe_head, probe_layer_idx = load_probe_head(probe_dir, device=device)
+    print(f"Using probe at layer {probe_layer_idx}")
+    selected_states = [token_tuple[probe_layer_idx] for token_tuple in hidden_states]
+    
+    try:
+        Y = torch.cat(selected_states[1:], dim=0)[:,0,:]
+    except:
+        print(f"Error in concatenating hidden states for probe scoring.")
+        return 0
+    Y = Y.to(torch.float32)
+    print(f"Y.shape {Y.shape}")
+
+    probe_head = probe_head.to(torch.float32)
+    probe_score = probe_head(Y) 
+    # Convert raw score (logit) to probability (0 to 1)
+    probe_probability = torch.sigmoid(probe_score)
+    print(f"Probe probabilities shape: {probe_probability.shape}")
+    final_score = torch.max(probe_probability)
+    print(f"Max probe score: {final_score}")
+
+    return float(final_score.item())
 
 
 def get_unbiased_hsic_score_keybert_duplication(hidden_states, tokenizer, input_tokens, output_tokens, keywords, layer, kernel='rbf', **kwargs):
