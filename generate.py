@@ -19,7 +19,8 @@ import dataeval.nq_open as nq_open
 import dataeval.triviaqa as triviaqa
 import dataeval.SQuAD as SQuAD
 import dataeval.race as race
-import dataeval.halueval as halueval
+import dataeval.halueval_summ as halueval_summ
+import dataeval.halueval_dialogue as halueval_dialogue
 import models
 import utils
 from func.metric import *
@@ -72,7 +73,9 @@ def get_dataset_fn(data_name):
     if data_name == "race":
         return race.get_dataset
     if data_name == "halueval":
-        return halueval.get_dataset
+        return halueval_summ.get_dataset
+    if data_name == "haluevalDial":
+        return halueval_dialogue.get_dataset
 
 
 def get_generation_config(input_ids, tokenizer, data_name):
@@ -87,7 +90,9 @@ def get_generation_config(input_ids, tokenizer, data_name):
     if data_name == 'race':
         generation_config = race._generate_config(tokenizer)
     if data_name == 'halueval':
-        generation_config = halueval._generate_config(tokenizer)
+        generation_config = halueval_summ._generate_config(tokenizer)
+    if data_name == 'haluevalDial':
+        generation_config = halueval_dialogue._generate_config(tokenizer)
     generation_config['max_new_tokens'] = max_length_of_generated_sequence
     generation_config['early_stopping'] = True
     # https://jaketae.github.io/study/gpt2/#setup

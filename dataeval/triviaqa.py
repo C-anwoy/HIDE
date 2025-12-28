@@ -83,9 +83,9 @@ def process_data_to_model_inputs(batch, tokenizer):
 @functools.lru_cache()
 def get_dataset(tokenizer, split='validation'):
     try:
-        data = datasets.load_dataset("trivia_qa", "rc.nocontext", split=split)
-    except:
         data = datasets.load_from_disk(f'{_settings.DATA_FOLDER}/trivia_qa')
+    except:
+        data = datasets.load_dataset("trivia_qa", "rc.nocontext", split=split)
     id_mem = set()
     def remove_dups(batch):
         if batch['question_id'][0] in id_mem:

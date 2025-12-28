@@ -53,9 +53,9 @@ def _generate_config(tokenizer):
 def get_dataset(tokenizer):
     # For Natural Questions we use the test split used for open-domain question answering containing 3610 questions.
     try:
-        data = datasets.load_dataset("nq_open", split='validation')
-    except:
         data = datasets.load_from_disk(f'{_settings.DATA_FOLDER}/nq_open')
+    except:
+        data = datasets.load_dataset("nq_open", split='validation')
     id_map = {_['question']:str(i) for i, _ in enumerate(data)}
 
     def process_instance(example):
