@@ -1,6 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import argparse
 import glob
 import json
@@ -16,14 +15,12 @@ from sentence_transformers import SentenceTransformer
 from torchmetrics.text.bert import BERTScore
 
 import _settings
-# import dataeval.coqa as coqa
 import dataeval.nq_open as nq_open
 import dataeval.triviaqa as triviaqa
 import dataeval.SQuAD as SQuAD
-# import dataeval.umwp as umwp
-# import dataeval.hotpot_qa as hotpot_qa
 import dataeval.race as race
-# import dataeval.TruthfulQA as TruthfulQA
+import dataeval.halueval_summ as halueval_summ
+import dataeval.halueval_dialogue as halueval_dialogue
 import models
 import utils
 from func.metric import *
@@ -57,7 +54,7 @@ else:
     mode = "a+"
 
 # Ensure the directory exists
-log_dir = os.path.join(_settings.ABLATION_FOLDER, "logs")
+log_dir = os.path.join(_settings.GENERATION_FOLDER, "logs")
 os.makedirs(log_dir, exist_ok=True)
 
 # Define the log file path
@@ -69,20 +66,16 @@ logInfo = open(log_path, mode=mode, encoding="utf-8")
 def get_dataset_fn(data_name):
     if data_name == 'triviaqa':
         return triviaqa.get_dataset
-    # if data_name == 'coqa':
-    #     return coqa.get_dataset
     if data_name == 'nq_open':
         return nq_open.get_dataset
     if data_name == "SQuAD":
         return SQuAD.get_dataset
-    # if data_name == "umwp":
-    #     return umwp.get_dataset
-    # if data_name == "hotpot_qa":
-    #     return hotpot_qa.get_dataset
     if data_name == "race":
         return race.get_dataset
-    # if data_name == "TruthfulQA":
-    #     return TruthfulQA.get_dataset
+    if data_name == "halueval":
+        return halueval_summ.get_dataset
+    if data_name == "haluevalDial":
+        return halueval_dialogue.get_dataset
 
 
 def get_generation_config(input_ids, tokenizer, data_name):
@@ -90,20 +83,16 @@ def get_generation_config(input_ids, tokenizer, data_name):
     max_length_of_generated_sequence = 256
     if data_name == 'triviaqa':
         generation_config = triviaqa._generate_config(tokenizer)
-    # if data_name == 'coqa':
-    #     generation_config = coqa._generate_config(tokenizer)
     if data_name == 'nq_open':
         generation_config = nq_open._generate_config(tokenizer)
     if data_name == 'SQuAD':
         generation_config = SQuAD._generate_config(tokenizer)
-    # if data_name == 'umwp':
-    #     generation_config = umwp._generate_config(tokenizer)
-    # if data_name == 'hotpot_qa':
-    #     generation_config = hotpot_qa._generate_config(tokenizer)
     if data_name == 'race':
         generation_config = race._generate_config(tokenizer)
-    # if data_name == 'TruthfulQA':
-    #     generation_config = TruthfulQA._generate_config(tokenizer)
+    if data_name == 'halueval':
+        generation_config = halueval_summ._generate_config(tokenizer)
+    if data_name == 'haluevalDial':
+        generation_config = halueval_dialogue._generate_config(tokenizer)
     generation_config['max_new_tokens'] = max_length_of_generated_sequence
     generation_config['early_stopping'] = True
     # https://jaketae.github.io/study/gpt2/#setup
@@ -117,8 +106,8 @@ def get_generations(model_name:str, args, seed=1, old_sequences=None, max_num_ge
     model, tokenizer = models.load_model_and_tokenizer(model_name, args.device)
     
     # 'sentence-transformers/nli-roberta-large'
-    # SenSimModel = SentenceTransformer(os.path.join(_settings.MODEL_PATH, 'nli-roberta-large'), device = device)
-    # bertscore = BERTScore(model_name_or_path=os.path.join(_settings.MODEL_PATH, 'bert-base-uncased'), device=device)
+    SenSimModel = SentenceTransformer(os.path.join(_settings.MODEL_PATH, 'nli-roberta-large'), device = device)
+    bertscore = BERTScore(model_name_or_path=os.path.join(_settings.MODEL_PATH, 'bert-base-uncased'), device=device)
 
     utils.seed_everything(seed)
     dataset = get_dataset_fn(args.dataset)(tokenizer)
@@ -152,119 +141,73 @@ def get_generations(model_name:str, args, seed=1, old_sequences=None, max_num_ge
                                         output_hidden_states = True,
                                         return_dict_in_generate=True,
                                         output_scores=True)
-            generation_time = time.time() - greedy_start_time
-        elif args.decoding_method == 'temperature':
-            print(f"Using temperature sampling with temperature={args.temperature}")
-            temp_start_time = time.time()
-            dict_outputs = model.generate(
-                input_ids, 
-                attention_mask=batch['attention_mask'].to(device),
-                do_sample=True,
-                temperature=args.temperature, # Controls randomness (Higher = more diverse)
-                num_beams=1,
-                generation_config=generation_config,
-                output_hidden_states=True,
-                return_dict_in_generate=True,
-                output_scores=True
-            )
-            generation_time = time.time() - temp_start_time
-        elif args.decoding_method == 'top_k':
-            print(f"Using top-k sampling with k={args.top_k}")
-            topk_start_time = time.time()
-            dict_outputs = model.generate(
-                input_ids, 
-                attention_mask=batch['attention_mask'].to(device),
-                do_sample=True,
-                top_k=args.top_k, # Limits vocabulary to top K most likely tokens
-                num_beams=1,
-                generation_config=generation_config,
-                output_hidden_states=True,
-                return_dict_in_generate=True,
-                output_scores=True
-            )
-            generation_time = time.time() - topk_start_time
-        elif args.decoding_method == 'top_p':
-            print(f"Using top_p sampling with top_p={args.top_p}")
-            topp_start_time = time.time()
-            dict_outputs = model.generate(
-                input_ids, 
-                attention_mask=batch['attention_mask'].to(device),
-                do_sample=True,
-                top_p=args.top_p, # Nucleus sampling: limits to smallest set of tokens with cumulative prob >= top_p
-                num_beams=1,
-                generation_config=generation_config,
-                output_hidden_states=True,
-                return_dict_in_generate=True,
-                output_scores=True
-            )
-            generation_time = time.time() - topp_start_time
-        scores = dict_outputs.scores
+            greedy_generation_time = time.time() - greedy_start_time
 
-        # perplexity_start_time = time.time()
-        # perplexity = get_perplexity_score(scores)
-        # perplexity_time = time.time() - perplexity_start_time
+            scores = dict_outputs.scores
 
-        # energy_start_time = time.time()
-        # energy_score = get_energy_score(scores)
-        # energy_time = time.time() - energy_start_time
+            perplexity_start_time = time.time()
+            perplexity = get_perplexity_score(scores)
+            perplexity_time = time.time() - perplexity_start_time
 
-        hidden_states = dict_outputs.hidden_states
-        most_likely_generations = dict_outputs.sequences.cpu()[0, input_length:]
+            energy_start_time = time.time()
+            energy_score = get_energy_score(scores)
+            energy_time = time.time() - energy_start_time
 
-        input_tokens = dict_outputs.sequences.cpu()[0, 0:input_length]
-        
-        hsic_start_time = time.time()
-        hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = get_unbiased_hsic_score_keybert(hidden_states, tokenizer, input_tokens, most_likely_generations, keywords = args.keywords, layer=args.layer, kernel=args.kernel)
-        # hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = get_l2norm_sim_score_keybert(hidden_states, tokenizer, input_tokens, most_likely_generations, keywords = args.keywords, layer=args.layer)
-        # hsic_score = get_max_token_probe_score(hidden_states, model_name, device)
-        hsic_time = time.time() - hsic_start_time
+            hidden_states = dict_outputs.hidden_states
+            most_likely_generations = dict_outputs.sequences.cpu()[0, input_length:]
+
+            input_tokens = dict_outputs.sequences.cpu()[0, 0:input_length]
+            
+            hsic_start_time = time.time()
+            hsic_score, input_keywords, output_keywords, input_tokens_topk, output_tokens_topk = get_unbiased_hsic_score_keybert(hidden_states, tokenizer, input_tokens, most_likely_generations, keywords = args.keywords, layer=args.layer, kernel=args.kernel)
+            hsic_time = time.time() - hsic_start_time
 
         torch.cuda.empty_cache()
-        # generations = []
-        # num_gens = args.num_generations_per_prompt
-        # while num_gens > 0:
-        #     multiple_generation_start_time = time.time()
-        #     dict_outputs =  model.generate(input_ids, attention_mask=batch['attention_mask'].to(device),
-        #                     num_beams=1, num_return_sequences=min(max_num_gen_once, num_gens),
-        #                     do_sample=True, top_p=args.top_p, top_k=args.top_k,
-        #                     temperature=args.temperature, generation_config=generation_config,
-        #                     output_hidden_states = True, return_dict_in_generate=True, output_scores=True
-        #                     )
-        #     multiple_generation_time = time.time() - multiple_generation_start_time
+        generations = []
+        num_gens = args.num_generations_per_prompt
+        while num_gens > 0:
+            multiple_generation_start_time = time.time()
+            dict_outputs =  model.generate(input_ids, attention_mask=batch['attention_mask'].to(device),
+                            num_beams=1, num_return_sequences=min(max_num_gen_once, num_gens),
+                            do_sample=True, top_p=args.top_p, top_k=args.top_k,
+                            temperature=args.temperature, generation_config=generation_config,
+                            output_hidden_states = True, return_dict_in_generate=True, output_scores=True
+                            )
+            multiple_generation_time = time.time() - multiple_generation_start_time
 
-        #     generation = dict_outputs.sequences[:, input_length:].cpu()
-        #     generations.append(generation)
-        #     num_tokens = get_num_tokens(generation)
-        #     scores = dict_outputs.scores
+            generation = dict_outputs.sequences[:, input_length:].cpu()
+            generations.append(generation)
+            num_tokens = get_num_tokens(generation)
+            scores = dict_outputs.scores
 
-        #     entropy_start_time = time.time()
-        #     predictive_entropy = get_lenghthNormalized_entropy(scores, num_tokens) 
-        #     entropy_time = time.time() - entropy_start_time
+            entropy_start_time = time.time()
+            predictive_entropy = get_lenghthNormalized_entropy(scores, num_tokens) 
+            entropy_time = time.time() - entropy_start_time
 
-        #     hidden_states = dict_outputs.hidden_states
+            hidden_states = dict_outputs.hidden_states
 
-        #     eigen_start_time = time.time()
-        #     eigenIndicator, eigenValue = getEigenIndicator_v0(hidden_states, num_tokens)
-        #     eigen_time = time.time() - eigen_start_time
+            eigen_start_time = time.time()
+            eigenIndicator, eigenValue = getEigenIndicator_v0(hidden_states, num_tokens)
+            eigen_time = time.time() - eigen_start_time
 
-        #     num_gens -= len(generation)
+            num_gens -= len(generation)
 
-        # generations = torch.nested.nested_tensor(generations).to_padded_tensor(tokenizer.eos_token_id)
-        # generations = generations.reshape(-1, generations.shape[-1])[:args.num_generations_per_prompt]
-        # best_generated_text = tokenizer.decode(most_likely_generations, skip_special_tokens=True)
-        # generated_texts = [tokenizer.decode(_, skip_special_tokens=True) for _ in generations]
+        generations = torch.nested.nested_tensor(generations).to_padded_tensor(tokenizer.eos_token_id)
+        generations = generations.reshape(-1, generations.shape[-1])[:args.num_generations_per_prompt]
+        best_generated_text = tokenizer.decode(most_likely_generations, skip_special_tokens=True)
+        generated_texts = [tokenizer.decode(_, skip_special_tokens=True) for _ in generations]
         
-        # lexical_sim_start_time = time.time()
-        # lexical_similarity = getLexicalSim(generated_texts)
-        # lexical_sim_time = time.time() - lexical_sim_start_time
+        lexical_sim_start_time = time.time()
+        lexical_similarity = getLexicalSim(generated_texts)
+        lexical_sim_time = time.time() - lexical_sim_start_time
 
-        # bert_score_start_time = time.time()
-        # sent_bertscore = getAvgBertScore(bertscore, best_generated_text, generated_texts)
-        # bert_score_time = time.time() - bert_score_start_time
+        bert_score_start_time = time.time()
+        sent_bertscore = getAvgBertScore(bertscore, best_generated_text, generated_texts)
+        bert_score_time = time.time() - bert_score_start_time
         
-        # eigen_output_start_time = time.time()
-        # eigenIndicatorOutput, eigenValue_O = getEigenIndicatorOutput(generated_texts, SenSimModel)
-        # eigen_output_time = time.time() - eigen_output_start_time
+        eigen_output_start_time = time.time()
+        eigenIndicatorOutput, eigenValue_O = getEigenIndicatorOutput(generated_texts, SenSimModel)
+        eigen_output_time = time.time() - eigen_output_start_time
 
         curr_seq = dict(
             prompt=tokenizer.decode(input_ids.cpu()[0], skip_special_tokens=True),
@@ -276,25 +219,25 @@ def get_generations(model_name:str, args, seed=1, old_sequences=None, max_num_ge
         curr_seq.update(
             dict(
                 most_likely_generation_ids = most_likely_generations,
-                # generations_ids=generations,
+                generations_ids=generations,
             )
         )
         curr_seq.update(
             dict(
                 most_likely_generation=tokenizer.decode(curr_seq['most_likely_generation_ids'], skip_special_tokens=True),
-                # generations=generated_texts,
+                generations=generated_texts,
             )
         )
-        # curr_seq.update(
-        #     dict(
-        #         perplexity=perplexity
-        #     )
-        # )
-        # curr_seq.update(
-        #     dict(
-        #         energy=energy_score
-        #     )
-        # )
+        curr_seq.update(
+            dict(
+                perplexity=perplexity
+            )
+        )
+        curr_seq.update(
+            dict(
+                energy=energy_score
+            )
+        )
         curr_seq.update(
             dict(
                 hsic=hsic_score
@@ -308,44 +251,44 @@ def get_generations(model_name:str, args, seed=1, old_sequences=None, max_num_ge
                 output_tokens_topk=output_tokens_topk
             )
         )
-        # curr_seq.update(
-        #     dict(
-        #         lexical_similarity=lexical_similarity
-        #     )
-        # )
-        # curr_seq.update(
-        #     dict(
-        #         sent_bertscore=sent_bertscore
-        #     )
-        # )
-        # curr_seq.update(
-        #     dict(
-        #         entropy=predictive_entropy
-        #     )
-        # )
-        # curr_seq.update(
-        #     dict(
-        #         eigenIndicator=eigenIndicator
-        #     )
-        # )
-        # curr_seq.update(
-        #     dict(
-        #         eigenIndicatorOutput=eigenIndicatorOutput
-        #     )
-        # )
+        curr_seq.update(
+            dict(
+                lexical_similarity=lexical_similarity
+            )
+        )
+        curr_seq.update(
+            dict(
+                sent_bertscore=sent_bertscore
+            )
+        )
+        curr_seq.update(
+            dict(
+                entropy=predictive_entropy
+            )
+        )
+        curr_seq.update(
+            dict(
+                eigenIndicator=eigenIndicator
+            )
+        )
+        curr_seq.update(
+            dict(
+                eigenIndicatorOutput=eigenIndicatorOutput
+            )
+        )
         # Add timing information
         curr_seq.update(
             dict(
-                greedy_generation_time=generation_time,
-                # multiple_generation_time=multiple_generation_time,
-                # perplexity_time=perplexity_time,
-                # energy_time=energy_time,
+                greedy_generation_time=greedy_generation_time,
+                multiple_generation_time=multiple_generation_time,
+                perplexity_time=perplexity_time,
+                energy_time=energy_time,
                 hsic_time=hsic_time,
-                # entropy_time=entropy_time,
-                # lexical_sim_time=lexical_sim_time,
-                # bert_score_time=bert_score_time,
-                # eigen_time=eigen_time,
-                # eigen_output_time=eigen_output_time
+                entropy_time=entropy_time,
+                lexical_sim_time=lexical_sim_time,
+                bert_score_time=bert_score_time,
+                eigen_time=eigen_time,
+                eigen_output_time=eigen_output_time
             )
         )
         if args.dataset == 'coqa' or args.dataset == "TruthfulQA":
@@ -368,8 +311,8 @@ def get_generations(model_name:str, args, seed=1, old_sequences=None, max_num_ge
         print("GTAns:", batch['answer'][0], file=logInfo)
         print("BestAns:", tokenizer.decode(curr_seq['most_likely_generation_ids'], skip_special_tokens=True), file=logInfo)
         # print("BatchGenerations:", generated_texts, file=logInfo)
-        # print("Perplexity:", perplexity, file=logInfo)
-        # print("Energy:", energy_score, file=logInfo)
+        print("Perplexity:", perplexity, file=logInfo)
+        print("Energy:", energy_score, file=logInfo)
         print("HSIC:", hsic_score, file=logInfo)
         print("input keywords:", input_keywords, file=logInfo)
         print("output keywords:", output_keywords, file=logInfo)
@@ -377,12 +320,12 @@ def get_generations(model_name:str, args, seed=1, old_sequences=None, max_num_ge
         print("output tokens topk:", output_tokens_topk, file=logInfo)
         # print("input tokens topk duplication:", input_tokens_topk_duplication, file=logInfo)
         # print("output tokens topk duplication:", output_tokens_topk_duplication, file=logInfo)
-        # print("NormalizedEntropy: ", predictive_entropy, file=logInfo)
-        # print("LexicalSimilarity: ", lexical_similarity, file=logInfo)
-        # print("SentBERTScore: ", sent_bertscore, file=logInfo)
-        # print("EigenScore: ", eigenIndicator, file=logInfo)
-        # print("EigenValue:", eigenValue, file=logInfo)
-        # print("EigenScore-Output: ", eigenIndicatorOutput, file=logInfo)
+        print("NormalizedEntropy: ", predictive_entropy, file=logInfo)
+        print("LexicalSimilarity: ", lexical_similarity, file=logInfo)
+        print("SentBERTScore: ", sent_bertscore, file=logInfo)
+        print("EigenScore: ", eigenIndicator, file=logInfo)
+        print("EigenValue:", eigenValue, file=logInfo)
+        print("EigenScore-Output: ", eigenIndicatorOutput, file=logInfo)
         print("\n","\n","\n", file=logInfo)
     return sequences
 
@@ -411,7 +354,7 @@ def main(overwrite=False, continue_from=None, parallel:int=None):
         model_name = args.model
         if '/' in model_name:
             model_name = model_name.replace('/', '_')
-        cache_dir = os.path.join(_settings.ABLATION_FOLDER, f'{model_name}_{args.dataset}_{args.project_ind}')
+        cache_dir = os.path.join(_settings.GENERATION_FOLDER, f'{model_name}_{args.dataset}_{args.project_ind}')
         os.makedirs(cache_dir, exist_ok=True)
         old_results = glob.glob(os.path.join(cache_dir, '*.pkl'))
         old_results = [_ for _ in old_results if '_partial' not in _]

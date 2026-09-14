@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # Configuration
-MODEL="llama3-3b"
-DATASET="halueval"
-DEVICE="cuda:0"
-SEED=25
-KEYWORDS=20
-LAYER=14
-KERNEL="rbf"
-PROJECT_IND=0
+# MODEL="llama3-3b"
+# DATASET="race"
+# DEVICE="cuda:0"
+# SEED=25
+# KEYWORDS=20
+# LAYER=14
+# KERNEL="rbf"
 
 # MODEL="llama3-8b"
 # DATASET="SQuAD"
@@ -17,20 +16,20 @@ PROJECT_IND=0
 # KEYWORDS=20
 # LAYER=16
 # KERNEL="rbf"
-# PROJECT_IND=1
+# PROJECT_IND=2
 
-# MODEL="gemma2"
-# DATASET="halueval"
-# DEVICE="cuda:0"
-# SEED=25
-# KEYWORDS=20
-# LAYER=21
-# KERNEL="rbf"
-# PROJECT_IND=0
+MODEL="gemma2"
+DATASET="SQuAD"
+DEVICE="cuda:0"
+SEED=25
+KEYWORDS=20
+LAYER=21
+KERNEL="rbf"
+PROJECT_IND=3
 
 echo "${MODEL}, ${DATASET}, ${LAYER}"
 
-CMD="python generate.py \
+CMD="python generate_single_exp.py \
   --model $MODEL \
   --dataset $DATASET \
   --device $DEVICE \
@@ -45,19 +44,27 @@ echo "Running: $CMD"
 eval $CMD
 echo "Completed: ${MODEL}, ${DATASET}"
 
-# Configuration
-MODEL="llama3-3b-instruct"
-DATASET="halueval"
+# MODEL="llama3-8b"
+# DATASET="nq_open"
+# DEVICE="cuda:0"
+# SEED=25
+# KEYWORDS=20
+# LAYER=16
+# KERNEL="rbf"
+# PROJECT_IND=2
+
+MODEL="gemma2"
+DATASET="nq_open"
 DEVICE="cuda:0"
 SEED=25
 KEYWORDS=20
-LAYER=14
+LAYER=21
 KERNEL="rbf"
-PROJECT_IND=0
+PROJECT_IND=3
 
 echo "${MODEL}, ${DATASET}, ${LAYER}"
 
-CMD="python generate.py \
+CMD="python generate_single_exp.py \
   --model $MODEL \
   --dataset $DATASET \
   --device $DEVICE \

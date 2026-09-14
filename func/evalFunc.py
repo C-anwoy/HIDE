@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import numpy as np
 import pickle as pkl
 # import evaluate
@@ -11,7 +11,7 @@ from .metric import *
 from .plot import *
 import _settings
 
-USE_Roberta = True
+USE_Roberta = False
 USE_EXACT_MATCH = False
 
 rougeEvaluator = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
@@ -293,10 +293,12 @@ def get_inference_time(resultDict):
     print(f"Eigen Output: {(avg_eigen_output_time+avg_multiple_generation_time)}")
 
 if __name__ == "__main__":
-    # file_name = "/home/anwoy/HIDE/data/output/llama3-8b_SQuAD_1/0.pkl"
-    # file_name = "/home/anwoy/HIDE/data/output/llama3-8b_nq_open_1/0.pkl"
-    # file_name = "/home/anwoy/HIDE/data/output/gemma2_SQuAD_1/0.pkl"
-    file_name = "/home/anwoy/HIDE/data/output/gemma2_nq_open_1/0.pkl"
+    # file_name = "/home/anwoy/HIDE/data/output/llama3-8b_haluevalDial_0/0.pkl"
+    # file_name = "/home/anwoy/HIDE/data/output/llama3-8b-instruct_haluevalDial_0/0.pkl"
+    # file_name = "/home/anwoy/HIDE/data/output/gemma2_haluevalDial_0/0.pkl"
+    # file_name = "/home/anwoy/HIDE/data/output/gemma2-instruct_haluevalDial_0/0.pkl"
+    # file_name = "/home/anwoy/HIDE/data/output/llama3-3b_haluevalDial_0/0.pkl"
+    file_name = "/home/anwoy/HIDE/data/output/llama3-3b-instruct_haluevalDial_0/0.pkl"
 
     print(file_name)
     f = open(file_name, "rb")
@@ -304,5 +306,5 @@ if __name__ == "__main__":
     # printInfo(resultDict)
     getAcc(resultDict, file_name)
     getAUROC(resultDict, file_name)
-    get_inference_time(resultDict)
+    # get_inference_time(resultDict)
 
