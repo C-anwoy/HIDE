@@ -1,0 +1,149 @@
+\appendixsection{Illustrative Examples}
+We provide some illustrative examples in this section for prompts from various datasets and the corresponding outputs from Llama-3-8B with the \method~scores for every generation. We observe a threshold of $0.12$, as discussed in \cref{sec:interpreting-hide}, effectively discriminates hallucinated generations in most cases. 
+
+\begin{tcolorbox}[title=Example from SQuAD, colback=gray!5!white, colframe=gray!70!black, boxrule=0.6pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm]
+\footnotesize
+\textbf{Prompt:} Civil disobedience is usually defined as pertaining to a citizen's relation to the state and its laws, as distinguished from a constitutional impasse in which two public agencies, especially two equally sovereign branches of government, conflict. For instance, if the head of government of a country were to refuse to enforce a decision of that country's highest court, it would not be civil disobedience, since the head of government would be acting in her or his capacity as public official rather than private citizen. \\Q: What type of person can not be attributed civil disobedience? \\A:\\[1ex]
+\textbf{Ground-truth:} head of government\\
+\textbf{Llama-3-8B Output:} \textcolor{red}{A person who is not a citizen of the country in which the civil disobedience is taking place.}\\
+
+\textbf{Input Keywords:} [\textit{disobedience}, \textit{civil}, \textit{person}, \textit{enforce}, \textit{attributed}, \textit{defined}, \textit{agencies}, \textit{relation}, \textit{be}, \textit{head}, \textit{his}, \textit{official}, \textit{usually}, \textit{instance}, \textit{capacity}, \textit{impasse}, \textit{would}, \textit{branches}, \textit{highest}, \textit{and}]\\
+\textbf{Output Keywords:} [\textit{disobedience}, \textit{citizen}, \textit{civil}, \textit{person}, \textit{country}, \textit{who}, \textit{A}, \textit{a}, \textit{the}, \textit{place}, \textit{which}, \textit{taking}, \textit{in}, \textit{is}, \textit{of}, \textit{not}]\\
+\textbf{Selected Input Tokens:} [\texttt{ disobed}, \texttt{ience}, \texttt{ disobed}, \texttt{ience}, \texttt{ disobed}, \texttt{ience}, \texttt{ civil}, \texttt{ civil}, \texttt{ person}, \texttt{ enforce}, \texttt{ attributed}, \texttt{ defined}, \texttt{ agencies}, \texttt{ relation}, \texttt{ be}, \texttt{ be}, \texttt{ be}, \texttt{ head}, \texttt{ head}]\\
+\textbf{Selected Output Tokens:} [\texttt{ disobed}, \texttt{ience}, \texttt{ citizen}, \texttt{ civil}, \texttt{ person}, \texttt{ country}, \texttt{ who}, \texttt{ A}, \texttt{ a}, \texttt{ the}, \texttt{ the}, \texttt{ place}, \texttt{ which}, \texttt{ taking}, \texttt{ in}, \texttt{ is}, \texttt{ is}, \texttt{ of}, \texttt{ not}]\\
+
+\textbf{\method~Score:} $0.049$
+\end{tcolorbox}
+
+\clearpage
+\begin{tcolorbox}[title=Example from SQuAD, colback=gray!5!white, colframe=gray!70!black, boxrule=0.6pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm]
+\footnotesize
+\textbf{Prompt:} College sports are also popular in southern California. The UCLA Bruins and the USC Trojans both field teams in NCAA Division I in the Pac-12 Conference, and there is a longtime rivalry between the schools. \\Q: The Bruins belong to which college? \\A:\\[1ex]
+\textbf{Ground-truth:} UCLA\\
+\textbf{Llama-3-8B Output:} \textcolor{OliveGreen}{The University of California, Los Angeles.}\\
+
+\textbf{Input keywords:} [\textit{UCLA}, \textit{rivalry}, \textit{southern}, \textit{sports}, \textit{Pac}, \textit{schools}, \textit{Trojans}, \textit{belong}, \textit{popular}, \textit{Division}, \textit{Q}, \textit{field}, \textit{longtime}, \textit{in}, \textit{both}, \textit{The}, \textit{also}, \textit{is}, \textit{12}, \textit{there}]\\
+\textbf{Output keywords:} [\textit{University}, \textit{Angeles}, \textit{California}, \textit{Los}, \textit{The}, \textit{of}]\\
+\textbf{Selected Input Tokens:} [\texttt{ UCLA}, \texttt{ rivalry}, \texttt{ southern}, \texttt{ sports}, \texttt{ Pac}, \texttt{ schools}]\\
+\textbf{Selected Output Tokens:} [\texttt{ University}, \texttt{ Angeles}, \texttt{ California}, \texttt{ Los}, \texttt{ The}, \texttt{ of}]\\
+
+\textbf{\method~Score:} $0.139$
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[title=Example from NQ, colback=gray!5!white, colframe=gray!70!black, boxrule=0.6pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm]
+\footnotesize
+\textbf{Prompt:} Answer these questions:
+\\Q: Who played solomon in little house on the prairie?
+\\A:\\[1ex]
+\textbf{Ground-truth:} Todd Bridges\\
+\textbf{Llama-3-8B Output:} \textcolor{red}{The actor who played Solomon in Little House on the Prairie was Jonathan Gilbert.}\\
+
+\textbf{Input keywords:} [\textit{solomon}, \textit{prairie}, \textit{house}, \textit{questions}, \textit{Q}, \textit{little}, \textit{who}, \textit{played}, \textit{A}, \textit{the}, \textit{Answer}, \textit{in}, \textit{these}, \textit{on}]\\
+\textbf{Output keywords:} [\textit{Gilbert}, \textit{Solomon}, \textit{Jonathan}, \textit{actor}, \textit{Prairie}, \textit{Little}, \textit{House}, \textit{who}, \textit{was}, \textit{played}, \textit{The}, \textit{the}, \textit{in}, \textit{on}]\\
+\textbf{Selected Input Tokens:} [\texttt{ sol}, \texttt{omon}, \texttt{ pr}, \texttt{airie}, \texttt{ house}, \texttt{ questions}, \texttt{Q}, \texttt{ little}, \texttt{ who}, \texttt{ played}, \texttt{A}, \texttt{ the}, \texttt{Answer}, \texttt{ in}]\\
+\textbf{Selected Output Tokens:} [\texttt{ Gilbert}, \texttt{ Solomon}, \texttt{ Jonathan}, \texttt{ actor}, \texttt{ Prairie}, \texttt{ Little}, \texttt{ House}, \texttt{ who}, \texttt{ was}, \texttt{ played}, \texttt{ The}, \texttt{ the}, \texttt{ in}, \texttt{ on}]\\
+
+
+\textbf{\method~Score:} $0.066$
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Example from NQ, colback=gray!5!white, colframe=gray!70!black, boxrule=0.6pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm]
+\footnotesize
+\textbf{Prompt:} Answer these questions:
+\\Q: Who plays joker in batman the dark knight?
+\\A:\\[1ex]
+\textbf{Ground-truth:} Ledger\\
+\textbf{Llama-3-8B Output:} \textcolor{OliveGreen}{Heath Ledger}\\
+
+\textbf{Input keywords:} [\textit{joker}, \textit{batman}, \textit{knight}, \textit{questions}, \textit{plays}, \textit{dark}, \textit{Q}, \textit{A}, \textit{who}, \textit{Answer}, \textit{these}, \textit{in}, \textit{the}]\\
+\textbf{Output keywords:} [\textit{Ledger}, \textit{Heath}]\\
+\textbf{Selected Input Tokens:} [\texttt{ joker}, \texttt{ bat}]\\
+\textbf{Selected Output Tokens:} [\texttt{ Ledger}, \texttt{ Heath}]\\
+
+\textbf{\method~Score:} $0.249$
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Example from TriviaQA, colback=gray!5!white, colframe=gray!70!black, boxrule=0.6pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm]
+\footnotesize
+\textbf{Prompt:} Answer these questions:
+\\Q: Who was the man behind The Chipmunks?
+\\A:\\[1ex]
+\textbf{Ground-truth:} David Seville\\
+\textbf{Llama-3-8B Output:} \textcolor{red}{Ross Bagdasarian, Sr.}\\
+
+\textbf{Input keywords:} [\textit{Chipmunks}, \textit{questions}, \textit{Who}, \textit{Q}, \textit{The}, \textit{the}, \textit{A}, \textit{behind}, \textit{was}, \textit{man}, \textit{Answer}, \textit{these}]\\
+\textbf{Output keywords:} [\textit{Chipmunks}, \textit{Chipmunk}, \textit{Bagdasarian}, \textit{album}, \textit{Songbook}, \textit{Ross}, \textit{name}, \textit{first}, \textit{The}, \textit{the}, \textit{of}, \textit{Sr}, \textit{A}, \textit{Q}, \textit{was}, \textit{What}]\\
+\textbf{Selected Input Tokens:} [\texttt{ Chip}, \texttt{m}, \texttt{unks}, \texttt{ questions}, \texttt{ Who}, \texttt{Q}, \texttt{ The}, \texttt{ the}, \texttt{A}, \texttt{ behind}, \texttt{ was}, \texttt{ man}, \texttt{Answer}, \texttt{ these}]\\
+\textbf{Selected Output Tokens:} [\texttt{ Chip}, \texttt{m}, \texttt{unks}, \texttt{ Chip}, \texttt{m}, \texttt{unk}, \texttt{ Bag}, \texttt{das}, \texttt{arian}, \texttt{ album}, \texttt{ Song}, \texttt{book}, \texttt{ Ross}, \texttt{ name}]\\
+
+
+\textbf{\method~Score:} $0.066$
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=Example from TriviaQA, colback=gray!5!white, colframe=gray!70!black, boxrule=0.6pt, arc=2mm, left=2mm, right=2mm, top=1mm, bottom=1mm]
+\footnotesize
+\textbf{Prompt:} College sports are also popular in southern California. The UCLA Bruins and the USC Trojans both field teams in NCAA Division I in the Pac-12 Conference, and there is a longtime rivalry between the schools.
+\\Q: What is the Japanese share index called?
+\\A:\\[1ex]
+\textbf{Ground-truth:} Nikkei\\
+\textbf{Llama-3-8B Output:} \textcolor{OliveGreen}{The Nikkei}\\
+
+\textbf{Input keywords:} [\textit{index}, \textit{Japanese}, \textit{share}, \textit{Q}, \textit{questions}, \textit{A}, \textit{Answer}, \textit{these}, \textit{the}, \textit{What}, \textit{called}, \textit{is}]\\
+\textbf{Output keywords:} [\textit{Nikkei}, \textit{The}]\\
+\textbf{Selected Input Tokens:} [\texttt{ index}, \texttt{ Japanese}, \texttt{ share}, \texttt{Q}]\\
+\textbf{Selected Output Tokens:} [\texttt{ Nik}, \texttt{ke}, \texttt{i}, \texttt{ The}]\\
+
+\textbf{\method~Score:} $0.187$
+\end{tcolorbox}
+
+\changed{
+\appendixsection{Prevalence and Impact of Very Short Outputs}
+HSIC-based dependence estimation requires multiple output tokens to meaningfully assess statistical coupling between input and output representations. Consequently, HIDE is not informative when the generated output consists of a single token and is less reliable for extremely short responses.
+}
+
+\changed{
+To contextualize this limitation, Table~\ref{tab:short_outputs} reports the prevalence of very short model-generated outputs for Llama-3-8B across QA datasets. We observe a clear dataset-dependent pattern: TriviaQA, which emphasizes factual recall, produces a substantially higher fraction of single-token and two-token answers, whereas SQuAD and RACE more often elicit short phrases or sentence-level responses.
+}
+
+\changed{
+Although extremely short outputs represent a genuine edge case for HSIC-based dependence estimation, they do not dominate the overall evaluation and primarily affect datasets with inherently minimal answer lengths. This analysis complements the discussion in Section~8.1 and explains why the short-output failure mode does not alter the main performance trends reported in Section~6.
+}
+
+\begin{table}[h]
+\centering
+\changed{
+\begin{tabular}{lcc}
+\hline
+Dataset & \% length = 1 & \% length $\leq$ 2 \\
+\hline
+SQuAD     & 14.9 & 28.8 \\
+RACE     & 11.1 & 16.6 \\
+NQ       & 12.0 & 31.1 \\
+TriviaQA & 36.6 & 71.5 \\
+\hline
+\end{tabular}
+}
+\caption{\changed{Prevalence of very short model-generated outputs for Llama-3-8B across QA datasets.}}
+\label{tab:short_outputs}
+\end{table}
+
+% \begin{table}[h]
+% \centering
+% \changed{
+% \begin{tabular}{lcc}
+% \hline
+% Dataset & \% length = 1 & \% length $\leq$ 2 \\
+% \hline
+% SQuAD     & XX & XX \\
+% RACE     & XX & XX \\
+% NQ       & XX & XX \\
+% TriviaQA & XX & XX \\
+% \hline
+% \end{tabular}
+% }
+% \caption{\changed{Prevalence of very short model-generated outputs for Llama-3-8B across QA datasets.}}
+% \label{tab:short_outputs}
+% \end{table}
+
+

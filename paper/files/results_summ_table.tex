@@ -1,0 +1,66 @@
+\begin{table*}[h]
+\centering
+\tiny
+\begin{tabular}{lcccc}
+\toprule
+Method & $\text{AUC}_\text{s}$ & $\text{AUC}_\text{r}$ & $\text{PCC}_\text{s}$ & $\text{PCC}_\text{r}$ \\
+\hline
+\multicolumn{5}{c}{\cellcolor[HTML]{C0C0C0}{Llama-3.2-3B}} \\\hline
+Perplexity & 51.84 & 52.13 & 2.19 & 10.76 \\
+Energy & 41.53 & 41.05 & -19.18 & -12.51 \\
+\rowcolor{gray!20} LN-Entropy & 62.86 & 62.42 & 15.84 & 19.52 \\
+\rowcolor{gray!20} Lexical Similarity & 68.61 & \textbf{70.65} & 31.04 & \textbf{36.45} \\
+\rowcolor{gray!20} Eigenscore & 66.98 & 66.65 & 25.39 & 25.85 \\
+\textbf{\method} & \textbf{\underline{69.37}} & \underline{69.13} & \textbf{\underline{35.86}} & \underline{28.67} \\
+
+\hline
+\multicolumn{5}{c}{\cellcolor[HTML]{C0C0C0}{Llama-3.2-3B-Instruct}} \\\hline
+Perplexity & 56.75 & 57.70 & 10.87 & 18.77 \\
+Energy & 39.99 & 40.48 & -19.11 & -10.48 \\
+\rowcolor{gray!20} LN-Entropy & 65.29 & 65.70 & 21.77 & 24.19 \\
+\rowcolor{gray!20} Lexical Similarity & 71.38 & \textbf{72.75} & 38.38 & \textbf{40.69} \\
+\rowcolor{gray!20} Eigenscore & \textbf{72.68} & 72.57 & 38.44 & 37.19 \\
+\textbf{\method} & \underline{71.26} & \underline{71.20} & \textbf{\underline{38.68}} & \underline{33.47} \\
+
+\hline
+\multicolumn{5}{c}{\cellcolor[HTML]{C0C0C0}{Llama-3-8B}} \\\hline
+Perplexity & 45.56 & 45.68 & -3.92 & 2.33 \\
+Energy & 36.63 & 36.36 & -21.55 & -18.13 \\
+\rowcolor{gray!20} LN-Entropy & 60.99 & 60.87 & 15.58 & 18.31 \\
+\rowcolor{gray!20} Lexical Similarity & 68.12 & 69.50 & 31.45 & \textbf{35.90} \\
+\rowcolor{gray!20} Eigenscore & 66.54 & 66.81 & 26.84 & 28.79 \\
+\textbf{\method} & \textbf{\underline{72.84}} & \textbf{\underline{72.60}} & \textbf{\underline{39.32}} & \underline{35.60} \\
+
+\hline
+\multicolumn{5}{c}{\cellcolor[HTML]{C0C0C0}{Llama-3-8B-Instruct}} \\\hline
+Perplexity & 56.71 & 57.47 & 6.38 & 15.13 \\
+Energy & 42.25 & 42.53 & -13.99 & -6.88 \\
+\rowcolor{gray!20} LN-Entropy & 66.69 & 66.60 & 24.15 & 27.60 \\
+\rowcolor{gray!20} Lexical Similarity & 70.48 & 71.89 & 36.83 & 39.45 \\
+\rowcolor{gray!20} Eigenscore & \textbf{74.12} & \textbf{73.99} & 41.57 & \textbf{39.83} \\
+\textbf{\method} & \underline{73.58} & \underline{73.43} & \textbf{\underline{41.86}} & \underline{37.84} \\
+
+\hline
+\multicolumn{5}{c}{\cellcolor[HTML]{C0C0C0}{Gemma-2-9B}} \\\hline
+Perplexity & 45.07 & 47.68 & 5.97 & 11.43 \\
+Energy & 57.49 & 56.00 & 2.19 & -1.60 \\
+\rowcolor{gray!20} LN-Entropy & 52.25 & 55.81 & 12.70 & 20.58 \\
+\rowcolor{gray!20} Lexical Similarity & 63.97 & 66.21 & 26.68 & \textbf{33.13} \\
+\rowcolor{gray!20} Eigenscore & 70.67 & 71.37 & 24.37 & 29.18 \\
+\textbf{\method} & \textbf{\underline{73.29}} & \textbf{\underline{72.91}} & \textbf{\underline{35.70}} & \underline{31.05} \\
+
+\hline
+\multicolumn{5}{c}{\cellcolor[HTML]{C0C0C0}{Gemma-2-9B-Instruct}} \\\hline
+Perplexity & 44.25 & 47.29 & 25.49 & 10.43 \\
+Energy & \textbf{\underline{76.73}} & \textbf{\underline{75.20}} & 8.61 & 23.92 \\
+\rowcolor{gray!20} LN-Entropy & 53.57 & 56.06 & 21.65 & 18.39 \\
+\rowcolor{gray!20} Lexical Similarity & 62.43 & 65.27 & 31.27 & 29.45 \\
+\rowcolor{gray!20} Eigenscore & 67.26 & 69.08 & 23.24 & 28.73 \\
+\textbf{\method} & 73.24 & 73.49 & \textbf{\underline{38.87}} & \textbf{\underline{35.97}} \\
+
+\bottomrule
+\end{tabular}
+\caption{\changed{Average performance of different hallucination detection methods across QA-datasets. We report average AUC-ROC and PCC values using sentence similarity (s) and ROUGE-L (r) as correctness measures. Multi-pass methods are highlighted in gray. The best overall result is shown in \textbf{bold}, and the best among single-pass methods is \underline{underlined}.Refer to Table~\ref{tab:results_exp} of Appendix B for detailed breakdown.}}
+\label{tab:summary_results}
+
+\end{table*}

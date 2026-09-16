@@ -1,0 +1,33 @@
+
+
+\section{Experimental Setup}
+\label{sec:experiments}
+
+\paragraph{\textbf{Evaluation Datasets}}
+Following the setup of \citet{hallucinations-leaderboard}, we evaluate \method~on four benchmark QA-datasets, as discussed below, to assess its effectiveness in detecting both faithfulness and factuality hallucinations:
+\begin{itemize}
+    \item[\textbf{(i)}] \textbf{RACE (ReAding Comprehension dataset from Examinations)} \citep{lai-etal-2017-race} is a multiple-choice reading comprehension dataset from English exams for Chinese students, featuring 27,933 passages and 97,867 questions. We use the test split of the `high' subset containing 1,050 passages and 3,498 questions. RACE is challenging due to its focus on inference and reasoning. RACE is used to evaluate \textit{faithfulness hallucinations}, as answers must be supported by explicit information in the provided passage, making inference and grounding critical.
+    
+    \item[\textbf{(ii)}] \textbf{SQuAD (Stanford Question Answering Dataset)} \citep{rajpurkar2016squad100000questionsmachine} is a widely used benchmark for extractive question answering, containing crowd-sourced questions on Wikipedia articles. SQuAD-v1.1 contains only questions for which answers are present within the provided context, while SQuAD-v2.0 extends it to include both answerable and unanswerable questions. Following \citet{chen_inside:_2024}, we use only answerable questions from the development split of $\text{v}2.0$, retaining 5,928 context-question-answer pairs. SQuAD also targets \textit{faithfulness hallucinations}, as the correct answer must be a text span from the passage, requiring the model to remain faithful to the context.
+
+    \item[\textbf{(iii)}] \textbf{NQ (Natural Questions)} \citep{kwiatkowski-etal-2019-natural} is a large-scale question answering dataset consisting of real, anonymized queries issued to the Google search engine. Following \citet{lin2024generatingconfidenceuncertaintyquantification}, we use the validation set consisting of 3610 pairs. NQ is notable for its use of naturally occurring user queries, making it a realistic and challenging benchmark for end-to-end QA. NQ is primarily used to assess \textit{factuality hallucinations}, as it requires models to provide correct answers to open-domain questions based on external world knowledge, testing factual correctness.
+
+    \item[\textbf{(iv)}] \textbf{TriviaQA} \citep{joshi2017triviaqalargescaledistantly} is a large-scale reading comprehension dataset with over 95,000 crowd-authored question-answer pairs and associated evidence documents. The questions are naturally complex, often requiring cross-sentence reasoning. We use the \texttt{rc.nocontext} validation subset, which contains 9,960 deduplicated pairs. TriviaQA also focuses on \textit{factuality hallucinations}, as we use the subset which has no input context, hence the evaluation relies on accurate, fact-based answers.
+\end{itemize}
+
+\changed{
+\paragraph{\textbf{Dialogue Evaluation}}
+To assess whether the representational decoupling hypothesis extends beyond QA, we additionally evaluate \method~on the dialogue split of the HaluEval benchmark. In this setting, hallucinations typically manifest as responses that contradict established dialogue context or introduce unsupported factual claims. Unlike QA, dialogue responses are open-ended, but correctness can still be evaluated based on consistency with the preceding conversational turns. This experiment allows us to test whether \method~generalizes to conversational generation without relying on multiple generations or external verification.
+}
+
+
+\paragraph{\textbf{Models and Generation Configurations}} To ensure that our findings are broadly applicable and robust across diverse model scales and variants, we consider six open-source LMs, which include both \textit{base} and \textit{instruction-tuned} variants of Llama-3.2-3B, Llama-3-8B, and Gemma-2-9B. All model checkpoints are sourced directly from the HuggingFace model hub without any additional fine-tuning. For all experiments, we generate outputs in a \textit{zero-shot setting}, using greedy decoding for techniques requiring a single output, and set the values of temperature, top-$p$ and top-$k$ parameters to $0.5$, $0.99$ and $10$, respectively for stochastic sampling in case of methods requiring multiple outputs for the same input prompt. All our experiments were run on a single NVIDIA A100-SXM4-80GB GPU.
+
+\paragraph{\textbf{Evaluation Metrics}}
+
+To comprehensively assess the effectiveness of \method~and baseline methods in hallucination detection, we employ a variety of evaluation metrics commonly used in the literature. 
+\begin{itemize}
+    \item \textbf{Area Under the ROC Curve (AUC-ROC):} This threshold-independent metric quantifies how well a given method can distinguish between hallucinated and non-hallucinated outputs. Higher AUC-ROC values indicate stronger binary discrimination.
+    \item \textbf{Pearson Correlation Coefficient (PCC):} PCC measures the linear correlation between the predicted scores of a method (e.g., \method~score) and the ground-truth correctness labels. This reflects the extent to which the method's confidence scores align with true instance-level correctness.
+\end{itemize}
+We report AUC-ROC and PCC values for both \emph{sentence embedding similarity} and \emph{ROUGE-L overlap} as the reference ground-truth measure, denoted in the results as $AUC_s$, $PCC_s$ (using sentence similarity) and $AUC_r$, $PCC_r$ (using ROUGE-L). The sentence similarity is calculated as the cosine similarity between the sentence embeddings of the generated output and the reference answer, using the \textit{nli-roberta-large} model~\citep{reimers-gurevych-2019-sentence} -- an output is considered correct if its similarity exceeds a fixed threshold set to $0.9$. When using the ROUGE-L measure~\citep{lin-2004-rouge}, outputs with an overlap score of more than $0.5$ with the reference are considered to be correct. We also report the AUC-ROC and PCC values for exact match with the ground-truth answer as the correctness measure.

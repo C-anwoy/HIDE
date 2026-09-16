@@ -1,8 +1,29 @@
-data/output.zip
-data
-/data/output
-# Python cache files
+# Local inference inputs and append-only working outputs
+/data/
+/checkpoints/
+/outputs/
+/.venv/
+/.venv-revision/
+/configs/env.local.sh
+
+# Python/build artifacts
 __pycache__/
 *.py[cod]
-*$py.class
 .pytest_cache/
+*.egg-info/
+/build/
+/dist/
+
+# Transfer bundles are generated; verified experiment snapshots under results/ are tracked.
+/hide_repository.zip
+/hide_revision_bundle.zip
+
+# LaTeX build intermediates
+/paper/*.aux
+/paper/*.bbl
+/paper/*.blg
+/paper/*.fdb_latexmk
+/paper/*.fls
+/paper/*.log
+/paper/*.out
+/paper/*.synctex.gz

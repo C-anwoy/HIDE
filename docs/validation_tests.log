@@ -1,0 +1,34 @@
+test_cached_alignment_llama_and_gemma (test_core.CoreTests.test_cached_alignment_llama_and_gemma) ... ok
+test_formula_preserved_and_constant_kernel_control (test_core.CoreTests.test_formula_preserved_and_constant_kernel_control) ... ok
+test_token_selection_and_full_score_parity (test_core.CoreTests.test_token_selection_and_full_score_parity) ... ok
+test_auc_matches_sklearn_with_ties (test_core.EvaluationTests.test_auc_matches_sklearn_with_ties) ... ok
+test_normalization (test_core.EvaluationTests.test_normalization) ... ok
+test_paired_bootstrap_and_score_filtering (test_core.EvaluationTests.test_paired_bootstrap_and_score_filtering) ... ok
+test_timing_accounting_and_negative_overhead (test_core.EvaluationTests.test_timing_accounting_and_negative_overhead) ... ok
+test_original_prompt_and_stop_parity (test_datasets.DatasetTests.test_original_prompt_and_stop_parity) ... ok
+test_race_list_and_serialized_list_schemas (test_datasets.DatasetTests.test_race_list_and_serialized_list_schemas) ... ok
+test_squad_first_reference_is_explicitly_returned (test_datasets.DatasetTests.test_squad_first_reference_is_explicitly_returned) ... ok
+test_incomplete_export_is_explicit (test_export.ExportTests.test_incomplete_export_is_explicit) ... ok
+test_lossless_shards_and_tamper_detection (test_export.ExportTests.test_lossless_shards_and_tamper_detection) ... ok
+test_required_full_suite (test_export.ExportTests.test_required_full_suite) ... ok
+test_estimator_conventions (test_protocol.ProtocolTests.test_estimator_conventions) ... ok
+test_generated_token_likelihood_and_eigen_formula (test_protocol.ProtocolTests.test_generated_token_likelihood_and_eigen_formula) ... ok
+test_lock_and_atomic_metadata (test_protocol.ProtocolTests.test_lock_and_atomic_metadata) ... ok
+test_seed_is_independent_of_previous_examples (test_protocol.ProtocolTests.test_seed_is_independent_of_previous_examples) ... ok
+test_suite_commands_parse_and_keep_full_counts (test_protocol.ProtocolTests.test_suite_commands_parse_and_keep_full_counts) ... ok
+test_errors_require_explicit_retry_and_never_remove_earlier_corruption (test_recovery.RecoveryTests.test_errors_require_explicit_retry_and_never_remove_earlier_corruption) ... ok
+test_export_rejects_active_writer (test_recovery.RecoveryTests.test_export_rejects_active_writer) ... ok
+test_truncated_tail_is_backed_up (test_recovery.RecoveryTests.test_truncated_tail_is_backed_up) ... ok
+test_detection_timing_and_resume (test_runner.RunnerTests.test_detection_timing_and_resume) ... `generation_config` default values have been modified to match model-specific defaults: {'bos_token_id': 1}. If this is not desired, please set these values explicitly.
+ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 2.542s
+
+OK
+Exported 3 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp0gwjrecb/checkpoint
+Exported 4 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp54t_ur2u/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp54t_ur2u/restored
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp1fe19mt7/.history/run_20260916T111258608695Z; rerun the identical command
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp75jroprn/.history/run_20260916T111258610797Z; rerun the identical command
+No trailing damaged/error record; nothing changed

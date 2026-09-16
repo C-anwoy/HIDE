@@ -1,0 +1,31 @@
+
+\section{Theoretical Foundations}
+\label{sec:foundations_hsic}
+We propose that linguistic hallucination in LMs often stems from a statistical decoupling between the model's internal representation of the input and that of the generated output. \changed{A natural question that arises is whether simpler geometric similarity measures, such as cosine similarity between aggregated input and output representations, are sufficient to capture representational coupling. However, the relationship between faithful input–output representations in LLMs is often highly non-linear, shaped by attention, residual connections, and layer-wise transformations. As a result, linear similarity measures may fail to detect meaningful dependence even when representations are strongly coupled in a non-linear sense (c.f.~\cref{sec:hsic_vs_cos}). To address this, we adopt the Hilbert--Schmidt Independence Criterion (HSIC), a kernel-based, non-parametric measure of statistical dependence. HSIC is sensitive to arbitrary non-linear relationships between random variables and evaluates dependence in a reproducing kernel Hilbert space, making it well-suited for capturing complex interactions between input and output representations in deep neural networks.
+}
+
+Our experiments show that, while sound generation preserves a robust statistical dependency between these representations, hallucination is characterized by a measurable weakening of this dependence, as quantified by our method (\cref{sec:irid,sec:results}). To quantify this phenomenon, we leverage the Hilbert-Schmidt Independence Criterion (HSIC), a non-parametric measure that can capture complex, non-linear relationships in high-dimensional spaces, such as LMs' hidden states. We first introduce HSIC and discuss its properties, motivating its adaptation to our method for hallucination detection. 
+
+\changed{
+\subsection{Measuring Representational Dependence}
+We hypothesize that hallucinations arise when an LM’s internal representations of the input
+and generated output become statistically decoupled. While faithful generations preserve
+a strong dependence between these representations, hallucinated outputs exhibit weakened
+or near-independent representations.
+Capturing such dependence requires a statistic capable of detecting non-linear relationships,
+as linear similarity measures (e.g., cosine similarity) fail under deep, non-linear transformations.
+To this end, we adopt the Hilbert--Schmidt Independence Criterion (HSIC), a kernel-based,
+non-parametric measure that can detect arbitrary statistical dependence.
+We provide the formal definition of HSIC, its independence guarantees, and relevant theoretical
+properties in Appendix A.1.
+}
+
+\changed{
+\subsection{Empirical Estimation}
+In practice, we estimate HSIC using an unbiased estimator that remains reliable under small
+sample sizes, which is critical for hallucination detection where only a limited number of
+input and output tokens are available. The estimator operates on kernelized hidden-state
+representations extracted from a single forward pass of the LM.
+Details of the estimator, including its derivation and statistical properties, are provided
+in Appendix A.2.
+}

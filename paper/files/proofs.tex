@@ -1,0 +1,144 @@
+\appendixsection{Theoretical Foundations of HSIC and HIDE}
+\label{app:hsic_theory}
+
+\subsection*{A.1 Measuring Statistical Dependence using HSIC}
+\label{subsec:hsic_rkhs}
+Let's assume that we want to assess the statistical dependence between two random variables $X$ and $Y$, taking values in separable topological spaces $\mathcal{X}$ and $\mathcal{Y}$, respectively. The statistical relationship between $X$ and $Y$ is governed by their joint probability distribution $P_{XY}$. HSIC quantifies this dependence by comparing $P_{XY}$ to the product of the marginals, $P_X P_Y$, within Reproducing Kernel Hilbert Spaces (RKHSs). An RKHS $\mathcal{F}_k$, associated with a kernel $k: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ allows implicit mapping to a feature space via $\phi: \mathcal{X} \to \mathcal{F}_k$, where $k(x, x') = \langle \phi(x), \phi(x') \rangle_{\mathcal{F}_k}$, with $\langle \cdot, \cdot \rangle_{\mathcal{F}_k}$ denoting the inner product in the RKHS $\mathcal{F}_k$. This mapping facilitates the detection of non-linear dependencies.
+
+
+% Given two RKHSs, $\mathcal{F}$ with kernel $k_X$ for variable $X$, and $\mathcal{G}$ with kernel $k_Y$ for variable $Y$ (corresponding to feature maps $\phi$ and $\psi$ respectively), the cross-covariance operator $C_{XY}: \mathcal{G} \to \mathcal{F}$ is defined as:
+% \begin{equation*}\small
+% \begin{small}
+% C_{XY} \coloneqq \mathbb{E}_{XY}[\phi(X) \otimes \psi(Y)] - \mathbb{E}_X[\phi(X)] \otimes \mathbb{E}_Y[\psi(Y)]
+% \end{small}
+% \end{equation*}
+% where $\otimes$ denotes the tensor product. Intuitively, $C_{XY}$ captures the covariance between the representations of $X$ and $Y$ in their respective RKHSs. If $X$ and $Y$ are independent, $C_{XY}$ is the zero operator. 
+\changedtwo{Intuitively, standard linear metrics (like cosine similarity) only capture direct geometric alignment. In contrast, evaluating dependence in an RKHS allows us to detect arbitrary, non-linear relationships. The cross-covariance operator, $C_{XY}$, acts as a high-dimensional analog to the standard covariance matrix, capturing the covariance between the transformed representations of $X$ and $Y$ in their respective feature spaces. When an LM hallucinates, the structural link between the input context and the output breaks down, shrinking the magnitude of this operator. Formally, given two RKHSs, $\mathcal{F}$ with kernel $k_X$ for variable $X$, and $\mathcal{G}$ with kernel $k_Y$ for variable $Y$ (corresponding to feature maps $\phi$ and $\psi$ respectively), the cross-covariance operator $C_{XY}: \mathcal{G} \to \mathcal{F}$ is defined as:}
+\begin{equation*}\small
+C_{XY} \coloneqq \mathbb{E}_{XY}[\phi(X) \otimes \psi(Y)] - \mathbb{E}_X[\phi(X)] \otimes \mathbb{E}_Y[\psi(Y)]
+\end{equation*}
+where $\otimes$ denotes the tensor product. If $X$ and $Y$ are independent, $C_{XY}$ is the zero operator.
+
+The Hilbert-Schmidt norm of an operator $C: \mathcal{G} \to \mathcal{F}$, denoted by $\|C\|_{HS}$, is a generalization of the Frobenius norm for matrices and can be defined as $\|C\|_{HS}^2 = \sum_{i,j} |\langle C g_j, f_i \rangle_{\mathcal{F}}|^2$, where $\{f_i\}$ and $\{g_j\}$ are orthonormal bases of $\mathcal{F}$ and $\mathcal{G}$, respectively. It essentially measures the \textit{magnitude} of the operator.
+
+
+\begin{definition}
+\label{def:hsic}
+\textit{HSIC is the squared Hilbert-Schmidt norm of the cross-covariance operator $C_{XY}$:}
+\begin{equation}
+\text{\textit{HSIC}}(X,Y; k_X, k_Y) \coloneqq \|C_{XY}\|^2_{HS}
+\end{equation}
+\end{definition}
+
+\noindent A crucial property of HSIC is its relationship with statistical independence, formalized as follows:
+
+\begin{lemma}[\citet{gretton05a}]
+\label{lemma:hsic_independence_merged}
+\textit{Let $k_X$ and $k_Y$ be characteristic kernels on $\mathcal{X}$ and $\mathcal{Y}$, respectively. Then $\operatorname{HSIC}(X,Y; k_X, k_Y) = 0$ if and only if $X$ and $Y$ are statistically independent.}
+\end{lemma}
+A kernel $k$ is termed characteristic if the mapping from probability measures on its domain to mean elements in its RKHS, $\mu \mapsto \mathbb{E}_{X \sim \mu}[\phi(X)]$, is injective \citep{JMLR:v11:sriperumbudur10a}. This ensures that the mean embedding $\mathbb{E}[\phi(X)]$ uniquely determines $P_X$. For our method, we use the Radial Basis Function (RBF) kernel, $k_{\text{RBF}}(x, x') = \exp(-\gamma \|x - x'\|_2^2)$ for a bandwidth parameter $\gamma > 0$.
+
+\begin{lemma}[\citet{5122}]
+\label{lemma:rbf_characteristic_merged}
+\textit{The RBF kernel is characteristic on $\mathbb{R}^d$.}
+\end{lemma}
+The conjunction of Lemma~\ref{lemma:hsic_independence_merged} and Lemma~\ref{lemma:rbf_characteristic_merged} establishes HSIC, when computed with RBF kernels, as a robust and theoretically sound metric for detecting statistical independence, forming the cornerstone of our approach.
+
+\subsection*{A.2 Empirical Estimation of HSIC}
+\label{subsec:empirical_hsic_foundation}
+In practice, we rely on empirical estimates of HSIC to quantify statistical independence from a finite set of $n$ samples. Given samples $\{x_1, \dots, x_n\}$ from the distribution of $X$ and $\{y_1, \dots, y_n\}$ from the distribution of $Y$, we form $n \times n$ Gram matrices $\mathbf{K}_X$ and $\mathbf{K}_Y$, where $\mathbf{K}_{X,ij} = k_X(x_i, x_j)$ and $\mathbf{K}_{Y,ij} = k_Y(y_i, y_j)$.
+
+A common, though biased, empirical estimator for HSIC is \citep{gretton05a}:
+
+\begin{equation}
+\widehat{\operatorname{HSIC}}_b(X,Y) = \frac{1}{(n-1)^2} \text{Tr}(\mathbf{K}_X \mathbf{H} \mathbf{K}_Y \mathbf{H})
+\label{eq:biased_HSIC_foundation}
+\end{equation}
+where $\mathbf{H} = \mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T$ is the $n \times n$ centering matrix, $\mathbf{I}$ is the identity matrix, and $\mathbf{1}$ is an $n \times 1$ column vector of ones.
+
+For improved performance, particularly with smaller $n$, an unbiased estimator is preferred \citep{JMLR:v13:song12a}. The V-statistic based unbiased estimator is given by:
+\begin{multline}
+\widehat{\operatorname{HSIC}}_u(X,Y) = \frac{1}{n(n-3)} \bigg[ \text{Tr}(\tilde{\mathbf{K}}_X\tilde{\mathbf{K}}_Y) +   \frac{(\mathbf{1}^T \tilde{\mathbf{K}}_X \mathbf{1}) (\mathbf{1}^T \tilde{\mathbf{K}}_Y \mathbf{1})}{(n-1)(n-2)} -  \frac{2}{n-2} \mathbf{1}^T \tilde{\mathbf{K}}_X\tilde{\mathbf{K}}_Y \mathbf{1} \bigg]
+\label{eq:unbiased_HSIC_foundation}
+\end{multline}
+Here, $n$ is the number of samples. The matrices $\tilde{\mathbf{K}}_X$ and $\tilde{\mathbf{K}}_Y$ are derived from $\mathbf{K}_X$ and $\mathbf{K}_Y$, respectively by setting their diagonal entries to zero: $\tilde{\mathbf{K}}_{X,ij} = (1-\delta_{ij})\mathbf{K}_{X,ij}$, where $\delta_{ij}$ is the Kronecker delta  (1 if $i=j$, and 0 otherwise). This estimator requires $n \ge 4$ for its standard definition.
+
+\subsection*{A.3 Properties of the \method~Score}
+\label{sec:properties-hide}
+We now analyze the properties of our proposed \method~score (Equation ~\ref{eq:hide-score}), denoted as \(\widehat{\operatorname{HSIC}}_{\method}\), which adapts the standard unbiased V-statistic based HSIC estimator to be computable for any number of effective tokens \(n \equiv n_{\text{eff}} \ge 1\). 
+
+Let \(\{(x_i,y_i)\}_{i=1}^{n}\) be the set of hidden state representations for the selected input and output tokens. We use the RBF kernel, which is bounded such that \(0 < k(u,v) \le 1\) for any vectors \(u,v\). The score is computed using Gram matrices with zeroed diagonals, \(\tilde{\mathbf{K}}_X\) and \(\tilde{\mathbf{K}}_Y\), as defined in Equation~\ref{eq:unbiased_HSIC_foundation}.
+
+\begin{lemma}[\textbf{Behaviour for Small Sample Sizes}]
+\label{lem:small_n_properties}
+\textit{The \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is computable for small sample sizes where \(\widehat{\operatorname{HSIC}}_u\) is undefined. Specifically:}
+\begin{enumerate}
+    \item[\textit{(i)}] \textit{If \(n=1\), then \(\widehat{\operatorname{HSIC}}_{\method}(X,Y) = 0\).}
+    \item[\textit{(ii)}] \textit{If \(n=2\), then \(\widehat{\operatorname{HSIC}}_{\method}(X,Y) = \frac{1}{4} k_X(x_1,x_2)k_Y(y_1,y_2)\), which implies \(0 < \widehat{\operatorname{HSIC}}_{\method}(X,Y) \le 1/4\).}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The proof of the above lemma follows from direct substitution into Equation~\ref{eq:hide-score} for computing \(\widehat{\operatorname{HSIC}}_{\method}\).
+
+(i) For \(n=1\), the zero-diagonal matrices are \(\tilde K_X = [0]\) and \(\tilde K_Y = [0]\). All terms in Equation~\ref{eq:hide-score} thus becomes zero, implying \(\widehat{\operatorname{HSIC}}_{\method} = 0\).
+
+(ii) For \(n=2\), let \(a = k_X(x_1,x_2)\) and \(b = k_Y(y_1,y_2)\). The matrices are, therefore, \(\tilde K_X = \begin{pmatrix} 0 & a \\ a & 0 \end{pmatrix}\) and \(\tilde K_Y = \begin{pmatrix} 0 & b \\ b & 0 \end{pmatrix}\). The constituent terms of Equation~\ref{eq:hide-score} are: \(\text{Tr}(\tilde K_X\tilde K_Y) = 2ab\); \(\mathbf{1}^{\!\top}\tilde K_X\mathbf{1} = 2a\); \(\mathbf{1}^{\!\top}\tilde K_Y\mathbf{1} = 2b\); and \(\mathbf{1}^{\!\top}\tilde K_X\tilde K_Y\mathbf{1} = 2ab\). Substituting these into Equation~\ref{eq:hide-score} for \(n=2\) yields:
+\[ \widehat{\operatorname{HSIC}}_{\method}(X,Y) = \frac{1}{2^2} \left[ 2ab + \frac{(2a)(2b)}{2^2} - \frac{2}{2}(2ab) \right] = \frac{1}{4} [2ab + ab - 2ab] = \frac{ab}{4}. \]
+Since the RBF kernel ensures \(a, b \in (0,1]\) for distinct points, the result \( (0, 1/4]\) follows. This confirms the score yields a deterministic, non-negative value for \(n=2\).
+\end{proof}
+
+
+\begin{lemma}[\textbf{Asymptotic Properties}]
+\label{lem:asymptotic_properties}
+\textit{The \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is asymptotically unbiased and strongly consistent.}
+\begin{enumerate}
+    \item[\textit{(i)}] \textit{(Asymptotic Bias) The bias of the estimator vanishes as \(n \to \infty\):
+    \[ \bigl|\mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] - \operatorname{HSIC}(X,Y)\bigr| = O(1/n). \]}
+    \item[\textit{(ii)}] \textit{(Strong Consistency) As \(n \to \infty\), \(\widehat{\operatorname{HSIC}}_{\method}(X,Y)\) converges almost surely to the true population HSIC:
+    \[ \widehat{\operatorname{HSIC}}_{\method}(X,Y) \xrightarrow{\text{a.s.}} \operatorname{HSIC}(X,Y). \]}
+\end{enumerate}
+\end{lemma}
+
+% \appendixsection{Proofs of Lemmas}
+% \label{appendix:proofs}
+% We discuss detailed mathematical proofs of Lemmas 3 and 4, introduced in \cref{sec:properties-hide}, below:
+% \\
+% \noindent\textbf{Lemma 3 (Behaviour for Small Sample Sizes).}
+% \label{lem:small_n_properties}
+% \textit{The \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is computable for small sample sizes where \(\widehat{\operatorname{HSIC}}_u\) is undefined. Specifically:}
+% \begin{enumerate}
+%     \item[\textit{(i)}] \textit{If \(n=1\), then \(\widehat{\operatorname{HSIC}}_{\method}(X,Y) = 0\).}
+%     \item[\textit{(ii)}] \textit{If \(n=2\), then \(\widehat{\operatorname{HSIC}}_{\method}(X,Y) = \frac{1}{4} k_X(x_1,x_2)k_Y(y_1,y_2)\), which implies \(0 < \widehat{\operatorname{HSIC}}_{\method}(X,Y) \le 1/4\).}
+% \end{enumerate}
+
+% \begin{proof}
+% The proof of the above lemma follows from direct substitution into Equation~\ref{eq:hide-score} for computing \(\widehat{\operatorname{HSIC}}_{\method}\).
+
+% (i) For \(n=1\), the zero-diagonal matrices are \(\tilde K_X = [0]\) and \(\tilde K_Y = [0]\). All terms in Equation~\ref{eq:hide-score} thus becomes zero, implying \(\widehat{\operatorname{HSIC}}_{\method} = 0\).
+
+% (ii) For \(n=2\), let \(a = k_X(x_1,x_2)\) and \(b = k_Y(y_1,y_2)\). The matrices are, therefore, \(\tilde K_X = \begin{pmatrix} 0 & a \\ a & 0 \end{pmatrix}\) and \(\tilde K_Y = \begin{pmatrix} 0 & b \\ b & 0 \end{pmatrix}\). The constituent terms of Equation~\ref{eq:hide-score} are: \(\text{Tr}(\tilde K_X\tilde K_Y) = 2ab\); \(\mathbf{1}^{\!\top}\tilde K_X\mathbf{1} = 2a\); \(\mathbf{1}^{\!\top}\tilde K_Y\mathbf{1} = 2b\); and \(\mathbf{1}^{\!\top}\tilde K_X\tilde K_Y\mathbf{1} = 2ab\). Substituting these into Equation~\ref{eq:hide-score} for \(n=2\) yields:
+% \[ \widehat{\operatorname{HSIC}}_{\method}(X,Y) = \frac{1}{2^2} \left[ 2ab + \frac{(2a)(2b)}{2^2} - \frac{2}{2}(2ab) \right] = \frac{1}{4} [2ab + ab - 2ab] = \frac{ab}{4}. \]
+% Since the RBF kernel ensures \(a, b \in (0,1]\) for distinct points, the result \( (0, 1/4]\) follows. This confirms the score yields a deterministic, non-negative value for \(n=2\).
+% \end{proof}
+
+% \noindent\textbf{Lemma 4 (Asymptotic Properties).}
+% \label{lem:asymptotic_properties}
+% \textit{The \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is asymptotically unbiased and strongly consistent.}
+% \begin{enumerate}
+%     \item[\textit{(i)}] \textit{(Asymptotic Bias) The bias of the estimator vanishes as \(n \to \infty\):
+%     \[ \bigl|\mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] - \operatorname{HSIC}(X,Y)\bigr| = O(1/n). \]}
+%     \item[\textit{(ii)}] \textit{(Strong Consistency) As \(n \to \infty\), \(\widehat{\operatorname{HSIC}}_{\method}(X,Y)\) converges almost surely to the true population HSIC:
+%     \[ \widehat{\operatorname{HSIC}}_{\method}(X,Y) \xrightarrow{\text{a.s.}} \operatorname{HSIC}(X,Y). \]}
+% \end{enumerate}
+
+\begin{proof}
+We relate our estimator to the standard V-statistic unbiased estimator, \(\widehat{\operatorname{HSIC}}_{u}\) (c.f. Equation~\ref{eq:unbiased_HSIC_foundation}), which is a strongly consistent estimator for the true population HSIC. For large \(n\) (\(n \ge 4\)), the denominators in Equation~\ref{eq:unbiased_HSIC_foundation} for \(\widehat{\operatorname{HSIC}}_{u}\) (e.g., \(n-1, n-2, n-3\)) become asymptotically equivalent to \(n\), i.e., $(n-1) \approx (n-2) \approx (n-3) = n(1-\frac{3}{n})$ when $n$ is large. This leads to the following relationship between the two estimators:
+\[ \widehat{\operatorname{HSIC}}_{\method}(X,Y) \approx \left(1 - \frac{3}{n}\right) \widehat{\operatorname{HSIC}}_{u}(X,Y). \]
+
+(i) To analyze the bias, we take the expectation of this approximate relation. Since \(\mathbb{E}[\widehat{\operatorname{HSIC}}_u] = \operatorname{HSIC}(X,Y)\), we have:
+\[ \mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] \approx \left(1 - \frac{3}{n}\right) \operatorname{HSIC}(X,Y). \]
+The absolute bias is therefore \( |\mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] - \operatorname{HSIC}(X,Y)| \approx |(1 - 3/n)\operatorname{HSIC} - \operatorname{HSIC}| = \frac{3}{n}|\operatorname{HSIC}(X,Y)| \). As \(|\operatorname{HSIC}(X,Y)| \le 1\) for a bounded RBF kernel, the bias is of order \(O(1/n)\) and vanishes as \(n \to \infty\).
+
+(ii) For consistency, we observe that as \(n \to \infty\), the scaling factor \((1 - 3/n) \to 1\). Since \(\widehat{\operatorname{HSIC}}_{u}(X,Y)\) converges almost surely to \(\operatorname{HSIC}(X,Y)\), their product also converges almost surely to \(\operatorname{HSIC}(X,Y)\) by the properties of limits of almost sure convergence. This establishes the strong consistency of our estimator.
+\end{proof}

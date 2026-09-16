@@ -1,0 +1,90 @@
+\appendixsection{Detailed Per-Dataset Results}
+\label{app:detailed_results}
+\input{files/results_table} 
+\changed{
+For completeness, this appendix reports the full per-dataset hallucination detection results underlying the summarized comparisons in the main paper. Table~\ref{tab:results_exp} presents AUC-ROC and PCC scores for all methods across individual datasets and models, allowing fine-grained inspection of dataset-specific behavior and variance that is abstracted away in the averaged results shown in Table~\ref{tab:summary_results}.
+}
+
+\appendixsection{Performance with Exact Match as Correctness Measure}
+\label{sec:exact_match}
+
+In addition to AUC-ROC and PCC for sentence embedding similarity and ROUGE-L as correctness measures, we also present the evaluation results by using exact match \citep{liang2023holisticevaluationlanguagemodels} as the correctness measure, which imposes a more stringent criterion for a generation to be accurate. The findings in Table \ref{tab:exact_match} provide results analogous to those in Table \ref{tab:results_exp}, indicating that our approach is effective for detecting both faithfulness and factuality hallucinations.
+
+\begin{table*}[t!]
+\tiny
+\centering
+\adjustbox{width=\linewidth}{
+\begin{tabular}{lcc|cc|cc|cc|cc}
+\toprule
+\multirow{3}{*}{Method} 
+& \multicolumn{4}{c}{\textbf{Faithfulness}} 
+& \multicolumn{4}{c}{\textbf{Factuality}} \\
+\cmidrule(lr){2-5} \cmidrule(lr){6-9}
+& \multicolumn{2}{c}{RACE} & \multicolumn{2}{c}{SQuAD} 
+& \multicolumn{2}{c}{NQ} & \multicolumn{2}{c}{TriviaQA} & \multicolumn{2}{c}{\textbf{Average}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9} \cmidrule(lr){10-11}
+& $\text{AUC}$ & $\text{PCC}$ & $\text{AUC}$ & $\text{PCC}$& $\text{AUC}$ & $\text{PCC}$& $\text{AUC}$ & $\text{PCC}$ & $\text{AUC}$ & $\text{PCC}$\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{11}{c}{\cellcolor[HTML]{C0C0C0}Llama-3.2-3B} \\\hline
+Perplexity         & 52.91 & 7.32 & 45.32 & -4.34 & 54.75 & 5.37 & \underline{57.84} & \underline{19.44} & 52.70 & 6.95 \\
+Energy             & 49.86 & 0.05 & 34.40 & -23.90 & 35.01 & -13.17 & 42.54 & -18.99 & 40.45 & -14.00 \\
+\rowcolor{gray!20} LN-Entropy         & 50.78 & 2.55 & 61.76 & 17.66 & \textbf{74.54} & 21.42 & 67.24 & 27.11 & 63.58 & 17.18 \\
+\rowcolor{gray!20} Lexical Similarity &  66.17 & 24.29 & 64.13 & 22.29 & 68.86 & 22.29 & \textbf{79.32} & \textbf{50.78} & 69.62 & \textbf{29.91}\\
+\rowcolor{gray!20} Eigenscore         & 62.00 & 16.80 & 65.91 & 21.57 & 70.12 & 19.08 & 75.95 & 43.92 & 68.50 & 25.34 \\
+\textbf{\method} & \textbf{\underline{69.63}} & \textbf{\underline{26.13}} & \textbf{\underline{77.30}} & \textbf{\underline{44.15}} & \underline{74.46} & \textbf{\underline{26.23}} & 57.61 & 14.08 & \textbf{\underline{69.75}} & \underline{27.65} \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{11}{c}{\cellcolor[HTML]{C0C0C0}Llama-3.2-3B-Instruct} \\\hline
+Perplexity         & 58.68 & 14.88 & 52.55 & 6.22 & 55.66 & 5.48 & \underline{59.90} & \underline{20.39} & 56.70 & 11.74 \\
+Energy             & 51.55 & 3.08 & 36.13 & -21.11 & 25.59 & -23.91 & 42.06 & -14.11 & 38.83 & -14.01\\
+\rowcolor{gray!20} LN-Entropy         & 53.50 & 6.15 & 64.53 & 23.31 & 71.06 & 20.88 & 71.77 & 27.32 & 65.22 & 19.41\\
+\rowcolor{gray!20} Lexical Similarity & 66.56 & 27.05 & 69.52 & 31.73 & 70.58 & 27.62 & \textbf{78.88} & \textbf{49.17} & 71.38 & 33.89 \\
+\rowcolor{gray!20} Eigenscore         & 64.16 & 22.86 & 75.66 & \textbf{42.81} & \textbf{76.05} & 30.44 & 77.91 & 45.54 & \textbf{73.44} & \textbf{35.41}\\
+\textbf{\method} & \textbf{\underline{78.49}} & \textbf{\underline{41.68}} & \textbf{\underline{75.71}} & \underline{42.45} & \underline{75.55} & \textbf{\underline{32.40}} & 57.23 & 14.99 & \underline{71.74} & \underline{32.88}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{11}{c}{\cellcolor[HTML]{C0C0C0}Llama-3-8B} \\\hline
+Perplexity         & 56.68 & 11.82 & 44.16 & -6.38 & 46.96 & -1.38 & 39.23 & -5.94 & 46.76 & -0.47 \\
+Energy             & 55.98 & 9.88 & 33.51 & -26.30 & 30.93 & -18.07 & 27.31 & -39.28 & 36.93 & -18.44 \\
+\rowcolor{gray!20} LN-Entropy         & 45.33 & -3.66 & 61.24 & 17.13 & 66.40 & 15.30 & 72.40 & 36.05 & 61.34 & 16.21 \\
+\rowcolor{gray!20} Lexical Similarity & 66.05 & \textbf{25.92} & 63.41 & 22.28 & 65.05 & 20.06 & 76.29 & 44.85 & 67.70 & 28.28\\
+\rowcolor{gray!20} Eigenscore         & 55.49 & 11.51 & 68.38 & 28.24 & 66.40 & 17.54 & \textbf{80.04} & \textbf{52.15} & 67.58 & 27.36\\
+\textbf{\method} & \textbf{\underline{69.48}} & \underline{24.27} & \textbf{\underline{76.57}} & \textbf{\underline{44.64}} & \textbf{\underline{78.58}} & \textbf{\underline{33.65}} & \underline{64.35} & \underline{28.95} & \textbf{\underline{72.24}} & \textbf{\underline{32.88}} \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{11}{c}{\cellcolor[HTML]{C0C0C0}Llama-3-8B-Instruct} \\\hline
+Perplexity         & 58.16 & 10.67 & 46.38 & -2.87 & 57.74 & 6.97 & \underline{60.95} & 18.78 & 55.81 & 8.39 \\
+Energy             & 52.26 & 3.91 & 41.37 & -14.63 & 30.19 & -19.62 & 38.32 & -17.71 & 40.53 & -12.01\\
+\rowcolor{gray!20} LN-Entropy         & 57.33 & 11.06 & 63.65 & 19.21 & 67.65 & 19.26 & 78.61 & 43.82 & 66.81 & 23.34\\
+\rowcolor{gray!20} Lexical Similarity & 68.51 & 30.04 & 62.46 & 18.42 & 70.47 & 24.73 & 79.98 & 52.49 & 70.35 & 31.42 \\
+\rowcolor{gray!20} Eigenscore         & 66.57 & 25.98 & 73.33 & 34.87 & \textbf{79.08} & 31.70 & \textbf{81.32} & \textbf{56.83} & \textbf{75.07} & \textbf{37.34} \\
+\textbf{\method} &  \textbf{\underline{78.16}} & \textbf{\underline{39.28}} & \textbf{\underline{80.77}} & \textbf{\underline{52.52}} & \underline{77.45} & \textbf{\underline{35.56}} & 60.25 & \underline{20.98} & \underline{74.15} & \underline{37.08}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{11}{c}{\cellcolor[HTML]{C0C0C0}Gemma-2-9B} \\\hline
+Perplexity         & \underline{59.69} & \underline{19.95} & 46.14 & -4.46 & 29.75 & -4.55 & 40.46 & -7.66 & 44.01 & 0.82\\
+Energy             & 44.45 & -9.16 & 53.56 & 2.39 & 63.18 & 2.08 & 71.93 & 15.07 & 58.28 & 2.60  \\
+\rowcolor{gray!20} LN-Entropy         & 63.10 & 22.58 & 59.07 & 13.84 & 41.64 & -2.82 & 38.69 & -7.53 & 50.63 & 6.52\\
+\rowcolor{gray!20} Lexical Similarity & \textbf{68.93} & \textbf{33.21}& 66.84 & 27.57 & 49.29 & -0.60 & 62.08 & 10.82 & 61.79 & 17.75\\
+\rowcolor{gray!20} Eigenscore         & 64.41 & 25.28 & 74.27 & 38.40 & \textbf{79.23} & 8.06 & 72.24 & 17.68 & \textbf{72.54} & \textbf{22.36}  \\
+\textbf{\method} & 58.11 & 14.86 & \textbf{\underline{74.57}} & \textbf{\underline{40.93}} & \underline{74.12} & \textbf{\underline{20.87}} & \textbf{\underline{80.94}} & \textbf{\underline{46.90}} & \underline{71.94} & \underline{30.89}  \\ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{11}{c}{\cellcolor[HTML]{C0C0C0}Gemma-2-9B-Instruct} \\\hline
+Perplexity         & 59.65 & 12.24 & 52.92 & 3.96 & 30.70 & -8.91 & 28.99 & -7.91 & 43.07 & -0.16\\
+Energy             & 59.03 & 12.08 & \textbf{\underline{81.68}} & \textbf{\underline{51.69}} & 78.04 & 19.77 & \textbf{\underline{92.75}} & 34.10 & \textbf{\underline{77.87}} & 29.41  \\
+\rowcolor{gray!20} LN-Entropy         & 62.39 & 16.99 & 68.31 & 24.85 & 44.40 & -3.54 & 36.64 & -6.75 & 52.94 & 7.89  \\
+\rowcolor{gray!20} Lexical Similarity & \textbf{73.28} & \textbf{39.48} & 73.55 & 35.35 & 53.91 & 3.30& 49.55 & 0.13 & 62.57 & 19.57 \\
+\rowcolor{gray!20} Eigenscore         & 70.96 & 32.03 & 72.42 & 40.43 & 66.72 & 12.17 & 60.28 & 7.88 & 67.59 & 23.13 \\
+\textbf{\method} &  \underline{66.08} & \underline{20.79} & 72.62 & 37.79 & \textbf{\underline{84.00}} & \textbf{\underline{41.94}} & 67.92 & \textbf{\underline{38.57}} & 72.65 & \textbf{\underline{34.77}}\\
+\midrule
+\end{tabular}
+}
+\caption{AUC-ROC and PCC values using exact match as the correctness measure for faithfulness and factuality hallucination detection across four datasets. \method~is compared with single-pass and multi-pass baselines (rows corresponding to multi-pass are highlighted in grey; $5$ outputs are generated for each multi-pass method). The best result for each metric is shown in \textbf{bold}; the best among single-pass methods is \underline{underlined}.}
+\label{tab:exact_match}
+\end{table*}
+
+
+
+

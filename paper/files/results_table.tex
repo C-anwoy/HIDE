@@ -1,0 +1,91 @@
+%\begin{landscape}
+\afterpage{%
+  \clearpage
+\begin{table*}[p]
+% \begin{sidewaystable}[p]
+\centering
+\caption{AUC-ROC and PCC values using sentence similarity and ROUGE-L as correctness measures for faithfulness and factuality hallucination detection across four datasets. \method~is compared with single-pass and multi-pass baselines (rows corresponding to multi-pass are highlighted in gray; five outputs are generated for each multi-pass method). The best result for each metric is shown in \textbf{bold}; the best among single-pass methods is \underline{underlined}.}
+
+\rotatebox{90}{
+% \adjustbox{width=0.9\linewidth}{
+\adjustbox{max width=0.9\textheight, max height=\linewidth, keepaspectratio}{
+\begin{tabular}{lcccc|cccc|cccc|cccc|cccc}
+\toprule
+\multirow{3}{*}{Method} 
+& \multicolumn{8}{c}{\textbf{Faithfulness}} 
+& \multicolumn{8}{c}{\textbf{Factuality}} \\
+\cmidrule(lr){2-9} \cmidrule(lr){10-17}
+& \multicolumn{4}{c}{RACE} & \multicolumn{4}{c}{SQuAD} 
+& \multicolumn{4}{c}{NQ} & \multicolumn{4}{c}{TriviaQA} & \multicolumn{4}{c}{\textbf{Average}}\\
+\cmidrule(lr){2-5} \cmidrule(lr){6-9} \cmidrule(lr){10-13} \cmidrule(lr){14-17} \cmidrule(lr){18-21}
+& $\text{AUC}_\text{s}$ & $\text{AUC}_\text{r}$ & $\text{PCC}_\text{s}$ & $\text{PCC}_\text{r}$ 
+& $\text{AUC}_\text{s}$ & $\text{AUC}_\text{r}$ & $\text{PCC}_\text{s}$ & $\text{PCC}_\text{r}$ 
+& $\text{AUC}_\text{s}$ & $\text{AUC}_\text{r}$ & $\text{PCC}_\text{s}$ & $\text{PCC}_\text{r}$ 
+& $\text{AUC}_\text{s}$ & $\text{AUC}_\text{r}$ & $\text{PCC}_\text{s}$ & $\text{PCC}_\text{r}$
+& $\text{AUC}_\text{s}$ & $\text{AUC}_\text{r}$ & $\text{PCC}_\text{s}$ & $\text{PCC}_\text{r}$ \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{21}{c}{\cellcolor[HTML]{C0C0C0}Llama-3.2-3B} \\\hline
+Perplexity         & 50.27 & 49.94 & \underline{18.6} & 15 & 46.53 & 47.3 & -7.81 & -1.56 & 53.03 & 54.25 & -8.16 & 9.2 &57.53 & 57.01 & 6.14 & \underline{20.41} & 51.84 & 52.13 & 2.19 & 10.76 \\
+
+Energy             & 49.07 & 49.93 & 13.10 & 9.14 & 36.9 & 37.22 & -29.49 & -26.22 & 36.83 & 35.2 & -25.81 & -10.75 &43.32 & 41.84 & -34.53 & -22.20 & 41.53 & 41.05 & -19.18 & -12.51 \\
+
+\rowcolor{gray!20} LN-Entropy & 50.90 & 50.26 & 6.01 & 6.96 & 60.85 & 60.89 & 14.24 & 19.74 & 72.39 & 71.31 & 20.58 & 22.53 & 67.31 & 67.24 & 22.52 & 28.82 & 62.86 & 62.42 & 15.84 & 19.52 \\
+\rowcolor{gray!20} Lexical Similarity & 64.11 & 65.04 & \textbf{22.04} & \textbf{27.32} & 64.61 & 66.71 & 28.81 & 34.1 & 65.98 & 69.51 & 20.32 & 27.8 &  \textbf{79.74} & \textbf{81.34} & \textbf{52.99}& \textbf{56.59} & 68.61 & \textbf{70.65} & 31.04 & \textbf{36.45}\\
+\rowcolor{gray!20} Eigenscore         & 58.17 & 57.18 & 9.56 & 12.37 & 65.31 & 65.49 & 21.29 & 25.46 & 68.34 & 67.34 & 20.27 & 17.39 & 76.13 & 76.57 & 50.45 & 48.15 & 66.98 & 66.65 & 25.39 & 25.85 \\
+\textbf{\method} & \textbf{\underline{66.43}} & \textbf{\underline{65.48}} & {18.34} & \underline{20.72} & \textbf{\underline{77.55}} & \textbf{\underline{77.28}} & \textbf{\underline{49.86}} & \textbf{\underline{50.3}} & \textbf{\underline{75.16}} & \textbf{\underline{74.63}} & \textbf{\underline{47.77}}& \textbf{\underline{25.77}} & \underline{58.36} & \underline{59.14} & \underline{27.46} & 17.88 & \textbf{\underline{69.37}} & \underline{69.13} & \textbf{\underline{35.86}} & \underline{28.67} \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{21}{c}{\cellcolor[HTML]{C0C0C0}Llama-3.2-3B-Instruct} \\\hline
+Perplexity         & 59.52 & 61.28 & 34.59& 28.44 & 52.50 & 55.22 & 9.73 & 15.36 & 54.90 & 54.16 & -7.26 & 8.80& \underline{60.08} & \underline{60.14} & 6.42 & \underline{22.49} & 56.75 & 57.70 & 10.87 & 18.77\\
+Energy             & 54.19 & 57.03 & 21.48 & 17.04 & 37.36 & 38.57 & -18.23 & -16.81 & 25.89 & 24.72 & -48.16 & -25.99& 42.51 & 41.59 & -31.54 & -16.17 & 39.99 & 40.48 & -19.11 & -10.48\\
+\rowcolor{gray!20} \rowcolor{gray!20} LN-Entropy         & 54.46 & 55.65 & 14.96 & 12.96 & 62.98 & 64.74 & 23.51 & 29.69 & 71.88 & 70.42 & 25.68& 24.93& 71.83 & 72.01 & 22.95 & 29.18 & 65.29 & 65.70 & 21.77 & 24.19\\
+\rowcolor{gray!20} Lexical Similarity & 66.75 & 68.20 & 31.91 & 33.83 & 69.05 & 71.69 & 35.08 & 41.91 & 70.49 & 70.53& 34.54 & 32.62& \textbf{79.25} & \textbf{80.59} & 51.98 & \textbf{54.42} & 71.38 & \textbf{72.75} & 38.38 & \textbf{40.69} \\
+\rowcolor{gray!20} Eigenscore         & 62.82 & 62.09 & 19.09 & 20.92 & 73.14 & 73.57 & 39.58 & \textbf{45.56} & 76.42 & 75.56& 41.64 & 32.71& 78.35 & 79.08 & \textbf{53.46} & 49.55 & \textbf{72.68} & 72.57 & 38.44 & 37.19 \\
+\textbf{\method} & \textbf{\underline{74.88}} & \textbf{\underline{73.02}} & \textbf{\underline{27.36}} & \textbf{\underline{33.95}} & \textbf{\underline{75.18}} & \textbf{\underline{75.48}} & \textbf{\underline{42.80}} & \underline{44.98} & \textbf{\underline{76.56}} & \textbf{\underline{77.27}} & \textbf{\underline{53.91}} & \textbf{\underline{35.40}} &58.43 & 59.03 & \underline{30.64} & 19.54 & \underline{71.26} & \underline{71.20} & \textbf{\underline{38.68}} & \underline{33.47}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{21}{c}{\cellcolor[HTML]{C0C0C0}Llama-3-8B} \\\hline
+Perplexity         & 50.78 & 51.93 & \underline{23.01} & 18.07 & 45.08 & 46.37 & -8.01 & -2.39 & 48.18 & 47.51 & -11.22 & 2.16& 38.21 & 36.90 & -19.49 & -8.54 & 45.56 & 45.68 & -3.92 & 2.33 \\
+Energy             & 50.10 & 51.35 & 17.68& 12.31 & 35.27 & 35.48 & -29.16 & -26.95 & 33.70 & 32.13 & -23.86 & -15.02&27.43 & 26.48& -50.84 & -42.86 & 36.63 & 36.36 & -21.55 & -18.13 \\
+\rowcolor{gray!20} LN-Entropy         & 45.49 & 45.85 & -0.10 & -0.54 & 60.50 & 60.57 & 15.09& 19.82 & 65.81 & 65.00 & 13.80 & 16.17  & 72.15& 72.08 & 33.54 & 37.79 & 60.99 & 60.87 & 15.58 & 18.31  \\
+\rowcolor{gray!20} Lexical Similarity & 66.10 & 66.92 & \textbf{29.15} & \textbf{33.80} & 64.01 & 66.57 & 29.36 & 33.69 & 65.22 & 65.84 & 20.10 & 25.87& 77.13 & 78.65 & 47.18 & 50.24 & 68.12 & 69.50 & 31.45 & \textbf{35.90} \\
+\rowcolor{gray!20} Eigenscore         & 54.16 & 53.98 & 6.73& 10.88 & 66.57 & 66.34 & 25.66 & 29.93 & 64.36 & 64.76 & 17.07 & 16.90& \textbf{81.06}& \textbf{82.14} & \textbf{57.92} & \textbf{57.46} & 66.54 & 66.81 & 26.84 & 28.79 \\
+\textbf{\method} & \textbf{\underline{69.81}} & \textbf{\underline{66.95}} & 16.76 & \underline{22.87} & \textbf{\underline{76.87}} & \textbf{\underline{77.45}} & \textbf{\underline{49.09}} & \textbf{\underline{50.43}} & \textbf{\underline{79.02}} & \textbf{\underline{79.17}} & \textbf{\underline{49.61}} & \textbf{\underline{33.91}} & \underline{65.65} & \underline{66.82} & \underline{41.82} & \underline{35.19} & \textbf{\underline{72.84}} & \textbf{\underline{72.60}} & \textbf{\underline{39.32}} & \underline{35.60}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{21}{c}{\cellcolor[HTML]{C0C0C0}Llama-3-8B-Instruct} \\\hline
+Perplexity         & 60.20 & 61.91 & \underline{22.52} & 22.42 & 47.46 & 50.73 & 2.95 & 6.94 & 57.47 & 56.11 & -7.64 & 9.72& \underline{61.70} & 61.14 & 7.68 & 21.43 & 56.71 & 57.47 & 6.38& 15.13\\
+Energy             & 55.94 & 57.16 & 18.26 & 15.97 & 43.05 & 44.60 & -8.96 & -8.31 & 30.63 & 29.56 & -36.02 & -18.50 &39.40 & 38.80 & -29.22 & -16.69 & 42.25 & 42.53 & -13.99 & -6.88 \\
+\rowcolor{gray!20} LN-Entropy         & 57.13 & 57.83 & 12.59 & 14.26 & 62.73 & 63.44 & 23.11 & 26.94 & 67.29 & 65.43 & 18.12 & 20.80 & 79.61 & 79.72 & 42.76 & 48.41 & 66.69 & 66.60 & 24.15 & 27.60 \\
+\rowcolor{gray!20} Lexical Similarity & 69.28 & 71.22 & \textbf{36.64} & \textbf{40.07} & 62.46 & 65.14 & 25.76 & 29.69 & 69.05 & 68.88 & 26.24 & 28.84&81.12 & 82.33 & 58.68& 59.19 & 70.48 & 71.89 & 36.83 & 39.45\\
+\rowcolor{gray!20} Eigenscore         & 63.65 & 62.99 & 18.78& 23.01 & 72.11 & 71.49 & 36.95 & 39.85 & 77.89 & 77.53 & 41.23 & 32.73& \textbf{82.83} & \textbf{83.94} & \textbf{69.32} & \textbf{63.72} & \textbf{74.12} & \textbf{73.99} & 41.57 & \textbf{39.83} \\
+\textbf{\method} & \textbf{\underline{73.20}} & \textbf{\underline{72.73}} & 22.12 & \underline{30.11} & \textbf{\underline{80.15}} & \textbf{\underline{79.14}} & \textbf{\underline{52.27}} & \textbf{\underline{55.98}} & \textbf{\underline{79.29}} & \textbf{\underline{78.91}} & \textbf{\underline{56.33}} & \textbf{\underline{37.98}} & \underline{61.70} & \underline{62.94} & \underline{36.73} & \underline{27.27} & \underline{73.58} & \underline{73.43} & \textbf{\underline{41.86}} & \underline{37.84}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{21}{c}{\cellcolor[HTML]{C0C0C0}Gemma-2-9B} \\\hline
+Perplexity         & \underline{59.88} & \underline{60.65} & \underline{29.89} & \underline{27.98} & 47.42 & 48.29 & -8.61 & -1.85 & 29.92 & 35.59 & 9.29 & 12.95 & 43.08 & 46.18 & -6.69 & 6.65 & 45.07 & 47.68 & 5.97 & 11.43 \\
+Energy             & 44.05 & 43.20 & -13.38 & -12.32 & 52.12 & 52.50 & 6.81 & 2.25 & 64.89 & 60.48 & 0.50 & -3.93& 68.90 & 67.80 & 14.82 & 7.61 & 57.49 & 56.00 & 2.19 & -1.60\\
+\rowcolor{gray!20} LN-Entropy         & 63.27 & 64.11 & 25.93 & 26.76& 60.05 & 61.26 & 15.72 & 22.29 & 44.14 & 53.01 & 8.19 & 20.20 & 41.53 & 44.85 & 0.95 & 13.07 & 52.25 & 55.81 & 12.70 & 20.58 \\
+\rowcolor{gray!20} Lexical Similarity & \textbf{69.02} & \textbf{69.62} & \textbf{34.18} & \textbf{35.48} & 67.10 & 70.32 & 35.25 & 40.56 & 56.80 & 59.43 & 13.50 & \textbf{23.50} &62.98 & 65.46 & 23.79 & 32.99 & 63.97 & 66.21 & 26.68 & \textbf{33.13}\\
+\rowcolor{gray!20} Eigenscore         & 64.58 & 64.35 & 24.99 & 25.20 & 73.40 & 75.14 & 41.66 & 47.29 & 73.31 & 74.31 & 7.70 & 16.79 & 71.40 & 71.70 & 23.15 & 27.42 & 70.67 & 71.37 & 24.37 & 29.18\\
+\textbf{\method} & 58.06 & 57.99 & 20.60 & 16.50 & \textbf{\underline{75.17}} & \textbf{\underline{76.66}} & \textbf{\underline{47.63}} & \textbf{\underline{48.43}} & \textbf{\underline{79.08}} & \textbf{\underline{75.96}} & \textbf{\underline{24.08}} & \underline{15.41} & \textbf{\underline{80.84}} & \textbf{\underline{81.02}} & \textbf{\underline{50.51}} & \textbf{\underline{43.88}} & \textbf{\underline{73.29}} & \textbf{\underline{72.91}} & \textbf{\underline{35.70}} & \underline{31.05} \\ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hline
+\multicolumn{21}{c}{\cellcolor[HTML]{C0C0C0}Gemma-2-9B-Instruct} \\\hline
+Perplexity         & 60.22& 61.27 & \underline{14.11} & \underline{17.12} & 53.15 & 56.90 & 5.73 & 12.49 & 31.52 & 34.14 & 29.54 & 0.19 & 32.09 & 36.85 & 52.60 & 11.92 & 44.25 & 47.29 & 25.49 & 10.43\\
+Energy             & 57.29 & 55.87 & 7.28 & 5.99 & \textbf{\underline{80.08}} & \textbf{\underline{77.41}} & \textbf{\underline{49.54}} & \textbf{\underline{50.08}} & 77.19 & 76.56 & -9.51 & 11.55 & \textbf{\underline{92.34}} & \textbf{\underline{90.96}} & -12.88 & 28.05 & \textbf{\underline{76.73}} & \textbf{\underline{75.20}} & 8.61 & 23.92\\
+\rowcolor{gray!20} LN-Entropy         & 62.82 & 64.58 & 17.67 & 20.84 & 67.09 & 69.50 & 26.65 & 33.47 & 44.68 & 46.01 & 13.79 & 4.64 & 39.70 & 44.13 & 28.49 & 14.62 & 53.57 & 56.06 & 21.65 & 18.39 \\
+\rowcolor{gray!20} Lexical Similarity & \textbf{72.55} & \textbf{72.98} & \textbf{34.16} & \textbf{38.63} & 72.33 & 74.97 & 39.77 & 46.57 & 53.27 & 56.91 & 19.80 & 11.13 & 51.56 & 56.22 & 31.36 & 21.47 & 62.43 & 65.27 & 31.27 & 29.45  \\
+\rowcolor{gray!20} Eigenscore         & 70.22 & 70.59 & 24.78 & 29.44 & 71.70 & 73.99 & 44.71 & 49.87 & 65.97 & 67.11 & 8.40 & 14.46 & 61.17 & 64.63 & 15.05 & 21.13 & 67.26 & 69.08 & 23.24 & 28.73 \\
+\textbf{\method} & \underline{64.18} & \underline{64.03} & 11.92 & 16.26 & 72.69 & 73.32 & 39.73 & 39.70 & \textbf{\underline{85.19}} & \textbf{\underline{85.89}} & \textbf{\underline{51.20}} & \textbf{\underline{41.99}} & 70.90 & 70.72 & \textbf{\underline{52.64}} & \textbf{\underline{45.90}} & 73.24 & 73.49 & \textbf{\underline{38.87}} & \textbf{\underline{35.97}}\\
+\midrule
+\end{tabular}
+}
+}
+\label{tab:results_exp}
+\end{table*}
+}
+%\end{landscape}
+% \end{sidewaystable}
+% \todo{table 2 is too small. reveiwer will complain. You may rotate it by 90 degree and make it a full page table}

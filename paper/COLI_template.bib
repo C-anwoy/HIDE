@@ -1,0 +1,1653 @@
+
+@misc{nanda_progress_2023,
+	title = {Progress measures for grokking via mechanistic interpretability},
+	url = {http://arxiv.org/abs/2301.05217},
+	doi = {10.48550/arXiv.2301.05217},
+	abstract = {Neural networks often exhibit emergent behavior, where qualitatively new capabilities arise from scaling up the amount of parameters, training data, or training steps. One approach to understanding emergence is to find continuous {\textbackslash}textit\{progress measures\} that underlie the seemingly discontinuous qualitative changes. We argue that progress measures can be found via mechanistic interpretability: reverse-engineering learned behaviors into their individual components. As a case study, we investigate the recently-discovered phenomenon of ``grokking'' exhibited by small transformers trained on modular addition tasks. We fully reverse engineer the algorithm learned by these networks, which uses discrete Fourier transforms and trigonometric identities to convert addition to rotation about a circle. We confirm the algorithm by analyzing the activations and weights and by performing ablations in Fourier space. Based on this understanding, we define progress measures that allow us to study the dynamics of training and split training into three continuous phases: memorization, circuit formation, and cleanup. Our results show that grokking, rather than being a sudden shift, arises from the gradual amplification of structured mechanisms encoded in the weights, followed by the later removal of memorizing components.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Nanda, Neel and Chan, Lawrence and Lieberum, Tom and Smith, Jess and Steinhardt, Jacob},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2301.05217},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence},
+}
+
+@misc{rauker_toward_2023,
+	title = {Toward transparent ai: a survey on interpreting the inner structures of deep neural networks},
+	shorttitle = {Toward transparent ai},
+	url = {http://arxiv.org/abs/2207.13243},
+	doi = {10.48550/arXiv.2207.13243},
+	abstract = {The last decade of machine learning has seen drastic increases in scale and capabilities. Deep neural networks (DNNs) are increasingly being deployed in the real world. However, they are difficult to analyze, raising concerns about using them without a rigorous understanding of how they function. Effective tools for interpreting them will be important for building more trustworthy AI by helping to identify problems, fix bugs, and improve basic understanding. In particular, "inner" interpretability techniques, which focus on explaining the internal components of DNNs, are well-suited for developing a mechanistic understanding, guiding manual modifications, and reverse engineering solutions. Much recent work has focused on DNN interpretability, and rapid progress has thus far made a thorough systematization of methods difficult. In this survey, we review over 300 works with a focus on inner interpretability tools. We introduce a taxonomy that classifies methods by what part of the network they help to explain (weights, neurons, subnetworks, or latent representations) and whether they are implemented during (intrinsic) or after (post hoc) training. To our knowledge, we are also the first to survey a number of connections between interpretability research and work in adversarial robustness, continual learning, modularity, network compression, and studying the human visual system. We discuss key challenges and argue that the status quo in interpretability research is largely unproductive. Finally, we highlight the importance of future work that emphasizes diagnostics, debugging, adversaries, and benchmarking in order to make interpretability tools more useful to engineers in practical applications.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Räuker, Tilman and Ho, Anson and Casper, Stephen and Hadfield-Menell, Dylan},
+	month = aug,
+	year = {2023},
+	note = {arXiv:2207.13243},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Computation and Language, Computer Science - Computer Vision and Pattern Recognition},
+}
+
+@misc{karpathy_visualizing_2015,
+	title = {Visualizing and understanding recurrent networks},
+	url = {http://arxiv.org/abs/1506.02078},
+	doi = {10.48550/arXiv.1506.02078},
+	abstract = {Recurrent Neural Networks (RNNs), and specifically a variant with Long Short-Term Memory (LSTM), are enjoying renewed interest as a result of successful applications in a wide range of machine learning problems that involve sequential data. However, while LSTMs provide exceptional results in practice, the source of their performance and their limitations remain rather poorly understood. Using character-level language models as an interpretable testbed, we aim to bridge this gap by providing an analysis of their representations, predictions and error types. In particular, our experiments reveal the existence of interpretable cells that keep track of long-range dependencies such as line lengths, quotes and brackets. Moreover, our comparative analysis with finite horizon n-gram models traces the source of the LSTM improvements to long-range structural dependencies. Finally, we provide analysis of the remaining errors and suggests areas for further study.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Karpathy, Andrej and Johnson, Justin and Fei-Fei, Li},
+	month = nov,
+	year = {2015},
+	note = {arXiv:1506.02078},
+	keywords = {Computer Science - Machine Learning, Computer Science - Computation and Language, Computer Science - Neural and Evolutionary Computing},
+}
+
+@inproceedings{geva_transformer_2022,
+	address = {Abu Dhabi, United Arab Emirates},
+	title = {Transformer feed-forward layers build predictions by promoting concepts in the vocabulary space},
+	url = {https://aclanthology.org/2022.emnlp-main.3},
+	doi = {10.18653/v1/2022.emnlp-main.3},
+	language = {en},
+	urldate = {2025-01-13},
+	booktitle = {Proceedings of the 2022 {Conference} on {Empirical} {Methods} in {Natural} {Language} {Processing}},
+	publisher = {Association for Computational Linguistics},
+	author = {Geva, Mor and Caciularu, Avi and Wang, Kevin and Goldberg, Yoav},
+	year = {2022},
+	pages = {30--45},
+}
+
+@article{nostalgebraist_interpreting_2020,
+	title = {Interpreting gpt: the logit lens},
+	shorttitle = {Interpreting gpt},
+	url = {https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens},
+	abstract = {This post relates an observation I've made in my work with GPT-2, which I have not seen made elsewhere. …},
+	language = {en},
+	urldate = {2025-01-13},
+	author = {{nostalgebraist}},
+	month = aug,
+	year = {2020},
+}
+
+@misc{katz_backward_2024,
+	title = {Backward lens: projecting language model gradients into the vocabulary space},
+	shorttitle = {Backward lens},
+	url = {http://arxiv.org/abs/2402.12865},
+	doi = {10.48550/arXiv.2402.12865},
+	abstract = {Understanding how Transformer-based Language Models (LMs) learn and recall information is a key goal of the deep learning community. Recent interpretability methods project weights and hidden states obtained from the forward pass to the models' vocabularies, helping to uncover how information flows within LMs. In this work, we extend this methodology to LMs' backward pass and gradients. We first prove that a gradient matrix can be cast as a low-rank linear combination of its forward and backward passes' inputs. We then develop methods to project these gradients into vocabulary items and explore the mechanics of how new information is stored in the LMs' neurons.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Katz, Shahar and Belinkov, Yonatan and Geva, Mor and Wolf, Lior},
+	month = feb,
+	year = {2024},
+	note = {arXiv:2402.12865 
+version: 1},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+}
+
+@inproceedings{geva_transformer_2021,
+	address = {Online and Punta Cana, Dominican Republic},
+	title = {Transformer feed-forward layers are key-value memories},
+	url = {https://aclanthology.org/2021.emnlp-main.446},
+	doi = {10.18653/v1/2021.emnlp-main.446},
+	language = {en},
+	urldate = {2025-01-13},
+	booktitle = {Proceedings of the 2021 {Conference} on {Empirical} {Methods} in {Natural} {Language} {Processing}},
+	publisher = {Association for Computational Linguistics},
+	author = {Geva, Mor and Schuster, Roei and Berant, Jonathan and Levy, Omer},
+	year = {2021},
+	pages = {5484--5495},
+}
+
+@misc{geva_dissecting_2023,
+	title = {Dissecting recall of factual associations in auto-regressive language models},
+	url = {http://arxiv.org/abs/2304.14767},
+	doi = {10.48550/arXiv.2304.14767},
+	abstract = {Transformer-based language models (LMs) are known to capture factual knowledge in their parameters. While previous work looked into where factual associations are stored, only little is known about how they are retrieved internally during inference. We investigate this question through the lens of information flow. Given a subject-relation query, we study how the model aggregates information about the subject and relation to predict the correct attribute. With interventions on attention edges, we first identify two critical points where information propagates to the prediction: one from the relation positions followed by another from the subject positions. Next, by analyzing the information at these points, we unveil a three-step internal mechanism for attribute extraction. First, the representation at the last-subject position goes through an enrichment process, driven by the early MLP sublayers, to encode many subject-related attributes. Second, information from the relation propagates to the prediction. Third, the prediction representation "queries" the enriched subject to extract the attribute. Perhaps surprisingly, this extraction is typically done via attention heads, which often encode subject-attribute mappings in their parameters. Overall, our findings introduce a comprehensive view of how factual associations are stored and extracted internally in LMs, facilitating future research on knowledge localization and editing.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Geva, Mor and Bastings, Jasmijn and Filippova, Katja and Globerson, Amir},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2304.14767},
+	keywords = {Computer Science - Computation and Language},
+}
+
+@misc{Olsson_2022,
+	title = {In-context learning and induction heads},
+year = {2022},
+	url = {https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html},
+	urldate = {2025-01-13},
+    author = { Catherine Olsson, Nelson Elhage, Neel Nanda, Nicholas
+ Joseph, Nova DasSarma, Tom Henighan, Ben Mann,
+ Amanda Askell, Yuntao Bai, Anna Chen, Tom Con
+erly, Dawn Drain, Deep Ganguli, Zac Hatfield-Dodds,
+ Danny Hernandez, Scott Johnston, Andy Jones, Jack
+son Kernion, Liane Lovitt, Kamal Ndousse, Dario
+ Amodei, Tom Brown, Jack Clark, Jared Kaplan,
+ Sam McCandlish, and Chris Olah}
+}
+
+@misc{finlayson_causal_2021,
+	title = {Causal analysis of syntactic agreement mechanisms in neural language models},
+	url = {http://arxiv.org/abs/2106.06087},
+	doi = {10.48550/arXiv.2106.06087},
+	abstract = {Targeted syntactic evaluations have demonstrated the ability of language models to perform subject-verb agreement given difficult contexts. To elucidate the mechanisms by which the models accomplish this behavior, this study applies causal mediation analysis to pre-trained neural language models. We investigate the magnitude of models' preferences for grammatical inflections, as well as whether neurons process subject-verb agreement similarly across sentences with different syntactic structures. We uncover similarities and differences across architectures and model sizes -- notably, that larger models do not necessarily learn stronger preferences. We also observe two distinct mechanisms for producing subject-verb agreement depending on the syntactic structure of the input sentence. Finally, we find that language models rely on similar sets of neurons when given sentences with similar syntactic structure.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Finlayson, Matthew and Mueller, Aaron and Gehrmann, Sebastian and Shieber, Stuart and Linzen, Tal and Belinkov, Yonatan},
+	month = jun,
+	year = {2021},
+	note = {arXiv:2106.06087},
+	keywords = {Computer Science - Computation and Language},
+}
+
+@misc{ghandeharioun_patchscopes:_2024,
+	title = {Patchscopes: a unifying framework for inspecting hidden representations of language models},
+	shorttitle = {Patchscopes},
+	url = {http://arxiv.org/abs/2401.06102},
+	doi = {10.48550/arXiv.2401.06102},
+	abstract = {Understanding the internal representations of large language models (LLMs) can help explain models' behavior and verify their alignment with human values. Given the capabilities of LLMs in generating human-understandable text, we propose leveraging the model itself to explain its internal representations in natural language. We introduce a framework called Patchscopes and show how it can be used to answer a wide range of questions about an LLM's computation. We show that many prior interpretability methods based on projecting representations into the vocabulary space and intervening on the LLM computation can be viewed as instances of this framework. Moreover, several of their shortcomings such as failure in inspecting early layers or lack of expressivity can be mitigated by Patchscopes. Beyond unifying prior inspection techniques, Patchscopes also opens up new possibilities such as using a more capable model to explain the representations of a smaller model, and multihop reasoning error correction.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Ghandeharioun, Asma and Caciularu, Avi and Pearce, Adam and Dixon, Lucas and Geva, Mor},
+	month = jun,
+	year = {2024},
+	note = {arXiv:2401.06102},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+}
+
+@misc{wang_interpretability_2022,
+	title = {Interpretability in the wild: a circuit for indirect object identification in gpt-2 small},
+	shorttitle = {Interpretability in the wild},
+	url = {http://arxiv.org/abs/2211.00593},
+	doi = {10.48550/arXiv.2211.00593},
+	abstract = {Research in mechanistic interpretability seeks to explain behaviors of machine learning models in terms of their internal components. However, most previous work either focuses on simple behaviors in small models, or describes complicated behaviors in larger models with broad strokes. In this work, we bridge this gap by presenting an explanation for how GPT-2 small performs a natural language task called indirect object identification (IOI). Our explanation encompasses 26 attention heads grouped into 7 main classes, which we discovered using a combination of interpretability approaches relying on causal interventions. To our knowledge, this investigation is the largest end-to-end attempt at reverse-engineering a natural behavior "in the wild" in a language model. We evaluate the reliability of our explanation using three quantitative criteria--faithfulness, completeness and minimality. Though these criteria support our explanation, they also point to remaining gaps in our understanding. Our work provides evidence that a mechanistic understanding of large ML models is feasible, opening opportunities to scale our understanding to both larger models and more complex tasks.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Wang, Kevin and Variengien, Alexandre and Conmy, Arthur and Shlegeris, Buck and Steinhardt, Jacob},
+	month = nov,
+	year = {2022},
+	note = {arXiv:2211.00593},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Computation and Language},
+}
+
+@misc{conmy_towards_2023,
+	title = {Towards automated circuit discovery for mechanistic interpretability},
+	url = {http://arxiv.org/abs/2304.14997},
+	doi = {10.48550/arXiv.2304.14997},
+	abstract = {Through considerable effort and intuition, several recent works have reverse-engineered nontrivial behaviors of transformer models. This paper systematizes the mechanistic interpretability process they followed. First, researchers choose a metric and dataset that elicit the desired model behavior. Then, they apply activation patching to find which abstract neural network units are involved in the behavior. By varying the dataset, metric, and units under investigation, researchers can understand the functionality of each component. We automate one of the process' steps: to identify the circuit that implements the specified behavior in the model's computational graph. We propose several algorithms and reproduce previous interpretability results to validate them. For example, the ACDC algorithm rediscovered 5/5 of the component types in a circuit in GPT-2 Small that computes the Greater-Than operation. ACDC selected 68 of the 32,000 edges in GPT-2 Small, all of which were manually found by previous work. Our code is available at https://github.com/ArthurConmy/Automatic-Circuit-Discovery.},
+	urldate = {2025-01-13},
+	publisher = {arXiv},
+	author = {Conmy, Arthur and Mavor-Parker, Augustine N. and Lynch, Aengus and Heimersheim, Stefan and Garriga-Alonso, Adrià},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2304.14997},
+	keywords = {Computer Science - Machine Learning},
+}
+
+@article{olah_zoom_2020,
+	title = {Zoom in: an introduction to circuits},
+	volume = {5},
+	issn = {2476-0757},
+	shorttitle = {Zoom in},
+	url = {https://distill.pub/2020/circuits/zoom-in},
+	doi = {10.23915/distill.00024.001},
+	number = {3},
+	urldate = {2025-01-15},
+	journal = {Distill},
+	author = {Olah, Chris and Cammarata, Nick and Schubert, Ludwig and Goh, Gabriel and Petrov, Michael and Carter, Shan},
+	month = mar,
+	year = {2020},
+	pages = {10.23915/distill.00024.001},
+}
+
+@misc{zhang_towards_2024,
+	title = {Towards best practices of activation patching in language models: metrics and methods},
+	shorttitle = {Towards best practices of activation patching in language models},
+	url = {http://arxiv.org/abs/2309.16042},
+	doi = {10.48550/arXiv.2309.16042},
+	abstract = {Mechanistic interpretability seeks to understand the internal mechanisms of machine learning models, where localization -- identifying the important model components -- is a key step. Activation patching, also known as causal tracing or interchange intervention, is a standard technique for this task (Vig et al., 2020), but the literature contains many variants with little consensus on the choice of hyperparameters or methodology. In this work, we systematically examine the impact of methodological details in activation patching, including evaluation metrics and corruption methods. In several settings of localization and circuit discovery in language models, we find that varying these hyperparameters could lead to disparate interpretability results. Backed by empirical observations, we give conceptual arguments for why certain metrics or methods may be preferred. Finally, we provide recommendations for the best practices of activation patching going forwards.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Zhang, Fred and Nanda, Neel},
+	month = jan,
+	year = {2024},
+	note = {arXiv:2309.16042},
+	keywords = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Computation and Language},
+}
+
+@misc{nanda_attribution,
+	title = {Attribution patching: activation patching at industrial scale},
+	shorttitle = {Attribution patching},
+	url = {https://www.neelnanda.io/mechanistic-interpretability/attribution-patching},
+	abstract = {A write-up of an incomplete project I worked on at Anthropic in early 2022, using gradient-based approximation to make activation patching far more scalable},
+	language = {en-US},
+	urldate = {2025-01-15},
+	author = {Neel Nanda},
+        year = {2022},
+}
+
+@misc{belinkov_probing_2021,
+	title = {Probing classifiers: promises, shortcomings, and advances},
+	shorttitle = {Probing classifiers},
+	url = {http://arxiv.org/abs/2102.12452},
+	doi = {10.48550/arXiv.2102.12452},
+	abstract = {Probing classifiers have emerged as one of the prominent methodologies for interpreting and analyzing deep neural network models of natural language processing. The basic idea is simple -- a classifier is trained to predict some linguistic property from a model's representations -- and has been used to examine a wide variety of models and properties. However, recent studies have demonstrated various methodological limitations of this approach. This article critically reviews the probing classifiers framework, highlighting their promises, shortcomings, and advances.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Belinkov, Yonatan},
+	month = sep,
+	year = {2021},
+	note = {arXiv:2102.12452},
+	keywords = {Computer Science - Computation and Language},
+}
+
+@article{nostalgebraist_interpreting_2020-1,
+	title = {Interpreting gpt: the logit lens},
+	shorttitle = {Interpreting gpt},
+	url = {https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens},
+	abstract = {This post relates an observation I've made in my work with GPT-2, which I have not seen made elsewhere. …},
+	language = {en},
+	urldate = {2025-01-15},
+	author = {{nostalgebraist}},
+	month = aug,
+	year = {2020},
+}
+
+@misc{elhage_toy_2022,
+	title = {Toy models of superposition},
+	url = {http://arxiv.org/abs/2209.10652},
+	doi = {10.48550/arXiv.2209.10652},
+	abstract = {Neural networks often pack many unrelated concepts into a single neuron - a puzzling phenomenon known as 'polysemanticity' which makes interpretability much more challenging. This paper provides a toy model where polysemanticity can be fully understood, arising as a result of models storing additional sparse features in "superposition." We demonstrate the existence of a phase change, a surprising connection to the geometry of uniform polytopes, and evidence of a link to adversarial examples. We also discuss potential implications for mechanistic interpretability.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Elhage, Nelson and Hume, Tristan and Olsson, Catherine and Schiefer, Nicholas and Henighan, Tom and Kravec, Shauna and Hatfield-Dodds, Zac and Lasenby, Robert and Drain, Dawn and Chen, Carol and Grosse, Roger and McCandlish, Sam and Kaplan, Jared and Amodei, Dario and Wattenberg, Martin and Olah, Christopher},
+	month = sep,
+	year = {2022},
+	note = {arXiv:2209.10652},
+	keywords = {Computer Science - Machine Learning},
+}
+
+@inproceedings{pal_investigating_2021,
+	address = {Punta Cana, Dominican Republic},
+	title = {Investigating numeracy learning ability of a text-to-text transfer model},
+	url = {https://aclanthology.org/2021.findings-emnlp.265},
+	doi = {10.18653/v1/2021.findings-emnlp.265},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Findings of the {Association} for {Computational} {Linguistics}: {EMNLP} 2021},
+	publisher = {Association for Computational Linguistics},
+	author = {Pal, Kuntal Kumar and Baral, Chitta},
+	year = {2021},
+	pages = {3095--3101},
+}
+
+@inproceedings{piekos_measuring_2021,
+	address = {Online},
+	title = {Measuring and improving bert’s mathematical abilities by predicting the order of reasoning.},
+	url = {https://aclanthology.org/2021.acl-short.49},
+	doi = {10.18653/v1/2021.acl-short.49},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Proceedings of the 59th {Annual} {Meeting} of the {Association} for {Computational} {Linguistics} and the 11th {International} {Joint} {Conference} on {Natural} {Language} {Processing} ({Volume} 2: {Short} {Papers})},
+	publisher = {Association for Computational Linguistics},
+	author = {Piękos, Piotr and Malinowski, Mateusz and Michalewski, Henryk},
+	year = {2021},
+	pages = {383--394},
+}
+
+@misc{cobbe_training_2021,
+	title = {Training verifiers to solve math word problems},
+	url = {http://arxiv.org/abs/2110.14168},
+	doi = {10.48550/arXiv.2110.14168},
+	abstract = {State-of-the-art language models can match human performance on many tasks, but they still struggle to robustly perform multi-step mathematical reasoning. To diagnose the failures of current models and support research, we introduce GSM8K, a dataset of 8.5K high quality linguistically diverse grade school math word problems. We find that even the largest transformer models fail to achieve high test performance, despite the conceptual simplicity of this problem distribution. To increase performance, we propose training verifiers to judge the correctness of model completions. At test time, we generate many candidate solutions and select the one ranked highest by the verifier. We demonstrate that verification significantly improves performance on GSM8K, and we provide strong empirical evidence that verification scales more effectively with increased data than a finetuning baseline.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Cobbe, Karl and Kosaraju, Vineet and Bavarian, Mohammad and Chen, Mark and Jun, Heewoo and Kaiser, Lukasz and Plappert, Matthias and Tworek, Jerry and Hilton, Jacob and Nakano, Reiichiro and Hesse, Christopher and Schulman, John},
+	month = nov,
+	year = {2021},
+	note = {arXiv:2110.14168},
+	keywords = {Computer Science - Machine Learning, Computer Science - Computation and Language},
+}
+
+@inproceedings{wang_asking_2020,
+	address = {Online},
+	title = {Asking and answering questions to evaluate the factual consistency of summaries},
+	url = {https://www.aclweb.org/anthology/2020.acl-main.450},
+	doi = {10.18653/v1/2020.acl-main.450},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Proceedings of the 58th {Annual} {Meeting} of the {Association} for {Computational} {Linguistics}},
+	publisher = {Association for Computational Linguistics},
+	author = {Wang, Alex and Cho, Kyunghyun and Lewis, Mike},
+	year = {2020},
+	pages = {5008--5020},
+}
+
+@misc{madaan_self-refine:_2023,
+	title = {Self-refine: iterative refinement with self-feedback},
+	shorttitle = {Self-refine},
+	url = {http://arxiv.org/abs/2303.17651},
+	doi = {10.48550/arXiv.2303.17651},
+	abstract = {Like humans, large language models (LLMs) do not always generate the best output on their first try. Motivated by how humans refine their written text, we introduce Self-Refine, an approach for improving initial outputs from LLMs through iterative feedback and refinement. The main idea is to generate an initial output using an LLMs; then, the same LLMs provides feedback for its output and uses it to refine itself, iteratively. Self-Refine does not require any supervised training data, additional training, or reinforcement learning, and instead uses a single LLM as the generator, refiner, and feedback provider. We evaluate Self-Refine across 7 diverse tasks, ranging from dialog response generation to mathematical reasoning, using state-of-the-art (GPT-3.5, ChatGPT, and GPT-4) LLMs. Across all evaluated tasks, outputs generated with Self-Refine are preferred by humans and automatic metrics over those generated with the same LLM using conventional one-step generation, improving by {\textasciitilde}20\% absolute on average in task performance. Our work demonstrates that even state-of-the-art LLMs like GPT-4 can be further improved at test time using our simple, standalone approach.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Madaan, Aman and Tandon, Niket and Gupta, Prakhar and Hallinan, Skyler and Gao, Luyu and Wiegreffe, Sarah and Alon, Uri and Dziri, Nouha and Prabhumoye, Shrimai and Yang, Yiming and Gupta, Shashank and Majumder, Bodhisattwa Prasad and Hermann, Katherine and Welleck, Sean and Yazdanbakhsh, Amir and Clark, Peter},
+	month = may,
+	year = {2023},
+	note = {arXiv:2303.17651},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+}
+
+@misc{yao_tree_2023,
+	title = {Tree of thoughts: deliberate problem solving with large language models},
+	shorttitle = {Tree of thoughts},
+	url = {http://arxiv.org/abs/2305.10601},
+	doi = {10.48550/arXiv.2305.10601},
+	abstract = {Language models are increasingly being deployed for general problem solving across a wide range of tasks, but are still confined to token-level, left-to-right decision-making processes during inference. This means they can fall short in tasks that require exploration, strategic lookahead, or where initial decisions play a pivotal role. To surmount these challenges, we introduce a new framework for language model inference, Tree of Thoughts (ToT), which generalizes over the popular Chain of Thought approach to prompting language models, and enables exploration over coherent units of text (thoughts) that serve as intermediate steps toward problem solving. ToT allows LMs to perform deliberate decision making by considering multiple different reasoning paths and self-evaluating choices to decide the next course of action, as well as looking ahead or backtracking when necessary to make global choices. Our experiments show that ToT significantly enhances language models' problem-solving abilities on three novel tasks requiring non-trivial planning or search: Game of 24, Creative Writing, and Mini Crosswords. For instance, in Game of 24, while GPT-4 with chain-of-thought prompting only solved 4\% of tasks, our method achieved a success rate of 74\%. Code repo with all prompts: https://github.com/princeton-nlp/tree-of-thought-llm.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Yao, Shunyu and Yu, Dian and Zhao, Jeffrey and Shafran, Izhak and Griffiths, Thomas L. and Cao, Yuan and Narasimhan, Karthik},
+	month = dec,
+	year = {2023},
+	note = {arXiv:2305.10601},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+}
+
+@misc{xie_self-evaluation_2023,
+	title = {Self-evaluation guided beam search for reasoning},
+	url = {http://arxiv.org/abs/2305.00633},
+	doi = {10.48550/arXiv.2305.00633},
+	abstract = {Breaking down a problem into intermediate steps has demonstrated impressive performance in Large Language Model (LLM) reasoning. However, the growth of the reasoning chain introduces uncertainty and error accumulation, making it challenging to elicit accurate final results. To tackle this challenge of uncertainty in multi-step reasoning, we introduce a stepwise self-evaluation mechanism to guide and calibrate the reasoning process of LLMs. We propose a decoding algorithm integrating the self-evaluation guidance via stochastic beam search. The self-evaluation guidance serves as a better-calibrated automatic criterion, facilitating an efficient search in the reasoning space and resulting in superior prediction quality. Stochastic beam search balances exploitation and exploration of the search space with temperature-controlled randomness. Our approach surpasses the corresponding Codex-backboned baselines in few-shot accuracy by \$6.34{\textbackslash}\%\$, \$9.56{\textbackslash}\%\$, and \$5.46{\textbackslash}\%\$ on the GSM8K, AQuA, and StrategyQA benchmarks, respectively. Experiment results with Llama-2 on arithmetic reasoning demonstrate the efficiency of our method in outperforming the baseline methods with comparable computational budgets. Further analysis in multi-step reasoning finds our self-evaluation guidance pinpoints logic failures and leads to higher consistency and robustness. Our code is publicly available at https://guideddecoding.github.io/.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Xie, Yuxi and Kawaguchi, Kenji and Zhao, Yiran and Zhao, Xu and Kan, Min-Yen and He, Junxian and Xie, Qizhe},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2305.00633},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+}
+
+@misc{stechly_gpt-4_2023,
+	title = {Gpt-4 doesn't know it's wrong: an analysis of iterative prompting for reasoning problems},
+	shorttitle = {Gpt-4 doesn't know it's wrong},
+	url = {http://arxiv.org/abs/2310.12397},
+	doi = {10.48550/arXiv.2310.12397},
+	abstract = {There has been considerable divergence of opinion on the reasoning abilities of Large Language Models (LLMs). While the initial optimism that reasoning might emerge automatically with scale has been tempered thanks to a slew of counterexamples, a wide spread belief in their iterative self-critique capabilities persists. In this paper, we set out to systematically investigate the effectiveness of iterative prompting of LLMs in the context of Graph Coloring, a canonical NP-complete reasoning problem that is related to propositional satisfiability as well as practical problems like scheduling and allocation. We present a principled empirical study of the performance of GPT4 in solving graph coloring instances or verifying the correctness of candidate colorings. In iterative modes, we experiment with the model critiquing its own answers and an external correct reasoner verifying proposed solutions. In both cases, we analyze whether the content of the criticisms actually affects bottom line performance. The study seems to indicate that (i) LLMs are bad at solving graph coloring instances (ii) they are no better at verifying a solution--and thus are not effective in iterative modes with LLMs critiquing LLM-generated solutions (iii) the correctness and content of the criticisms--whether by LLMs or external solvers--seems largely irrelevant to the performance of iterative prompting. We show that the observed increase in effectiveness is largely due to the correct solution being fortuitously present in the top-k completions of the prompt (and being recognized as such by an external verifier). Our results thus call into question claims about the self-critiquing capabilities of state of the art LLMs.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Stechly, Kaya and Marquez, Matthew and Kambhampati, Subbarao},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2310.12397},
+	keywords = {Computer Science - Artificial Intelligence},
+}
+
+@misc{huang_large_2024,
+	title = {Large language models cannot self-correct reasoning yet},
+	url = {http://arxiv.org/abs/2310.01798},
+	doi = {10.48550/arXiv.2310.01798},
+	abstract = {Large Language Models (LLMs) have emerged as a groundbreaking technology with their unparalleled text generation capabilities across various applications. Nevertheless, concerns persist regarding the accuracy and appropriateness of their generated content. A contemporary methodology, self-correction, has been proposed as a remedy to these issues. Building upon this premise, this paper critically examines the role and efficacy of self-correction within LLMs, shedding light on its true potential and limitations. Central to our investigation is the notion of intrinsic self-correction, whereby an LLM attempts to correct its initial responses based solely on its inherent capabilities, without the crutch of external feedback. In the context of reasoning, our research indicates that LLMs struggle to self-correct their responses without external feedback, and at times, their performance even degrades after self-correction. Drawing from these insights, we offer suggestions for future research and practical applications in this field.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Huang, Jie and Chen, Xinyun and Mishra, Swaroop and Zheng, Huaixiu Steven and Yu, Adams Wei and Song, Xinying and Zhou, Denny},
+	month = mar,
+	year = {2024},
+	note = {arXiv:2310.01798},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence},
+}
+
+@misc{valmeekam_can_2023,
+	title = {Can large language models really improve by self-critiquing their own plans?},
+	url = {http://arxiv.org/abs/2310.08118},
+	doi = {10.48550/arXiv.2310.08118},
+	abstract = {There have been widespread claims about Large Language Models (LLMs) being able to successfully verify or self-critique their candidate solutions in reasoning problems in an iterative mode. Intrigued by those claims, in this paper we set out to investigate the verification/self-critiquing abilities of large language models in the context of planning. We evaluate a planning system that employs LLMs for both plan generation and verification. We assess the verifier LLM's performance against ground-truth verification, the impact of self-critiquing on plan generation, and the influence of varying feedback levels on system performance. Using GPT-4, a state-of-the-art LLM, for both generation and verification, our findings reveal that self-critiquing appears to diminish plan generation performance, especially when compared to systems with external, sound verifiers and the LLM verifiers in that system produce a notable number of false positives, compromising the system's reliability. Additionally, the nature of feedback, whether binary or detailed, showed minimal impact on plan generation. Collectively, our results cast doubt on the effectiveness of LLMs in a self-critiquing, iterative framework for planning tasks.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Valmeekam, Karthik and Marquez, Matthew and Kambhampati, Subbarao},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2310.08118},
+	keywords = {Computer Science - Artificial Intelligence},
+}
+
+@misc{hou_towards_2023,
+	title = {Towards a mechanistic interpretation of multi-step reasoning capabilities of language models},
+	url = {http://arxiv.org/abs/2310.14491},
+	doi = {10.48550/arXiv.2310.14491},
+	abstract = {Recent work has shown that language models (LMs) have strong multi-step (i.e., procedural) reasoning capabilities. However, it is unclear whether LMs perform these tasks by cheating with answers memorized from pretraining corpus, or, via a multi-step reasoning mechanism. In this paper, we try to answer this question by exploring a mechanistic interpretation of LMs for multi-step reasoning tasks. Concretely, we hypothesize that the LM implicitly embeds a reasoning tree resembling the correct reasoning process within it. We test this hypothesis by introducing a new probing approach (called MechanisticProbe) that recovers the reasoning tree from the model's attention patterns. We use our probe to analyze two LMs: GPT-2 on a synthetic task (k-th smallest element), and LLaMA on two simple language-based reasoning tasks (ProofWriter \& AI2 Reasoning Challenge). We show that MechanisticProbe is able to detect the information of the reasoning tree from the model's attentions for most examples, suggesting that the LM indeed is going through a process of multi-step reasoning within its architecture in many cases.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Hou, Yifan and Li, Jiaoda and Fei, Yu and Stolfo, Alessandro and Zhou, Wangchunshu and Zeng, Guangtao and Bosselut, Antoine and Sachan, Mrinmaya},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2310.14491},
+	keywords = {Computer Science - Computation and Language},
+}
+
+@misc{stolfo_mechanistic_2023,
+	title = {A mechanistic interpretation of arithmetic reasoning in language models using causal mediation analysis},
+	url = {http://arxiv.org/abs/2305.15054},
+	doi = {10.48550/arXiv.2305.15054},
+	abstract = {Mathematical reasoning in large language models (LMs) has garnered significant attention in recent work, but there is a limited understanding of how these models process and store information related to arithmetic tasks within their architecture. In order to improve our understanding of this aspect of language models, we present a mechanistic interpretation of Transformer-based LMs on arithmetic questions using a causal mediation analysis framework. By intervening on the activations of specific model components and measuring the resulting changes in predicted probabilities, we identify the subset of parameters responsible for specific predictions. This provides insights into how information related to arithmetic is processed by LMs. Our experimental results indicate that LMs process the input by transmitting the information relevant to the query from mid-sequence early layers to the final token using the attention mechanism. Then, this information is processed by a set of MLP modules, which generate result-related information that is incorporated into the residual stream. To assess the specificity of the observed activation dynamics, we compare the effects of different model components on arithmetic queries with other tasks, including number retrieval from prompts and factual knowledge questions.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Stolfo, Alessandro and Belinkov, Yonatan and Sachan, Mrinmaya},
+	month = oct,
+	year = {2023},
+	note = {arXiv:2305.15054},
+	keywords = {Computer Science - Computation and Language, Computer Science - Machine Learning},
+}
+
+@misc{zhang_interpreting_2024,
+	title = {Interpreting and improving large language models in arithmetic calculation},
+	url = {http://arxiv.org/abs/2409.01659},
+	doi = {10.48550/arXiv.2409.01659},
+	abstract = {Large language models (LLMs) have demonstrated remarkable potential across numerous applications and have shown an emergent ability to tackle complex reasoning tasks, such as mathematical computations. However, even for the simplest arithmetic calculations, the intrinsic mechanisms behind LLMs remain mysterious, making it challenging to ensure reliability. In this work, we delve into uncovering a specific mechanism by which LLMs execute calculations. Through comprehensive experiments, we find that LLMs frequently involve a small fraction ({\textless} 5\%) of attention heads, which play a pivotal role in focusing on operands and operators during calculation processes. Subsequently, the information from these operands is processed through multi-layer perceptrons (MLPs), progressively leading to the final solution. These pivotal heads/MLPs, though identified on a specific dataset, exhibit transferability across different datasets and even distinct tasks. This insight prompted us to investigate the potential benefits of selectively fine-tuning these essential heads/MLPs to boost the LLMs' computational performance. We empirically find that such precise tuning can yield notable enhancements on mathematical prowess, without compromising the performance on non-mathematical tasks. Our work serves as a preliminary exploration into the arithmetic calculation abilities inherent in LLMs, laying a solid foundation to reveal more intricate mathematical tasks.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Zhang, Wei and Wan, Chaoqun and Zhang, Yonggang and Cheung, Yiu-ming and Tian, Xinmei and Shen, Xu and Ye, Jieping},
+	month = sep,
+	year = {2024},
+	note = {arXiv:2409.01659},
+	keywords = {Computer Science - Computation and Language},
+}
+
+@misc{li_evaluating_2024,
+	title = {Evaluating mathematical reasoning of large language models: a focus on error identification and correction},
+	shorttitle = {Evaluating mathematical reasoning of large language models},
+	url = {http://arxiv.org/abs/2406.00755},
+	doi = {10.48550/arXiv.2406.00755},
+	abstract = {The rapid advancement of Large Language Models (LLMs) in the realm of mathematical reasoning necessitates comprehensive evaluations to gauge progress and inspire future directions. Existing assessments predominantly focus on problem-solving from the examinee perspective, overlooking a dual perspective of examiner regarding error identification and correction. From the examiner perspective, we define four evaluation tasks for error identification and correction along with a new dataset with annotated error types and steps. We also design diverse prompts to thoroughly evaluate eleven representative LLMs. Our principal findings indicate that GPT-4 outperforms all models, while open-source model LLaMA-2-7B demonstrates comparable abilities to closed-source models GPT-3.5 and Gemini Pro. Notably, calculation error proves the most challenging error type. Moreover, prompting LLMs with the error types can improve the average correction accuracy by 47.9{\textbackslash}\%. These results reveal potential directions for developing the mathematical reasoning abilities of LLMs. Our code and dataset is available on https://github.com/LittleCirc1e/EIC.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Li, Xiaoyuan and Wang, Wenjie and Li, Moxin and Guo, Junrong and Zhang, Yang and Feng, Fuli},
+	month = jun,
+	year = {2024},
+	note = {arXiv:2406.00755},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+}
+
+@misc{nikankin_arithmetic_2024,
+	title = {Arithmetic without algorithms: language models solve math with a bag of heuristics},
+	shorttitle = {Arithmetic without algorithms},
+	url = {http://arxiv.org/abs/2410.21272},
+	doi = {10.48550/arXiv.2410.21272},
+	abstract = {Do large language models (LLMs) solve reasoning tasks by learning robust generalizable algorithms, or do they memorize training data? To investigate this question, we use arithmetic reasoning as a representative task. Using causal analysis, we identify a subset of the model (a circuit) that explains most of the model's behavior for basic arithmetic logic and examine its functionality. By zooming in on the level of individual circuit neurons, we discover a sparse set of important neurons that implement simple heuristics. Each heuristic identifies a numerical input pattern and outputs corresponding answers. We hypothesize that the combination of these heuristic neurons is the mechanism used to produce correct arithmetic answers. To test this, we categorize each neuron into several heuristic types-such as neurons that activate when an operand falls within a certain range-and find that the unordered combination of these heuristic types is the mechanism that explains most of the model's accuracy on arithmetic prompts. Finally, we demonstrate that this mechanism appears as the main source of arithmetic accuracy early in training. Overall, our experimental results across several LLMs show that LLMs perform arithmetic using neither robust algorithms nor memorization; rather, they rely on a "bag of heuristics".},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Nikankin, Yaniv and Reusch, Anja and Mueller, Aaron and Belinkov, Yonatan},
+	month = oct,
+	year = {2024},
+	note = {arXiv:2410.21272},
+	keywords = {Computer Science - Computation and Language},
+}
+
+@misc{vaswani_attention_2017,
+	title = {Attention is all you need},
+	copyright = {arXiv.org perpetual, non-exclusive license},
+	url = {https://arxiv.org/abs/1706.03762},
+	doi = {10.48550/ARXIV.1706.03762},
+	abstract = {The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia},
+	year = {2017},
+	keywords = {Computation and Language (cs.CL), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+}
+
+@inproceedings{spokoyny_masked_2022,
+	address = {Seattle, United States},
+	title = {Masked measurement prediction: learning to jointly predict quantities and units from textual context},
+	shorttitle = {Masked measurement prediction},
+	url = {https://aclanthology.org/2022.findings-naacl.2},
+	doi = {10.18653/v1/2022.findings-naacl.2},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Findings of the {Association} for {Computational} {Linguistics}: {NAACL} 2022},
+	publisher = {Association for Computational Linguistics},
+	author = {Spokoyny, Daniel and Lee, Ivan and Jin, Zhao and Berg-Kirkpatrick, Taylor},
+	year = {2022},
+	pages = {17--29},
+}
+
+@misc{lewkowycz_solving_2022,
+	title = {Solving quantitative reasoning problems with language models},
+	copyright = {Creative Commons Attribution 4.0 International},
+	url = {https://arxiv.org/abs/2206.14858},
+	doi = {10.48550/ARXIV.2206.14858},
+	abstract = {Language models have achieved remarkable performance on a wide range of tasks that require natural language understanding. Nevertheless, state-of-the-art models have generally struggled with tasks that require quantitative reasoning, such as solving mathematics, science, and engineering problems at the college level. To help close this gap, we introduce Minerva, a large language model pretrained on general natural language data and further trained on technical content. The model achieves state-of-the-art performance on technical benchmarks without the use of external tools. We also evaluate our model on over two hundred undergraduate-level problems in physics, biology, chemistry, economics, and other sciences that require quantitative reasoning, and find that the model can correctly answer nearly a third of them.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Lewkowycz, Aitor and Andreassen, Anders and Dohan, David and Dyer, Ethan and Michalewski, Henryk and Ramasesh, Vinay and Slone, Ambrose and Anil, Cem and Schlag, Imanol and Gutman-Solo, Theo and Wu, Yuhuai and Neyshabur, Behnam and Gur-Ari, Guy and Misra, Vedant},
+	year = {2022},
+	keywords = {Computation and Language (cs.CL), Artificial Intelligence (cs.AI), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+}
+
+@misc{liu_goat:_2023,
+	title = {Goat: fine-tuned llama outperforms gpt-4 on arithmetic tasks},
+	copyright = {Creative Commons Attribution 4.0 International},
+	shorttitle = {Goat},
+	url = {https://arxiv.org/abs/2305.14201},
+	doi = {10.48550/ARXIV.2305.14201},
+	abstract = {We introduce Goat, a fine-tuned LLaMA model that significantly outperforms GPT-4 on a range of arithmetic tasks. Fine-tuned on a synthetically generated dataset, Goat achieves state-of-the-art performance on BIG-bench arithmetic sub-task. In particular, the zero-shot Goat-7B matches or even surpasses the accuracy achieved by the few-shot PaLM-540B. Surprisingly, Goat can achieve near-perfect accuracy on large-number addition and subtraction through supervised fine-tuning only, which is almost impossible with previous pretrained language models, such as Bloom, OPT, GPT-NeoX, etc. We attribute Goat's exceptional performance to LLaMA's consistent tokenization of numbers. To tackle more challenging tasks like large-number multiplication and division, we propose an approach that classifies tasks based on their learnability, and subsequently decomposes unlearnable tasks, such as multi-digit multiplication and division, into a series of learnable tasks by leveraging basic arithmetic principles. We thoroughly examine the performance of our model, offering a comprehensive evaluation of the effectiveness of our proposed decomposition steps. Additionally, Goat-7B can be easily trained using LoRA on a 24GB VRAM GPU, facilitating reproducibility for other researchers. We release our model, dataset, and the Python script for dataset generation.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Liu, Tiedong and Low, Bryan Kian Hsiang},
+	year = {2023},
+	keywords = {Machine Learning (cs.LG), Artificial Intelligence (cs.AI), Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+}
+
+@misc{yang_large_2023,
+	title = {Large language models as optimizers},
+	copyright = {Creative Commons Zero v1.0 Universal},
+	url = {https://arxiv.org/abs/2309.03409},
+	doi = {10.48550/ARXIV.2309.03409},
+	abstract = {Optimization is ubiquitous. While derivative-based algorithms have been powerful tools for various problems, the absence of gradient imposes challenges on many real-world applications. In this work, we propose Optimization by PROmpting (OPRO), a simple and effective approach to leverage large language models (LLMs) as optimizers, where the optimization task is described in natural language. In each optimization step, the LLM generates new solutions from the prompt that contains previously generated solutions with their values, then the new solutions are evaluated and added to the prompt for the next optimization step. We first showcase OPRO on linear regression and traveling salesman problems, then move on to our main application in prompt optimization, where the goal is to find instructions that maximize the task accuracy. With a variety of LLMs, we demonstrate that the best prompts optimized by OPRO outperform human-designed prompts by up to 8\% on GSM8K, and by up to 50\% on Big-Bench Hard tasks. Code at https://github.com/google-deepmind/opro.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Yang, Chengrun and Wang, Xuezhi and Lu, Yifeng and Liu, Hanxiao and Le, Quoc V. and Zhou, Denny and Chen, Xinyun},
+	year = {2023},
+	keywords = {Machine Learning (cs.LG), Artificial Intelligence (cs.AI), Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+}
+
+@misc{wei_chain--thought_2022,
+	title = {Chain-of-thought prompting elicits reasoning in large language models},
+	copyright = {Creative Commons Attribution 4.0 International},
+	url = {https://arxiv.org/abs/2201.11903},
+	doi = {10.48550/ARXIV.2201.11903},
+	abstract = {We explore how generating a chain of thought -- a series of intermediate reasoning steps -- significantly improves the ability of large language models to perform complex reasoning. In particular, we show how such reasoning abilities emerge naturally in sufficiently large language models via a simple method called chain of thought prompting, where a few chain of thought demonstrations are provided as exemplars in prompting. Experiments on three large language models show that chain of thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks. The empirical gains can be striking. For instance, prompting a 540B-parameter language model with just eight chain of thought exemplars achieves state of the art accuracy on the GSM8K benchmark of math word problems, surpassing even finetuned GPT-3 with a verifier.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Ichter, Brian and Xia, Fei and Chi, Ed and Le, Quoc and Zhou, Denny},
+	year = {2022},
+	keywords = {Computation and Language (cs.CL), Artificial Intelligence (cs.AI), FOS: Computer and information sciences, FOS: Computer and information sciences},
+}
+
+@inproceedings{lee_deduplicating_2022,
+	address = {Dublin, Ireland},
+	title = {Deduplicating training data makes language models better},
+	url = {https://aclanthology.org/2022.acl-long.577},
+	doi = {10.18653/v1/2022.acl-long.577},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Proceedings of the 60th {Annual} {Meeting} of the {Association} for {Computational} {Linguistics} ({Volume} 1: {Long} {Papers})},
+	publisher = {Association for Computational Linguistics},
+	author = {Lee, Katherine and Ippolito, Daphne and Nystrom, Andrew and Zhang, Chiyuan and Eck, Douglas and Callison-Burch, Chris and Carlini, Nicholas},
+	year = {2022},
+	pages = {8424--8445},
+}
+
+@inproceedings{onoe_entity_2022,
+	address = {Seattle, United States},
+	title = {Entity cloze by date: what lms know about unseen entities},
+	shorttitle = {Entity cloze by date},
+	url = {https://aclanthology.org/2022.findings-naacl.52},
+	doi = {10.18653/v1/2022.findings-naacl.52},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Findings of the {Association} for {Computational} {Linguistics}: {NAACL} 2022},
+	publisher = {Association for Computational Linguistics},
+	author = {Onoe, Yasumasa and Zhang, Michael and Choi, Eunsol and Durrett, Greg},
+	year = {2022},
+	pages = {693--702},
+}
+
+@article{zheng_why_2023,
+	title = {Why does chatgpt fall short in providing truthful answers?},
+	url = {http://arxiv.org/abs/2304.10513},
+	doi = {10.48550/arXiv.2304.10513},
+	abstract = {Recent advancements in large language models, such as ChatGPT, have demonstrated significant potential to impact various aspects of human life. However, ChatGPT still faces challenges in providing reliable and accurate answers to user questions. To better understand the model's particular weaknesses in providing truthful answers, we embark an in-depth exploration of open-domain question answering. Specifically, we undertake a detailed examination of ChatGPT's failures, categorized into: comprehension, factuality, specificity, and inference. We further pinpoint factuality as the most contributing failure and identify two critical abilities associated with factuality: knowledge memorization and knowledge recall. Through experiments focusing on factuality, we propose several potential enhancement strategies. Our findings suggest that augmenting the model with granular external knowledge and cues for knowledge recall can enhance the model's factuality in answering questions.},
+	urldate = {2025-01-15},
+	publisher = {arXiv},
+	author = {Zheng, Shen and Huang, Jie and Chang, Kevin Chen-Chuan},
+journal={arXiv preprint arXiv:2304.10513},
+	month = dec,
+	year = {2023},
+	keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence},
+}
+
+@inproceedings{wang_exposure_2020,
+	address = {Online},
+	title = {On exposure bias, hallucination and domain shift in neural machine translation},
+	url = {https://www.aclweb.org/anthology/2020.acl-main.326},
+	doi = {10.18653/v1/2020.acl-main.326},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Proceedings of the 58th {Annual} {Meeting} of the {Association} for {Computational} {Linguistics}},
+	publisher = {Association for Computational Linguistics},
+	author = {Wang, Chaojun and Sennrich, Rico},
+	year = {2020},
+	pages = {3544--3552},
+}
+
+@inproceedings{sharma_towards_2023,
+  title={TOWARDS UNDERSTANDING SYCOPHANCY IN LANGUAGE MODELS},
+  author={Sharma, Mrinank and Tong, Meg and Korbak, Tomasz and Duvenaud, David and Askell, Amanda and Bowman, Samuel R and Cheng, Newton and Durmus, Esin and Hatfield-Dodds, Zac and Johnston, Scott R and others},
+  booktitle={12th International Conference on Learning Representations, ICLR 2024},
+  year={2024}
+}
+
+@inproceedings{holtzman_curious_2019,
+  title={The Curious Case of Neural Text Degeneration},
+  author={Holtzman, Ari and Buys, Jan and Du, Li and Forbes, Maxwell and Choi, Yejin},
+  booktitle={International Conference on Learning Representations},
+year={2020}
+}
+
+@inproceedings{liu_instruction_2023,
+  title={Instruction Position Matters in Sequence Generation with Large Language Models},
+  author={Liu, Yijin and Zeng, Xianfeng and Shao, Chenze and Meng, Fandong and Zhou, Jie},
+  booktitle={Findings of the Association for Computational Linguistics ACL 2024},
+  pages={11652--11663},
+  year={2024}
+}
+
+@inproceedings{chang_softmax_2022,
+	address = {Dublin, Ireland},
+	title = {Softmax bottleneck makes language models unable to represent multi-mode word distributions},
+	url = {https://aclanthology.org/2022.acl-long.554},
+	doi = {10.18653/v1/2022.acl-long.554},
+	language = {en},
+	urldate = {2025-01-15},
+	booktitle = {Proceedings of the 60th {Annual} {Meeting} of the {Association} for {Computational} {Linguistics} ({Volume} 1: {Long} {Papers})},
+	publisher = {Association for Computational Linguistics},
+	author = {Chang, Haw-Shiuan and McCallum, Andrew},
+	year = {2022},
+	pages = {8048--8073},
+}
+
+@inproceedings{ren_out--distribution_2023,
+  title={Out-of-Distribution Detection and Selective Generation for Conditional Language Models},
+  author={Ren, Jie and Luo, Jiaming and Zhao, Yao and Krishna, Kundan and Saleh, Mohammad and Lakshminarayanan, Balaji and Liu, Peter J},
+  booktitle={The Eleventh International Conference on Learning Representations},
+year={2023}
+}
+
+@inproceedings{lin_towards_2022,
+	address = {Dublin, Ireland},
+	title = {Towards collaborative neural-symbolic graph semantic parsing via uncertainty},
+	url = {https://aclanthology.org/2022.findings-acl.328/},
+	doi = {10.18653/v1/2022.findings-acl.328},
+	abstract = {Recent work in task-independent graph semantic parsing has shifted from grammar-based symbolic approaches to neural models, showing strong performance on different types of meaning representations. However, it is still unclear that what are the limitations of these neural parsers, and whether these limitations can be compensated by incorporating symbolic knowledge into model inference. In this paper, we address these questions by taking English Resource Grammar (ERG) parsing as a case study. Specifically, we first develop a state-of-the-art, T5-based neural ERG parser, and conduct detail analyses of parser performance within fine-grained linguistic categories. The neural parser attains superior performance on in-distribution test set, but degrades significantly on long-tail situations, while the symbolic parser performs more robustly. To address this, we further propose a simple yet principled collaborative framework for neural-symbolic semantic parsing, by designing a decision criterion for beam search that incorporates the prior knowledge from a symbolic parser and accounts for model uncertainty. Experimental results show that the proposed framework yields comprehensive improvement over neural baseline across long-tail categories, yielding the best known Smatch score (97.01) on the well-studied DeepBank benchmark.},
+	urldate = {2025-01-15},
+	booktitle = {Findings of the {Association} for {Computational} {Linguistics}: {ACL} 2022},
+	publisher = {Association for Computational Linguistics},
+	author = {Lin, Zi and Liu, Jeremiah Zhe and Shang, Jingbo},
+	editor = {Muresan, Smaranda and Nakov, Preslav and Villavicencio, Aline},
+	month = may,
+	year = {2022},
+	pages = {4160--4173},
+}
+
+@inproceedings{malinin_uncertainty_2021,
+  title={Uncertainty Estimation in Autoregressive Structured Prediction},
+  author={Malinin, Andrey and Gales, Mark},
+  booktitle={International Conference on Learning Representations},
+year={2021}
+}
+
+@inproceedings{liu_energy-based_2020,
+	title = {Energy-based {Out}-of-distribution {Detection}},
+	volume = {33},
+	url = {https://proceedings.neurips.cc/paper/2020/hash/f5496252609c43eb8a3d147ab9b9c006-Abstract.html},
+	abstract = {Determining whether inputs are out-of-distribution (OOD) is an essential building block for safely deploying machine learning models in the open world. However, previous methods relying on the softmax confidence score suffer from overconfident posterior distributions for OOD data. We propose a unified framework for OOD detection that uses an energy score. We show that energy scores better distinguish in- and out-of-distribution samples than the traditional approach using the softmax scores. Unlike softmax confidence scores, energy scores are theoretically aligned with the probability density of the inputs and are less susceptible to the overconfidence issue. Within this framework, energy can be flexibly used as a scoring function for any pre-trained neural classifier as well as a trainable cost function to shape the energy surface explicitly for OOD detection. On a CIFAR-10 pre-trained WideResNet, using the energy score reduces the average FPR (at TPR 95\%) by 18.03\% compared to the softmax confidence score. With energy-based training, our method outperforms the state-of-the-art on common benchmarks.},
+	urldate = {2025-01-15},
+	booktitle = {Advances in {Neural} {Information} {Processing} {Systems}},
+	publisher = {Curran Associates, Inc.},
+	author = {Liu, Weitang and Wang, Xiaoyun and Owens, John and Li, Yixuan},
+	year = {2020},
+	pages = {21464--21475},
+}
+
+@inproceedings{chen_inside:_2024,
+  title={INSIDE: LLMs' Internal States Retain the Power of Hallucination Detection},
+  author={Chen, Chao and Liu, Kai and Chen, Ze and Gu, Yi and Wu, Yue and Tao, Mingyuan and Fu, Zhihang and Ye, Jieping},
+  booktitle={The Twelfth International Conference on Learning Representations},
+year={2024}
+}
+
+@misc{duan2024shiftingattentionrelevancepredictive,
+      title={Shifting Attention to Relevance: Towards the Predictive Uncertainty Quantification of Free-Form Large Language Models}, 
+      author={Jinhao Duan and Hao Cheng and Shiqi Wang and Alex Zavalny and Chenan Wang and Renjing Xu and Bhavya Kailkhura and Kaidi Xu},
+      year={2024},
+      eprint={2307.01379},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2307.01379}, 
+}
+
+@misc{raj2025semanticconsistencyassuringreliability,
+      title={Semantic Consistency for Assuring Reliability of Large Language Models}, 
+      author={Harsh Raj and Vipul Gupta and Domenic Rosati and Subhabrata Majumdar},
+      year={2025},
+      eprint={2308.09138},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2308.09138}, 
+}
+
+@article{lin2024generatingconfidenceuncertaintyquantification,
+  title={Generating with Confidence: Uncertainty Quantification for Black-box Large Language Models},
+  author={Lin, Zhen and Trivedi, Shubhendu and Sun, Jimeng},
+  journal={Transactions on Machine Learning Research},
+year={2024}
+}
+
+@article{kadavath2022languagemodelsmostlyknow,
+  title={Language models (mostly) know what they know},
+  author={Saurav Kadavath and Tom Conerly and Amanda Askell and Tom Henighan and Dawn Drain and Ethan Perez and Nicholas Schiefer and Zac Hatfield-Dodds and Nova DasSarma and Eli Tran-Johnson and Scott Johnston and Sheer El-Showk and Andy Jones and Nelson Elhage and Tristan Hume and Anna Chen and Yuntao Bai and Sam Bowman and Stanislav Fort and Deep Ganguli and Danny Hernandez and Josh Jacobson and Jackson Kernion and Shauna Kravec and Liane Lovitt and Kamal Ndousse and Catherine Olsson and Sam Ringer and Dario Amodei and Tom Brown and Jack Clark and Nicholas Joseph and Ben Mann and Sam McCandlish and Chris Olah and Jared Kaplan},
+  journal={arXiv preprint arXiv:2207.05221},
+  year={2022}
+}
+
+
+@inproceedings{lin-2004-rouge,
+    title = "{ROUGE}: A Package for Automatic Evaluation of Summaries",
+    author = "Lin, Chin-Yew",
+    booktitle = "Text Summarization Branches Out",
+    month = jul,
+    year = "2004",
+    address = "Barcelona, Spain",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/W04-1013/",
+    pages = "74--81"
+}
+
+
+@article{JMLR:v13:song12a,
+  author  = {Le Song and Alex Smola and Arthur Gretton and Justin Bedo and Karsten Borgwardt},
+  title   = {Feature Selection via Dependence Maximization},
+  journal = {Journal of Machine Learning Research},
+  year    = {2012},
+  volume  = {13},
+  number  = {47},
+  pages   = {1393-1434},
+  url     = {http://jmlr.org/papers/v13/song12a.html}
+}
+
+
+@inproceedings{azaria2023internalstatellmknows,
+  title={The Internal State of an LLM Knows When It’s Lying},
+  author={Azaria, Amos and Mitchell, Tom},
+  booktitle={Findings of the Association for Computational Linguistics: EMNLP 2023},
+  pages={967--976},
+  year={2023}
+}
+
+@inproceedings{rajpurkar2016squad100000questionsmachine,
+  title={SQuAD: 100,000+ Questions for Machine Comprehension of Text},
+  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
+  booktitle={Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing},
+  pages={2383--2392},
+  year={2016}
+}
+
+@inproceedings{joshi2017triviaqalargescaledistantly,
+  title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
+  author={Joshi, Mandar and Choi, Eunsol and Weld, Daniel S and Zettlemoyer, Luke},
+  booktitle={Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={1601--1611},
+  year={2017}
+}
+
+@article{kwiatkowski-etal-2019-natural,
+    title = "Natural Questions: A Benchmark for Question Answering Research",
+    author = "Kwiatkowski, Tom  and
+      Palomaki, Jennimaria  and
+      Redfield, Olivia  and
+      Collins, Michael  and
+      Parikh, Ankur  and
+      Alberti, Chris  and
+      Epstein, Danielle  and
+      Polosukhin, Illia  and
+      Devlin, Jacob  and
+      Lee, Kenton  and
+      Toutanova, Kristina  and
+      Jones, Llion  and
+      Kelcey, Matthew  and
+      Chang, Ming-Wei  and
+      Dai, Andrew M.  and
+      Uszkoreit, Jakob  and
+      Le, Quoc  and
+      Petrov, Slav",
+    editor = "Lee, Lillian  and
+      Johnson, Mark  and
+      Roark, Brian  and
+      Nenkova, Ani",
+    journal = "Transactions of the Association for Computational Linguistics",
+    volume = "7",
+    year = "2019",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/Q19-1026/",
+    doi = "10.1162/tacl_a_00276",
+    pages = "452--466",
+}
+
+@misc{sun2024benchmarkinghallucinationlargelanguage,
+      title={Benchmarking Hallucination in Large Language Models based on Unanswerable Math Word Problem}, 
+      author={Yuhong Sun and Zhangyue Yin and Qipeng Guo and Jiawen Wu and Xipeng Qiu and Hui Zhao},
+      year={2024},
+      eprint={2403.03558},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2403.03558}, 
+}
+
+@misc{reimers2019sentencebertsentenceembeddingsusing,
+      title={Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks}, 
+      author={Nils Reimers and Iryna Gurevych},
+      year={2019},
+      eprint={1908.10084},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/1908.10084}, 
+}
+
+
+%%%%%%%%%%%%% Anwoy %%%%%%%%%%%%%
+@inproceedings{Brown2020,
+ author = {Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel and Wu, Jeffrey and Winter, Clemens and Hesse, Chris and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Larochelle and M. Ranzato and R. Hadsell and M.F. Balcan and H. Lin},
+ pages = {1877--1901},
+ publisher = {Curran Associates, Inc.},
+ title = {Language Models are Few-Shot Learners},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf},
+ volume = {33},
+ year = {2020}
+}
+
+@article{Touvron2023,
+  title={Llama 2: Open foundation and fine-tuned chat models},
+  author={Hugo Touvron and Louis Martin and Kevin Stone and Peter Albert and Amjad Almahairi and Yasmine Babaei and Nikolay Bashlykov and Soumya Batra and Prajjwal Bhargava and Shruti Bhosale and Dan Bikel and Lukas Blecher and Cristian Canton Ferrer and Moya Chen and Guillem Cucurull and David Esiobu and Jude Fernandes and Jeremy Fu and Wenyin Fu and Brian Fuller and Cynthia Gao and Vedanuj Goswami and Naman Goyal and Anthony Hartshorn and Saghar Hosseini and Rui Hou and Hakan Inan and Marcin Kardas and Viktor Kerkez and Madian Khabsa and Isabel Kloumann and Artem Korenev and Punit Singh Koura and Marie-Anne Lachaux and Thibaut Lavril and Jenya Lee and Diana Liskovich and Yinghai Lu and Yuning Mao and Xavier Martinet and Todor Mihaylov and Pushkar Mishra and Igor Molybog and Yixin Nie and Andrew Poulton and Jeremy Reizenstein and Rashi Rungta and Kalyan Saladi and Alan Schelten and Ruan Silva and Eric Michael Smith and Ranjan Subramanian and Xiaoqing Ellen Tan and Binh Tang and Ross Taylor and Adina Williams and Jian Xiang Kuan and Puxin Xu and Zheng Yan and Iliyan Zarov and Yuchen Zhang and Angela Fan and Melanie Kambadur and Sharan Narang and Aurelien Rodriguez and Robert Stojnic and Sergey Edunov and Thomas Scialom},
+  journal={arXiv preprint arXiv:2307.09288},
+  year={2023}
+}
+
+
+@article{grattafiori2024llama3herdmodels,
+  title={The llama 3 herd of models},
+  author={Aaron Grattafiori and Abhimanyu Dubey and Abhinav Jauhri and Abhinav Pandey and Abhishek Kadian and Ahmad Al-Dahle and Aiesha Letman and Akhil Mathur and Alan Schelten and Alex Vaughan and Amy Yang and Angela Fan and Anirudh Goyal and Anthony Hartshorn and Aobo Yang and Archi Mitra and Archie Sravankumar and Artem Korenev and Arthur Hinsvark and Arun Rao and Aston Zhang and Aurelien Rodriguez and Austen Gregerson and Ava Spataru and Baptiste Roziere and Bethany Biron and Binh Tang and Bobbie Chern and Charlotte Caucheteux and Chaya Nayak and Chloe Bi and Chris Marra and Chris McConnell and Christian Keller and Christophe Touret and Chunyang Wu and Corinne Wong and Cristian Canton Ferrer and Cyrus Nikolaidis and Damien Allonsius and Daniel Song and Danielle Pintz and Danny Livshits and Danny Wyatt and David Esiobu and Dhruv Choudhary and Dhruv Mahajan and Diego Garcia-Olano and Diego Perino and Dieuwke Hupkes and Egor Lakomkin and Ehab AlBadawy and Elina Lobanova and Emily Dinan and Eric Michael Smith and Filip Radenovic and Francisco Guzmán and Frank Zhang and Gabriel Synnaeve and Gabrielle Lee and Georgia Lewis Anderson and Govind Thattai and Graeme Nail and Gregoire Mialon and Guan Pang and Guillem Cucurell and Hailey Nguyen and Hannah Korevaar and Hu Xu and Hugo Touvron and Iliyan Zarov and Imanol Arrieta Ibarra and Isabel Kloumann and Ishan Misra and Ivan Evtimov and Jack Zhang and Jade Copet and Jaewon Lee and Jan Geffert and Jana Vranes and Jason Park and Jay Mahadeokar and Jeet Shah and Jelmer van der Linde and Jennifer Billock and Jenny Hong and Jenya Lee and Jeremy Fu and Jianfeng Chi and Jianyu Huang and Jiawen Liu and Jie Wang and Jiecao Yu and Joanna Bitton and Joe Spisak and Jongsoo Park and Joseph Rocca and Joshua Johnstun and Joshua Saxe and Junteng Jia and Kalyan Vasuden Alwala and Karthik Prasad and Kartikeya Upasani and Kate Plawiak and Ke Li and Kenneth Heafield and Kevin Stone and Khalid El-Arini and Krithika Iyer and Kshitiz Malik and Kuenley Chiu and Kunal Bhalla and Kushal Lakhotia and Lauren Rantala-Yeary and Laurens van der Maaten and Lawrence Chen and Liang Tan and Liz Jenkins and Louis Martin and Lovish Madaan and Lubo Malo and Lukas Blecher and Lukas Landzaat and Luke de Oliveira and Madeline Muzzi and Mahesh Pasupuleti and Mannat Singh and Manohar Paluri and Marcin Kardas and Maria Tsimpoukelli and Mathew Oldham and Mathieu Rita and Maya Pavlova and Melanie Kambadur and Mike Lewis and Min Si and Mitesh Kumar Singh and Mona Hassan and Naman Goyal and Narjes Torabi and Nikolay Bashlykov and Nikolay Bogoychev and Niladri Chatterji and Ning Zhang and Olivier Duchenne and Onur Çelebi and Patrick Alrassy and Pengchuan Zhang and Pengwei Li and Petar Vasic and Peter Weng and Prajjwal Bhargava and Pratik Dubal and Praveen Krishnan and Punit Singh Koura and Puxin Xu and Qing He and Qingxiao Dong and Ragavan Srinivasan and Raj Ganapathy and Ramon Calderer and Ricardo Silveira Cabral and Robert Stojnic and Roberta Raileanu and Rohan Maheswari and Rohit Girdhar and Rohit Patel and Romain Sauvestre and Ronnie Polidoro and Roshan Sumbaly and Ross Taylor and Ruan Silva and Rui Hou and Rui Wang and Saghar Hosseini and Sahana Chennabasappa and Sanjay Singh and Sean Bell and Seohyun Sonia Kim and Sergey Edunov and Shaoliang Nie and Sharan Narang and Sharath Raparthy and Sheng Shen and Shengye Wan and Shruti Bhosale and Shun Zhang and Simon Vandenhende and Soumya Batra and Spencer Whitman and Sten Sootla and Stephane Collot and Suchin Gururangan and Sydney Borodinsky and Tamar Herman and Tara Fowler and Tarek Sheasha and Thomas Georgiou and Thomas Scialom and Tobias Speckbacher and Todor Mihaylov and Tong Xiao and Ujjwal Karn and Vedanuj Goswami and Vibhor Gupta and Vignesh Ramanathan and Viktor Kerkez and Vincent Gonguet and Virginie Do and Vish Vogeti and Vítor Albiero and Vladan Petrovic and Weiwei Chu and Wenhan Xiong and Wenyin Fu and Whitney Meers and Xavier Martinet and Xiaodong Wang and Xiaofang Wang and Xiaoqing Ellen Tan and Xide Xia and Xinfeng Xie and Xuchao Jia and Xuewei Wang and Yaelle Goldschlag and Yashesh Gaur and Yasmine Babaei and Yi Wen and Yiwen Song and Yuchen Zhang and Yue Li and Yuning Mao and Zacharie Delpierre Coudert and Zheng Yan and Zhengxing Chen and Zoe Papakipos and Aaditya Singh and Aayushi Srivastava and Abha Jain and Adam Kelsey and Adam Shajnfeld and Adithya Gangidi and Adolfo Victoria and Ahuva Goldstand and Ajay Menon and Ajay Sharma and Alex Boesenberg and Alexei Baevski and Allie Feinstein and Amanda Kallet and Amit Sangani and Amos Teo and Anam Yunus and Andrei Lupu and Andres Alvarado and Andrew Caples and Andrew Gu and Andrew Ho and Andrew Poulton and Andrew Ryan and Ankit Ramchandani and Annie Dong and Annie Franco and Anuj Goyal and Aparajita Saraf and Arkabandhu Chowdhury and Ashley Gabriel and Ashwin Bharambe and Assaf Eisenman and Azadeh Yazdan and Beau James and Ben Maurer and Benjamin Leonhardi and Bernie Huang and Beth Loyd and Beto De Paola and Bhargavi Paranjape and Bing Liu and Bo Wu and Boyu Ni and Braden Hancock and Bram Wasti and Brandon Spence and Brani Stojkovic and Brian Gamido and Britt Montalvo and Carl Parker and Carly Burton and Catalina Mejia and Ce Liu and Changhan Wang and Changkyu Kim and Chao Zhou and Chester Hu and Ching-Hsiang Chu and Chris Cai and Chris Tindal and Christoph Feichtenhofer and Cynthia Gao and Damon Civin and Dana Beaty and Daniel Kreymer and Daniel Li and David Adkins and David Xu and Davide Testuggine and Delia David and Devi Parikh and Diana Liskovich and Didem Foss and Dingkang Wang and Duc Le and Dustin Holland and Edward Dowling and Eissa Jamil and Elaine Montgomery and Eleonora Presani and Emily Hahn and Emily Wood and Eric-Tuan Le and Erik Brinkman and Esteban Arcaute and Evan Dunbar and Evan Smothers and Fei Sun and Felix Kreuk and Feng Tian and Filippos Kokkinos and Firat Ozgenel and Francesco Caggioni and Frank Kanayet and Frank Seide and Gabriela Medina Florez and Gabriella Schwarz and Gada Badeer and Georgia Swee and Gil Halpern and Grant Herman and Grigory Sizov and Guangyi and Zhang and Guna Lakshminarayanan and Hakan Inan and Hamid Shojanazeri and Han Zou and Hannah Wang and Hanwen Zha and Haroun Habeeb and Harrison Rudolph and Helen Suk and Henry Aspegren and Hunter Goldman and Hongyuan Zhan and Ibrahim Damlaj and Igor Molybog and Igor Tufanov and Ilias Leontiadis and Irina-Elena Veliche and Itai Gat and Jake Weissman and James Geboski and James Kohli and Janice Lam and Japhet Asher and Jean-Baptiste Gaya and Jeff Marcus and Jeff Tang and Jennifer Chan and Jenny Zhen and Jeremy Reizenstein and Jeremy Teboul and Jessica Zhong and Jian Jin and Jingyi Yang and Joe Cummings and Jon Carvill and Jon Shepard and Jonathan McPhie and Jonathan Torres and Josh Ginsburg and Junjie Wang and Kai Wu and Kam Hou U and Karan Saxena and Kartikay Khandelwal and Katayoun Zand and Kathy Matosich and Kaushik Veeraraghavan and Kelly Michelena and Keqian Li and Kiran Jagadeesh and Kun Huang and Kunal Chawla and Kyle Huang and Lailin Chen and Lakshya Garg and Lavender A and Leandro Silva and Lee Bell and Lei Zhang and Liangpeng Guo and Licheng Yu and Liron Moshkovich and Luca Wehrstedt and Madian Khabsa and Manav Avalani and Manish Bhatt and Martynas Mankus and Matan Hasson and Matthew Lennie and Matthias Reso and Maxim Groshev and Maxim Naumov and Maya Lathi and Meghan Keneally and Miao Liu and Michael L. Seltzer and Michal Valko and Michelle Restrepo and Mihir Patel and Mik Vyatskov and Mikayel Samvelyan and Mike Clark and Mike Macey and Mike Wang and Miquel Jubert Hermoso and Mo Metanat and Mohammad Rastegari and Munish Bansal and Nandhini Santhanam and Natascha Parks and Natasha White and Navyata Bawa and Nayan Singhal and Nick Egebo and Nicolas Usunier and Nikhil Mehta and Nikolay Pavlovich Laptev and Ning Dong and Norman Cheng and Oleg Chernoguz and Olivia Hart and Omkar Salpekar and Ozlem Kalinli and Parkin Kent and Parth Parekh and Paul Saab and Pavan Balaji and Pedro Rittner and Philip Bontrager and Pierre Roux and Piotr Dollar and Polina Zvyagina and Prashant Ratanchandani and Pritish Yuvraj and Qian Liang and Rachad Alao and Rachel Rodriguez and Rafi Ayub and Raghotham Murthy and Raghu Nayani and Rahul Mitra and Rangaprabhu Parthasarathy and Raymond Li and Rebekkah Hogan and Robin Battey and Rocky Wang and Russ Howes and Ruty Rinott and Sachin Mehta and Sachin Siby and Sai Jayesh Bondu and Samyak Datta and Sara Chugh and Sara Hunt and Sargun Dhillon and Sasha Sidorov and Satadru Pan and Saurabh Mahajan and Saurabh Verma and Seiji Yamamoto and Sharadh Ramaswamy and Shaun Lindsay and Shaun Lindsay and Sheng Feng and Shenghao Lin and Shengxin Cindy Zha and Shishir Patil and Shiva Shankar and Shuqiang Zhang and Shuqiang Zhang and Sinong Wang and Sneha Agarwal and Soji Sajuyigbe and Soumith Chintala and Stephanie Max and Stephen Chen and Steve Kehoe and Steve Satterfield and Sudarshan Govindaprasad and Sumit Gupta and Summer Deng and Sungmin Cho and Sunny Virk and Suraj Subramanian and Sy Choudhury and Sydney Goldman and Tal Remez and Tamar Glaser and Tamara Best and Thilo Koehler and Thomas Robinson and Tianhe Li and Tianjun Zhang and Tim Matthews and Timothy Chou and Tzook Shaked and Varun Vontimitta and Victoria Ajayi and Victoria Montanez and Vijai Mohan and Vinay Satish Kumar and Vishal Mangla and Vlad Ionescu and Vlad Poenaru and Vlad Tiberiu Mihailescu and Vladimir Ivanov and Wei Li and Wenchen Wang and Wenwen Jiang and Wes Bouaziz and Will Constable and Xiaocheng Tang and Xiaojian Wu and Xiaolan Wang and Xilun Wu and Xinbo Gao and Yaniv Kleinman and Yanjun Chen and Ye Hu and Ye Jia and Ye Qi and Yenda Li and Yilin Zhang and Ying Zhang and Yossi Adi and Youngjin Nam and Yu and Wang and Yu Zhao and Yuchen Hao and Yundi Qian and Yunlu Li and Yuzi He and Zach Rait and Zachary DeVito and Zef Rosnbrick and Zhaoduo Wen and Zhenyu Yang and Zhiwei Zhao and Zhiyu Ma},
+  journal={arXiv preprint arXiv:2407.21783},
+  year={2024}
+}
+
+@article{Chowdhery2022,
+  author  = {Aakanksha Chowdhery and Sharan Narang and Jacob Devlin and Maarten Bosma and Gaurav Mishra and Adam Roberts and Paul Barham and Hyung Won Chung and Charles Sutton and Sebastian Gehrmann and Parker Schuh and Kensen Shi and Sasha Tsvyashchenko and Joshua Maynez and Abhishek Rao and Parker Barnes and Yi Tay and Noam Shazeer and Vinodkumar Prabhakaran and Emily Reif and Nan Du and Ben Hutchinson and Reiner Pope and James Bradbury and Jacob Austin and Michael Isard and Guy Gur-Ari and Pengcheng Yin and Toju Duke and Anselm Levskaya and Sanjay Ghemawat and Sunipa Dev and Henryk Michalewski and Xavier Garcia and Vedant Misra and Kevin Robinson and Liam Fedus and Denny Zhou and Daphne Ippolito and David Luan and Hyeontaek Lim and Barret Zoph and Alexander Spiridonov and Ryan Sepassi and David Dohan and Shivani Agrawal and Mark Omernick and Andrew M. Dai and Thanumalayan Sankaranarayana Pillai and Marie Pellat and Aitor Lewkowycz and Erica Moreira and Rewon Child and Oleksandr Polozov and Katherine Lee and Zongwei Zhou and Xuezhi Wang and Brennan Saeta and Mark Diaz and Orhan Firat and Michele Catasta and Jason Wei and Kathy Meier-Hellstern and Douglas Eck and Jeff Dean and Slav Petrov and Noah Fiedel},
+  title   = {PaLM: Scaling Language Modeling with Pathways},
+  journal = {Journal of Machine Learning Research},
+  year    = {2023},
+  volume  = {24},
+  number  = {240},
+  pages   = {1--113},
+  url     = {http://jmlr.org/papers/v24/22-1144.html}
+}
+
+@article{ji_survey,
+author = {Ji, Ziwei and Lee, Nayeon and Frieske, Rita and Yu, Tiezheng and Su, Dan and Xu, Yan and Ishii, Etsuko and Bang, Ye Jin and Madotto, Andrea and Fung, Pascale},
+title = {Survey of Hallucination in Natural Language Generation},
+year = {2023},
+issue_date = {December 2023},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {55},
+number = {12},
+issn = {0360-0300},
+url = {https://doi.org/10.1145/3571730},
+doi = {10.1145/3571730},
+abstract = {Natural Language Generation (NLG) has improved exponentially in recent years thanks to the development of sequence-to-sequence deep learning technologies such as Transformer-based language models. This advancement has led to more fluent and coherent NLG, leading to improved development in downstream tasks such as abstractive summarization, dialogue generation, and data-to-text generation. However, it is also apparent that deep learning based generation is prone to hallucinate unintended text, which degrades the system performance and fails to meet user expectations in many real-world scenarios. To address this issue, many studies have been presented in measuring and mitigating hallucinated texts, but these have never been reviewed in a comprehensive manner before.In this survey, we thus provide a broad overview of the research progress and challenges in the hallucination problem in NLG. The survey is organized into two parts: (1) a general overview of metrics, mitigation methods, and future directions, and (2) an overview of task-specific research progress on hallucinations in the following downstream tasks, namely abstractive summarization, dialogue generation, generative question answering, data-to-text generation, and machine translation. This survey serves to facilitate collaborative efforts among researchers in tackling the challenge of hallucinated texts in NLG.},
+journal = {ACM Comput. Surv.},
+month = mar,
+articleno = {248},
+numpages = {38},
+keywords = {consistency in NLG, factuality in NLG, faithfulness in NLG, extrinsic hallucination, intrinsic hallucination, Hallucination}
+}
+
+@article{zhang2023sirenssongaiocean,
+      title={Siren's Song in the AI Ocean: A Survey on Hallucination in Large Language Models}, 
+      author={Yue Zhang and Yafu Li and Leyang Cui and Deng Cai and Lemao Liu and Tingchen Fu and Xinting Huang and Enbo Zhao and Yu Zhang and Yulong Chen and Longyue Wang and Anh Tuan Luu and Wei Bi and Freda Shi and Shuming Shi},
+journal={arXiv preprint arXiv:2309.01219},
+      year={2023},
+      eprint={2309.01219},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2309.01219}, 
+}
+
+@inproceedings{10.1145/3531146.3533088,
+author = {Weidinger, Laura and Uesato, Jonathan and Rauh, Maribeth and Griffin, Conor and Huang, Po-Sen and Mellor, John and Glaese, Amelia and Cheng, Myra and Balle, Borja and Kasirzadeh, Atoosa and Biles, Courtney and Brown, Sasha and Kenton, Zac and Hawkins, Will and Stepleton, Tom and Birhane, Abeba and Hendricks, Lisa Anne and Rimell, Laura and Isaac, William and Haas, Julia and Legassick, Sean and Irving, Geoffrey and Gabriel, Iason},
+title = {Taxonomy of Risks posed by Language Models},
+year = {2022},
+isbn = {9781450393522},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3531146.3533088},
+doi = {10.1145/3531146.3533088},
+abstract = {Responsible innovation on large-scale Language Models (LMs) requires foresight into and in-depth understanding of the risks these models may pose. This paper develops a comprehensive taxonomy of ethical and social risks associated with LMs. We identify twenty-one risks, drawing on expertise and literature from computer science, linguistics, and the social sciences. We situate these risks in our taxonomy of six risk areas: I. Discrimination, Hate speech and Exclusion, II. Information Hazards, III. Misinformation Harms, IV. Malicious Uses, V. Human-Computer Interaction Harms, and VI. Environmental and Socioeconomic harms. For risks that have already been observed in LMs, the causal mechanism leading to harm, evidence of the risk, and approaches to risk mitigation are discussed. We further describe and analyse risks that have not yet been observed but are anticipated based on assessments of other language technologies, and situate these in the same taxonomy. We underscore that it is the responsibility of organizations to engage with the mitigations we discuss throughout the paper. We close by highlighting challenges and directions for further research on risk evaluation and mitigation with the goal of ensuring that language models are developed responsibly.},
+booktitle = {Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency},
+pages = {214–229},
+numpages = {16},
+keywords = {language models, responsible AI, responsible innovation, risk assessment, technology risks},
+location = {Seoul, Republic of Korea},
+series = {FAccT '22}
+}
+
+@article{Huang_2025,
+author = {Huang, Lei and Yu, Weijiang and Ma, Weitao and Zhong, Weihong and Feng, Zhangyin and Wang, Haotian and Chen, Qianglong and Peng, Weihua and Feng, Xiaocheng and Qin, Bing and Liu, Ting},
+title = {A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions},
+year = {2025},
+issue_date = {March 2025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {43},
+number = {2},
+issn = {1046-8188},
+url = {https://doi.org/10.1145/3703155},
+doi = {10.1145/3703155},
+abstract = {The emergence of large language models (LLMs) has marked a significant breakthrough in natural language processing (NLP), fueling a paradigm shift in information acquisition. Nevertheless, LLMs are prone to hallucination, generating plausible yet nonfactual content. This phenomenon raises significant concerns over the reliability of LLMs in real-world information retrieval (IR) systems and has attracted intensive research to detect and mitigate such hallucinations. Given the open-ended general-purpose attributes inherent to LLMs, LLM hallucinations present distinct challenges that diverge from prior task-specific models. This divergence highlights the urgency for a nuanced understanding and comprehensive overview of recent advances in LLM hallucinations. In this survey, we begin with an innovative taxonomy of hallucination in the era of LLM and then delve into the factors contributing to hallucinations. Subsequently, we present a thorough overview of hallucination detection methods and benchmarks. Our discussion then transfers to representative methodologies for mitigating LLM hallucinations. Additionally, we delve into the current limitations faced by retrieval-augmented LLMs in combating hallucinations, offering insights for developing more robust IR systems. Finally, we highlight the promising research directions on LLM hallucinations, including hallucination in large vision-language models and understanding of knowledge boundaries in LLM hallucinations.},
+journal = {ACM Trans. Inf. Syst.},
+month = jan,
+articleno = {42},
+numpages = {55},
+keywords = {Large Language Models, Hallucination, Factuality, Faithfulness}
+}
+
+
+
+@inproceedings{maynez-etal-2020-faithfulness,
+    title = "On Faithfulness and Factuality in Abstractive Summarization",
+    author = "Maynez, Joshua  and
+      Narayan, Shashi  and
+      Bohnet, Bernd  and
+      McDonald, Ryan",
+    editor = "Jurafsky, Dan  and
+      Chai, Joyce  and
+      Schluter, Natalie  and
+      Tetreault, Joel",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.acl-main.173/",
+    doi = "10.18653/v1/2020.acl-main.173",
+    pages = "1906--1919",
+    abstract = "It is well known that the standard likelihood training and approximate decoding objectives in neural text generation models lead to less human-like responses for open-ended tasks such as language modeling and story generation. In this paper we have analyzed limitations of these models for abstractive document summarization and found that these models are highly prone to hallucinate content that is unfaithful to the input document. We conducted a large scale human evaluation of several neural abstractive summarization systems to better understand the types of hallucinations they produce. Our human annotators found substantial amounts of hallucinated content in all model generated summaries. However, our analysis does show that pretrained models are better summarizers not only in terms of raw metrics, i.e., ROUGE, but also in generating faithful and factual summaries as evaluated by humans. Furthermore, we show that textual entailment measures better correlate with faithfulness than standard metrics, potentially leading the way to automatic evaluation metrics as well as training and decoding criteria."
+}
+
+@inproceedings{chen2024complexclaimverificationevidence,
+  title={Complex Claim Verification with Evidence Retrieved in the Wild},
+  author={Chen, Jifan and Kim, Grace and Sriram, Aniruddh and Durrett, Greg and Choi, Eunsol},
+  booktitle={Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)},
+  pages={3569--3587},
+  year={2024}
+}
+
+@inproceedings{min2023factscorefinegrainedatomicevaluation,
+  title={FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation},
+  author={Min, Sewon and Krishna, Kalpesh and Lyu, Xinxi and Lewis, Mike and Yih, Wen-tau and Koh, Pang and Iyyer, Mohit and Zettlemoyer, Luke and Hajishirzi, Hannaneh},
+  booktitle={Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+  pages={12076--12100},
+  year={2023}
+}
+
+
+@inproceedings{nan-etal-2021-entity,
+    title = "Entity-level Factual Consistency of Abstractive Text Summarization",
+    author = "Nan, Feng  and
+      Nallapati, Ramesh  and
+      Wang, Zhiguo  and
+      Nogueira dos Santos, Cicero  and
+      Zhu, Henghui  and
+      Zhang, Dejiao  and
+      McKeown, Kathleen  and
+      Xiang, Bing",
+    editor = "Merlo, Paola  and
+      Tiedemann, Jorg  and
+      Tsarfaty, Reut",
+    booktitle = "Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main Volume",
+    month = apr,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.eacl-main.235/",
+    doi = "10.18653/v1/2021.eacl-main.235",
+    pages = "2727--2733"
+}
+
+@inproceedings{falke-etal-2019-ranking,
+    title = "Ranking Generated Summaries by Correctness: An Interesting but Challenging Application for Natural Language Inference",
+    author = "Falke, Tobias  and
+      Ribeiro, Leonardo F. R.  and
+      Utama, Prasetya Ajie  and
+      Dagan, Ido  and
+      Gurevych, Iryna",
+    editor = "Korhonen, Anna  and
+      Traum, David  and
+      M{\`a}rquez, Llu{\'i}s",
+    booktitle = "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/P19-1213/",
+    doi = "10.18653/v1/P19-1213",
+    pages = "2214--2220"
+}
+
+@inproceedings{durmus-etal-2020-feqa,
+    title = "{FEQA}: A Question Answering Evaluation Framework for Faithfulness Assessment in Abstractive Summarization",
+    author = "Durmus, Esin  and
+      He, He  and
+      Diab, Mona",
+    editor = "Jurafsky, Dan  and
+      Chai, Joyce  and
+      Schluter, Natalie  and
+      Tetreault, Joel",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.acl-main.454/",
+    doi = "10.18653/v1/2020.acl-main.454",
+    pages = "5055--5070"
+}
+
+@inproceedings{scialom-etal-2021-questeval,
+    title = "{Q}uest{E}val: Summarization Asks for Fact-based Evaluation",
+    author = "Scialom, Thomas  and
+      Dray, Paul-Alexis  and
+      Lamprier, Sylvain  and
+      Piwowarski, Benjamin  and
+      Staiano, Jacopo  and
+      Wang, Alex  and
+      Gallinari, Patrick",
+    editor = "Moens, Marie-Francine  and
+      Huang, Xuanjing  and
+      Specia, Lucia  and
+      Yih, Scott Wen-tau",
+    booktitle = "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2021",
+    address = "Online and Punta Cana, Dominican Republic",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.emnlp-main.529/",
+    doi = "10.18653/v1/2021.emnlp-main.529",
+    pages = "6594--6604"
+}
+
+@article{luo2023chatgptfactualinconsistencyevaluator,
+  title={Chatgpt as a factual inconsistency evaluator for text summarization},
+  author={Luo, Zheheng and Xie, Qianqian and Ananiadou, Sophia},
+  journal={arXiv preprint arXiv:2303.15621},
+  year={2023}
+}
+
+@article{laban2023llmsfactualreasonersinsights,
+  title={Llms as factual reasoners: Insights from existing benchmarks and beyond},
+  author={Laban, Philippe and Kry{\'s}ci{\'n}ski, Wojciech and Agarwal, Divyansh and Fabbri, Alexander R and Xiong, Caiming and Joty, Shafiq and Wu, Chien-Sheng},
+  journal={arXiv preprint arXiv:2305.14540},
+  year={2023}
+}
+
+@inproceedings{lai-etal-2017-race,
+    title = "{RACE}: Large-scale {R}e{A}ding Comprehension Dataset From Examinations",
+    author = "Lai, Guokun  and
+      Xie, Qizhe  and
+      Liu, Hanxiao  and
+      Yang, Yiming  and
+      Hovy, Eduard",
+    editor = "Palmer, Martha  and
+      Hwa, Rebecca  and
+      Riedel, Sebastian",
+    booktitle = "Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing",
+    month = sep,
+    year = "2017",
+    address = "Copenhagen, Denmark",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D17-1082/",
+    doi = "10.18653/v1/D17-1082",
+    pages = "785--794"
+}
+
+@misc{kuhn2023semanticuncertaintylinguisticinvariances,
+      title={Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation}, 
+      author={Lorenz Kuhn and Yarin Gal and Sebastian Farquhar},
+      year={2023},
+      eprint={2302.09664},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2302.09664}, 
+}
+
+@inproceedings{reimers-gurevych-2019-sentence,
+    title = "Sentence-{BERT}: Sentence Embeddings using {S}iamese {BERT}-Networks",
+    author = "Reimers, Nils  and
+      Gurevych, Iryna",
+    editor = "Inui, Kentaro  and
+      Jiang, Jing  and
+      Ng, Vincent  and
+      Wan, Xiaojun",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D19-1410/",
+    doi = "10.18653/v1/D19-1410",
+    pages = "3982--3992",
+}
+
+@INPROCEEDINGS {halu_debate,
+author = { Maleki, Negar and Padmanabhan, Balaji and Dutta, Kaushik },
+booktitle = { 2024 IEEE Conference on Artificial Intelligence (CAI) },
+title = {{ AI Hallucinations: A Misnomer Worth Clarifying }},
+year = {2024},
+volume = {},
+ISSN = {},
+pages = {133-138},
+abstract = { As large language models continue to advance in Artificial Intelligence (AI), text generation systems have been shown to suffer from a problematic phenomenon often termed as "hallucination." However, with AI’s increasing presence across various domains, including medicine, concerns have arisen regarding the use of the term itself. In this study, we conducted a systematic review to identify papers defining "AI hallucination" across fourteen databases. We present and analyze definitions obtained from all databases, categorize them based on their applications, and extract key points within each category. Our results highlight a lack of consistency in how the term is used, but also help identify several alternative terms in the literature. We discuss the implications of these findings and call for a more unified effort to bring consistency to this important contemporary AI issue, which can significantly affect multiple domains. },
+keywords = {Systematics;Databases;Reviews;Large language models;Artificial intelligence},
+doi = {10.1109/CAI59869.2024.00033},
+url = {https://doi.ieeecomputersociety.org/10.1109/CAI59869.2024.00033},
+publisher = {IEEE Computer Society},
+address = {Los Alamitos, CA, USA},
+month =Jun}
+
+@article{simhi2025trustmeimwrong,
+  title={Trust Me, I'm Wrong: High-Certainty Hallucinations in LLMs},
+  author={Simhi, Adi and Itzhak, Itay and Barez, Fazl and Stanovsky, Gabriel and Belinkov, Yonatan},
+  journal={arXiv preprint arXiv:2502.12964},
+  year={2025}
+}
+
+
+@article{gretton05a,
+  author  = {Arthur Gretton and Ralf Herbrich and Alexander Smola and Olivier Bousquet and Bernhard Sch{\"o}lkopf},
+  title   = {Kernel Methods for Measuring Independence},
+  journal = {Journal of Machine Learning Research},
+  year    = {2005},
+  volume  = {6},
+  number  = {70},
+  pages   = {2075--2129},
+  url     = {http://jmlr.org/papers/v6/gretton05a.html}
+}
+
+@inproceedings{5122,
+  title = {Injective Hilbert Space Embeddings of Probability Measures},
+  journal = {Proceedings of the 21st Annual Conference on Learning Theory (COLT 2008)},
+  booktitle = {Proceedings of the 21st Annual Conference on Learning Theory},
+  abstract = {A Hilbert space embedding for probability measures
+  has recently been proposed, with applications
+  including dimensionality reduction, homogeneity
+  testing and independence testing. This embedding
+  represents any probability measure as a mean element
+  in a reproducing kernel Hilbert space (RKHS).
+  The embedding function has been proven to be injective
+  when the reproducing kernel is universal.
+  In this case, the embedding induces a metric on the
+  space of probability distributions defined on compact
+  metric spaces.
+  In the present work, we consider more broadly the
+  problem of specifying characteristic kernels, defined
+  as kernels for which the RKHS embedding
+  of probability measures is injective. In particular,
+  characteristic kernels can include non-universal kernels.
+  We restrict ourselves to translation-invariant
+  kernels on Euclidean space, and define the associated
+  metric on probability measures in terms of
+  the Fourier spectrum of the kernel and characteristic
+  functions of these measures. The support of the
+  kernel spectrum is important in finding whether a
+  kernel is characteristic: in particular, the embedding
+  is injective if and only if the kernel spectrum
+  has the entire domain as its support. Characteristic
+  kernels may nonetheless have difficulty in distinguishing
+  certain distributions on the basis of finite
+  samples, again due to the interaction of the kernel
+  spectrum and the characteristic functions of the
+  measures.},
+  pages = {111-122},
+  editors = {RA Servedio and T Zhang},
+  publisher = {Omnipress},
+  organization = {Max-Planck-Gesellschaft},
+  school = {Biologische Kybernetik},
+  address = {Madison, WI, USA},
+  month = jul,
+  year = {2008},
+  slug = {5122},
+  author = {Sriperumbudur, BK. and Gretton, A. and Fukumizu, K. and Lanckriet, G. and Sch{\"o}lkopf, B.},
+  month_numeric = {7}
+}
+
+@article{JMLR:v11:sriperumbudur10a,
+  author  = {Bharath K. Sriperumbudur and Arthur Gretton and Kenji Fukumizu and Bernhard Sch{{\"o}}lkopf and Gert R.G. Lanckriet},
+  title   = {Hilbert Space Embeddings and Metrics on Probability Measures},
+  journal = {Journal of Machine Learning Research},
+  year    = {2010},
+  volume  = {11},
+  number  = {50},
+  pages   = {1517--1561},
+  url     = {http://jmlr.org/papers/v11/sriperumbudur10a.html}
+}
+
+@article{liang2023holisticevaluationlanguagemodels,
+  title={Holistic Evaluation of Language Models},
+  author={Percy Liang and Rishi Bommasani and Tony Lee and Dimitris Tsipras and Dilara Soylu and Michihiro Yasunaga and Yian Zhang and Deepak Narayanan and Yuhuai Wu and Ananya Kumar and Benjamin Newman and Binhang Yuan and Bobby Yan and Ce Zhang and Christian Cosgrove and Christopher D. Manning and Christopher Ré and Diana Acosta-Navas and Drew A. Hudson and Eric Zelikman and Esin Durmus and Faisal Ladhak and Frieda Rong and Hongyu Ren and Huaxiu Yao and Jue Wang and Keshav Santhanam and Laurel Orr and Lucia Zheng and Mert Yuksekgonul and Mirac Suzgun and Nathan Kim and Neel Guha and Niladri Chatterji and Omar Khattab and Peter Henderson and Qian Huang and Ryan Chi and Sang Michael Xie and Shibani Santurkar and Surya Ganguli and Tatsunori Hashimoto and Thomas Icard and Tianyi Zhang and Vishrav Chaudhary and William Wang and Xuechen Li and Yifan Mai and Yuhui Zhang and Yuta Koreeda},
+  journal={Transactions on Machine Learning Research},
+year={2023}
+}
+
+
+
+@article{gemmateam2024gemma2improvingopen,
+  title={Gemma 2: Improving open language models at a practical size},
+  author={Team, Gemma and Riviere, Morgane and Pathak, Shreya and Sessa, Pier Giuseppe and Hardin, Cassidy and Bhupatiraju, Surya and Hussenot, L{\'e}onard and Mesnard, Thomas and Shahriari, Bobak and Ram{\'e}, Alexandre and others},
+  journal={arXiv preprint arXiv:2408.00118},
+  year={2024}
+}
+
+@article{hallucinations-leaderboard,
+  author       = {Giwon Hong and
+                  Aryo Pradipta Gema and
+                  Rohit Saxena and
+                  Xiaotang Du and
+                  Ping Nie and
+                  Yu Zhao and
+                  Laura Perez{-}Beltrachini and
+                  Max Ryabinin and
+                  Xuanli He and
+                  Cl{\'{e}}mentine Fourrier and
+                  Pasquale Minervini},
+  title        = {The Hallucinations Leaderboard - An Open Effort to Measure Hallucinations
+                  in Large Language Models},
+  journal      = {CoRR},
+  volume       = {abs/2404.05904},
+  year         = {2024},
+  url          = {https://doi.org/10.48550/arXiv.2404.05904},
+  doi          = {10.48550/ARXIV.2404.05904},
+  eprinttype    = {arXiv},
+  eprint       = {2404.05904},
+  timestamp    = {Wed, 15 May 2024 08:47:08 +0200},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-2404-05904.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{lin-etal-2022-truthfulqa,
+    title = "{T}ruthful{QA}: Measuring How Models Mimic Human Falsehoods",
+    author = "Lin, Stephanie  and
+      Hilton, Jacob  and
+      Evans, Owain",
+    editor = "Muresan, Smaranda  and
+      Nakov, Preslav  and
+      Villavicencio, Aline",
+    booktitle = "Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = may,
+    year = "2022",
+    address = "Dublin, Ireland",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.acl-long.229/",
+    doi = "10.18653/v1/2022.acl-long.229",
+    pages = "3214--3252",
+    abstract = "We propose a benchmark to measure whether a language model is truthful in generating answers to questions. The benchmark comprises 817 questions that span 38 categories, including health, law, finance and politics. We crafted questions that some humans would answer falsely due to a false belief or misconception. To perform well, models must avoid generating false answers learned from imitating human texts. We tested GPT-3, GPT-Neo/J, GPT-2 and a T5-based model. The best model was truthful on 58{\%} of questions, while human performance was 94{\%}. Models generated many false answers that mimic popular misconceptions and have the potential to deceive humans. The largest models were generally the least truthful. This contrasts with other NLP tasks, where performance improves with model size. However, this result is expected if false answers are learned from the training distribution. We suggest that scaling up models alone is less promising for improving truthfulness than fine-tuning using training objectives other than imitation of text from the web."
+}
+
+@article{hernandez2022scalinglawsinterpretabilitylearning,
+  title={Scaling laws and interpretability of learning from repeated data},
+  author={Hernandez, Danny and Brown, Tom and Conerly, Tom and DasSarma, Nova and Drain, Dawn and El-Showk, Sheer and Elhage, Nelson and Hatfield-Dodds, Zac and Henighan, Tom and Hume, Tristan and others},
+  journal={arXiv preprint arXiv:2205.10487},
+  year={2022}
+}
+
+@article{data_paullada_2021,
+  title={Data and its (dis) contents: A survey of dataset development and use in machine learning research},
+  author={Paullada, Amandalynne and Raji, Inioluwa Deborah and Bender, Emily M and Denton, Emily and Hanna, Alex},
+  journal={Patterns},
+  volume={2},
+  number={11},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@inproceedings{narayanan-venkit-etal-2023-nationality,
+    title = "Nationality Bias in Text Generation",
+    author = "Narayanan Venkit, Pranav  and
+      Gautam, Sanjana  and
+      Panchanadikar, Ruchi  and
+      Huang, Ting-Hao  and
+      Wilson, Shomir",
+    editor = "Vlachos, Andreas  and
+      Augenstein, Isabelle",
+    booktitle = "Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics",
+    month = may,
+    year = "2023",
+    address = "Dubrovnik, Croatia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.eacl-main.9/",
+    doi = "10.18653/v1/2023.eacl-main.9",
+    pages = "116--122",
+    abstract = "Little attention is placed on analyzing nationality bias in language models, especially when nationality is highly used as a factor in increasing the performance of social NLP models. This paper examines how a text generation model, GPT-2, accentuates pre-existing societal biases about country-based demonyms. We generate stories using GPT-2 for various nationalities and use sensitivity analysis to explore how the number of internet users and the country{'}s economic status impacts the sentiment of the stories. To reduce the propagation of biases through large language models (LLM), we explore the debiasing method of adversarial triggering. Our results show that GPT-2 demonstrates significant bias against countries with lower internet users, and adversarial triggering effectively reduces the same."
+}
+
+@inproceedings{ladhak-etal-2023-pre,
+    title = "When Do Pre-Training Biases Propagate to Downstream Tasks? A Case Study in Text Summarization",
+    author = "Ladhak, Faisal  and
+      Durmus, Esin  and
+      Suzgun, Mirac  and
+      Zhang, Tianyi  and
+      Jurafsky, Dan  and
+      McKeown, Kathleen  and
+      Hashimoto, Tatsunori",
+    editor = "Vlachos, Andreas  and
+      Augenstein, Isabelle",
+    booktitle = "Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics",
+    month = may,
+    year = "2023",
+    address = "Dubrovnik, Croatia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.eacl-main.234/",
+    doi = "10.18653/v1/2023.eacl-main.234",
+    pages = "3206--3219",
+    abstract = "Large language models (LLMs) are subject to sociocultural and other biases previously identified using intrinsic evaluations. However, when and how these intrinsic biases in pre-trained LM representations propagate to downstream, fine-tuned NLP tasks like summarization is not well understood. In this work, we investigate one type of bias{---}name-nationality bias{---}and trace it from the pre-training stage to a downstream summarization task across multiple summarization modeling choices. We show that these biases manifest themselves as hallucinations in summarization, leading to factually incorrect summaries. We also find that this propagation of biases is algorithm-dependent: more abstractive models allow biases to propagate more directly to downstream tasks as hallucinated facts. Building on these observations, we further analyze how changes to the adaptation method and fine-tuning data set affect name nationality biases and show that while they can reduce the overall rate of hallucinations, they do not change the types of biases that do appear."
+}
+
+@article{kasai2024realtimeqawhatsanswer,
+  title={Realtime qa: What's the answer right now?},
+  author={Kasai, Jungo and Sakaguchi, Keisuke and Le Bras, Ronan and Asai, Akari and Yu, Xinyan and Radev, Dragomir and Smith, Noah A and Choi, Yejin and Inui, Kentaro and others},
+  journal={Advances in neural information processing systems},
+  volume={36},
+  pages={49025--49043},
+  year={2023}
+}
+
+@article{li2023batgptbidirectionalautoregessivetalker,
+  title={Batgpt: A bidirectional autoregessive talker from generative pre-trained transformer},
+  author={Li, Zuchao and Zhang, Shitou and Zhao, Hai and Yang, Yifei and Yang, Dongjie},
+  journal={arXiv preprint arXiv:2307.00360},
+  year={2023}
+}
+
+@article{liu2023exposingattentionglitchesflipflop,
+  title={Exposing attention glitches with flip-flop language modeling},
+  author={Liu, Bingbin and Ash, Jordan and Goel, Surbhi and Krishnamurthy, Akshay and Zhang, Cyril},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  pages={25549--25583},
+  year={2023}
+}
+
+@inproceedings{fan-etal-2018-hierarchical,
+    title = "Hierarchical Neural Story Generation",
+    author = "Fan, Angela  and
+      Lewis, Mike  and
+      Dauphin, Yann",
+    editor = "Gurevych, Iryna  and
+      Miyao, Yusuke",
+    booktitle = "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2018",
+    address = "Melbourne, Australia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/P18-1082/",
+    doi = "10.18653/v1/P18-1082",
+    pages = "889--898",
+    abstract = "We explore story generation: creative systems that can build coherent and fluent passages of text about a topic. We collect a large dataset of 300K human-written stories paired with writing prompts from an online forum. Our dataset enables hierarchical story generation, where the model first generates a premise, and then transforms it into a passage of text. We gain further improvements with a novel form of model fusion that improves the relevance of the story to the prompt, and adding a new gated multi-scale self-attention mechanism to model long-range context. Experiments show large improvements over strong baselines on both automated and human evaluations. Human judges prefer stories generated by our approach to those from a strong non-hierarchical model by a factor of two to one."
+}
+
+@inproceedings{dziri-etal-2021-neural,
+    title = "Neural Path Hunter: Reducing Hallucination in Dialogue Systems via Path Grounding",
+    author = {Dziri, Nouha  and
+      Madotto, Andrea  and
+      Za{\"i}ane, Osmar  and
+      Bose, Avishek Joey},
+    editor = "Moens, Marie-Francine  and
+      Huang, Xuanjing  and
+      Specia, Lucia  and
+      Yih, Scott Wen-tau",
+    booktitle = "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2021",
+    address = "Online and Punta Cana, Dominican Republic",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.emnlp-main.168/",
+    doi = "10.18653/v1/2021.emnlp-main.168",
+    pages = "2197--2214",
+    abstract = "Dialogue systems powered by large pre-trained language models exhibit an innate ability to deliver fluent and natural-sounding responses. Despite their impressive performance, these models are fitful and can often generate factually incorrect statements impeding their widespread adoption. In this paper, we focus on the task of improving faithfulness and reducing hallucination of neural dialogue systems to known facts supplied by a Knowledge Graph (KG). We propose Neural Path Hunter which follows a generate-then-refine strategy whereby a generated response is amended using the KG. Neural Path Hunter leverages a separate token-level fact critic to identify plausible sources of hallucination followed by a refinement stage that retrieves correct entities by crafting a query signal that is propagated over a k-hop subgraph. We empirically validate our proposed approach on the OpenDialKG dataset (Moon et al., 2019) against a suite of metrics and report a relative improvement of faithfulness over dialogue responses by 20.35{\%} based on FeQA (Durmus et al., 2020). The code is available at \url{https://github.com/nouhadziri/Neural-Path-Hunter}."
+}
+
+@inproceedings{chuang2024doladecodingcontrastinglayers,
+  title={DoLa: Decoding by Contrasting Layers Improves Factuality in Large Language Models},
+  author={Chuang, Yung-Sung and Xie, Yujia and Luo, Hongyin and Kim, Yoon and Glass, James R and He, Pengcheng},
+  booktitle={The Twelfth International Conference on Learning Representations},
+year={2024}
+}
+
+@inproceedings{shi2023trustingevidencehallucinatecontextaware,
+  title={Trusting your evidence: Hallucinate less with context-aware decoding},
+  author={Shi, Weijia and Han, Xiaochuang and Lewis, Mike and Tsvetkov, Yulia and Zettlemoyer, Luke and Yih, Wen-tau},
+  booktitle={Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 2: Short Papers)},
+  pages={783--791},
+  year={2024}
+}
+
+@inproceedings{yang2018breakingsoftmaxbottleneckhighrank,
+  title={Breaking the Softmax Bottleneck: A High-Rank RNN Language Model},
+  author={Yang, Zhilin and Dai, Zihang and Salakhutdinov, Ruslan and Cohen, William W},
+  booktitle={International Conference on Learning Representations},
+  year={2018}
+}
+
+
+@article{huo2023retrievingsupportingevidencellms,
+  title={Retrieving supporting evidence for llms generated answers},
+  author={Huo, Siqing and Arabzadeh, Negar and Clarke, Charles LA},
+  journal={arXiv preprint arXiv:2306.13781},
+  year={2023}
+}
+
+@article{chern2023factoolfactualitydetectiongenerative,
+      title={FacTool: Factuality Detection in Generative AI -- A Tool Augmented Framework for Multi-Task and Multi-Domain Scenarios}, 
+      author={I-Chun Chern and Steffi Chern and Shiqi Chen and Weizhe Yuan and Kehua Feng and Chunting Zhou and Junxian He and Graham Neubig and Pengfei Liu},
+journal={arXiv preprint arXiv:2307.13528},
+      year={2023},
+      eprint={2307.13528},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2307.13528}, 
+}
+
+@inproceedings{xiong2024llmsexpressuncertaintyempirical,
+  title={Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs},
+  author={Xiong, Miao and Hu, Zhiyuan and Lu, Xinyang and LI, YIFEI and Fu, Jie and He, Junxian and Hooi, Bryan},
+  booktitle={The Twelfth International Conference on Learning Representations},
+year={2024}
+}
+@inproceedings{manakul2023selfcheckgptzeroresourceblackboxhallucination,
+  title={SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models},
+  author={Manakul, Potsawee and Liusie, Adian and Gales, Mark},
+  booktitle={Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+  pages={9004--9017},
+  year={2023}
+}
+
+
+@inproceedings{xiao-wang-2021-hallucination,
+    title = "On Hallucination and Predictive Uncertainty in Conditional Language Generation",
+    author = "Xiao, Yijun  and
+      Wang, William Yang",
+    editor = "Merlo, Paola  and
+      Tiedemann, Jorg  and
+      Tsarfaty, Reut",
+    booktitle = "Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main Volume",
+    month = apr,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.eacl-main.236/",
+    doi = "10.18653/v1/2021.eacl-main.236",
+    pages = "2734--2744",
+    abstract = "Despite improvements in performances on different natural language generation tasks, deep neural models are prone to hallucinating facts that are incorrect or nonexistent. Different hypotheses are proposed and examined separately for different tasks, but no systematic explanations are available across these tasks. In this study, we draw connections between hallucinations and predictive uncertainty in conditional language generation. We investigate their relationship in both image captioning and data-to-text generation and propose a simple extension to beam search to reduce hallucination. Our analysis shows that higher predictive uncertainty corresponds to a higher chance of hallucination. Epistemic uncertainty is more indicative of hallucination than aleatoric or total uncertainties. It helps to achieve better results of trading performance in standard metric for less hallucination with the proposed beam search variant."
+}
+
+@inproceedings{guerreiro-etal-2023-looking,
+    title = "Looking for a Needle in a Haystack: A Comprehensive Study of Hallucinations in Neural Machine Translation",
+    author = "Guerreiro, Nuno M.  and
+      Voita, Elena  and
+      Martins, Andr{\'e}",
+    editor = "Vlachos, Andreas  and
+      Augenstein, Isabelle",
+    booktitle = "Proceedings of the 17th Conference of the European Chapter of the Association for Computational Linguistics",
+    month = may,
+    year = "2023",
+    address = "Dubrovnik, Croatia",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.eacl-main.75/",
+    doi = "10.18653/v1/2023.eacl-main.75",
+    pages = "1059--1075",
+    abstract = "Although the problem of hallucinations in neural machine translation (NMT) has received some attention, research on this highly pathological phenomenon lacks solid ground. Previous work has been limited in several ways: it often resorts to artificial settings where the problem is amplified, it disregards some (common) types of hallucinations, and it does not validate adequacy of detection heuristics. In this paper, we set foundations for the study of NMT hallucinations. First, we work in a natural setting, i.e., in-domain data without artificial noise neither in training nor in inference. Next, we annotate a dataset of over 3.4k sentences indicating different kinds of critical errors and hallucinations. Then, we turn to detection methods and both revisit methods used previously and propose using glass-box uncertainty-based detectors. Overall, we show that for preventive settings, (i) previously used methods are largely inadequate, (ii) sequence log-probability works best and performs on par with reference-based methods. Finally, we propose DeHallucinator, a simple method for alleviating hallucinations at test time that significantly reduces the hallucinatory rate."
+}
+
+@inproceedings{chiang2023largelanguagemodelsalternative,
+  title={Can Large Language Models Be an Alternative to Human Evaluations?},
+  author={Chiang, Cheng-Han and Lee, Hung-Yi},
+  booktitle={Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={15607--15631},
+  year={2023}
+}
+
+
+@misc{miao2023selfcheckusingllmszeroshot,
+      title={SelfCheck: Using LLMs to Zero-Shot Check Their Own Step-by-Step Reasoning}, 
+      author={Ning Miao and Yee Whye Teh and Tom Rainforth},
+      year={2023},
+      eprint={2308.00436},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2308.00436}, 
+}
+
+@inproceedings{ji-etal-2024-llm,
+    title = "{LLM} Internal States Reveal Hallucination Risk Faced With a Query",
+    author = "Ji, Ziwei  and
+      Chen, Delong  and
+      Ishii, Etsuko  and
+      Cahyawijaya, Samuel  and
+      Bang, Yejin  and
+      Wilie, Bryan  and
+      Fung, Pascale",
+    editor = "Belinkov, Yonatan  and
+      Kim, Najoung  and
+      Jumelet, Jaap  and
+      Mohebbi, Hosein  and
+      Mueller, Aaron  and
+      Chen, Hanjie",
+    booktitle = "Proceedings of the 7th BlackboxNLP Workshop: Analyzing and Interpreting Neural Networks for NLP",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, US",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.blackboxnlp-1.6/",
+    doi = "10.18653/v1/2024.blackboxnlp-1.6",
+    pages = "88--104",
+    abstract = "The hallucination problem of Large Language Models (LLMs) significantly limits their reliability and trustworthiness. Humans have a self-awareness process that allows us to recognize what we don{'}t know when faced with queries. Inspired by this, our paper investigates whether LLMs can estimate their own hallucination risk before response generation. We analyze the internal mechanisms of LLMs broadly both in terms of training data sources and across 15 diverse Natural Language Generation (NLG) tasks, spanning over 700 datasets. Our empirical analysis reveals two key insights: (1) LLM internal states indicate whether they have seen the query in training data or not; and (2) LLM internal states show they are likely to hallucinate or not regarding the query. Our study explores particular neurons, activation layers, and tokens that play a crucial role in the LLM perception of uncertainty and hallucination risk. By a probing estimator, we leverage LLM self-assessment, achieving an average hallucination estimation accuracy of 84.32{\%} at run time."
+}
+
+@article{duan2024llmsknowhallucinationempirical,
+  title={Do LLMs Know about Hallucination? An Empirical Investigation of LLM's Hidden States},
+  author={Duan, Hanyu and Yang, Yi and Tam, Kar Yan},
+  journal={arXiv preprint arXiv:2402.09733},
+  year={2024}
+}
+
+
+@article{math11102320,
+AUTHOR = {Lee, Minhyeok},
+TITLE = {A Mathematical Investigation of Hallucination and Creativity in GPT Models},
+JOURNAL = {Mathematics},
+VOLUME = {11},
+YEAR = {2023},
+NUMBER = {10},
+ARTICLE-NUMBER = {2320},
+URL = {https://www.mdpi.com/2227-7390/11/10/2320},
+ISSN = {2227-7390},
+ABSTRACT = {In this paper, we present a comprehensive mathematical analysis of the hallucination phenomenon in generative pretrained transformer (GPT) models. We rigorously define and measure hallucination and creativity using concepts from probability theory and information theory. By introducing a parametric family of GPT models, we characterize the trade-off between hallucination and creativity and identify an optimal balance that maximizes model performance across various tasks. Our work offers a novel mathematical framework for understanding the origins and implications of hallucination in GPT models and paves the way for future research and development in the field of large language models (LLMs).},
+DOI = {10.3390/math11102320}
+}
+
+@article{10.1145/3652102,
+author = {Chakraborty, Tanmoy and Masud, Sarah},
+title = {The Promethean Dilemma of AI at the Intersection of Hallucination and Creativity},
+year = {2024},
+issue_date = {October 2024},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {67},
+number = {10},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/3652102},
+doi = {10.1145/3652102},
+abstract = {Seeking to understand how we can better synthesize creative outputs from generative artificial intelligence.},
+journal = {Commun. ACM},
+month = sep,
+pages = {26–28},
+numpages = {3}
+}
+
+@inproceedings{10.1145/3442188.3445922,
+author = {Bender, Emily M. and Gebru, Timnit and McMillan-Major, Angelina and Shmitchell, Shmargaret},
+title = {On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?},
+year = {2021},
+isbn = {9781450383097},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3442188.3445922},
+doi = {10.1145/3442188.3445922},
+abstract = {The past 3 years of work in NLP have been characterized by the development and deployment of ever larger language models, especially for English. BERT, its variants, GPT-2/3, and others, most recently Switch-C, have pushed the boundaries of the possible both through architectural innovations and through sheer size. Using these pretrained models and the methodology of fine-tuning them for specific tasks, researchers have extended the state of the art on a wide array of tasks as measured by leaderboards on specific benchmarks for English. In this paper, we take a step back and ask: How big is too big? What are the possible risks associated with this technology and what paths are available for mitigating those risks? We provide recommendations including weighing the environmental and financial costs first, investing resources into curating and carefully documenting datasets rather than ingesting everything on the web, carrying out pre-development exercises evaluating how the planned approach fits into research and development goals and supports stakeholder values, and encouraging research directions beyond ever larger language models.},
+booktitle = {Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency},
+pages = {610–623},
+numpages = {14},
+location = {Virtual Event, Canada},
+series = {FAccT '21}
+}
+
+@inproceedings{
+skean2025layerlayeruncoveringhidden,
+title={Layer by Layer: Uncovering Hidden Representations in Language Models},
+author={Oscar Skean and Md Rifat Arefin and Dan Zhao and Niket Nikul Patel and Jalal Naghiyev and Yann LeCun and Ravid Shwartz-Ziv},
+booktitle={Forty-second International Conference on Machine Learning},
+year={2025},
+url={https://openreview.net/forum?id=WGXb7UdvTX}
+}
+
+@misc{obeso2025realtimedetectionhallucinatedentities,
+      title={Real-Time Detection of Hallucinated Entities in Long-Form Generation}, 
+      author={Oscar Obeso and Andy Arditi and Javier Ferrando and Joshua Freeman and Cameron Holmes and Neel Nanda},
+      year={2025},
+      eprint={2509.03531},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2509.03531}, 
+}
+
+@inproceedings{geva-etal-2023-dissecting,
+    title = "Dissecting Recall of Factual Associations in Auto-Regressive Language Models",
+    author = "Geva, Mor  and
+      Bastings, Jasmijn  and
+      Filippova, Katja  and
+      Globerson, Amir",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.emnlp-main.751/",
+    doi = "10.18653/v1/2023.emnlp-main.751",
+    pages = "12216--12235",
+    abstract = "Transformer-based language models (LMs) are known to capture factual knowledge in their parameters. While previous work looked into where factual associations are stored, only little is known about how they are retrieved internally during inference. We investigate this question through the lens of information flow. Given a subject-relation query, we study how the model aggregates information about the subject and relation to predict the correct attribute. With interventions on attention edges, we first identify two critical points where information propagates to the prediction: one from the relation positions followed by another from the subject positions. Next, by analyzing the information at these points, we unveil a three-step internal mechanism for attribute extraction. First, the representation at the last-subject position goes through an enrichment process, driven by the early MLP sublayers, to encode many subject-related attributes. Second, information from the relation propagates to the prediction. Third, the prediction representation ``queries'' the enriched subject to extract the attribute. Perhaps surprisingly, this extraction is typically done via attention heads, which often encode subject-attribute mappings in their parameters. Overall, our findings introduce a comprehensive view of how factual associations are stored and extracted internally in LMs, facilitating future research on knowledge localization and editing."
+}
