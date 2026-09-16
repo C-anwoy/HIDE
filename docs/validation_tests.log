@@ -11,6 +11,29 @@ test_squad_first_reference_is_explicitly_returned (test_datasets.DatasetTests.te
 test_incomplete_export_is_explicit (test_export.ExportTests.test_incomplete_export_is_explicit) ... ok
 test_lossless_shards_and_tamper_detection (test_export.ExportTests.test_lossless_shards_and_tamper_detection) ... ok
 test_required_full_suite (test_export.ExportTests.test_required_full_suite) ... ok
+test_control_pause_and_signal_restoration (test_parts.PartTests.test_control_pause_and_signal_restoration) ... ok
+test_merge_exact_order_provenance_export_and_restore (test_parts.PartTests.test_merge_exact_order_provenance_export_and_restore) ... ok
+test_merge_rejects_missing_duplicate_and_incompatible_parts (test_parts.PartTests.test_merge_rejects_missing_duplicate_and_incompatible_parts) ... ok
+test_plan_full_coverage_no_redundant_qa_and_static_assignments (test_parts.PartTests.test_plan_full_coverage_no_redundant_qa_and_static_assignments) ... ok
+test_plan_tamper_rejected (test_parts.PartTests.test_plan_tamper_rejected) ... ok
+test_queue_snapshot_detects_missing_plan_tasks (test_parts.PartTests.test_queue_snapshot_detects_missing_plan_tasks) ... ok
+test_shared_queue_lock_excludes_exports_and_merge (test_parts.PartTests.test_shared_queue_lock_excludes_exports_and_merge) ... ok
+test_timing_device_requires_exclusive_fixed_hardware (test_parts.PartTests.test_timing_device_requires_exclusive_fixed_hardware) ... ok
+test_worker_pauses_then_resumes_without_duplicate_rows (test_parts.PartTests.test_worker_pauses_then_resumes_without_duplicate_rows) ... Exported 3 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpe6u3qjz6/checkpoint
+Exported 4 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpo6rnfqna/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpo6rnfqna/restored
+Verified merge: 3 parts -> /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiuc0eqje/merged
+Exported 133 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiuc0eqje/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiuc0eqje/restored
+Exported 99 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp8c4nvbrz/checkpoint
+RUN qa__llama3-8b__nq_open__00000-00002
+Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpcx8d9p7i/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
+Paused. Rerun the same worker command to continue.
+Worker stopped; 0 parts completed this session. Check queue status for remaining work.
+RUN qa__llama3-8b__nq_open__00000-00002
+Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpcx8d9p7i/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
+ok
+test_worker_supervisor_hard_and_cooperative_stop (test_parts.PartTests.test_worker_supervisor_hard_and_cooperative_stop) ... ok
 test_estimator_conventions (test_protocol.ProtocolTests.test_estimator_conventions) ... ok
 test_generated_token_likelihood_and_eigen_formula (test_protocol.ProtocolTests.test_generated_token_likelihood_and_eigen_formula) ... ok
 test_lock_and_atomic_metadata (test_protocol.ProtocolTests.test_lock_and_atomic_metadata) ... ok
@@ -23,12 +46,11 @@ test_detection_timing_and_resume (test_runner.RunnerTests.test_detection_timing_
 ok
 
 ----------------------------------------------------------------------
-Ran 22 tests in 2.542s
+Ran 32 tests in 5.227s
 
 OK
-Exported 3 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp0gwjrecb/checkpoint
-Exported 4 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp54t_ur2u/bundle
-Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp54t_ur2u/restored
-Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp1fe19mt7/.history/run_20260916T111258608695Z; rerun the identical command
-Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp75jroprn/.history/run_20260916T111258610797Z; rerun the identical command
+Worker stopped; 1 parts completed this session. Check queue status for remaining work.
+Worker stopped; 0 parts completed this session. Check queue status for remaining work.
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmphbixfu_v/.history/run_20260916T184347797443Z; rerun the identical command
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp1xvbcpe7/.history/run_20260916T184347799613Z; rerun the identical command
 No trailing damaged/error record; nothing changed

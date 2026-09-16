@@ -134,3 +134,7 @@ Restore is byte-for-byte and refuses an existing output directory. No weights/GP
 ## Earlier provisional runs
 
 This is schema/protocol v2. If you already ran the earlier commands, keep those raw outputs and their original snapshots intact. They can be exported/restored and analyzed separately, but do not merge them into v2 files or claim that they include newly added raw-logit, ablation or five-sample baseline fields. A fresh output root is required for the new protocol.
+
+## Distributed parts
+
+See [PARALLEL_RUNS.md](PARALLEL_RUNS.md). Raw queues live under `outputs/`, with a checksummed plan, independent task folders, worker session logs and per-execution runtime records. A row's `execution_id` references its saved runtime record. Cooperative pauses retain ordinary successful rows; explicit repair preserves a damaged trailing record before retry. Source/manifest checks remain enforced. Merge verifies every planned part exactly once and retains original bytes and metadata under `provenance/`; source queues and merged roots must be separate. Export detects unfinished work plans and excludes active queue writers using a shared/exclusive lock. Merged results use the same analysis and Git snapshot format as single-process runs.

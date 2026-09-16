@@ -2,6 +2,8 @@
 
 All commands run from the repository root after installation and sourcing `configs/env.local.sh`. There is one supported package and one storage workflow. No provisional parallel implementation is required.
 
+For multiple GPUs or 20-hour process limits, use [PARALLEL_RUNS.md](PARALLEL_RUNS.md). It preserves these experiments and full cohorts while dividing accuracy runs into independently resumable parts; the `full` plan omits duplicate QA jobs.
+
 ## Decide which results you are claiming
 
 | Work | Why | Required action |

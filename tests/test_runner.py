@@ -29,11 +29,11 @@ class RunnerTests(unittest.TestCase):
             def encode(self, text, **kwargs):
                 return [int(text.strip())]
         class Data:
-            def __init__(self):
+            def __init__(self, rows=None):
                 self.rows=[dict(id=str(i),input_ids=torch.tensor([2,3,4,5]),attention_mask=torch.ones(4,dtype=torch.long),
-                    answer='7',question='2 3',prompt='2 3 4 5') for i in range(2)]
+                    answer='7',question='2 3',prompt='2 3 4 5') for i in range(2)] if rows is None else rows
             def shuffle(self, **kwargs): return self
-            def select(self, indices): return self
+            def select(self, indices): return Data([self.rows[i] for i in indices])
             def __len__(self): return len(self.rows)
             def __iter__(self): return iter(self.rows)
             def __getitem__(self,key):
@@ -86,6 +86,39 @@ class RunnerTests(unittest.TestCase):
                 with patch.object(sys,'argv',argv+['--resume']),contextlib.redirect_stdout(io.StringIO()):
                     main()
                 self.assertEqual(output.read_text(),before)
+                # A partition must preserve generation and score for the same seeded example.
+                if label != 'timing':
+                    partition_argv = argv.copy()
+                    partition_output = Path(root)/(label+'_part.jsonl')
+                    partition_argv[partition_argv.index('--output')+1] = str(partition_output)
+                    with patch.object(sys,'argv',partition_argv+['--start','1','--stop','2']), contextlib.redirect_stdout(io.StringIO()):
+                        main()
+                    partition_rows = [json.loads(x) for x in partition_output.read_text().splitlines()]
+                    self.assertEqual(len(partition_rows),1)
+                    self.assertEqual(partition_rows[0]['id'], rows[1]['id'])
+                    self.assertEqual(partition_rows[0]['generated_ids'], rows[1]['generated_ids'])
+                    self.assertEqual(partition_rows[0]['HIDE_score'], rows[1]['HIDE_score'])
+                    if label == 'comparison':
+                        self.assertEqual(partition_rows[0]['multipass_samples'],rows[1]['multipass_samples'])
+                if label == 'nucleus':
+                    # Cooperative time stop writes no error row and resumes the same stochastic cohort.
+                    from hide.execution import RunPaused
+                    paused_output=Path(root)/'paused.jsonl'
+                    paused_argv=argv.copy(); paused_argv[paused_argv.index('--output')+1]=str(paused_output)
+                    checks=[0]
+                    def budget_check(_):
+                        checks[0]+=1
+                        if checks[0]==3: raise RunPaused('test budget')
+                    with patch.object(sys,'argv',paused_argv), patch('hide.execution.RunControl.check',budget_check), contextlib.redirect_stdout(io.StringIO()):
+                        with self.assertRaises(SystemExit) as paused: main()
+                    self.assertEqual(paused.exception.code,75)
+                    paused_rows=[json.loads(x) for x in paused_output.read_text().splitlines()]
+                    self.assertEqual(len(paused_rows),1)
+                    self.assertEqual(paused_rows[0]['status'],'ok')
+                    with patch.object(sys,'argv',paused_argv+['--resume','--time-budget-seconds','10000']), contextlib.redirect_stdout(io.StringIO()):
+                        main()
+                    resumed=[json.loads(x) for x in paused_output.read_text().splitlines()]
+                    self.assertEqual([r['generated_ids'] for r in resumed],[r['generated_ids'] for r in rows])
                 if label == 'ablations':
                     self.assertTrue(all(r['ablations'] for r in rows))
                     self.assertTrue(all(v['status'] != 'error' for r in rows for v in r['ablations']))

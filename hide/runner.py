@@ -28,6 +28,9 @@ def parser():
     p.add_argument('--dtype', choices=['float16', 'bfloat16', 'float32'], default='bfloat16')
     p.add_argument('--attention-backend', choices=['eager', 'sdpa'], default='eager')
     p.add_argument('--samples', type=int, default=0, help='0 (default) means the entire dataset')
+    p.add_argument('--start', type=int, default=0, help='Start position in the seeded selected cohort')
+    p.add_argument('--stop', type=int, help='Exclusive end position; omitted means cohort end')
+    p.add_argument('--time-budget-seconds', type=float, default=0, help='Operational soft limit, checked between examples; 0 disables')
     p.add_argument('--seed', type=int, default=42)
     p.add_argument('--layer', type=int, help='HF hidden_states index; default num_hidden_layers // 2')
     p.add_argument('--keywords', type=int, default=20)
@@ -93,11 +96,16 @@ def labels(text, answer, question, judge, rouge):
 def main():
     from hide.provenance import run_lock
     args = parser().parse_args()
-    with run_lock(args.output):
-        run(args)
+    from hide.execution import RunControl, RunPaused
+    with RunControl(args.time_budget_seconds) as control, run_lock(args.output):
+        try:
+            run(args, control)
+        except RunPaused as exc:
+            print(f'PAUSED: {exc}; saved rows are resumable', flush=True)
+            raise SystemExit(75)
 
 
-def run(args):
+def run(args, control=None):
     from hide.provenance import atomic_json, source_files, checkpoint_identity, example_seed
     if args.mode == 'detection' and (not args.judge_model or args.attention_backend != 'eager'):
         raise SystemExit('Detection requires --judge-model and --attention-backend eager')
@@ -111,6 +119,8 @@ def run(args):
         raise ValueError('The comparison study evaluates a greedy target answer')
     if args.mode == 'timing' and (args.decoding != 'greedy' or args.ablations or args.multipass_samples):
         raise ValueError('Timing uses greedy decoding and the default HIDE score only')
+    if args.start < 0 or (args.stop is not None and args.stop <= args.start):
+        raise ValueError('Require 0 <= start < stop')
     os.environ['HIDE_DATA_ROOT'] = str(Path(args.data_root).resolve())
     import torch
     import transformers
@@ -125,7 +135,9 @@ def run(args):
     dataset_module = importlib.import_module('hide.datasets.' + args.dataset)
     tokenizer = AutoTokenizer.from_pretrained(args.model_path, use_fast=False)
     tokenizer.pad_token_id = tokenizer.eos_token_id
-    dataset = dataset_module.get_dataset(tokenizer)
+    from hide.provenance import data_lock
+    with data_lock(args.data_root, args.dataset):
+        dataset = dataset_module.get_dataset(tokenizer)
     from hide.export_results import DATASET_COUNTS
     if len(dataset) != DATASET_COUNTS[args.dataset]:
         raise ValueError(f'Dataset has {len(dataset)} examples; paper requires {DATASET_COUNTS[args.dataset]}. '
@@ -137,6 +149,21 @@ def run(args):
         dataset = dataset.select(range(min(args.samples, len(dataset))))
     if not len(dataset):
         raise ValueError('Empty dataset')
+    parent_ids = [str(x) for x in dataset['id']]
+    if len(set(parent_ids)) != len(parent_ids):
+        raise ValueError('Duplicate parent dataset IDs; audit before partitioning')
+    parent_hash = hashlib.sha256()
+    for example in dataset:
+        parent_hash.update(json.dumps([str(example['id']), example['prompt'], example['answer']],
+                                      ensure_ascii=False).encode())
+    stop = len(dataset) if args.stop is None else args.stop
+    if not 0 <= args.start < stop <= len(dataset):
+        raise ValueError('Partition outside the selected cohort')
+    partition = None
+    if args.start or args.stop is not None:
+        partition = dict(start=args.start, stop=stop, parent_selected_ids=parent_ids,
+                         parent_cohort_sha256=parent_hash.hexdigest())
+        dataset = dataset.select(range(args.start, stop))
     selected_ids = [str(x) for x in dataset['id']]
     if len(set(selected_ids)) != len(selected_ids):
         raise ValueError('Duplicate dataset IDs; audit dataset provenance before proceeding')
@@ -145,6 +172,7 @@ def run(args):
     manifest_path = out.with_suffix('.manifest.json')
     config = vars(args).copy()
     config.pop('resume')
+    config.pop('time_budget_seconds')
     checkpoint_config = AutoConfig.from_pretrained(args.model_path)
     cohort_hash = hashlib.sha256()
     for example in dataset:
@@ -162,6 +190,8 @@ def run(args):
                 'checkpoint_identity': {name: checkpoint_identity(path, args.hash_weights)
                     for name, path in [('generator', args.model_path), ('keyword', args.keyword_model),
                                        ('judge', args.judge_model)] if path}}
+    if partition is not None:
+        metadata['partition'] = partition
     if args.ablations:
         from hide.ablations import variant_names
         metadata['expected_ablation_names'] = variant_names(checkpoint_config.num_hidden_layers)
@@ -204,6 +234,8 @@ def run(args):
         if destination.exists() and hashlib.sha256(destination.read_bytes()).hexdigest() != digest:
             raise ValueError('Stored source snapshot differs from this run')
         destination.write_bytes(path.read_bytes())
+    if control:
+        control.check()
     model = AutoModelForCausalLM.from_pretrained(
         args.model_path, torch_dtype=getattr(torch, args.dtype), attn_implementation=args.attention_backend,
         low_cpu_mem_usage=True
@@ -228,7 +260,9 @@ def run(args):
         gen_config.pop('top_p', None)
         gen_config.pop('top_k', None)
     gen_config = GenerationConfig(**gen_config)
-    runtime = {'cpu_count': os.cpu_count(), 'platform': platform.platform(),
+    runtime = {'hostname': platform.node(), 'cuda_visible_devices': os.environ.get('CUDA_VISIBLE_DEVICES'),
+               'gpu_uuid': str(getattr(torch.cuda.get_device_properties(args.device), 'uuid', ''))
+                   if str(args.device).startswith('cuda') else None, 'cpu_count': os.cpu_count(), 'platform': platform.platform(),
                'float32_matmul_precision': torch.get_float32_matmul_precision(),
                'keyword_device': args.keyword_device, 'judge_device': args.judge_device if judge else None,
                'layer': layer, 'hidden_size': model.config.hidden_size,
@@ -238,7 +272,13 @@ def run(args):
                'generation_config': gen_config.to_dict(),
                'gpu_memory_bytes': torch.cuda.get_device_properties(args.device).total_memory
                    if str(args.device).startswith('cuda') else None}
+    from datetime import datetime, timezone
+    import uuid
+    execution_id = uuid.uuid4().hex
+    runtime['execution_id'] = execution_id
+    runtime['started_utc'] = datetime.now(timezone.utc).isoformat()
     atomic_json(out.with_suffix('.runtime.json'), runtime)
+    atomic_json(out.with_suffix('.executions') / (execution_id+'.json'), runtime)
     print(json.dumps({'model': args.model_name, 'layer': layer, 'hidden_size': model.config.hidden_size,
                       'samples': len(dataset), 'backend': args.attention_backend}), flush=True)
 
@@ -265,6 +305,8 @@ def run(args):
     with torch.inference_mode(), out.open('a') as stream:
         if args.mode == 'timing':
             for j in range(args.warmup):
+                if control:
+                    control.check()
                 ex = dataset[j % len(dataset)]
                 ids = ex['input_ids'].unsqueeze(0).to(args.device)
                 mask = ex['attention_mask'].unsqueeze(0).to(args.device)
@@ -278,12 +320,14 @@ def run(args):
             for repeat in range(repeats):
                 if (example_id, repeat) in completed:
                     continue
+                if control:
+                    control.check()
                 run_seed = example_seed(args.seed, args.dataset, example_id, repeat)
                 random.seed(run_seed)
                 torch.manual_seed(run_seed)
                 if torch.cuda.is_available():
                     torch.cuda.manual_seed_all(run_seed)
-                row = {'schema_version': 2, 'example_seed': run_seed, 'decoding': args.decoding,
+                row = {'schema_version': 2, 'execution_id': execution_id, 'example_seed': run_seed, 'decoding': args.decoding,
                        'id': example_id, 'repeat': repeat, 'model': args.model_name,
                        'dataset': args.dataset, 'layer': layer, 'hidden_size': model.config.hidden_size,
                        'input_length': ids.shape[1], 'status': 'ok'}
@@ -330,7 +374,7 @@ def run(args):
                             row['additional_answers'] = ex['additional_answers']
                     else:
                         # Alternate order to reduce systematic warm-cache / thermal drift.
-                        order = ['base', 'hide'] if (i + repeat) % 2 == 0 else ['hide', 'base']
+                        order = ['base', 'hide'] if (args.start + i + repeat) % 2 == 0 else ['hide', 'base']
                         for variant in order:
                             if variant == 'base':
                                 base_ids, base_s = timed(lambda: base_pipeline(ids, mask), args.device)

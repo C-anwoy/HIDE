@@ -76,3 +76,34 @@ def checkpoint_identity(path, hash_weights=False):
         records.append(item)
     return {'location': str(root.resolve()), 'local': True,
             'weights_content_hashed': hash_weights, 'files': records}
+
+
+@contextmanager
+def queue_lock(root, shared=False):
+    """Workers share this lock; merging/exporting requires a stopped queue."""
+    import fcntl
+    path = Path(root)/'.queue.lock'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('a+') as stream:
+        try:
+            fcntl.flock(stream, (fcntl.LOCK_SH if shared else fcntl.LOCK_EX) | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise RuntimeError('Queue is active; stop workers before merging/exporting, or finish the snapshot first') from exc
+        try:
+            yield
+        finally:
+            fcntl.flock(stream, fcntl.LOCK_UN)
+
+
+@contextmanager
+def data_lock(root, dataset):
+    """Serialize cache initialization/mapping so concurrent workers cannot corrupt it."""
+    import fcntl
+    path = Path(root)/'.locks'/f'{dataset}.lock'
+    path.parent.mkdir(parents=True,exist_ok=True)
+    with path.open('a+') as stream:
+        fcntl.flock(stream,fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(stream,fcntl.LOCK_UN)

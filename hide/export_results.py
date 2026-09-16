@@ -160,8 +160,10 @@ def verify(bundle):
 
 def export(source, output, allow_incomplete=False, require_suite=False, suites=()):
     from contextlib import ExitStack
-    from hide.provenance import run_lock
+    from hide.provenance import run_lock, queue_lock
     with ExitStack() as stack:
+        if (Path(source)/'plan.json').exists():
+            stack.enter_context(queue_lock(source))
         for path in sorted(Path(source).rglob('*.jsonl')):
             stack.enter_context(run_lock(path))
         return _export(source, output, allow_incomplete, require_suite, suites)
@@ -183,6 +185,13 @@ def _export(source, output, allow_incomplete=False, require_suite=False, suites=
     issues = [f'{r["source"]}: {issue}' for r in runs for issue in r['issues']]
     if not runs:
         issues.append('No experiment JSONL files found')
+    if (source/'plan.json').is_file():
+        from hide.parts import load_plan, part_path
+        plan = load_plan(source/'plan.json')
+        complete_paths = {str(source/r['source']) for r in runs if r['complete']}
+        pending = [t['id'] for t in plan['tasks'] if str(part_path(source,t)) not in complete_paths]
+        if pending:
+            issues.append(f'Work plan has {len(pending)} unfinished/missing parts in this queue')
     requested_suites = list(dict.fromkeys([*suites, *(['review'] if require_suite else [])]))
     for suite in requested_suites:
         issues += suite_issues(runs, suite)
@@ -219,6 +228,9 @@ def _export(source, output, allow_incomplete=False, require_suite=False, suites=
                     n_bytes += len(raw)
                     stored = gzip.compress(raw, mtime=0) if compress else raw
                     stored_rel = f'files/{rel}.part{number:04d}.gz' if compress else f'files/{rel}'
+                    if any(part.endswith('.sources') for part in path.relative_to(source).parts[:-1]):
+                        # Thousands of work parts use identical code snapshots: store each byte string once.
+                        stored_rel = f'files/source_objects/{digest(stored)}{path.suffix}'
                     destination = safe_path(staging, stored_rel)
                     destination.parent.mkdir(parents=True, exist_ok=True)
                     destination.write_bytes(stored)

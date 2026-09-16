@@ -60,6 +60,18 @@ Place these directories under `HIDE_MODEL_ROOT`, or edit [hide/config/models.jso
 
 Also provide `all-MiniLM-L6-v2` for KeyBERT and `nli-roberta-large` for correctness similarity. The launcher checks local directories; it does not download model weights. Data caches are created under `HIDE_DATA_ROOT/datasets`. Dataset counts must match the paper before sampling: SQuAD 5,928; RACE 3,498; NQ 3,610; TriviaQA 9,960.
 
+## Multiple GPUs and bounded sessions
+
+Use the [parallel run guide](docs/PARALLEL_RUNS.md) to divide the full evaluation into 200-example parts and distribute them across GPUs. The default worker requests a pause at 18 hours and terminates its model subprocess at 20 hours if necessary; unfinished parts resume. This limits runtime, not a guaranteed amount of completed work.
+
+```bash
+bash scripts/parts.sh plan --suite full --output outputs/parts/plan.json
+bash scripts/parts.sh work --plan outputs/parts/plan.json --queue outputs/parts --max-parts 1
+bash scripts/parts.sh work --plan outputs/parts/plan.json --queue outputs/parts
+```
+
+Run one worker per GPU in tmux. Workers on a shared filesystem claim different parts automatically; fixed assignments also support separate machines. All workers must use the same plan/code/environment. Timing runs use a separate worker on one exclusive GPU. Merge and verify complete parts before using the usual analysis/export commands. See the guide for exact commands, GPU selection, logs, resume, collection and Git export.
+
 ## Run
 
 Start with the stored 25-example pilots:
@@ -96,7 +108,7 @@ bash scripts/run.sh timing gemma-2-27b nq_open
 | `bash scripts/run_decoding.sh` | Recompute temperature/nucleus results with explicit samplers | 24 full detection |
 | `bash scripts/run_timing.sh` | Run only the four-model/two-dataset timing study | 8 timing |
 
-Use `--dry-run` on any launcher to inspect commands. Run suites sequentially on one GPU. **Do not launch every suite blindly under a two-day deadline:** comparison sampling alone multiplies the generation cost. The [experiment plan](docs/EXPERIMENTS.md) distinguishes mandatory corrections, reviewer additions, and a complete table rebuild.
+Use `--dry-run` on any launcher to inspect commands. These original suite scripts run sequentially on one GPU. For multiple GPUs, use the partitioned workflow above. **Do not launch every suite blindly under a two-day deadline:** comparison sampling alone multiplies the generation cost. The [experiment plan](docs/EXPERIMENTS.md) distinguishes mandatory corrections, reviewer additions, and a complete table rebuild.
 
 All primary accuracy runs use full splits (`samples=0`). Timing uses 200 seeded prompts, three repeats and ten warmups. Runs resume automatically only with matching metadata. Stochastic seeds are stable per example. For recovery and storage details, see [RESULTS.md](docs/RESULTS.md).
 

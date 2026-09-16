@@ -71,3 +71,7 @@ Sampling in the comparison runner is sequential to keep memory predictable. Its 
 One ablation generation yields all 1..L layer scores; budgets 5/10/15/20/25/30; nine archived kernels; RBF gamma 1e-9/1e-7/1e-5/1e-3/1e-1/1; adapted and both centered estimator denominators; flattened cosine; and exact thin-SVD selection with adapted and n^2 centered scores.
 
 The new exact-SVD calculation implements the manuscript's thin-SVD construction. The archived path used randomized `svd_lowrank` and changed the estimator simultaneously. Therefore the new factorial comparison is a corrected experiment, not a claim of historical parity. The `(n-1)^2` estimator is explicitly undefined at n=1. Unexpected variant failures prevent a complete export; known mathematical undefined cases are counted and reported.
+
+## Partitioned execution
+
+Accuracy runs may use contiguous parts of the already shuffled/selected cohort. Each part retains the parent ID order and prompt/reference cohort hash. The seed remains a function of experiment seed, dataset, example ID and repeat, independent of partition boundaries. All requested detectors share the same answer. Cooperative stops occur between complete records and never produce error labels. Full-cohort analyses run only after a checked merge; part-level AUCs must not be averaged. Execution history records hardware per part/example, since different GPU types can change floating-point generation even with identical seeds. Timing jobs retain their original query count, warmup and repeat protocol and use one exclusive physical GPU.

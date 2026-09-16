@@ -1,8 +1,8 @@
-# Validation status — 2026-09-16
+# Validation status — 2026-09-17
 
 ## Completed
 
-- **22 automated tests passed.** Exact output: [validation_tests.log](validation_tests.log).
+- **32 automated tests passed.** Exact output: [validation_tests.log](validation_tests.log).
 - HIDE formula, FP32 score and keyword/token ordering checked against extracted original functions, including duplicate occurrences and the one-token fallback.
 - Constant-kernel formula, both centered estimator denominators, actual-token likelihoods and the printed EigenScore matrix formula checked numerically.
 - Cached/replayed state and attention alignment checked with random tiny Llama and Gemma models before the documented cache boundary.
@@ -17,6 +17,15 @@
 - 65 archived tracked files match their original Git versions byte-for-byte. The archived `_settings.py` preserves the environment overrides already made earlier in this task. The original external LaTeX directory was not modified; copied manuscript files retain source hashes and all literal includes resolve.
 
 Tests used Python 3.12 with isolated temporary dependencies including Torch 2.5.1 and Transformers 4.51.3. No working research environment was overwritten. A GitHub Actions workflow is included; a remote CI run has not been performed from this task.
+
+## Partitioned workflow validation
+
+- Full-plan coverage and non-overlap verified: 1,396 work units (702 comparison, 98 ablation, 588 decoding, 8 intact timing jobs); reviewer-only plan has 242 units. Full plans omit redundant QA generations.
+- Real tiny-model tests confirm partitioned token IDs/HIDE scores and multipass samples match unsplit results; cooperative pauses resume stochastic runs without an error label or duplicated example.
+- Workers tested for pause/resume, skipping complete parts, shared queue locks, active snapshot exclusion, plan checksums and fixed disjoint assignments.
+- Real subprocess tests exercise cooperative SIGTERM and forced SIGKILL deadlines in seconds. No 20-hour test or OS-hang termination guarantee is claimed.
+- Synthetic parts merge into original cohort order with lossless original-byte retention and verified export/restore. Missing/duplicate/incompatible parts and incomplete queue snapshots are rejected/labeled. Repeated source snapshots share content-addressed objects in exports.
+- Timing-device tests mock nvidia-smi to verify occupied-GPU and changed-power-limit rejection. Real multi-GPU and cross-host execution remain to be validated on the user's hardware.
 
 ## Still requires the A100 environment
 
