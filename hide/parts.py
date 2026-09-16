@@ -211,9 +211,7 @@ def _work(args):
                                      output_root=queue/'runs'/task['id'])
                     cmd += ['--start', str(task['start']), '--stop', str(task['stop']),
                             '--time-budget-seconds', str(max(.001, soft-time.monotonic()))]
-                    for flag in ['--model-path','--keyword-model'] + ([] if args.kind=='timing' else ['--judge-model']):
-                        if not Path(cmd[cmd.index(flag)+1]).is_dir():
-                            raise FileNotFoundError(cmd[cmd.index(flag)+1])
+                    # Downloads/hash preparation happen inside the supervised runner budget.
                     output.parent.mkdir(parents=True, exist_ok=True)
                     log = output.with_suffix('.log')
                     record['events'].append(dict(event='start', task=task['id'], time=time.time(), command=cmd))

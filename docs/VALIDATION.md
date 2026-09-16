@@ -2,7 +2,7 @@
 
 ## Completed
 
-- **32 automated tests passed.** Exact output: [validation_tests.log](validation_tests.log).
+- **40 automated tests passed.** Exact output: [validation_tests.log](validation_tests.log).
 - HIDE formula, FP32 score and keyword/token ordering checked against extracted original functions, including duplicate occurrences and the one-token fallback.
 - Constant-kernel formula, both centered estimator denominators, actual-token likelihoods and the printed EigenScore matrix formula checked numerically.
 - Cached/replayed state and attention alignment checked with random tiny Llama and Gemma models before the documented cache boundary.
@@ -26,6 +26,14 @@ Tests used Python 3.12 with isolated temporary dependencies including Torch 2.5.
 - Real subprocess tests exercise cooperative SIGTERM and forced SIGKILL deadlines in seconds. No 20-hour test or OS-hang termination guarantee is claimed.
 - Synthetic parts merge into original cohort order with lossless original-byte retention and verified export/restore. Missing/duplicate/incompatible parts and incomplete queue snapshots are rejected/labeled. Repeated source snapshots share content-addressed objects in exports.
 - Timing-device tests mock nvidia-smi to verify occupied-GPU and changed-power-limit rejection. Real multi-GPU and cross-host execution remain to be validated on the user's hardware.
+
+## Checkpoint startup validation
+
+- Local reuse without network calls or modification, exact-revision missing-base download/caching, invalid/quantized/missing-shard rejection, and incomplete-download retry behavior tested with synthetic checkpoints and mocked downloads.
+- Sentence-transformer module layout checked against the public MiniLM/nli-roberta manifests, including the parameterless Normalize module's absent directory. Pooling configs enter the saved file identity.
+- Weight hash caching/invalidation, identical copies with different timestamps, and timing startup omitting the correctness encoder tested.
+- Official Hub metadata resolved for the nine required repositories; pinned revisions and download file lists are stored in `hide/config/checkpoints.json`. No real model weights were downloaded locally.
+- Current tests use the pinned Hugging Face Hub 0.36.2 alongside Torch 2.5.1 and Transformers 4.51.3. Download/authorization behavior with actual gated large checkpoints still needs validation on the user's server.
 
 ## Still requires the A100 environment
 

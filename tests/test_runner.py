@@ -108,7 +108,7 @@ class RunnerTests(unittest.TestCase):
                     checks=[0]
                     def budget_check(_):
                         checks[0]+=1
-                        if checks[0]==3: raise RunPaused('test budget')
+                        if checks[0]==4: raise RunPaused('test budget')
                     with patch.object(sys,'argv',paused_argv), patch('hide.execution.RunControl.check',budget_check), contextlib.redirect_stdout(io.StringIO()):
                         with self.assertRaises(SystemExit) as paused: main()
                     self.assertEqual(paused.exception.code,75)

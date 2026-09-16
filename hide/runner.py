@@ -121,6 +121,10 @@ def run(args, control=None):
         raise ValueError('Timing uses greedy decoding and the default HIDE score only')
     if args.start < 0 or (args.stop is not None and args.stop <= args.start):
         raise ValueError('Require 0 <= start < stop')
+    from hide.checkpoints import prepare_arguments
+    prepare_arguments(args)
+    if control:
+        control.check()
     os.environ['HIDE_DATA_ROOT'] = str(Path(args.data_root).resolve())
     import torch
     import transformers
@@ -197,7 +201,7 @@ def run(args, control=None):
         metadata['expected_ablation_names'] = variant_names(checkpoint_config.num_hidden_layers)
     metadata['packages'] = {}
     for package in ['numpy', 'pandas', 'datasets', 'keybert', 'sentence-transformers',
-                    'sentencepiece', 'scikit-learn', 'rouge-score', 'accelerate']:
+                    'sentencepiece', 'scikit-learn', 'rouge-score', 'accelerate', 'huggingface-hub']:
         try:
             metadata['packages'][package] = importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:

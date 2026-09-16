@@ -46,7 +46,9 @@ The inference dependency versions are declared in [pyproject.toml](pyproject.tom
 
 ### Checkpoints
 
-Place these directories under `HIDE_MODEL_ROOT`, or edit [hide/config/models.json](hide/config/models.json):
+Existing checkpoints are read from `HIDE_MODEL_ROOT` (for optimus, `/models`). Missing checkpoints download automatically at startup into `HIDE_CHECKPOINT_CACHE` (default `./checkpoints`) using pinned Hub revisions. The local model root is never modified. [Checkpoint setup and caching](docs/CHECKPOINTS.md).
+
+Expected directory names:
 
 | Run name | Checkpoint directory |
 |---|---|
@@ -58,7 +60,7 @@ Place these directories under `HIDE_MODEL_ROOT`, or edit [hide/config/models.jso
 | `gemma-2-9b-instruct` | `gemma-2-9b-it` |
 | `gemma-2-27b` | `gemma-2-27b` |
 
-Also provide `all-MiniLM-L6-v2` for KeyBERT and `nli-roberta-large` for correctness similarity. The launcher checks local directories; it does not download model weights. Data caches are created under `HIDE_DATA_ROOT/datasets`. Dataset counts must match the paper before sampling: SQuAD 5,928; RACE 3,498; NQ 3,610; TriviaQA 9,960.
+Also provide `all-MiniLM-L6-v2` for KeyBERT and `nli-roberta-large` for correctness similarity. Startup validates local directories and downloads missing named checkpoints before inference. The supplied optimus listing contains all six main models and both encoders; only base `gemma-2-27b` is missing. Its `-it` variant is not substituted. Gated downloads require Hugging Face access. Optional prefetch: `bash scripts/prepare_models.sh`. Data caches are created under `HIDE_DATA_ROOT/datasets`. Dataset counts must match the paper before sampling: SQuAD 5,928; RACE 3,498; NQ 3,610; TriviaQA 9,960.
 
 ## Multiple GPUs and bounded sessions
 

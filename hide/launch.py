@@ -66,11 +66,7 @@ def execute(profile, model, dataset, dry_run=False):
     print(shlex.join(cmd), flush=True)
     if dry_run:
         return
-    # Missing checkpoints fail before loading datasets or allocating GPU memory.
-    for flag in ['--model-path', '--keyword-model'] + ([] if profile == 'timing' else ['--judge-model']):
-        location = Path(cmd[cmd.index(flag)+1])
-        if not location.is_dir():
-            raise FileNotFoundError(f'{flag}: {location}; configure HIDE_MODEL_ROOT/hide/config/models.json')
+    # Named-run checkpoints are prepared by the runner before data/model inference.
     logs = output.parent.parent/'logs'
     logs.mkdir(parents=True, exist_ok=True)
     stem = f'{profile}_{model}_{dataset}'

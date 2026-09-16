@@ -1,3 +1,21 @@
+test_identical_copies_merge_despite_different_timestamps (test_checkpoints.CheckpointTests.test_identical_copies_merge_despite_different_timestamps) ... Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpejh7o6mw/first/model.safetensors
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpejh7o6mw/second/model.safetensors
+ok
+test_invalid_local_checkpoint_is_not_silently_replaced (test_checkpoints.CheckpointTests.test_invalid_local_checkpoint_is_not_silently_replaced) ... ok
+test_local_checkpoint_is_reused_without_network_or_mutation (test_checkpoints.CheckpointTests.test_local_checkpoint_is_reused_without_network_or_mutation) ... Using local checkpoint: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpi6yyfqkj/models/Meta-Llama-3-8B
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpi6yyfqkj/models/Meta-Llama-3-8B/model.safetensors
+ok
+test_missing_base_downloads_exact_revision_and_reuses_cache (test_checkpoints.CheckpointTests.test_missing_base_downloads_exact_revision_and_reuses_cache) ... Downloading google/gemma-2-27b@938270f5272feb02779b55c2bb2fffdd0f53ff0c to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp_h7pavi0/cache/downloads/google--gemma-2-27b/938270f5272feb02779b55c2bb2fffdd0f53ff0c
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp_h7pavi0/cache/downloads/google--gemma-2-27b/938270f5272feb02779b55c2bb2fffdd0f53ff0c/model.safetensors
+ok
+test_offline_missing_checkpoint_and_failed_download_leave_no_ready_marker (test_checkpoints.CheckpointTests.test_offline_missing_checkpoint_and_failed_download_leave_no_ready_marker) ... Downloading google/gemma-2-27b@938270f5272feb02779b55c2bb2fffdd0f53ff0c to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpbd_weoiq/cache/downloads/google--gemma-2-27b/938270f5272feb02779b55c2bb2fffdd0f53ff0c
+ok
+test_sentence_transformer_pooling_is_checked_and_hashed (test_checkpoints.CheckpointTests.test_sentence_transformer_pooling_is_checked_and_hashed) ... Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp_w58kfjz/encoder/model.safetensors
+ok
+test_timing_startup_prepares_only_generator_and_keyword_model (test_checkpoints.CheckpointTests.test_timing_startup_prepares_only_generator_and_keyword_model) ... ok
+test_weight_hashes_are_cached_and_invalidated_on_change (test_checkpoints.CheckpointTests.test_weight_hashes_are_cached_and_invalidated_on_change) ... Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpkulxhebo/model/model.safetensors
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpkulxhebo/model/model.safetensors
+ok
 test_cached_alignment_llama_and_gemma (test_core.CoreTests.test_cached_alignment_llama_and_gemma) ... ok
 test_formula_preserved_and_constant_kernel_control (test_core.CoreTests.test_formula_preserved_and_constant_kernel_control) ... ok
 test_token_selection_and_full_score_parity (test_core.CoreTests.test_token_selection_and_full_score_parity) ... ok
@@ -19,19 +37,19 @@ test_plan_tamper_rejected (test_parts.PartTests.test_plan_tamper_rejected) ... o
 test_queue_snapshot_detects_missing_plan_tasks (test_parts.PartTests.test_queue_snapshot_detects_missing_plan_tasks) ... ok
 test_shared_queue_lock_excludes_exports_and_merge (test_parts.PartTests.test_shared_queue_lock_excludes_exports_and_merge) ... ok
 test_timing_device_requires_exclusive_fixed_hardware (test_parts.PartTests.test_timing_device_requires_exclusive_fixed_hardware) ... ok
-test_worker_pauses_then_resumes_without_duplicate_rows (test_parts.PartTests.test_worker_pauses_then_resumes_without_duplicate_rows) ... Exported 3 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpe6u3qjz6/checkpoint
-Exported 4 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpo6rnfqna/bundle
-Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpo6rnfqna/restored
-Verified merge: 3 parts -> /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiuc0eqje/merged
-Exported 133 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiuc0eqje/bundle
-Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiuc0eqje/restored
-Exported 99 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp8c4nvbrz/checkpoint
+test_worker_pauses_then_resumes_without_duplicate_rows (test_parts.PartTests.test_worker_pauses_then_resumes_without_duplicate_rows) ... Exported 3 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp3vzn55rv/checkpoint
+Exported 4 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpo8e7v_uv/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpo8e7v_uv/restored
+Verified merge: 3 parts -> /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiurk8o6k/merged
+Exported 141 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiurk8o6k/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpiurk8o6k/restored
+Exported 105 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmptoxt_vth/checkpoint
 RUN qa__llama3-8b__nq_open__00000-00002
-Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpcx8d9p7i/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
+Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpqx3ykvej/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
 Paused. Rerun the same worker command to continue.
 Worker stopped; 0 parts completed this session. Check queue status for remaining work.
 RUN qa__llama3-8b__nq_open__00000-00002
-Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpcx8d9p7i/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
+Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpqx3ykvej/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
 ok
 test_worker_supervisor_hard_and_cooperative_stop (test_parts.PartTests.test_worker_supervisor_hard_and_cooperative_stop) ... ok
 test_estimator_conventions (test_protocol.ProtocolTests.test_estimator_conventions) ... ok
@@ -46,11 +64,11 @@ test_detection_timing_and_resume (test_runner.RunnerTests.test_detection_timing_
 ok
 
 ----------------------------------------------------------------------
-Ran 32 tests in 5.227s
+Ran 40 tests in 5.369s
 
 OK
 Worker stopped; 1 parts completed this session. Check queue status for remaining work.
 Worker stopped; 0 parts completed this session. Check queue status for remaining work.
-Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmphbixfu_v/.history/run_20260916T184347797443Z; rerun the identical command
-Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp1xvbcpe7/.history/run_20260916T184347799613Z; rerun the identical command
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmppxbcp7rb/.history/run_20260916T191950043663Z; rerun the identical command
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp23546shs/.history/run_20260916T191950045748Z; rerun the identical command
 No trailing damaged/error record; nothing changed

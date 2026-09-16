@@ -58,24 +58,55 @@ def source_files():
 
 
 def checkpoint_identity(path, hash_weights=False):
-    """Hash tokenizer/config files; inventory weights, optionally hash their bytes."""
-    root = Path(path)
+    """Hash inference files, caching weight SHA-256 by path, size, mtime and ctime."""
+    root = Path(path).resolve()
     if not root.is_dir():
         return {'location': str(path), 'local': False}
-    records = []
-    for p in sorted(root.iterdir()):
-        if not p.is_file():
-            continue
-        weight = p.suffix in {'.safetensors', '.bin', '.pt', '.pth'}
-        if not weight and p.suffix not in {'.json', '.model', '.txt'}:
-            continue
-        stat = p.stat()
-        item = {'file': p.name, 'bytes': stat.st_size, 'mtime_ns': stat.st_mtime_ns}
-        if not weight or hash_weights:
-            item['sha256'] = file_sha256(p)
-        records.append(item)
-    return {'location': str(root.resolve()), 'local': True,
-            'weights_content_hashed': hash_weights, 'files': records}
+    cache_root = Path(os.environ.get('HIDE_CHECKPOINT_CACHE', Path.cwd()/'checkpoints'))
+    cache_key = hashlib.sha256(str(root).encode()).hexdigest()
+    cache_path = cache_root/'identities'/(cache_key+'.json')
+    # Do not inspect unrelated original/ONNX/OpenVINO exports or Hub download bookkeeping.
+    modules=[p for p in root.iterdir() if p.is_dir() and p.name.split('_')[0].isdigit()]
+    files=[p for p in root.iterdir() if p.is_file() and not p.name.startswith('.')]
+    files += [p for directory in modules for p in directory.rglob('*') if p.is_file() and
+              not any(part.startswith('.') for part in p.relative_to(root).parts)]
+    files=sorted(set(files))
+    def collect(cached):
+        records=[]; fresh={}; all_hashed=True
+        for p in files:
+            weight = p.suffix in {'.safetensors', '.bin', '.pt', '.pth'}
+            if not weight and p.suffix not in {'.json', '.model', '.txt'}:
+                continue
+            stat=p.stat(); name=p.relative_to(root).as_posix()
+            signature=[stat.st_size,stat.st_mtime_ns,stat.st_ctime_ns]
+            item={'file':name,'bytes':stat.st_size,'mtime_ns':stat.st_mtime_ns}
+            old=cached.get(name,{})
+            if not weight:
+                item['sha256']=file_sha256(p)
+            elif old.get('signature')==signature and old.get('sha256'):
+                item['sha256']=old['sha256']
+            elif hash_weights:
+                print(f'Hashing checkpoint weight once: {p}',flush=True)
+                item['sha256']=file_sha256(p)
+                after=p.stat()
+                if [after.st_size,after.st_mtime_ns,after.st_ctime_ns]!=signature:
+                    raise ValueError(f'Checkpoint changed while hashing: {p}')
+            else:
+                all_hashed=False
+            if weight and 'sha256' in item:
+                fresh[name]={'signature':signature,'sha256':item['sha256']}
+            records.append(item)
+        return records,fresh,all_hashed
+    def read_cached():
+        return json.loads(cache_path.read_text()) if cache_path.exists() else {}
+    if hash_weights:
+        with data_lock(cache_root,'identity-'+cache_key):
+            records,fresh,all_hashed=collect(read_cached())
+            atomic_json(cache_path,fresh)
+    else:
+        records,_,all_hashed=collect(read_cached())
+    return {'location':str(root),'local':True,
+            'weights_content_hashed':all_hashed,'files':records}
 
 
 @contextmanager
