@@ -64,6 +64,8 @@ Also provide `all-MiniLM-L6-v2` for KeyBERT and `nli-roberta-large` for correctn
 
 ## Multiple GPUs and bounded sessions
 
+For one available GPU and a revision deadline, start with the [overnight reviewer-priority instructions](docs/PARALLEL_RUNS.md#one-gpu-overnight-reviewer-priority). The launcher runs NQ for both mechanistic models, SQuAD for both, timing/scaling, then TriviaQA and RACE, with one shared time budget.
+
 Use the [parallel run guide](docs/PARALLEL_RUNS.md) to divide the full evaluation into 200-example parts and distribute them across GPUs. The default worker requests a pause at 18 hours and terminates its model subprocess at 20 hours if necessary; unfinished parts resume. This limits runtime, not a guaranteed amount of completed work.
 
 ```bash

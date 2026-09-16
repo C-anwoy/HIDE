@@ -54,6 +54,71 @@ bash scripts/parts.sh plan --suite full --part-size 200 --output outputs/parts/p
 
 For only reviewer additions, use `--suite review` instead. Choose one; do not run both and duplicate the greedy QA work. Plans for `consistency`, `ablations`, `decoding` and `timing` are also available. `plan.tsv` lists every task, model, dataset and range. The JSON includes a portable source fingerprint and checksum. Do not edit the plan or change code after starting it.
 
+## One GPU overnight: reviewer priority
+
+Use this when starting a **review** plan on one exclusive GPU. It does not consume a full plan. If you already started a different plan, retain it and use its regular workers instead of creating duplicate scientific work.
+
+The priority launcher automatically runs:
+
+1. NQ, both Llama-3-8B and Gemma-2-9B: paired HIDE/attention mass/update norm and closed-book evidence.
+2. SQuAD, both models: open-book comparison and model dependence of the norm relationship.
+3. All eight latency/scaling jobs: 3B, 8B, 9B and base 27B on SQuAD/NQ, on the same physical GPU.
+4. TriviaQA, both models: extend the factuality result.
+5. RACE, both models: complete the four-dataset baseline table.
+
+Within each accuracy dataset, models alternate after each 200-example part. These are full cohorts split into resumable units, not 200-example final evaluations. NQ has 3,610 examples per model; SQuAD 5,928; TriviaQA 9,960; RACE 3,498. Timing uses the declared 200-query protocol. The launcher requests a pause at 18 hours and passes the remaining 20-hour deadline to every successive worker; budgets do not restart per part. Completion of this entire schedule within one night is not guaranteed.
+
+Initialize tmux, Conda and GPU selection as above. Prepare dependencies/data and validate/download the checkpoints **before leaving**, so authentication and missing-file errors appear while you are available:
+
+```bash
+bash scripts/prepare_models.sh --models llama3-3b llama3-8b gemma-2-9b gemma-2-27b keyword judge
+python -m hide.prepare_data --data-root "$HIDE_DATA_ROOT"
+```
+
+Create the plan once (an existing path is intentionally refused):
+
+```bash
+bash scripts/parts.sh plan --suite review --part-size 200 --output outputs/review/plan.json
+bash scripts/run_priority.sh --dry-run
+```
+
+First validate two real parts while you are present. They remain part of the final NQ results:
+
+```bash
+bash scripts/run_priority.sh --max-parts 2
+bash scripts/parts.sh status --plan outputs/review/plan.json --queues outputs/review
+```
+
+On a new queue this should show 2 complete parts, 0 failed. Then start the overnight command inside tmux:
+
+```bash
+set -o pipefail
+bash scripts/run_priority.sh --hours 18 --hard-hours 20 2>&1 | tee -a outputs/review/overnight.log
+```
+
+Detach with Ctrl+B then D. Closing SSH or the laptop does not stop the server's tmux processes. Server shutdown, scheduler eviction or a real experiment error can still stop work. No unattended scientific-error retry is performed: a failed part stops the launcher, with details in the task log and a nonzero exit. Inspect and repair it explicitly using the retry instructions below. Downloads, disk space and both model smoke parts should be checked before leaving. Run only this launcher on its GPU and queue while using this one-GPU schedule; use the regular distributed workflow when assigning extra servers.
+
+The launcher automatically advances through the stages as they finish, and skips complete parts on restart. To inspect in the morning:
+
+```bash
+tail -n 60 outputs/review/overnight.log
+bash scripts/parts.sh status --plan outputs/review/plan.json --queues outputs/review
+```
+
+Resume using the same overnight command, on the same GPU once timing has begun. Timing jobs can also be explicitly prioritized after stopping the launcher:
+
+```bash
+bash scripts/parts.sh work --plan outputs/review/plan.json --queue outputs/review --kind timing --hours 18 --hard-hours 20
+```
+
+All records, metadata, individual task logs and worker sessions are saved under `outputs/review`. After the launcher has stopped, create a uniquely named Git-ready snapshot even if the schedule is unfinished:
+
+```bash
+python -m hide.export_results --source outputs/review --output results/optimus-review-night1 --allow-incomplete
+```
+
+Use the analysis/export instructions below to push snapshots and merge complete cohorts. Never treat an unfinished queue or the two smoke parts as the final baseline table.
+
 ## Shared filesystem: dynamic assignment (preferred)
 
 All workers use the **same queue directory and the same plan**, on a filesystem supporting POSIX advisory locks. They claim different tasks automatically. Adding a new GPU requires no repartitioning, and returning a GPU leaves its completed parts available. Do not synchronize separate live directories with rsync and treat them as a shared queue.
