@@ -17,6 +17,8 @@ This document describes the supported code. The supplied manuscript still contai
 
 For HF hidden-state index l, HIDE takes prompt states from prefill and available generated-token states from subsequent decoding steps. The final emitted token has not yet been forwarded; it is excluded from HIDE's output-state/token pairing. A generation with only one emitted token has no observed output state: the historical HIDE fallback is zero and is flagged in the record.
 
+If the custom word vectorizer raises an empty-vocabulary error and its analyzer confirms there are no word candidates (for example, the valid symbol answer `*`), keyword extraction returns an empty keyword list and follows the existing first-token selection fallback. It uses the first `min(k, token_count)` available tokens, then equalizes the input/output counts as usual. It does not drop the example or assign an error score. With one selected token per side, the unchanged adapted estimator yields zero. Other extraction failures remain errors, with their underlying type/message included.
+
 For mechanistic proxies, use attention block l-1 and its input hidden state l-1 over the same output query positions. Omega is mean attention mass to the whole prompt, averaged over heads and observed output tokens. Delta is the mean L2 norm of `mean_heads(attention_to_prompt) @ prompt_hidden_states[l-1]`.
 
 Delta is an **unprojected attention-weighted input-state proxy**. It is not the actual projected residual write. Value/output projections, per-head mappings and Gemma normalization are not reconstructed. Report associations, not causal conclusions.

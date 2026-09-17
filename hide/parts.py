@@ -289,6 +289,29 @@ def identity(meta):
     return value
 
 
+def keyword_fix_policy():
+    return json.loads((Path(__file__).parent/'config'/'compatibility.json').read_text())
+
+
+def compatible_detection_sources(sources, current):
+    """One narrowly pinned exception, never a general mixed-version override."""
+    policy = keyword_fix_policy()
+    legacy = policy['legacy_source_sha256']
+    changed = {key for key in set(legacy) | set(current) if legacy.get(key) != current.get(key)}
+    return (sources == legacy and current.get('hide__core.py') == policy['fixed_core_sha256']
+            and changed <= set(policy['allowed_changed_sources']))
+
+
+def comparison_identity(meta, plan):
+    value = identity(meta)
+    if value['source_sha256'] != plan['source_sha256']:
+        if meta['arguments']['mode'] != 'detection' or not compatible_detection_sources(
+                value['source_sha256'], plan['source_sha256']):
+            raise ValueError('Unapproved source version; only the pinned keyword-fallback correction is compatible')
+        value['source_sha256'] = plan['source_sha256']
+    return value
+
+
 def merge(plan_path, queues, output_root, kind='all'):
     plan = load_plan(plan_path, check_source=True)
     tasks = [t for t in plan['tasks'] if kind=='all' or (t['profile']=='timing') == (kind=='timing')]
@@ -317,8 +340,7 @@ def merge(plan_path, queues, output_root, kind='all'):
             part = meta.get('partition', {})
             if part.get('start') != task['start'] or part.get('stop') != task['stop']:
                 raise ValueError(f'Partition differs from plan: {path}')
-            if portable_sources(meta['source_sha256']) != plan['source_sha256']:
-                raise ValueError(f'Code differs from plan: {path}')
+            comparison_identity(meta, plan)  # Reject unknown source changes; retain original manifests.
             expected_args = profile_arguments(task['profile'])
             expected_args.update(profile=task['profile'], model_name=task['model'], dataset=task['dataset'],
                                  layer=catalog()[0][task['model']]['layer'], attention_backend='eager')
@@ -354,13 +376,13 @@ def merge(plan_path, queues, output_root, kind='all'):
             for (profile,model,dataset), group in groups.items():
                 group.sort(key=lambda item:item[0]['start'])
                 first=group[0][2]; parent=first['partition']['parent_selected_ids']
-                expected_identity=identity(first)
+                expected_identity=comparison_identity(first, plan)
                 target=staging/profile/f'{model}_{dataset}.jsonl'; target.parent.mkdir(exist_ok=True)
                 emitted=[]; runtimes=[]
                 observed_parent_hash=hashlib.sha256()
                 with target.open('wb') as stream:
                     for task,path,meta in group:
-                        if identity(meta)!=expected_identity or meta['partition']['parent_selected_ids']!=parent or \
+                        if comparison_identity(meta, plan)!=expected_identity or meta['partition']['parent_selected_ids']!=parent or \
                            meta['partition']['parent_cohort_sha256']!=first['partition']['parent_cohort_sha256']:
                             raise ValueError(f'Incompatible parts: {path}; check versions/checkpoints/cohorts')
                         rows={}
@@ -393,13 +415,25 @@ def merge(plan_path, queues, output_root, kind='all'):
                 merged['arguments'].update(start=0,stop=None,output=str(output_root/profile/target.name))
                 merged['gpu']='; '.join(sorted({item[2]['gpu'] for item in group}))
                 merged['merged_parts']=[item[0]['id'] for item in group]
+                # This manifest describes the merge. Never relabel old generation sources.
+                merged['source_sha256']=source_files()
+                merged['source_role']='merge implementation; generation sources are recorded separately per original part'
+                merged['generation_sources_by_part']={task['id']: meta['source_sha256'] for task,_,meta in group}
+                if any(portable_sources(meta['source_sha256']) != plan['source_sha256'] for _,_,meta in group):
+                    merged['source_compatibility_policy']=keyword_fix_policy()
                 atomic_json(target.with_suffix('.manifest.json'),merged)
                 runtime=deepcopy(runtimes[0]['runtime']); runtime['part_executions']=runtimes
                 atomic_json(target.with_suffix('.runtime.json'),runtime)
-                shutil.copytree(group[0][1].with_suffix('.sources'),target.with_suffix('.sources'))
+                snapshots=target.with_suffix('.sources'); snapshots.mkdir()
+                for source in merged['source_sha256']:
+                    src=Path(source); shutil.copy2(src,snapshots/(src.parent.name+'__'+src.name))
                 if not inspect_run(target)['complete']:
                     raise ValueError(f'Merged run failed verification: {target}')
             for i,queue in enumerate(queues):
+                if (queue/'migration.json').is_file():
+                    shutil.copy2(queue/'migration.json',staging/'provenance'/f'migration_{i}.json')
+                if (queue/'previous_incomplete_parts').is_dir():
+                    shutil.copytree(queue/'previous_incomplete_parts',staging/'provenance'/f'previous_incomplete_parts_{i}')
                 if (queue/'sessions').is_dir():
                     shutil.copytree(queue/'sessions',staging/'provenance'/f'worker_sessions_{i}')
                 if (queue/'timing_device.json').is_file():

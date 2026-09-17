@@ -21,6 +21,8 @@ parser.add_argument('--plan', default='outputs/review/plan.json')
 parser.add_argument('--queue', default='outputs/review')
 parser.add_argument('--hours', type=float, default=18)
 parser.add_argument('--hard-hours', type=float, default=20)
+parser.add_argument('--kind', choices=['all', 'detection', 'timing'], default='all',
+                    help='Use detection while timing cannot have exclusive GPU access.')
 parser.add_argument('--max-parts', type=int, default=0, help='Stop after this many new completed parts; 0 means unlimited.')
 parser.add_argument('--dry-run', action='store_true')
 args = parser.parse_args()
@@ -40,6 +42,8 @@ def priority(task):
     return stage, task['start'], ['llama3-8b', 'gemma-2-9b'].index(task['model'])
 
 tasks = sorted(plan['tasks'], key=priority)
+if args.kind != 'all':
+    tasks = [task for task in tasks if (task['profile'] == 'timing') == (args.kind == 'timing')]
 if args.dry_run:
     for task in tasks:
         print(task['id'])

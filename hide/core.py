@@ -27,12 +27,20 @@ def extract_keyword_representation(X, Y, tokenizer, input_tokens, output_tokens,
         input_keywords = kw_model.extract_keywords(input_text, keyphrase_ngram_range=(1, 1),
                                              top_n=k, use_mmr=True, diversity=1, vectorizer=vectorizer)
     except Exception as exc:
-        raise RuntimeError('Input keyword extraction failed') from exc
+        if (isinstance(exc, ValueError) and str(exc).startswith('empty vocabulary;')
+                and not vectorizer.build_analyzer()(input_text)):
+            input_keywords = []  # Reach the existing token fallback for symbol-only text.
+        else:
+            raise RuntimeError(f'Input keyword extraction failed: {type(exc).__name__}: {exc}') from exc
     try:
         output_keywords = kw_model.extract_keywords(output_text, keyphrase_ngram_range=(1, 1),
                                               top_n=k, use_mmr=True, diversity=1, vectorizer=vectorizer)
     except Exception as exc:
-        raise RuntimeError('Output keyword extraction failed') from exc
+        if (isinstance(exc, ValueError) and str(exc).startswith('empty vocabulary;')
+                and not vectorizer.build_analyzer()(output_text)):
+            output_keywords = []  # Reach the existing token fallback for symbol-only text.
+        else:
+            raise RuntimeError(f'Output keyword extraction failed: {type(exc).__name__}: {exc}') from exc
 
     def find_all_occurrences(keyword, token_sequence, tokenizer):
         variations = [keyword, " " + keyword]

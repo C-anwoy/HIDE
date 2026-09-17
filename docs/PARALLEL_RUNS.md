@@ -100,6 +100,8 @@ Detach with Ctrl+B then D. Closing SSH or the laptop does not stop the server's 
 
 The launcher automatically advances through the stages as they finish, and skips complete parts on restart. To inspect in the morning:
 
+When an otherwise usable accuracy GPU is shared, add `--kind detection` to the priority launcher to exclude timing and continue the baseline datasets. This does not ensure sufficient free VRAM. Once exclusive access is available, run the timing worker separately on one fixed GPU. `--kind timing` is also supported by the priority launcher.
+
 ```bash
 tail -n 60 outputs/review/overnight.log
 bash scripts/parts.sh status --plan outputs/review/plan.json --queues outputs/review
@@ -120,6 +122,8 @@ python -m hide.export_results --source outputs/review --output results/optimus-r
 Use the analysis/export instructions below to push snapshots and merge complete cohorts. Never treat an unfinished queue or the two smoke parts as the final baseline table.
 
 ## Shared filesystem: dynamic assignment (preferred)
+
+The pinned symbol-answer correction is the sole audited source-compatibility exception below. For other changes, keep the original strict same-code requirement.
 
 All workers use the **same queue directory and the same plan**, on a filesystem supporting POSIX advisory locks. They claim different tasks automatically. Adding a new GPU requires no repartitioning, and returning a GPU leaves its completed parts available. Do not synchronize separate live directories with rsync and treat them as a shared queue.
 
@@ -267,3 +271,55 @@ git push origin main
 ```
 
 Do not update source code from another commit while any planned experiment is running. Keep all parts on the plan's code version; analysis code updates should be audited separately after collection.
+
+## Upgrade a queue after the symbol-answer fix
+
+The confirmed Gemma NQ failure was a valid `*` answer with no word candidates. The core now routes the confirmed empty-vocabulary case into its existing first-token fallback. This changes source fingerprints, so **do not edit the old plan or simply clear its failed marker**.
+
+With all workers on the old queue stopped, pull the fix and create a new queue:
+
+```bash
+git pull --ff-only origin main
+python scripts/migrate_keyword_fallback.py --source outputs/review --output outputs/review-fixed
+```
+
+The upgrade accepts only the pinned pre-fix source inventory and audited corrected core. It validates and copies complete detection parts with unchanged JSONL, manifests and source snapshots. It preserves original partial/error records in `previous_incomplete_parts/` (using `.jsonl.bak` so they are not evaluated twice), and copies worker sessions plus the previous overnight log. The old queue is retained. Incomplete parts restart from their beginning under the new source; all timing parts must be rerun. The reported user queue should retain 35 complete parts and restart the one failed 200-example part. Its first 160 successful answers are archived; only the fresh 200-example rerun enters final analysis.
+
+Test the repaired part first:
+
+```bash
+bash scripts/parts.sh work --plan outputs/review-fixed/plan.json --queue outputs/review-fixed \
+  --task qa__gemma-2-9b__nq_open__03400-03600
+bash scripts/parts.sh status --plan outputs/review-fixed/plan.json --queues outputs/review-fixed
+```
+
+For that reported queue, success gives 36 complete parts and no failed parts. Continue the reviewer baseline datasets in tmux:
+
+```bash
+set -o pipefail
+bash scripts/run_priority.sh --plan outputs/review-fixed/plan.json --queue outputs/review-fixed \
+  --kind detection --hours 18 --hard-hours 20 2>&1 | tee -a outputs/review-fixed/overnight.log
+```
+
+Remove `--kind detection` to include timing in the usual priority order only when the selected GPU is exclusive. Otherwise run timing later on an exclusive GPU:
+
+```bash
+bash scripts/parts.sh work --plan outputs/review-fixed/plan.json --queue outputs/review-fixed \
+  --kind timing --hours 18 --hard-hours 20
+```
+
+Use `outputs/review-fixed` and its plan for all subsequent status/worker/merge/export commands. Merge **only the upgraded queue**, not both old and new (that would duplicate the 35 retained parts):
+
+```bash
+bash scripts/parts.sh merge --plan outputs/review-fixed/plan.json \
+  --queues outputs/review-fixed --output outputs/review-merged
+```
+
+The merge verifies the pinned compatibility exception and preserves generation sources per part, along with the migration record and archived failed output. A merged manifest's top-level source inventory is explicitly the merge implementation, not a claim that old rows were generated with new code. New timing and incomplete-part reruns use the corrected version throughout.
+
+To push a snapshot before the whole queue finishes, stop its workers first and choose a fresh export name:
+
+```bash
+python -m hide.export_results --source outputs/review-fixed \
+  --output results/optimus-review-fixed-01 --allow-incomplete
+```

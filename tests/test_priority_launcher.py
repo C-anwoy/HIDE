@@ -11,6 +11,17 @@ SCRIPT = (Path(__file__).resolve().parents[1] / 'scripts/run_priority.sh').read_
 
 
 class PriorityLauncherTests(unittest.TestCase):
+    def test_detection_only_schedule_excludes_timing(self):
+        tasks = [dict(id='qa', profile='qa', model='llama3-8b', dataset='nq_open', start=0),
+                 dict(id='timing', profile='timing', model='gemma-2-27b', dataset='SQuAD', start=0)]
+        output = io.StringIO()
+        with patch('sys.argv', ['priority', '--kind', 'detection', '--dry-run']), \
+             patch('hide.parts.load_plan', return_value={'suite': 'review', 'tasks': tasks}), \
+             redirect_stdout(output), self.assertRaises(SystemExit) as caught:
+            exec(compile(SCRIPT, 'run_priority.sh', 'exec'), {})
+        self.assertEqual(caught.exception.code, 0)
+        self.assertEqual(output.getvalue().splitlines(), ['qa'])
+
     def run_launcher(self, fail=False):
         tasks = [dict(id=f'{profile}-{model}-{dataset}', profile=profile, model=model,
                       dataset=dataset, start=0, stop=200)

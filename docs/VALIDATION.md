@@ -2,7 +2,7 @@
 
 ## Completed
 
-- **44 automated tests passed** in the latest full check: [validation_diagnostic_tests.log](validation_diagnostic_tests.log). Previous checks are retained in [validation_tests.log](validation_tests.log) and [validation_priority_tests.log](validation_priority_tests.log).
+- **49 automated tests passed** in the latest full check: [validation_keyword_fix_tests.log](validation_keyword_fix_tests.log). Previous checks are retained in [validation_diagnostic_tests.log](validation_diagnostic_tests.log), [validation_tests.log](validation_tests.log) and [validation_priority_tests.log](validation_priority_tests.log).
 - HIDE formula, FP32 score and keyword/token ordering checked against extracted original functions, including duplicate occurrences and the one-token fallback.
 - Constant-kernel formula, both centered estimator denominators, actual-token likelihoods and the printed EigenScore matrix formula checked numerically.
 - Cached/replayed state and attention alignment checked with random tiny Llama and Gemma models before the documented cache boundary.
@@ -28,7 +28,8 @@ Tests used Python 3.12 with isolated temporary dependencies including Torch 2.5.
 - Timing-device tests mock nvidia-smi to verify occupied-GPU and changed-power-limit rejection. Real multi-GPU and cross-host execution remain to be validated on the user's hardware.
 
 - The overnight reviewer scheduler was tested with simulated workers: NQ starts for both models, subsequent workers receive decreasing shared deadlines, and real worker errors stop without automatic retries. Bash syntax passes; real overnight CUDA execution remains untested locally.
-- The isolated failure diagnostic was tested for exact failed-example selection, retaining the exception cause/text/token IDs, and leaving original records and manifests unchanged. The reported real Gemma NQ failure still needs a diagnostic replay on the user's GPU; its cause is not established by these synthetic tests.
+- The isolated failure diagnostic was tested for exact failed-example selection, retaining the exception cause/text/token IDs, and leaving original records and manifests unchanged. The user then supplied an actual Gemma NQ diagnostic: example `2720` had output keyword text ` *`, causing sklearn's empty-vocabulary ValueError. The fix reproduces that vectorizer failure locally and checks the normal token fallback; the corrected real checkpoint run still needs to be resumed on the server.
+- Empty-vocabulary handling is tested with the real sklearn vectorizer and Torch scoring. Other extraction exceptions remain errors. Existing original-function parity checks still pass. Synthetic queue migration, mixed compatible-part merge, lossless export/restoration, unchanged legacy manifests/raw bytes, rejected unrelated source changes, and rejection of legacy timing records are tested. The detection-only priority option is tested to exclude timing.
 
 ## Checkpoint startup validation
 

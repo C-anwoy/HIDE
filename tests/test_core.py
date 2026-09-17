@@ -55,6 +55,46 @@ class EvaluationTests(unittest.TestCase):
 
 
 class CoreTests(unittest.TestCase):
+    def test_symbol_answer_uses_existing_token_fallback(self):
+        import torch
+        from hide.core import get_unbiased_hsic_score_keybert
+        class Tok:
+            def decode(self, ids, **kwargs):
+                return ''.join({1: 'question', 649: ' *', 9: '\n'}[int(i)] for i in ids)
+            def encode(self, text, **kwargs):
+                return [1] if text.strip() == 'question' else [649]
+        class KW:
+            def extract_keywords(self, text, **kwargs):
+                # Actual sklearn empty-vocabulary failure used by KeyBERT's custom vectorizer.
+                vectorizer = kwargs['vectorizer'].fit([text])
+                return [(word, 1.0) for word in vectorizer.get_feature_names_out()]
+        hidden = [tuple(torch.randn(1, 1, 8) for _ in range(3)) for _ in range(2)]
+        score, ik, ok, it, ot = get_unbiased_hsic_score_keybert(
+            hidden, Tok(), torch.tensor([1]), torch.tensor([649, 9]), 20, 1, kw_model=KW())
+        self.assertEqual(ok, [])
+        self.assertEqual(ot, [' *'])
+        self.assertEqual(len(it), 1)
+        self.assertEqual(score, 0.0)  # The unchanged estimator yields zero for n_eff=1.
+
+    def test_empty_vocabulary_guard_does_not_hide_other_errors(self):
+        import torch
+        from hide.core import extract_keyword_representation
+        class Tok:
+            def decode(self, ids, **kwargs):
+                return 'word'
+        class KW:
+            def __init__(self, error):
+                self.error = error
+            def extract_keywords(self, text, **kwargs):
+                raise self.error
+        for error in (ValueError('empty vocabulary; unexpected on ordinary words'),
+                      RuntimeError('out of memory'), ValueError('invalid embeddings')):
+            with self.assertRaises(RuntimeError) as caught:
+                extract_keyword_representation(torch.ones(1, 2), torch.ones(1, 2), Tok(),
+                                               torch.tensor([1]), torch.tensor([1]), kw_model=KW(error))
+            self.assertIs(caught.exception.__cause__, error)
+            self.assertIn(str(error), str(caught.exception))
+
     def test_formula_preserved_and_constant_kernel_control(self):
         import torch
         from hide.core import unbiased_HSIC

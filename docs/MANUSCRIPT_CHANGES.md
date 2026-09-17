@@ -261,3 +261,8 @@ Finally, match the biased HSIC formula in Appendix A.2 to the comparator actuall
 - Report model dtype: the supported default is BF16, while the archived loader defaults to FP16. Do not label fresh generations as exact historical reproduction.
 - For Table 8, state that unused top-k/top-p/temperature samplers are neutralized in the new experiment.
 - For SVD, state exact thin SVD and compare adapted/centered estimators separately; the old path mixed estimator and selection changes.
+
+
+## Confirmed symbolic-answer edge case
+
+Describe the existing token fallback explicitly: “When keyword extraction yields no lexical candidates, including symbol-only answers, we select the first available tokens up to the token budget and equalize input/output counts.” The September 17 correction makes a custom-vectorizer empty-vocabulary exception reach that fallback; it does not discard such answers. For one selected token the adapted estimator is exactly zero, so a correct short/symbol answer can still be a detector false positive. Report count-stratified results and discuss this limitation if material. Retained complete pre-fix detection parts and rerun failed parts are distinguished in the saved source provenance; timing is measured entirely with the corrected implementation.

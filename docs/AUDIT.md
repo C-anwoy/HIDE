@@ -2,6 +2,12 @@
 
 ## Current correction status (2026-09-16)
 
+### Symbol-only answer correction (2026-09-17)
+
+A server diagnostic confirmed that NQ example `2720` generated ` *` (Gemma token `649`) for “what is the multiplication sign on the computer.” KeyBERT's custom CountVectorizer path raised `ValueError: empty vocabulary; perhaps the documents only contain stop words`. This prevented the existing no-keyword token fallback from running. `hide/core.py` now handles only that error when the analyzer also confirms no word candidates, then uses the existing token fallback and unchanged score formula. Other exceptions still fail. The generated symbol answer is retained and judged by the existing correctness protocol. For this one-token representation, `n_eff=1` gives an estimator value of zero; it does not establish that the answer is incorrect. Keep the count-stratified analyses and discuss short/symbolic-answer limitations if they materially affect detection.
+
+Previously successful detection records are unaffected because the newly handled branch previously raised rather than returning a successful record. A pinned compatibility policy permits only the exact pre-fix source inventory, the audited new core hash, and changes to the parts/provenance handling needed for this upgrade. Complete detection parts retain their original raw bytes, manifests, source snapshots and execution records. The upgrade starts every incomplete part again, preserves its old bytes outside the active run tree, and requires timing to be remeasured. It does not permit arbitrary mixed code versions or rewrite old generation provenance as new code. Merged manifests identify their source inventory as the merge implementation and list generation sources separately for every original part.
+
 The supported code is now `hide/`; original file names in the detailed historical findings below refer to `archive/original/`. Original numerical claims have not been replicated. Fresh protocols and raw results must accompany any replaced table/figure.
 
 | Paper description / issue | Supported implementation | Status and consequence |

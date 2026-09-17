@@ -24,6 +24,8 @@ archive/original/     Original code for provenance and parity tests; unsupported
 
 ## Update an existing GPU checkout
 
+If a running queue stopped on a symbol-only answer with `Output keyword extraction failed`, use the [checked keyword-fallback upgrade](docs/PARALLEL_RUNS.md#upgrade-a-queue-after-the-symbol-answer-fix). It retains complete detection parts with their original provenance, reruns incomplete parts, and creates a new queue without overwriting the original.
+
 Commit/push the reorganized source from this working tree, then pull that commit on the GPU machine before starting runs. A Git update records the moves into `archive/original/`; copying new files over an old checkout does not remove obsolete entry points. The `hide_repository.zip` transfer bundle contains a fresh `HIDE/` source directory without `.git`, weights, caches or results.
 
 Use a new `HIDE_RESULTS_ROOT` for this schema/protocol version. Keep any earlier outputs intact and analyze them separately; do not append new records to old files.
