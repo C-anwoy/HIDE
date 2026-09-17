@@ -199,6 +199,19 @@ bash scripts/parts.sh work --plan outputs/parts/plan.json --queue outputs/parts 
 
 For separate queues, use the common plan and `--queue outputs/timing`. The worker requires an explicit GPU UUID and checks that no compute process occupies it before each job. It pins host, GPU UUID, driver and power limit in `timing_device.json`, rejects concurrent timing workers on the same queue, and records runtime identity. This is a preflight check, not a reservation; arrange exclusive access for the entire run. Keep power limits and CPU environment consistent. Resume on the same GPU. Do not merge scaling measurements from different physical GPUs.
 
+### Repeated timing preflight interruptions
+
+For a review plan, use the priority launcher restricted to timing if the long-lived worker repeatedly stops between jobs:
+
+```bash
+bash scripts/run_priority.sh --plan outputs/review-fixed/plan.json --queue outputs/review-fixed \
+  --kind timing --hours 18 --hard-hours 20 2>&1 | tee -a outputs/review-fixed/timing-worker.log
+```
+
+Each timing job runs in a fresh worker, with a five-second pause after completion outside the measured region. Only the specific GPU/host/driver/power-limit identity error receives up to six total attempts with five-second delays. Every attempt rechecks the original guard; a persistent mismatch stops the launcher, and model/measurement failures are not retried. All delays and retries use the same shared 18/20-hour budget. Completed jobs are skipped.
+
+The logging wrapper captures the observed identity from the original failed guard's traceback frame, plus the expected file after that check. Retry reports, full stderr and launcher source copies are saved under `sessions/timing_guard_*/` and retained by export/merge. A second post-failure hardware snapshot is also saved and explicitly distinguished from the observation at failure. No measured code, original timing-device record, work plan or scientific source fingerprint changes. Matching later settings do not retrospectively prove uninterrupted hardware stability during earlier measurements.
+
 ## Inspect, resume, and repair
 
 ```bash

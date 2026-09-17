@@ -5,12 +5,16 @@ repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 exec python -u - "$@" <<'PY'
 import argparse
+import json
 import math
 from pathlib import Path
+import platform
 import signal
 import subprocess
 import sys
+import tempfile
 import time
+import uuid
 
 from hide.export_results import inspect_run
 from hide.parts import load_plan, part_path
@@ -55,6 +59,38 @@ started = time.monotonic()
 soft, hard = started + args.hours * 3600, started + args.hard_hours * 3600
 requested = False
 child = None
+guard_directory = None
+
+def save_guard_failure(task, attempt, error):
+    global guard_directory
+    if guard_directory is None:
+        guard_directory = queue / 'sessions' / ('timing_guard_' + uuid.uuid4().hex)
+        guard_directory.mkdir(parents=True)
+        (guard_directory / 'launcher.sh').write_bytes(Path('scripts/run_priority.sh').read_bytes())
+        (guard_directory / 'timing_worker.py').write_bytes(Path('scripts/timing_worker.py').read_bytes())
+    report = {'task': task['id'], 'attempt': attempt, 'unix_time': time.time(),
+              'worker_stderr': error, 'plan_sha256': plan.get('sha256')}
+    for line in error.splitlines():
+        if line.startswith('TIMING_GUARD_DIAGNOSTICS='):
+            report['failed_check'] = json.loads(line.split('=', 1)[1])
+    try:
+        import os
+        expected = json.loads((queue / 'timing_device.json').read_text())
+        selected = os.environ.get('CUDA_VISIBLE_DEVICES', '')
+        rows = subprocess.check_output(['nvidia-smi', '--query-gpu=uuid,name,driver_version,power.limit',
+                                        '--format=csv,noheader,nounits'], text=True, timeout=5)
+        matches = [line.strip() for line in rows.splitlines() if line.split(',')[0].strip() == selected]
+        current = {'hostname': platform.node(), 'device': matches[0] if len(matches) == 1 else matches,
+                   'plan_sha256': plan.get('sha256')}
+        report.update(expected=expected, observed_after_failure=current,
+                      differences={key: {'expected': expected.get(key), 'observed': current.get(key)}
+                                   for key in set(expected) | set(current) if expected.get(key) != current.get(key)},
+                      note='This snapshot follows the failed check; a transient discrepancy may already have cleared.')
+    except Exception as exc:
+        report['diagnostic_error'] = f'{type(exc).__name__}: {exc}'
+    path = guard_directory / f'{task["id"]}_attempt{attempt}.json'
+    path.write_text(json.dumps(report, indent=2) + '\n')
+    print(f'Timing preflight attempt {attempt}/6 failed. Exact diagnostics: {path}', flush=True)
 
 def stop(signum, frame):
     global requested
@@ -78,19 +114,43 @@ with run_lock(queue / 'priority-launcher.claim'):
             sys.exit(f'Failed part needs inspection/retry before continuing: {task["id"]}')
         if output.exists() and inspect_run(output)['complete']:
             continue
-        cmd = [sys.executable, '-u', '-m', 'hide.parts', 'work', '--plan', args.plan,
-               '--queue', str(queue), '--task', task['id'],
-               '--kind', 'timing' if task['profile'] == 'timing' else 'detection',
-               '--hours', str((soft-now)/3600), '--hard-hours', str((hard-now)/3600)]
-        print(f'PRIORITY {task["id"]}; {(soft-now)/3600:.2f} work hours remaining', flush=True)
-        child = subprocess.Popen(cmd)
-        code = child.wait()
-        child = None
-        if code:
-            sys.exit(f'Worker failed ({code}); inspect the printed task log. Saved results are retained.')
+        for attempt in range(1, 7):
+            now = time.monotonic()
+            if requested or now >= soft:
+                break
+            entry = ([sys.executable, '-u', 'scripts/timing_worker.py'] if task['profile'] == 'timing'
+                     else [sys.executable, '-u', '-m', 'hide.parts', 'work'])
+            cmd = entry + ['--plan', args.plan,
+                   '--queue', str(queue), '--task', task['id'],
+                   '--kind', 'timing' if task['profile'] == 'timing' else 'detection',
+                   '--hours', str((soft-now)/3600), '--hard-hours', str((hard-now)/3600)]
+            print(f'PRIORITY {task["id"]}; {(soft-now)/3600:.2f} work hours remaining', flush=True)
+            with tempfile.TemporaryFile(mode='w+') as errors:
+                child = subprocess.Popen(cmd, stderr=errors)
+                code = child.wait()
+                child = None
+                errors.seek(0)
+                error = errors.read()
+            guard_failure = (code != 0 and task['profile'] == 'timing'
+                             and 'ValueError: Timing worker GPU, host, driver or power limit changed' in error
+                             and not output.with_suffix('.failed.json').exists())
+            if guard_failure:
+                save_guard_failure(task, attempt, error)
+                if attempt < 6 and not requested and time.monotonic() < soft:
+                    print('Waiting five seconds, then checking again in a fresh worker.', flush=True)
+                    time.sleep(min(5, max(0, soft-time.monotonic())))
+                    continue
+            if error:
+                print(error, file=sys.stderr, end='', flush=True)
+            if code:
+                sys.exit(f'Worker failed ({code}); inspect the printed task log. Saved results are retained.')
+            break
         if not output.exists() or not inspect_run(output)['complete']:
             print('Part paused or claimed elsewhere; stopping. Resume on this GPU with the same command.')
             break
         completed += 1
+        if task['profile'] == 'timing' and not requested:
+            # Teardown delay is outside measurements, but counts toward the shared worker budget.
+            time.sleep(min(5, max(0, soft-time.monotonic())))
 print(f'Priority launcher stopped: {completed} new parts complete. Use parts.sh status for full coverage.')
 PY
