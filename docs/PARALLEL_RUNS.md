@@ -205,6 +205,14 @@ Normal 18-hour pause: rerun the exact worker command. Completed examples are ski
 
 After a real error or hard termination, inspect the printed log first and fix its cause. Stop workers on that queue, then explicitly permit repair/retry of the affected task:
 
+If the log contains only `Input/Output keyword extraction failed`, the current runner has discarded the underlying exception chain when serializing the error. Before retrying, replay the single failed detection example with diagnostic logging:
+
+```bash
+python scripts/diagnose_failure.py --run outputs/review/runs/qa__gemma-2-9b__nq_open__03400-03600/qa/gemma-2-9b_nq_open.jsonl
+```
+
+Use the actual failed JSONL path. The command reads its final error and manifest, identifies the original cohort position, and uses the recorded model paths, seed, dtype and generation settings. It requires matching scientific source, writes only a new `outputs/diagnostics/<timestamp>/` folder, and does not clear the failed marker or edit the original records. `--dry-run` previews the selected example without loading models. A reproduced exception is expected to exit nonzero; share `keyword_traceback.txt` and `keyword_inputs.json` from the printed diagnostic directory. If failure occurs earlier, share `runner_traceback.txt`. The replay is excluded from the paper results. Resolve the actual cause before using the retry command below; do not substitute a zero score or skip the example.
+
 ```bash
 bash scripts/parts.sh retry --queue outputs/parts --task comparison__llama3-8b__nq_open__00000-00200
 ```
