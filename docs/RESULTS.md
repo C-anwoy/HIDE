@@ -1,5 +1,15 @@
 # Results, provenance, recovery and Git
 
+## Completed reviewer experiment snapshot
+
+The server snapshot at commit `5baab47` is stored in `results/optimus-review-complete-01`.
+All 242 parts passed restore, strict merge, and review-suite checks. The derived
+[analysis report](../results/optimus-review-analysis-01/README.md) contains the paired
+baseline results, timing/scaling estimates, confidence intervals, and material
+protocol limitations. Read that report before using the results in the manuscript:
+completion checks do not resolve the answer-boundary issue or establish the claimed
+advantage of nonlinear dependence over attention and token-count controls.
+
 ## Working layout
 
 `HIDE_RESULTS_ROOT` defaults to `outputs/final`. Each experiment writes:

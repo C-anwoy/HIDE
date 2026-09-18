@@ -1,0 +1,264 @@
+{
+  "raw_commit": "5baab47",
+  "snapshot": "results/optimus-review-complete-01",
+  "detection": [
+    {
+      "run": "gemma-2-9b_SQuAD",
+      "n": 5928,
+      "positive_similarity": 2007,
+      "positive_rouge": 2473,
+      "positive_exact": 1592,
+      "generation_cap": 422,
+      "no_output_state": 0,
+      "following_question": 0,
+      "constant_control_mae": 0.0014894086685633978,
+      "constant_control_max_error": 0.042137771844863975,
+      "constant_control_pearson": 0.9988165529272806,
+      "first_nonempty_line_exact_match_diagnostic": 1594
+    },
+    {
+      "run": "gemma-2-9b_nq_open",
+      "n": 3610,
+      "positive_similarity": 27,
+      "positive_rouge": 39,
+      "positive_exact": 16,
+      "generation_cap": 23,
+      "no_output_state": 13,
+      "following_question": 2921,
+      "constant_control_mae": 0.0019250965310650165,
+      "constant_control_max_error": 0.008558371000819881,
+      "constant_control_pearson": 0.9997507423305592,
+      "first_nonempty_line_exact_match_diagnostic": 640
+    },
+    {
+      "run": "gemma-2-9b_race",
+      "n": 3498,
+      "positive_similarity": 2047,
+      "positive_rouge": 2104,
+      "positive_exact": 1996,
+      "generation_cap": 0,
+      "no_output_state": 0,
+      "following_question": 0,
+      "constant_control_mae": 0.001624492681017568,
+      "constant_control_max_error": 0.04216891527175998,
+      "constant_control_pearson": 0.9987817871530524,
+      "first_nonempty_line_exact_match_diagnostic": 1996
+    },
+    {
+      "run": "gemma-2-9b_triviaqa",
+      "n": 9960,
+      "positive_similarity": 463,
+      "positive_rouge": 618,
+      "positive_exact": 421,
+      "generation_cap": 27,
+      "no_output_state": 0,
+      "following_question": 8271,
+      "constant_control_mae": 0.0014234389593971446,
+      "constant_control_max_error": 0.008453466826015887,
+      "constant_control_pearson": 0.9998601113386892,
+      "first_nonempty_line_exact_match_diagnostic": 6056
+    },
+    {
+      "run": "llama3-8b_SQuAD",
+      "n": 5928,
+      "positive_similarity": 2178,
+      "positive_rouge": 2668,
+      "positive_exact": 1801,
+      "generation_cap": 219,
+      "no_output_state": 0,
+      "following_question": 0,
+      "constant_control_mae": 1.739891003165954e-06,
+      "constant_control_max_error": 5.06639480599147e-06,
+      "constant_control_pearson": 0.9999999999897636,
+      "first_nonempty_line_exact_match_diagnostic": 1805
+    },
+    {
+      "run": "llama3-8b_nq_open",
+      "n": 3610,
+      "positive_similarity": 432,
+      "positive_rouge": 478,
+      "positive_exact": 346,
+      "generation_cap": 48,
+      "no_output_state": 0,
+      "following_question": 679,
+      "constant_control_mae": 1.84027987404035e-06,
+      "constant_control_max_error": 5.2154064179854576e-06,
+      "constant_control_pearson": 0.9999999999907092,
+      "first_nonempty_line_exact_match_diagnostic": 348
+    },
+    {
+      "run": "llama3-8b_race",
+      "n": 3498,
+      "positive_similarity": 1181,
+      "positive_rouge": 1342,
+      "positive_exact": 880,
+      "generation_cap": 286,
+      "no_output_state": 0,
+      "following_question": 72,
+      "constant_control_mae": 1.7345127926248864e-06,
+      "constant_control_max_error": 5.6028366089699855e-06,
+      "constant_control_pearson": 0.9999999999830093,
+      "first_nonempty_line_exact_match_diagnostic": 1271
+    },
+    {
+      "run": "llama3-8b_triviaqa",
+      "n": 9960,
+      "positive_similarity": 5037,
+      "positive_rouge": 5336,
+      "positive_exact": 4713,
+      "generation_cap": 2089,
+      "no_output_state": 0,
+      "following_question": 2543,
+      "constant_control_mae": 2.0803285958625555e-06,
+      "constant_control_max_error": 5.483627319974316e-06,
+      "constant_control_pearson": 0.9999999999919765,
+      "first_nonempty_line_exact_match_diagnostic": 5558
+    }
+  ],
+  "timing": [
+    {
+      "run": "gemma-2-27b_SQuAD",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 64,
+      "within_query_cv_median": 0.030269841675323275,
+      "within_query_cv_p95": 0.10992851568178487,
+      "max_total_s": 26.831425161100924,
+      "max_score_s": 7.338245950173587,
+      "score_s_p50": 0.1578624600078905,
+      "score_s_p95": 0.250698260194622,
+      "generation_cap": 57,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "gemma-2-27b_nq_open",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 39,
+      "within_query_cv_median": 0.03833893596581005,
+      "within_query_cv_p95": 0.1274810329884898,
+      "max_total_s": 24.642869748175144,
+      "max_score_s": 0.297575582750141,
+      "score_s_p50": 0.0705966262612485,
+      "score_s_p95": 0.11333887320943146,
+      "generation_cap": 6,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "gemma-2-9b_SQuAD",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 34,
+      "within_query_cv_median": 0.05664443931266762,
+      "within_query_cv_p95": 0.4798675394741008,
+      "max_total_s": 28.910461017861962,
+      "max_score_s": 7.323816450778395,
+      "score_s_p50": 0.162704734131693,
+      "score_s_p95": 0.5181343805277709,
+      "generation_cap": 57,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "gemma-2-9b_nq_open",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 121,
+      "within_query_cv_median": 0.1111301009598735,
+      "within_query_cv_p95": 0.7056445910478073,
+      "max_total_s": 27.62152499286458,
+      "max_score_s": 4.438064087182283,
+      "score_s_p50": 0.0810872560832645,
+      "score_s_p95": 2.4685191652271867,
+      "generation_cap": 9,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "llama3-3b_SQuAD",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 13,
+      "within_query_cv_median": 0.04486066524733176,
+      "within_query_cv_p95": 0.38771048850992607,
+      "max_total_s": 14.50793453026563,
+      "max_score_s": 4.022981514688581,
+      "score_s_p50": 0.15030079404823402,
+      "score_s_p95": 0.27334827678278,
+      "generation_cap": 48,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "llama3-3b_nq_open",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 28,
+      "within_query_cv_median": 0.04794346763520707,
+      "within_query_cv_p95": 0.22157891932800902,
+      "max_total_s": 10.942891054786742,
+      "max_score_s": 0.738643008749932,
+      "score_s_p50": 0.06844840152189051,
+      "score_s_p95": 0.09896995900198786,
+      "generation_cap": 9,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "llama3-8b_SQuAD",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 9,
+      "within_query_cv_median": 0.04305380826563558,
+      "within_query_cv_p95": 0.575100595651289,
+      "max_total_s": 12.424614241812378,
+      "max_score_s": 6.887287131976336,
+      "score_s_p50": 0.15400610445067253,
+      "score_s_p95": 0.35810576714574865,
+      "generation_cap": 15,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    },
+    {
+      "run": "llama3-8b_nq_open",
+      "rows": 600,
+      "queries": 200,
+      "repeat_counts": {
+        "3": 200
+      },
+      "negative_overhead_rows": 46,
+      "within_query_cv_median": 0.05403220215485673,
+      "within_query_cv_p95": 0.32871568324358186,
+      "max_total_s": 13.071185061708093,
+      "max_score_s": 2.498752966057509,
+      "score_s_p50": 0.06631607003509951,
+      "score_s_p95": 0.18896514850202878,
+      "generation_cap": 12,
+      "hostname": "optimus.lcs2",
+      "gpu_uuid": "4957c764-5f46-b8cb-d688-a4a667c9e288"
+    }
+  ]
+}

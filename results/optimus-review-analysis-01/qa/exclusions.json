@@ -1,0 +1,234 @@
+[
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/gemma-2-9b_SQuAD.jsonl",
+    "model": "gemma-2-9b",
+    "dataset": "SQuAD",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 5928,
+        "retained": 5928,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 5928,
+        "retained": 5928,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 5928,
+        "retained": 5928,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/gemma-2-9b_nq_open.jsonl",
+    "model": "gemma-2-9b",
+    "dataset": "nq_open",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 3610,
+        "retained": 3610,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 3610,
+        "retained": 3610,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 3610,
+        "retained": 3610,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/gemma-2-9b_race.jsonl",
+    "model": "gemma-2-9b",
+    "dataset": "race",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 3498,
+        "retained": 3498,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 3498,
+        "retained": 3498,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 3498,
+        "retained": 3498,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/gemma-2-9b_triviaqa.jsonl",
+    "model": "gemma-2-9b",
+    "dataset": "triviaqa",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 9960,
+        "retained": 9960,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 9960,
+        "retained": 9960,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 9960,
+        "retained": 9960,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/llama3-8b_SQuAD.jsonl",
+    "model": "llama3-8b",
+    "dataset": "SQuAD",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 5928,
+        "retained": 5928,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 5928,
+        "retained": 5928,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 5928,
+        "retained": 5928,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/llama3-8b_nq_open.jsonl",
+    "model": "llama3-8b",
+    "dataset": "nq_open",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 3610,
+        "retained": 3610,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 3610,
+        "retained": 3610,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 3610,
+        "retained": 3610,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/llama3-8b_race.jsonl",
+    "model": "llama3-8b",
+    "dataset": "race",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 3498,
+        "retained": 3498,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 3498,
+        "retained": 3498,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 3498,
+        "retained": 3498,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  },
+  {
+    "source": "/Users/anwoy/Desktop/HIDE/outputs/optimus-review-merged-01/qa/llama3-8b_triviaqa.jsonl",
+    "model": "llama3-8b",
+    "dataset": "triviaqa",
+    "n_eff_bin": null,
+    "details": [
+      {
+        "target": "sentence_similarity",
+        "total": 9960,
+        "retained": 9960,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 9960,
+        "retained": 9960,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 9960,
+        "retained": 9960,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ]
+  }
+]

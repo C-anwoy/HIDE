@@ -1,0 +1,17 @@
+source,model,dataset,mode,expected,successful,n_errors,complete,no_output_state,hit_generation_cap,ablation_errors,ablation_undefined,mean_example_wall_s
+qa/gemma-2-9b_SQuAD.jsonl,gemma-2-9b,SQuAD,detection,5928,5928,0,True,0,422,0,0,5.912848590023711
+qa/gemma-2-9b_nq_open.jsonl,gemma-2-9b,nq_open,detection,3610,3610,0,True,13,23,0,0,1.5000631127273019
+qa/gemma-2-9b_race.jsonl,gemma-2-9b,race,detection,3498,3498,0,True,0,0,0,0,2.3586262913830547
+qa/gemma-2-9b_triviaqa.jsonl,gemma-2-9b,triviaqa,detection,9960,9960,0,True,0,27,0,0,2.841057939018426
+qa/llama3-8b_SQuAD.jsonl,llama3-8b,SQuAD,detection,5928,5928,0,True,0,219,0,0,1.6476519660618565
+qa/llama3-8b_nq_open.jsonl,llama3-8b,nq_open,detection,3610,3610,0,True,0,48,0,0,0.7340148742210089
+qa/llama3-8b_race.jsonl,llama3-8b,race,detection,3498,3498,0,True,0,286,0,0,3.0373526450749506
+qa/llama3-8b_triviaqa.jsonl,llama3-8b,triviaqa,detection,9960,9960,0,True,0,2089,0,0,3.9718629460161865
+timing/gemma-2-27b_SQuAD.jsonl,gemma-2-27b,SQuAD,timing,600,600,0,True,0,57,0,0,8.59582429828588
+timing/gemma-2-27b_nq_open.jsonl,gemma-2-27b,nq_open,timing,600,600,0,True,0,6,0,0,2.3589081479616776
+timing/gemma-2-9b_SQuAD.jsonl,gemma-2-9b,SQuAD,timing,600,600,0,True,0,57,0,0,6.91512587744665
+timing/gemma-2-9b_nq_open.jsonl,gemma-2-9b,nq_open,timing,600,600,0,True,0,9,0,0,4.274627140505084
+timing/llama3-3b_SQuAD.jsonl,llama3-3b,SQuAD,timing,600,600,0,True,0,48,0,0,2.7287473225027012
+timing/llama3-3b_nq_open.jsonl,llama3-3b,nq_open,timing,600,600,0,True,0,9,0,0,1.3307680756777214
+timing/llama3-8b_SQuAD.jsonl,llama3-8b,SQuAD,timing,600,600,0,True,0,15,0,0,2.086841911052664
+timing/llama3-8b_nq_open.jsonl,llama3-8b,nq_open,timing,600,600,0,True,0,12,0,0,1.674117997478849

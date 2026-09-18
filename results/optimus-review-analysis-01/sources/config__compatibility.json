@@ -1,0 +1,42 @@
+{
+  "id": "empty-vocabulary-fallback-2026-09-17",
+  "legacy_source_sha256": {
+    "hide____init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "hide__ablations.py": "1b1789ab1601f86f4fbdf89fdcb50329efe42ffa27edbdddf5fbdc9f27d21d9b",
+    "hide__analyze.py": "63e59e5e31ef95993813074d1d0a79f27e8f285a3d196ce71dd963c120ca716d",
+    "hide__analyze_ablations.py": "dc597e2aeaa86bddd52b53079d41b7127082a3e75223b53e35b15b8aca17aae3",
+    "hide__baselines.py": "b877078dadd03df4ae178313af0d449a99beff7c82ba37a8970d5006fdafb93c",
+    "hide__checkpoints.py": "a156470f62442961f2a89bb2a03af9fca534cffcd30ad49351742b3c5e7fee98",
+    "config__checkpoints.json": "7ee99181c96e90a1db5b9c8ca6d53ace2e82aebf3959657ada847aa139bad981",
+    "config__experiments.json": "a770aaf748b131e0e534d073e816e746a067ea45281d9efaeff49872a39c1f54",
+    "config__models.json": "b4ee8802a0ca9c482ebb29ea7abbd1dba61acb9e367bbd869e245b53d59b35c3",
+    "hide__core.py": "39ea13a73e1e898f44b274858838b1e535ebf87d8e1ae2037ebd983bc1b6fb95",
+    "datasets__SQuAD.py": "7ae548ddb9e642a8c8d65182240fc541d4c7597cd3f78d9c912f1c36b07f6628",
+    "datasets____init__.py": "a95ac739313afaa099e459e4ac6d5e852420fcf5ea4119e071f90a1ad6226ade",
+    "datasets__nq_open.py": "9269d39459b40e2b34345434ff3e71d569bda6680bb563c6f93ab9cfb8220702",
+    "datasets__race.py": "a9eb5a6eeaf229b6e8fe1a9baabe1beeed35d56bbcdaba170ee8cf2682e48ffb",
+    "datasets__triviaqa.py": "7cfb79e7194f7f53d1d49ccc9e47b0ecfd9fc2d256685439241151334430f106",
+    "hide__evaluate.py": "21b28cc1c50a478b01e4219a9cffbaf3ae98297aced6ad1bcab26feee2a338fe",
+    "hide__execution.py": "f19f8d24f36a7c1cc579452c44c47d16e541aa2f95f1d8b0bab6253aaef5a964",
+    "hide__export_results.py": "3ae25e08c5daf20bc5fd986c98cc89646b9178393215e11e1aa2a85db983775a",
+    "hide__kernels.py": "414e9c313d9f42e10eae7fffe2fa626961aacc02f36b0dec15762044490dad5d",
+    "hide__launch.py": "19add0516c09b5c3014517ef8f40e2f31f20b09e047599561dc60f78535dd0d0",
+    "hide__parts.py": "78f28d489420e6ad6f7c4e021801a68fb6189013555d01f25a5ad781e51ae1b0",
+    "hide__plot_mechanistic.py": "dd31c833b8151aa6d10798a6dbdd7b0a50d9f08be32f746d2cac418585797286",
+    "hide__prepare_data.py": "15a3db5e0734cad22fcf1896356243f7ec52c5ec65d75d20a80024858c37a847",
+    "hide__provenance.py": "1db26b764ee249342ed696a31a06b1ba5564002f59e2c641d282dc7be000d122",
+    "hide__recover.py": "eb2b219264131e055c8656135d740cf10e30c70c4cc62a7207a3e5bc8530ae39",
+    "hide__runner.py": "9453a6308164ebe6d086778625bb8f88db5589352d59f3e0f7bce0a3ceaa2bc1",
+    "hide__settings.py": "672ce1ccacfa60180915bf7238c5aed28d2ed60f4e37c7329e480869e7097fe1",
+    "hide__summarize_runs.py": "1ec36f829efd3003f2233444d3b96bd712c74e6f316c52b74d1fb38e0c50c146",
+    "hide__summarize_timing.py": "033f90e51de782102e6a1bf2074879c27a9adb29772c115261a2dfeea996461f",
+    "HIDE__pyproject.toml": "ffa6345185e5d85573b080f8f691142f2c7b996d1582e35ca2ad78e862b737a4"
+  },
+  "fixed_core_sha256": "30bdf4266416ee0d99e4bfd46382bca9e5ebe715d8daeaae5a6fa2a24dc45cd2",
+  "allowed_changed_sources": [
+    "hide__core.py",
+    "hide__parts.py",
+    "config__compatibility.json"
+  ],
+  "reason": "Completed detection records from this exact legacy implementation are unchanged: the fix only handles a previously raised empty-vocabulary ValueError. Incomplete parts and all timing parts must be rerun. Original source snapshots and manifests are retained."
+}

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hide-hallucination"
+version = "0.1.0"
+description = "Reproducible HIDE hallucination-detection experiments and analysis"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy==2.2.2", "pandas==2.2.3", "scipy==1.15.1", "matplotlib==3.10.0"
+]
+
+[project.optional-dependencies]
+inference = [
+  "torch==2.5.1", "transformers==4.51.3", "huggingface-hub==0.36.2", "accelerate>=0.26.0,<2",
+  "datasets==3.3.1", "sentence-transformers==3.4.1", "keybert==0.9.0",
+  "sentencepiece==0.2.0", "rouge-score==0.1.2", "scikit-learn==1.6.1"
+]
+
+[project.scripts]
+hide-run = "hide.runner:main"
+hide-evaluate = "hide.evaluate:main"
+hide-results = "hide.export_results:main"
+
+[tool.setuptools.packages.find]
+include = ["hide*"]
+exclude = ["archive*", "tests*"]
+
+[tool.setuptools.package-data]
+hide = ["config/*.json"]
