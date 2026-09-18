@@ -24,6 +24,10 @@ archive/original/     Original code for provenance and parity tests; unsupported
 
 ## Update an existing GPU checkout
 
+For the current ten-hour deadline, use the [fixed 2,000-example comparison](docs/ANSWER_SUBSET_RUNS.md).
+It reuses completed corrected runs, prioritizes factuality datasets, and runs both
+models on GPU1 without scheduling timing experiments.
+
 For the current correction, follow [ANSWER_BOUNDARY_RUNS.md](docs/ANSWER_BOUNDARY_RUNS.md).
 It uses a new plan/output root and does not reuse the old keyword-only migration.
 

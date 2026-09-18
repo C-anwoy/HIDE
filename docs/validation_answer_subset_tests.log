@@ -1,0 +1,114 @@
+test_answer_plan_covers_full_cohorts_and_timing_is_intact (test_answer_boundary.AnswerBoundaryTests.test_answer_plan_covers_full_cohorts_and_timing_is_intact) ... ok
+test_detection_only_plan_stays_detection_only_and_rejects_timing (test_answer_boundary.AnswerBoundaryTests.test_detection_only_plan_stays_detection_only_and_rejects_timing) ... ok
+test_first_nonempty_line_and_terminators (test_answer_boundary.AnswerBoundaryTests.test_first_nonempty_line_and_terminators) ... ok
+test_pilot_and_detection_share_one_deadline_and_keep_dataset_filter (test_answer_boundary.AnswerBoundaryTests.test_pilot_and_detection_share_one_deadline_and_keep_dataset_filter) ... ok
+test_pilot_gate_preserves_low_accuracy_but_blocks_wrong_boundary_metadata (test_answer_boundary.AnswerBoundaryTests.test_pilot_gate_preserves_low_accuracy_but_blocks_wrong_boundary_metadata) ... ok
+test_prompt_newlines_ignored_and_double_newline_token_detected (test_answer_boundary.AnswerBoundaryTests.test_prompt_newlines_ignored_and_double_newline_token_detected) ... ok
+test_real_llama_gemma_cached_generation_stops_before_next_question (test_answer_boundary.AnswerBoundaryTests.test_real_llama_gemma_cached_generation_stops_before_next_question) ... ok
+test_timing_waiter_waits_for_all_parts_and_stops_on_failure (test_answer_boundary.AnswerBoundaryTests.test_timing_waiter_waits_for_all_parts_and_stops_on_failure) ... ok
+test_tmux_detection_only_launches_two_workers_on_the_same_gpu (test_answer_boundary.AnswerBoundaryTests.test_tmux_detection_only_launches_two_workers_on_the_same_gpu) ... ok
+test_only_real_plan_contention_is_retried (test_answer_startup.AnswerStartupTests.test_only_real_plan_contention_is_retried) ... ok
+test_real_process_waits_for_each_plan_lock_then_initializes (test_answer_startup.AnswerStartupTests.test_real_process_waits_for_each_plan_lock_then_initializes) ... ok
+test_timeout_keeps_live_lock_and_propagates_failure (test_answer_startup.AnswerStartupTests.test_timeout_keeps_live_lock_and_propagates_failure) ... ok
+test_wrapper_restores_initializer_on_failure (test_answer_startup.AnswerStartupTests.test_wrapper_restores_initializer_on_failure) ... ok
+test_fixed_subset_exact_coverage_and_factuality_priority (test_answer_subset.AnswerSubsetTests.test_fixed_subset_exact_coverage_and_factuality_priority) ... ok
+test_selection_preserves_parent_plan_and_is_repeatable (test_answer_subset.AnswerSubsetTests.test_selection_preserves_parent_plan_and_is_repeatable) ... ok
+test_status_reports_completed_missing_and_live_parts (test_answer_subset.AnswerSubsetTests.test_status_reports_completed_missing_and_live_parts) ... ok
+test_tmux_launches_two_persistent_shells_with_model_commands (test_answer_subset.AnswerSubsetTests.test_tmux_launches_two_persistent_shells_with_model_commands) ... ok
+test_worker_filters_only_detection_keeps_pilots_and_restores_functions (test_answer_subset.AnswerSubsetTests.test_worker_filters_only_detection_keeps_pilots_and_restores_functions) ... ok
+test_identical_copies_merge_despite_different_timestamps (test_checkpoints.CheckpointTests.test_identical_copies_merge_despite_different_timestamps) ... Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp3qtcj365/first/model.safetensors
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp3qtcj365/second/model.safetensors
+ok
+test_invalid_local_checkpoint_is_not_silently_replaced (test_checkpoints.CheckpointTests.test_invalid_local_checkpoint_is_not_silently_replaced) ... ok
+test_local_checkpoint_is_reused_without_network_or_mutation (test_checkpoints.CheckpointTests.test_local_checkpoint_is_reused_without_network_or_mutation) ... Using local checkpoint: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpqaio1852/models/Meta-Llama-3-8B
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpqaio1852/models/Meta-Llama-3-8B/model.safetensors
+ok
+test_missing_base_downloads_exact_revision_and_reuses_cache (test_checkpoints.CheckpointTests.test_missing_base_downloads_exact_revision_and_reuses_cache) ... Downloading google/gemma-2-27b@938270f5272feb02779b55c2bb2fffdd0f53ff0c to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpvu14x5r4/cache/downloads/google--gemma-2-27b/938270f5272feb02779b55c2bb2fffdd0f53ff0c
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpvu14x5r4/cache/downloads/google--gemma-2-27b/938270f5272feb02779b55c2bb2fffdd0f53ff0c/model.safetensors
+ok
+test_offline_missing_checkpoint_and_failed_download_leave_no_ready_marker (test_checkpoints.CheckpointTests.test_offline_missing_checkpoint_and_failed_download_leave_no_ready_marker) ... Downloading google/gemma-2-27b@938270f5272feb02779b55c2bb2fffdd0f53ff0c to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpfrl_pjev/cache/downloads/google--gemma-2-27b/938270f5272feb02779b55c2bb2fffdd0f53ff0c
+ok
+test_sentence_transformer_pooling_is_checked_and_hashed (test_checkpoints.CheckpointTests.test_sentence_transformer_pooling_is_checked_and_hashed) ... Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpqlvx61fs/encoder/model.safetensors
+ok
+test_timing_startup_prepares_only_generator_and_keyword_model (test_checkpoints.CheckpointTests.test_timing_startup_prepares_only_generator_and_keyword_model) ... ok
+test_weight_hashes_are_cached_and_invalidated_on_change (test_checkpoints.CheckpointTests.test_weight_hashes_are_cached_and_invalidated_on_change) ... Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpz9wmhq86/model/model.safetensors
+Hashing checkpoint weight once: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpz9wmhq86/model/model.safetensors
+ok
+test_cached_alignment_llama_and_gemma (test_core.CoreTests.test_cached_alignment_llama_and_gemma) ... ok
+test_empty_vocabulary_guard_does_not_hide_other_errors (test_core.CoreTests.test_empty_vocabulary_guard_does_not_hide_other_errors) ... ok
+test_formula_preserved_and_constant_kernel_control (test_core.CoreTests.test_formula_preserved_and_constant_kernel_control) ... ok
+test_symbol_answer_uses_existing_token_fallback (test_core.CoreTests.test_symbol_answer_uses_existing_token_fallback) ... ok
+test_token_selection_and_full_score_parity (test_core.CoreTests.test_token_selection_and_full_score_parity) ... ok
+test_auc_matches_sklearn_with_ties (test_core.EvaluationTests.test_auc_matches_sklearn_with_ties) ... ok
+test_normalization (test_core.EvaluationTests.test_normalization) ... ok
+test_paired_bootstrap_and_score_filtering (test_core.EvaluationTests.test_paired_bootstrap_and_score_filtering) ... ok
+test_timing_accounting_and_negative_overhead (test_core.EvaluationTests.test_timing_accounting_and_negative_overhead) ... ok
+test_original_prompt_and_stop_parity (test_datasets.DatasetTests.test_original_prompt_and_stop_parity) ... ok
+test_race_list_and_serialized_list_schemas (test_datasets.DatasetTests.test_race_list_and_serialized_list_schemas) ... ok
+test_squad_first_reference_is_explicitly_returned (test_datasets.DatasetTests.test_squad_first_reference_is_explicitly_returned) ... ok
+test_incomplete_export_is_explicit (test_export.ExportTests.test_incomplete_export_is_explicit) ... ok
+test_lossless_shards_and_tamper_detection (test_export.ExportTests.test_lossless_shards_and_tamper_detection) ... ok
+test_required_full_suite (test_export.ExportTests.test_required_full_suite) ... ok
+test_exception_chain_and_inputs_are_retained_without_recovery (test_failure_diagnostic.FailureDiagnosticTests.test_exception_chain_and_inputs_are_retained_without_recovery) ... ok
+test_replay_uses_failed_cohort_position_without_modifying_original (test_failure_diagnostic.FailureDiagnosticTests.test_replay_uses_failed_cohort_position_without_modifying_original) ... ok
+test_migration_merge_export_preserve_original_sources_and_failed_bytes (test_keyword_migration.KeywordMigrationTests.test_migration_merge_export_preserve_original_sources_and_failed_bytes) ... ok
+test_real_policy_is_narrowly_pinned_and_rejects_timing (test_keyword_migration.KeywordMigrationTests.test_real_policy_is_narrowly_pinned_and_rejects_timing) ... ok
+test_control_pause_and_signal_restoration (test_parts.PartTests.test_control_pause_and_signal_restoration) ... ok
+test_merge_exact_order_provenance_export_and_restore (test_parts.PartTests.test_merge_exact_order_provenance_export_and_restore) ... ok
+test_merge_rejects_missing_duplicate_and_incompatible_parts (test_parts.PartTests.test_merge_rejects_missing_duplicate_and_incompatible_parts) ... ok
+test_plan_full_coverage_no_redundant_qa_and_static_assignments (test_parts.PartTests.test_plan_full_coverage_no_redundant_qa_and_static_assignments) ... ok
+test_plan_tamper_rejected (test_parts.PartTests.test_plan_tamper_rejected) ... ok
+test_queue_snapshot_detects_missing_plan_tasks (test_parts.PartTests.test_queue_snapshot_detects_missing_plan_tasks) ... ok
+test_shared_queue_lock_excludes_exports_and_merge (test_parts.PartTests.test_shared_queue_lock_excludes_exports_and_merge) ... ok
+test_timing_device_requires_exclusive_fixed_hardware (test_parts.PartTests.test_timing_device_requires_exclusive_fixed_hardware) ... ok
+test_worker_pauses_then_resumes_without_duplicate_rows (test_parts.PartTests.test_worker_pauses_then_resumes_without_duplicate_rows) ... No output indices found
+Exported 3 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp0933nbmo/checkpoint
+Exported 4 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpm9__i7oo/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpm9__i7oo/restored
+Retained 2 complete detection parts. Restart 1 previously attempted parts.
+New plan: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpfifa108d/fixed/plan.json
+Original queue preserved: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpfifa108d/queue
+Verified merge: 3 parts -> /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpfifa108d/merged
+Exported 193 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpfifa108d/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpfifa108d/restored
+Verified merge: 3 parts -> /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpot7hzaq4/merged
+Exported 155 files; complete=True; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpot7hzaq4/bundle
+Restored verified files to /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpot7hzaq4/restored
+Exported 114 files; complete=False; /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpktt0t90d/checkpoint
+RUN qa__llama3-8b__nq_open__00000-00002
+Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp1ki1v6zn/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
+Paused. Rerun the same worker command to continue.
+Worker stopped; 0 parts completed this session. Check queue status for remaining work.
+RUN qa__llama3-8b__nq_open__00000-00002
+Log: /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmp1ki1v6zn/queue/runs/qa__llama3-8b__nq_open__00000-00002/qa/llama3-8b_nq_open.log
+ok
+test_worker_supervisor_hard_and_cooperative_stop (test_parts.PartTests.test_worker_supervisor_hard_and_cooperative_stop) ... ok
+test_detection_only_schedule_excludes_timing (test_priority_launcher.PriorityLauncherTests.test_detection_only_schedule_excludes_timing) ... ok
+test_failure_stops_without_retrying (test_priority_launcher.PriorityLauncherTests.test_failure_stops_without_retrying) ... ok
+test_persistent_timing_guard_stops_after_six_attempts (test_priority_launcher.PriorityLauncherTests.test_persistent_timing_guard_stops_after_six_attempts) ... ValueError: Timing worker GPU, host, driver or power limit changed
+ok
+test_priority_and_shared_budget (test_priority_launcher.PriorityLauncherTests.test_priority_and_shared_budget) ... ok
+test_timing_diagnostic_preserves_failed_observation_and_original_exception (test_priority_launcher.PriorityLauncherTests.test_timing_diagnostic_preserves_failed_observation_and_original_exception) ... ok
+test_timing_model_error_is_not_retried (test_priority_launcher.PriorityLauncherTests.test_timing_model_error_is_not_retried) ... RuntimeError: Part failed (1)
+ok
+test_transient_timing_guard_retry_is_logged_and_budget_keeps_decreasing (test_priority_launcher.PriorityLauncherTests.test_transient_timing_guard_retry_is_logged_and_budget_keeps_decreasing) ... ok
+test_estimator_conventions (test_protocol.ProtocolTests.test_estimator_conventions) ... ok
+test_generated_token_likelihood_and_eigen_formula (test_protocol.ProtocolTests.test_generated_token_likelihood_and_eigen_formula) ... ok
+test_lock_and_atomic_metadata (test_protocol.ProtocolTests.test_lock_and_atomic_metadata) ... ok
+test_seed_is_independent_of_previous_examples (test_protocol.ProtocolTests.test_seed_is_independent_of_previous_examples) ... ok
+test_suite_commands_parse_and_keep_full_counts (test_protocol.ProtocolTests.test_suite_commands_parse_and_keep_full_counts) ... ok
+test_errors_require_explicit_retry_and_never_remove_earlier_corruption (test_recovery.RecoveryTests.test_errors_require_explicit_retry_and_never_remove_earlier_corruption) ... ok
+test_export_rejects_active_writer (test_recovery.RecoveryTests.test_export_rejects_active_writer) ... ok
+test_truncated_tail_is_backed_up (test_recovery.RecoveryTests.test_truncated_tail_is_backed_up) ... ok
+test_detection_timing_and_resume (test_runner.RunnerTests.test_detection_timing_and_resume) ... `generation_config` default values have been modified to match model-specific defaults: {'bos_token_id': 1}. If this is not desired, please set these values explicitly.
+ok
+
+----------------------------------------------------------------------
+Ran 71 tests in 9.527s
+
+OK
+Worker stopped; 1 parts completed this session. Check queue status for remaining work.
+Worker stopped; 0 parts completed this session. Check queue status for remaining work.
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpee3im5eb/.history/run_20260918T143517773402Z; rerun the identical command
+Original retained in /private/var/folders/54/v5bb5wx12db875xt2z5w65pm0000gn/T/tmpgrp3wueq/.history/run_20260918T143517775324Z; rerun the identical command
+No trailing damaged/error record; nothing changed

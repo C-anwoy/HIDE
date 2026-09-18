@@ -2,6 +2,7 @@
 
 ## Completed
 
+- **71 automated tests passed** after adding the fixed-subset launcher: [validation_answer_subset_tests.log](validation_answer_subset_tests.log). Tests cover exact 2,000-example coverage, factuality priority, unchanged parent plans, unchanged pilot selection, restoration of worker functions after errors, live-lock status, and construction of two persistent tmux shells. GPU throughput and ten-hour completion are not validated locally.
 - **66 automated tests passed** including the concurrent startup fix: [validation_answer_startup_tests.log](validation_answer_startup_tests.log). The earlier 62-test answer-boundary checks remain in [validation_answer_boundary_tests.log](validation_answer_boundary_tests.log), and earlier 53-test timing checks in [validation_timing_retry_tests.log](validation_timing_retry_tests.log).
 - HIDE formula, FP32 score and keyword/token ordering checked against extracted original functions, including duplicate occurrences and the one-token fallback.
 - Constant-kernel formula, both centered estimator denominators, actual-token likelihoods and the printed EigenScore matrix formula checked numerically.

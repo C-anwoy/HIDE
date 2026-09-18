@@ -1,5 +1,9 @@
 # Corrected answer-boundary experiments
 
+**Current deadline option:** [fixed 2,000-example paired comparison](ANSWER_SUBSET_RUNS.md).
+It reuses completed corrected runs and caps the remaining detection work without
+changing the original plan. The full-cohort workflow below remains available.
+
 ## Current selection: both detection workers on GPU1, retain existing timings
 
 To run the corrected detection experiments only, sharing physical GPU1:
