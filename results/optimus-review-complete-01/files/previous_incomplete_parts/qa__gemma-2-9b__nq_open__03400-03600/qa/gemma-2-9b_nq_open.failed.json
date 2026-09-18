@@ -1,0 +1,5 @@
+{
+  "task": "qa__gemma-2-9b__nq_open__03400-03600",
+  "exit_code": 1,
+  "log": "/home/anwoy/HIDE/outputs/review/runs/qa__gemma-2-9b__nq_open__03400-03600/qa/gemma-2-9b_nq_open.log"
+}

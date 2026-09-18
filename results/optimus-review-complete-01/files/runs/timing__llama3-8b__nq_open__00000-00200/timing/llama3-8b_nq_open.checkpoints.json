@@ -1,0 +1,162 @@
+{
+  "generator": {
+    "name": "llama3-8b",
+    "origin": "local",
+    "path": "/models/Meta-Llama-3-8B",
+    "revision": null,
+    "expected_repository": "meta-llama/Meta-Llama-3-8B",
+    "identity": {
+      "location": "/models/Meta-Llama-3-8B",
+      "local": true,
+      "weights_content_hashed": true,
+      "files": [
+        {
+          "file": "config.json",
+          "bytes": 654,
+          "mtime_ns": 1721044056138731788,
+          "sha256": "2430cee764b6530ff8673cf9ba8561e1d5a33152d503cd0de909ff5718261441"
+        },
+        {
+          "file": "generation_config.json",
+          "bytes": 177,
+          "mtime_ns": 1721044056138731788,
+          "sha256": "93caf96e269e32b9ee33ad78b0d76d910408d11a63a8b2c49241030836759311"
+        },
+        {
+          "file": "model-00001-of-00004.safetensors",
+          "bytes": 4976698672,
+          "mtime_ns": 1721046005362662078,
+          "sha256": "f2c144103072514542e327fa8080bd375cb300f2d453fba9ca3aea81d0d4cf33"
+        },
+        {
+          "file": "model-00002-of-00004.safetensors",
+          "bytes": 4999802720,
+          "mtime_ns": 1721045991222662584,
+          "sha256": "d9eee5f23d94405d90b7e9ff88b9443fee42f8528a658f54214c2aba7530d80c"
+        },
+        {
+          "file": "model-00003-of-00004.safetensors",
+          "bytes": 4915916176,
+          "mtime_ns": 1721045954270663906,
+          "sha256": "4b8fbc5e113f69768dd8de84661ea20af8a32b734a9976144b4236c447b40ccc"
+        },
+        {
+          "file": "model-00004-of-00004.safetensors",
+          "bytes": 1168138808,
+          "mtime_ns": 1721044627602711351,
+          "sha256": "5dc34e6bdf2da9e35f0d93b5c333c870f3677dc43dc3a91ea3a8ad28a1fe1acb"
+        },
+        {
+          "file": "model.safetensors.index.json",
+          "bytes": 23950,
+          "mtime_ns": 1721044056166731787,
+          "sha256": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b"
+        },
+        {
+          "file": "special_tokens_map.json",
+          "bytes": 73,
+          "mtime_ns": 1721044056166731787,
+          "sha256": "462d91939dbc37178aa5a3eae7068d1990ccc92e09f288cc71f42cdf139d69cc"
+        },
+        {
+          "file": "tokenizer.json",
+          "bytes": 9085698,
+          "mtime_ns": 1721044056218731785,
+          "sha256": "e134af98b985517b4f068e3755ae90d4e9cd2d45d328325dc503f1c6b2d06cc7"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "bytes": 50566,
+          "mtime_ns": 1721044056218731785,
+          "sha256": "690727b4fed286383df1c7ca5e805124cb70c6eb4529f807c7b2e60ff741da7e"
+        }
+      ]
+    }
+  },
+  "keyword": {
+    "name": "keyword",
+    "origin": "local",
+    "path": "/models/all-MiniLM-L6-v2",
+    "revision": null,
+    "expected_repository": "sentence-transformers/all-MiniLM-L6-v2",
+    "identity": {
+      "location": "/models/all-MiniLM-L6-v2",
+      "local": true,
+      "weights_content_hashed": true,
+      "files": [
+        {
+          "file": "1_Pooling/config.json",
+          "bytes": 190,
+          "mtime_ns": 1722618672984413920,
+          "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+        },
+        {
+          "file": "config.json",
+          "bytes": 612,
+          "mtime_ns": 1722618672984413920,
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+        },
+        {
+          "file": "config_sentence_transformers.json",
+          "bytes": 116,
+          "mtime_ns": 1722618672984413920,
+          "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+        },
+        {
+          "file": "data_config.json",
+          "bytes": 39265,
+          "mtime_ns": 1722618672984413920,
+          "sha256": "32edcb108fc2516b920734a862ae0692bcae1c5d45d5f8d972cb0d53434a4c54"
+        },
+        {
+          "file": "model.safetensors",
+          "bytes": 90868376,
+          "mtime_ns": 1722618712308412513,
+          "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+        },
+        {
+          "file": "modules.json",
+          "bytes": 349,
+          "mtime_ns": 1722618673004413919,
+          "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+        },
+        {
+          "file": "pytorch_model.bin",
+          "bytes": 90888945,
+          "mtime_ns": 1722618713884412457,
+          "sha256": "c3a85f238711653950f6a79ece63eb0ea93d76f6a6284be04019c53733baf256"
+        },
+        {
+          "file": "sentence_bert_config.json",
+          "bytes": 53,
+          "mtime_ns": 1722618673008413919,
+          "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+        },
+        {
+          "file": "special_tokens_map.json",
+          "bytes": 112,
+          "mtime_ns": 1722618673008413919,
+          "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+        },
+        {
+          "file": "tokenizer.json",
+          "bytes": 466247,
+          "mtime_ns": 1722618673012413919,
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "bytes": 350,
+          "mtime_ns": 1722618673012413919,
+          "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+        },
+        {
+          "file": "vocab.txt",
+          "bytes": 231508,
+          "mtime_ns": 1722618673012413919,
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+        }
+      ]
+    }
+  }
+}
