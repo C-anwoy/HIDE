@@ -2,6 +2,31 @@
 
 ## Current correction status (2026-09-16)
 
+### Answer-boundary correction (2026-09-18)
+
+The completed 242-part snapshot has been verified and analyzed in
+`results/optimus-review-analysis-01`. It exposed frequent extra-question
+continuations, especially for Gemma on NQ/TriviaQA. Full-output versus first-line
+exact-match counts demonstrate a material evaluation difference; merely changing
+the saved labels would leave detector states describing a different text span.
+
+The opt-in `first-line` protocol now terminates generation at the first line
+break after non-whitespace answer text, including multi-newline tokens. It
+preserves the original score/selection code and remaining generation settings.
+It records raw and evaluated text, checks that no scored state crosses the answer
+boundary, and uses the same boundary criterion for base and HIDE latency.
+New profiles, plans and result roots separate this protocol from the completed
+legacy runs. The default historical protocol remains `legacy`; old scientific
+fingerprints are not relabeled or approved for mixing with these results.
+See [the run guide](ANSWER_BOUNDARY_RUNS.md). Tiny-model tests are complete;
+the real-checkpoint first-line pilots must still run on the user's GPUs.
+
+This correction does not resolve the near-equivalence to the token-count control
+or establish an advantage over attention mass. Those comparisons remain fixed
+in the analysis and must be reported even if the corrected generations retain
+the same unfavorable pattern. Kernel parameters and score formulas are not
+tuned using the evaluation labels.
+
 ### Symbol-only answer correction (2026-09-17)
 
 A server diagnostic confirmed that NQ example `2720` generated ` *` (Gemma token `649`) for “what is the multiplication sign on the computer.” KeyBERT's custom CountVectorizer path raised `ValueError: empty vocabulary; perhaps the documents only contain stop words`. This prevented the existing no-keyword token fallback from running. `hide/core.py` now handles only that error when the analyzer also confirms no word candidates, then uses the existing token fallback and unchanged score formula. Other exceptions still fail. The generated symbol answer is retained and judged by the existing correctness protocol. For this one-token representation, `n_eff=1` gives an estimator value of zero; it does not establish that the answer is incorrect. Keep the count-stratified analyses and discuss short/symbolic-answer limitations if they materially affect detection.

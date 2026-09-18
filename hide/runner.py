@@ -15,6 +15,8 @@ import time
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--profile', default='custom')
+    p.add_argument('--answer-boundary', choices=['legacy', 'first-line'], default='legacy',
+                   help='First-line stops after the first nonempty answer line; requires a new result root')
     p.add_argument('--mode', choices=['detection', 'timing'], default='detection')
     p.add_argument('--model-path', required=True)
     p.add_argument('--model-name', required=True)
@@ -117,6 +119,8 @@ def run(args, control=None):
         raise ValueError('multipass-samples must be 0 or >=2')
     if args.multipass_samples and args.decoding != 'greedy':
         raise ValueError('The comparison study evaluates a greedy target answer')
+    if args.answer_boundary != 'legacy' and args.multipass_samples:
+        raise ValueError('First-line protocol currently supports single-output comparisons only')
     if args.mode == 'timing' and (args.decoding != 'greedy' or args.ablations or args.multipass_samples):
         raise ValueError('Timing uses greedy decoding and the default HIDE score only')
     if args.start < 0 or (args.stop is not None and args.stop <= args.start):
@@ -265,6 +269,11 @@ def run(args, control=None):
         gen_config.pop('top_k', None)
     gen_config = GenerationConfig(**gen_config)
     runtime = {'hostname': platform.node(), 'cuda_visible_devices': os.environ.get('CUDA_VISIBLE_DEVICES'),
+               'answer_boundary': args.answer_boundary,
+               'torch_num_threads': torch.get_num_threads(),
+               'torch_num_interop_threads': torch.get_num_interop_threads(),
+               'thread_environment': {k: os.environ.get(k) for k in
+                                      ['OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS']},
                'gpu_uuid': str(getattr(torch.cuda.get_device_properties(args.device), 'uuid', ''))
                    if str(args.device).startswith('cuda') else None, 'cpu_count': os.cpu_count(), 'platform': platform.platform(),
                'float32_matmul_precision': torch.get_float32_matmul_precision(),
@@ -287,10 +296,14 @@ def run(args, control=None):
                       'samples': len(dataset), 'backend': args.attention_backend}), flush=True)
 
     def generate(ids, mask, hidden=False, attention=False):
+        extra = {}
+        if args.answer_boundary == 'first-line':
+            from hide.answer_boundary import stopping_criteria
+            extra['stopping_criteria'] = stopping_criteria(tokenizer, ids.shape[1])
         return model.generate(ids, attention_mask=mask, generation_config=gen_config,
                               return_dict_in_generate=True, output_hidden_states=hidden,
                               output_attentions=attention, output_scores=False,
-                              output_logits=args.mode == 'detection')
+                              output_logits=args.mode == 'detection', **extra)
 
     def hide_score(result, ids):
         return get_unbiased_hsic_score_keybert(result.hidden_states, tokenizer, ids[0],
@@ -362,13 +375,17 @@ def run(args, control=None):
                                    question=ex['question'], answer=ex['answer'],
                                    prompt=ex['prompt'], no_output_state=len(gen_ids) <= 1,
                                    hit_generation_cap=len(gen_ids) == args.max_new_tokens)
+                        if args.answer_boundary == 'first-line':
+                            from hide.answer_boundary import generation_fields
+                            row.update(generation_fields(tokenizer, gen_ids))
                         if args.ablations:
                             from hide.ablations import score_variants
                             row['ablations'] = score_variants(result.hidden_states, tokenizer, ids[0], gen_ids,
                                                              layer, kw, args.keywords)
                         del result
                         result = None
-                        row.update(labels(row['generated_text'], ex['answer'], ex['question'], judge, rouge))
+                        row.update(labels(row.get('evaluated_text', row['generated_text']),
+                                          ex['answer'], ex['question'], judge, rouge))
                         if args.multipass_samples:
                             from hide.baselines import sampled_baselines
                             row.update(sampled_baselines(model, tokenizer, ids, mask, gen_config, layer,
@@ -399,6 +416,9 @@ def run(args, control=None):
                                    no_output_state=len(base_ids)-ids.shape[1] <= 1,
                                    hit_generation_cap=len(base_ids)-ids.shape[1] == args.max_new_tokens,
                                    output_length=len(base_ids)-ids.shape[1])
+                        if args.answer_boundary == 'first-line':
+                            from hide.answer_boundary import generation_fields
+                            row.update(generation_fields(tokenizer, base_ids[ids.shape[1]:]))
                     for key in ['HIDE_score', 'Omega', 'Delta_in', 'sentence_similarity', 'rouge_l']:
                         if key in row and not math.isfinite(row[key]):
                             raise ValueError(f'Non-finite {key}')

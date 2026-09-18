@@ -2,7 +2,7 @@
 
 ## Completed
 
-- **53 automated tests passed** in the latest full check: [validation_timing_retry_tests.log](validation_timing_retry_tests.log). Previous checks are retained in [validation_keyword_fix_tests.log](validation_keyword_fix_tests.log), [validation_diagnostic_tests.log](validation_diagnostic_tests.log), [validation_tests.log](validation_tests.log) and [validation_priority_tests.log](validation_priority_tests.log).
+- **60 automated tests passed** for the answer-boundary workflow: [validation_answer_boundary_tests.log](validation_answer_boundary_tests.log). Earlier 53-test timing checks remain in [validation_timing_retry_tests.log](validation_timing_retry_tests.log), with previous checks in the other retained validation logs.
 - HIDE formula, FP32 score and keyword/token ordering checked against extracted original functions, including duplicate occurrences and the one-token fallback.
 - Constant-kernel formula, both centered estimator denominators, actual-token likelihoods and the printed EigenScore matrix formula checked numerically.
 - Cached/replayed state and attention alignment checked with random tiny Llama and Gemma models before the documented cache boundary.
@@ -20,6 +20,10 @@ Tests used Python 3.12 with isolated temporary dependencies including Torch 2.5.
 
 ## Partitioned workflow validation
 
+- The new first-answer-line criterion was tested with real tiny Llama and Gemma generation forced to emit answer → double newline → next question: generation stops before that next question. Tests cover prompt-newline exclusion, leading blank lines, CRLF, terminal-token suffixes, and rejection of scored states after the answer boundary.
+- New detection/timing runner paths and resume were exercised locally. The pilot gate accepts low-accuracy outputs and rejects boundary-metadata mismatches. Pilot and full-worker deadlines share one budget; the timing waiter waits for all unlocked detection parts and stops on failed parts. Plans retain 45,992 full-cohort detection examples and eight intact timing jobs.
+- The tmux launcher was run with mocked tmux/nvidia-smi executables: three detached commands, physical-GPU-to-UUID mapping, the active absolute Python interpreter, and both plan files were verified. This checks launch construction, not real tmux/GPU scheduling on optimus.
+- Pilot/telemetry provenance survives strict merge, export and restore. Monitor files use `.ndjson` so they cannot be mistaken for scientific result JSONL files. The old keyword-only compatibility policy rejects the new generation protocol.
 - Full-plan coverage and non-overlap verified: 1,396 work units (702 comparison, 98 ablation, 588 decoding, 8 intact timing jobs); reviewer-only plan has 242 units. Full plans omit redundant QA generations.
 - Real tiny-model tests confirm partitioned token IDs/HIDE scores and multipass samples match unsplit results; cooperative pauses resume stochastic runs without an error label or duplicated example.
 - Workers tested for pause/resume, skipping complete parts, shared queue locks, active snapshot exclusion, plan checksums and fixed disjoint assignments.
@@ -42,7 +46,7 @@ Tests used Python 3.12 with isolated temporary dependencies including Torch 2.5.
 
 ## Still requires the A100 environment
 
-Real model/tokenizer files, full dataset/cache behavior, BF16/CUDA numerical behavior, stopping/cap rates, memory consumption and throughput. Run pilots before long jobs. No real-model AUC/PCC, 27B performance or latency measurement is claimed by the package tests.
+The old 242-part A100 review suite is now saved and analyzed; see [its report](../results/optimus-review-analysis-01/README.md). The new first-answer-line protocol still requires real-checkpoint pilots and CUDA runs to measure stopping/cap rates, memory and throughput. The local tests alone make no real-model accuracy or latency claim.
 
 The main comparison implements the five described training-free baselines with explicit corrected conventions. This does not certify missing supervised-probe training artifacts, dialogue experiment provenance or a batched/optimized-serving multipass benchmark.
 

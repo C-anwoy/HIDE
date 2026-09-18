@@ -109,7 +109,7 @@ def suite_issues(runs, suite='review'):
     for profile, model, dataset in suite_jobs(suite):
         expected = profile_arguments(profile)
         target_count = expected['samples'] or DATASET_COUNTS[dataset]
-        expected_records = target_count * (expected['repeats'] if profile == 'timing' else 1)
+        expected_records = target_count * (expected['repeats'] if expected['mode'] == 'timing' else 1)
         matches = []
         for r in runs:
             args = r.get('arguments', {})
@@ -285,7 +285,8 @@ def main():
     p.add_argument('--output')
     p.add_argument('--allow-incomplete', action='store_true')
     p.add_argument('--require-suite', action='store_true', help='Compatibility alias for --suite review')
-    p.add_argument('--suite', action='append', default=[], choices=['pilots','review','consistency','ablations','decoding','timing'])
+    p.add_argument('--suite', action='append', default=[], choices=['pilots','review','consistency','ablations','decoding','timing',
+                                                                 'answer-pilots','answer-review'])
     args = p.parse_args()
     if args.verify:
         index = verify(args.verify)

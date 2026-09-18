@@ -38,7 +38,9 @@ class ProtocolTests(unittest.TestCase):
                 cmd, output = command(profile, model, dataset)
                 args=parser().parse_args(cmd[4:])
                 self.assertEqual(args.profile,profile)
-                self.assertEqual(args.samples,25 if profile=='pilot' else 200 if profile=='timing' else 0)
+                self.assertEqual(args.samples,25 if profile in {'pilot','answer-pilot'} else
+                                 200 if profile in {'timing','answer-timing'} else 0)
+                self.assertEqual(args.answer_boundary, 'first-line' if profile.startswith('answer-') else 'legacy')
                 self.assertEqual(args.model_name,model)
                 self.assertEqual(output.parent.name,profile)
         self.assertEqual(len(suite_jobs('review')),16)

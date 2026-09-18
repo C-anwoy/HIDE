@@ -22,14 +22,19 @@ class KeywordMigrationTests(unittest.TestCase):
         policy = keyword_fix_policy()
         current = portable_sources(source_files())
         legacy = policy['legacy_source_sha256']
-        self.assertTrue(compatible_detection_sources(legacy, current))
-        altered = dict(current, **{'hide__runner.py': 'changed'})
+        # The later first-line generation protocol must not inherit the old
+        # keyword-only compatibility exception. Test the historical boundary too.
+        self.assertFalse(compatible_detection_sources(legacy, current))
+        historical = dict(legacy, **{'hide__core.py': policy['fixed_core_sha256'],
+                                    'hide__parts.py': 'keyword-fix-parts'})
+        self.assertTrue(compatible_detection_sources(legacy, historical))
+        altered = dict(historical, **{'hide__runner.py': 'changed'})
         self.assertFalse(compatible_detection_sources(legacy, altered))
         self.assertFalse(compatible_detection_sources(dict(legacy, extra='changed'), current))
         self.assertFalse(compatible_detection_sources(legacy, dict(current, **{'hide__core.py': 'changed'})))
         legacy_paths = {'/original/'+'/'.join(key.split('__', 1)): value for key, value in legacy.items()}
-        accepted = comparison_identity({'arguments': {'mode': 'detection'}, 'source_sha256': legacy_paths}, {'source_sha256': current})
-        self.assertEqual(accepted['source_sha256'], current)
+        accepted = comparison_identity({'arguments': {'mode': 'detection'}, 'source_sha256': legacy_paths}, {'source_sha256': historical})
+        self.assertEqual(accepted['source_sha256'], historical)
         with self.assertRaisesRegex(ValueError, 'Unapproved source'):
             comparison_identity({'arguments': {'mode': 'timing'}, 'source_sha256': legacy_paths}, {'source_sha256': current})
 

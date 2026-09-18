@@ -17,7 +17,7 @@ import time
 import uuid
 
 from hide.export_results import inspect_run
-from hide.parts import load_plan, part_path
+from hide.parts import load_plan, part_path, is_timing
 from hide.provenance import run_lock
 
 parser = argparse.ArgumentParser(description='One-GPU reviewer-priority queue; resume with the same command.')
@@ -34,12 +34,12 @@ if not (math.isfinite(args.hours) and math.isfinite(args.hard_hours)
         and 0 < args.hours < args.hard_hours <= 22) or args.max_parts < 0:
     parser.error('Require 0 < hours < hard-hours <= 22 and max-parts >= 0')
 plan = load_plan(args.plan, check_source=True)
-if plan['suite'] != 'review':
-    parser.error('This launcher requires a review plan. Do not duplicate an existing full-plan run.')
+if plan['suite'] not in {'review', 'answer-review'}:
+    parser.error('This launcher requires a review or answer-review plan. Do not duplicate an existing full-plan run.')
 
 def priority(task):
     # Alternate models after each part within a dataset, preserving both cohorts.
-    stage = 2 if task['profile'] == 'timing' else {'nq_open': 0, 'SQuAD': 1, 'triviaqa': 3, 'race': 4}[task['dataset']]
+    stage = 2 if is_timing(task['profile']) else {'nq_open': 0, 'SQuAD': 1, 'triviaqa': 3, 'race': 4}[task['dataset']]
     if stage == 2:
         model = ['llama3-3b', 'llama3-8b', 'gemma-2-9b', 'gemma-2-27b'].index(task['model'])
         return stage, model, task['dataset']
@@ -47,7 +47,7 @@ def priority(task):
 
 tasks = sorted(plan['tasks'], key=priority)
 if args.kind != 'all':
-    tasks = [task for task in tasks if (task['profile'] == 'timing') == (args.kind == 'timing')]
+    tasks = [task for task in tasks if (is_timing(task['profile'])) == (args.kind == 'timing')]
 if args.dry_run:
     for task in tasks:
         print(task['id'])
@@ -118,11 +118,11 @@ with run_lock(queue / 'priority-launcher.claim'):
             now = time.monotonic()
             if requested or now >= soft:
                 break
-            entry = ([sys.executable, '-u', 'scripts/timing_worker.py'] if task['profile'] == 'timing'
+            entry = ([sys.executable, '-u', 'scripts/timing_worker.py'] if is_timing(task['profile'])
                      else [sys.executable, '-u', '-m', 'hide.parts', 'work'])
             cmd = entry + ['--plan', args.plan,
                    '--queue', str(queue), '--task', task['id'],
-                   '--kind', 'timing' if task['profile'] == 'timing' else 'detection',
+                   '--kind', 'timing' if is_timing(task['profile']) else 'detection',
                    '--hours', str((soft-now)/3600), '--hard-hours', str((hard-now)/3600)]
             print(f'PRIORITY {task["id"]}; {(soft-now)/3600:.2f} work hours remaining', flush=True)
             with tempfile.TemporaryFile(mode='w+') as errors:
@@ -131,7 +131,7 @@ with run_lock(queue / 'priority-launcher.claim'):
                 child = None
                 errors.seek(0)
                 error = errors.read()
-            guard_failure = (code != 0 and task['profile'] == 'timing'
+            guard_failure = (code != 0 and is_timing(task['profile'])
                              and 'ValueError: Timing worker GPU, host, driver or power limit changed' in error
                              and not output.with_suffix('.failed.json').exists())
             if guard_failure:
@@ -149,7 +149,7 @@ with run_lock(queue / 'priority-launcher.claim'):
             print('Part paused or claimed elsewhere; stopping. Resume on this GPU with the same command.')
             break
         completed += 1
-        if task['profile'] == 'timing' and not requested:
+        if is_timing(task['profile']) and not requested:
             # Teardown delay is outside measurements, but counts toward the shared worker budget.
             time.sleep(min(5, max(0, soft-time.monotonic())))
 print(f'Priority launcher stopped: {completed} new parts complete. Use parts.sh status for full coverage.')

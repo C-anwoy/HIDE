@@ -75,11 +75,17 @@ class PartTests(unittest.TestCase):
             # Device names can differ for accuracy; each original manifest is retained.
             part=part_path(queue,plan['tasks'][1]).with_suffix('.manifest.json')
             meta=json.loads(part.read_text()); meta['gpu']='different GPU'; atomic_json(part,meta)
+            (queue/'telemetry').mkdir()
+            (queue/'telemetry'/'timing.ndjson').write_text('{"power_limit":300}\n')
+            (queue/'pilot').mkdir()
+            (queue/'pilot'/'raw.jsonl').write_text('{"id":"pilot"}\n')
             output=root/'merged'; merge(path,[queue],output)
             merged=output/'qa'/'llama3-8b_nq_open.jsonl'
             self.assertTrue(inspect_run(merged)['complete'])
             self.assertEqual([json.loads(line)['id'] for line in merged.read_text().splitlines()],list('01234'))
             self.assertEqual(len(list(output.rglob('*.jsonl'))),1)
+            self.assertEqual((output/'provenance/telemetry_0/timing.ndjson').read_text(),'{"power_limit":300}\n')
+            self.assertEqual((output/'provenance/pilot_0/raw.jsonl.bak').read_text(),'{"id":"pilot"}\n')
             for task in plan['tasks']:
                 raw=part_path(queue,task)
                 saved=output/'provenance'/'parts'/task['id']/'qa'/raw.with_suffix('.jsonl.bak').name

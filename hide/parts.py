@@ -21,7 +21,12 @@ from hide.launch import catalog, command, profile_arguments, suite_jobs
 from hide.provenance import atomic_json, data_lock, file_sha256, queue_lock, run_lock, source_files
 
 
-SUITES = ('review', 'full', 'consistency', 'ablations', 'decoding', 'timing')
+SUITES = ('review', 'full', 'consistency', 'ablations', 'decoding', 'timing',
+          'answer-review', 'answer-pilots')
+
+
+def is_timing(profile):
+    return profile_arguments(profile)['mode'] == 'timing'
 
 
 def portable_sources(sources):
@@ -77,7 +82,7 @@ def part_path(queue, task):
 def choose_tasks(plan, kind='detection', index=0, workers=1):
     if workers < 1 or not 0 <= index < workers:
         raise ValueError('Require 0 <= worker-index < workers')
-    tasks = [t for t in plan['tasks'] if (t['profile'] == 'timing') == (kind == 'timing')]
+    tasks = [t for t in plan['tasks'] if is_timing(t['profile']) == (kind == 'timing')]
     return [t for i, t in enumerate(tasks) if i % workers == index]
 
 
@@ -164,6 +169,8 @@ def _work(args):
         tasks = [t for t in tasks if t['model'] in args.models]
     if args.profiles:
         tasks = [t for t in tasks if t['profile'] in args.profiles]
+    if getattr(args, 'datasets', None):
+        tasks = [t for t in tasks if t['dataset'] in args.datasets]
     if args.task:
         tasks = [t for t in tasks if t['id'] == args.task]
         if not tasks:
@@ -314,7 +321,7 @@ def comparison_identity(meta, plan):
 
 def merge(plan_path, queues, output_root, kind='all'):
     plan = load_plan(plan_path, check_source=True)
-    tasks = [t for t in plan['tasks'] if kind=='all' or (t['profile']=='timing') == (kind=='timing')]
+    tasks = [t for t in plan['tasks'] if kind=='all' or is_timing(t['profile']) == (kind=='timing')]
     if not tasks:
         raise ValueError('No tasks match the merge kind')
     output_root = Path(output_root).resolve()
@@ -354,7 +361,7 @@ def merge(plan_path, queues, output_root, kind='all'):
         timing_platforms = set()
         timing_settings = set()
         for task,path,meta in selected:
-            if task['profile']=='timing':
+            if is_timing(task['profile']):
                 device_record = path.parents[3]/'timing_device.json'
                 if not device_record.is_file():
                     raise ValueError('Timing part lacks the worker platform record')
@@ -388,7 +395,7 @@ def merge(plan_path, queues, output_root, kind='all'):
                         rows={}
                         for line in path.read_bytes().splitlines(keepends=True):
                             row=json.loads(line); rows[(str(row['id']),row.get('repeat',0))]=line
-                        repeats=meta['arguments']['repeats'] if profile=='timing' else 1
+                        repeats=meta['arguments']['repeats'] if is_timing(profile) else 1
                         for example_id in meta['selected_ids']:
                             example=json.loads(rows[(example_id,0)])
                             observed_parent_hash.update(json.dumps([example_id,example['prompt'],example['answer']],
@@ -438,6 +445,12 @@ def merge(plan_path, queues, output_root, kind='all'):
                     shutil.copytree(queue/'sessions',staging/'provenance'/f'worker_sessions_{i}')
                 if (queue/'timing_device.json').is_file():
                     shutil.copy2(queue/'timing_device.json',staging/'provenance'/f'timing_device_{i}.json')
+                for name in ['pilot', 'telemetry']:
+                    if (queue/name).is_dir():
+                        saved = staging/'provenance'/f'{name}_{i}'
+                        shutil.copytree(queue/name, saved)
+                        for raw in saved.rglob('*.jsonl'):
+                            raw.rename(raw.with_suffix('.jsonl.bak'))
             atomic_json(staging/'work_plan.json',plan)
             atomic_json(staging/'merge_manifest.json',dict(kind=kind, plan_sha256=plan['sha256'], parts=provenance,
                 note='Accuracy GPU identities are retained per part; heterogeneous hardware may change floating-point generation.'))
@@ -472,6 +485,7 @@ def main():
     worker.add_argument('--worker-index',type=int,default=0); worker.add_argument('--workers',type=int,default=1)
     worker.add_argument('--models', nargs='+', choices=list(catalog()[0]))
     worker.add_argument('--profiles', nargs='+', choices=list(catalog()[1]['profiles']))
+    worker.add_argument('--datasets', nargs='+', choices=list(DATASET_COUNTS))
     worker.add_argument('--task', help='Run one exact task ID from the plan')
     worker.add_argument('--max-parts', type=int, default=0, help='Stop after this many completed parts; 0 means no count limit')
     worker.add_argument('--hours',type=float,default=18); worker.add_argument('--hard-hours',type=float,default=20)

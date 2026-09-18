@@ -41,7 +41,7 @@ def main():
     (analysis/'analysis_manifest.json').write_text(json.dumps(provenance, indent=2)+'\n')
     for profile in sorted({p.parent.name for p in files}):
         selected = [p for p in files if p.parent.name == profile]
-        if profile == 'pilot':
+        if profile in {'pilot', 'answer-pilot'}:
             continue  # Operational checks must not appear as scientific evaluation tables.
         records = [r for p, r in zip(files, inspected) if p in selected]
         source_versions = {r['source_fingerprint'] for r in records if r.get('source_fingerprint')}
@@ -62,7 +62,7 @@ def main():
         run('plot_mechanistic', *selected, '--output-dir', out/'mechanistic')
         if any(r.get('arguments', {}).get('ablations') for r in records):
             run('analyze_ablations', *selected, '--output-dir', out/'ablations')
-        if profile in {'qa', 'comparison', 'ablations'}:
+        if profile in {'qa', 'answer-qa', 'comparison', 'ablations'}:
             for lo, hi in [(0,1),(2,4),(5,9),(10,20)]:
                 run('evaluate', *selected, '--n-eff-bin', lo, hi, '--bootstrap', args.bootstrap,
                     '--output-dir', out/f'count_{lo}_{hi}')

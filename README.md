@@ -4,7 +4,7 @@ Reproducible code for **HIDE and Seek: Detecting Hallucinations in Language Mode
 
 HIDE scores a generated answer using selected prompt/output hidden states collected during one autoregressive generation. This repository contains the detector, audited QA data loaders, paired baseline experiments, score ablations, synchronized timing, analysis, and verifiable result snapshots.
 
-**Status:** the supported workflow has offline unit and tiny-model integration tests. Full checkpoint/CUDA experiments still need to be run on the A100. This is an experiment repository; it is not an optimized serving implementation. The supplied manuscript is included in `paper/`, with its submitted numbers unchanged pending fresh results.
+**Status:** the 242-part review suite is complete and its [analysis](results/optimus-review-analysis-01/README.md) is saved. It exposed answer-continuation and interpretation issues that must be resolved before submission. The [corrected answer-boundary workflow](docs/ANSWER_BOUNDARY_RUNS.md) provides pilot-gated detection, timing, tmux launchers and retained provenance. It has offline unit and tiny-model integration tests; its real-checkpoint pilots must run on the server. The supplied manuscript in `paper/` still contains its submitted numbers.
 
 ## Repository layout
 
@@ -23,6 +23,9 @@ archive/original/     Original code for provenance and parity tests; unsupported
 ```
 
 ## Update an existing GPU checkout
+
+For the current correction, follow [ANSWER_BOUNDARY_RUNS.md](docs/ANSWER_BOUNDARY_RUNS.md).
+It uses a new plan/output root and does not reuse the old keyword-only migration.
 
 If a running queue stopped on a symbol-only answer with `Output keyword extraction failed`, use the [checked keyword-fallback upgrade](docs/PARALLEL_RUNS.md#upgrade-a-queue-after-the-symbol-answer-fix). It retains complete detection parts with their original provenance, reruns incomplete parts, and creates a new queue without overwriting the original.
 

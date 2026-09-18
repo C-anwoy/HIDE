@@ -70,6 +70,8 @@ class RunnerTests(unittest.TestCase):
             for label, mode, extra in [('detection','detection',[]), ('timing','timing',[]),
                                         ('ablations','detection',['--ablations']),
                                         ('comparison','detection',['--multipass-samples','3']),
+                                        ('answer-detection','detection',['--answer-boundary','first-line']),
+                                        ('answer-timing','timing',['--answer-boundary','first-line']),
                                         ('nucleus','detection',['--decoding','nucleus','--top-p','.8'])]:
                 output=Path(root)/(label+'.jsonl')
                 weights=Path(root)/'weights'; weights.mkdir(exist_ok=True)
@@ -83,11 +85,13 @@ class RunnerTests(unittest.TestCase):
                 rows=[json.loads(x) for x in before.splitlines()]
                 self.assertEqual(len(rows),2 if mode=='detection' else 4)
                 self.assertTrue(all(r['status']=='ok' for r in rows))
+                if label.startswith('answer-'):
+                    self.assertTrue(all(r['answer_boundary']=='first-line' and 'evaluated_text' in r for r in rows))
                 with patch.object(sys,'argv',argv+['--resume']),contextlib.redirect_stdout(io.StringIO()):
                     main()
                 self.assertEqual(output.read_text(),before)
                 # A partition must preserve generation and score for the same seeded example.
-                if label != 'timing':
+                if mode != 'timing':
                     partition_argv = argv.copy()
                     partition_output = Path(root)/(label+'_part.jsonl')
                     partition_argv[partition_argv.index('--output')+1] = str(partition_output)
