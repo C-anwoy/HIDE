@@ -19,4 +19,4 @@ if [[ "$action" == detection ]]; then
 else
   args+=(--wait-for-detection)
 fi
-"$python_bin" -u -m hide.answer_runs "${args[@]}" 2>&1 | tee -a "$result_root/logs/$action-${model:-all}.log"
+"$python_bin" -u scripts/answer_worker.py "${args[@]}" 2>&1 | tee -a "$result_root/logs/$action-${model:-all}.log"

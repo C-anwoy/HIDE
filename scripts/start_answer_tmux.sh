@@ -44,7 +44,7 @@ for suffix in llama gemma timing; do
 done
 init_args=(init --root "$result_root")
 if [[ "$detection_only" == true ]]; then init_args+=(--detection-only); fi
-"$python_bin" -u -m hide.answer_runs "${init_args[@]}"
+"$python_bin" -u scripts/answer_worker.py "${init_args[@]}"
 start_session() {
   local name="$1" gpu="$2" action="$3" model="$4" command_text
   printf -v command_text '%q ' bash "$repo_root/scripts/answer_session.sh" "$python_bin" "$gpu" "$action" "$result_root" "$model"

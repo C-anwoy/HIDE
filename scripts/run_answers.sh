@@ -2,4 +2,4 @@
 set -euo pipefail
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
-exec python -u -m hide.answer_runs "$@"
+exec python -u scripts/answer_worker.py "$@"

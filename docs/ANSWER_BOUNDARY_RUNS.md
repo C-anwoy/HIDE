@@ -29,6 +29,40 @@ bash scripts/run_answers.sh detection --root outputs/answer-detection --models l
 # For the other worker, use --models gemma-2-9b in its own session.
 ```
 
+### If one worker exits with a plan startup lock error
+
+The shell launchers use `scripts/answer_worker.py`, which waits up to 60 seconds
+for concurrent initialization of `plan.json` or `pilot/plan.json`. This operational
+fix does not change experiment sources, fingerprints, plans, or saved results.
+Only actual lock contention on these two files is retried; other errors still fail.
+The direct `python -m hide.answer_runs` entry point retains its fail-fast behavior.
+
+If Llama is already running and Gemma exited, pull the launcher update with
+`git pull --ff-only`, then create only Gemma's interactive session:
+
+```bash
+tmux new-session -s hide-answer-gemma
+```
+
+Inside it, activate the environment and resume Gemma (the interactive shell stays
+open if the worker fails):
+
+```bash
+cd ~/HIDE
+source /home/anwoy/miniconda3/etc/profile.d/conda.sh
+conda activate hide-paper
+bash scripts/answer_session.sh "$(command -v python)" \
+  GPU-4957c764-5f46-b8cb-d688-a4a667c9e288 \
+  detection outputs/answer-detection gemma-2-9b
+```
+
+Detach using **Ctrl+B**, then **D**. If the session already exists, attach with
+`tmux attach-session -t hide-answer-gemma` and inspect it before starting another
+worker. Do not relaunch both sessions while Llama is active. If initialization
+still times out, inspect the lock owner using
+`fuser -v outputs/answer-detection/plan.lock outputs/answer-detection/pilot/plan.lock`.
+Do not delete lock files held by live processes.
+
 After all workers finish:
 
 ```bash
