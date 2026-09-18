@@ -23,6 +23,7 @@
     "decoding": [{"profiles": ["temperature-0.3", "temperature-0.6", "temperature-0.9", "nucleus-0.7", "nucleus-0.8", "nucleus-0.9"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["SQuAD", "nq_open"]}],
     "timing": [{"profiles": ["timing"], "models": ["llama3-3b", "llama3-8b", "gemma-2-9b", "gemma-2-27b"], "datasets": ["SQuAD", "nq_open"]}],
     "answer-pilots": [{"profiles": ["answer-pilot"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}],
+    "answer-detection": [{"profiles": ["answer-qa"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}],
     "answer-review": [{"profiles": ["answer-qa"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}, {"profiles": ["answer-timing"], "models": ["llama3-3b", "llama3-8b", "gemma-2-9b", "gemma-2-27b"], "datasets": ["SQuAD", "nq_open"]}]
   }
 }

@@ -1,7 +1,10 @@
 import contextlib
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -70,6 +73,43 @@ class AnswerBoundaryTests(unittest.TestCase):
         self.assertEqual(len(timing),8)
         self.assertTrue(all(is_timing(t['profile']) and t['start']==0 and t['stop']==200 for t in timing))
         self.assertEqual(len(make_plan('answer-pilots')['tasks']),8)
+
+    def test_detection_only_plan_stays_detection_only_and_rejects_timing(self):
+        from hide.answer_runs import initialize,main
+        from hide.parts import load_plan,is_timing
+        with tempfile.TemporaryDirectory() as td:
+            root=initialize(td,detection_only=True)
+            plan=load_plan(root/'plan.json')
+            self.assertEqual(len(plan['tasks']),234)
+            self.assertFalse(any(is_timing(t['profile']) for t in plan['tasks']))
+            initialize(root)  # Status/resume must not introduce timing jobs.
+            self.assertEqual(load_plan(root/'plan.json'),plan)
+            with patch.object(sys,'argv',['answers','timing','--root',td]), \
+                 contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as stopped:
+                main()
+            self.assertEqual(stopped.exception.code,2)
+
+    def test_tmux_detection_only_launches_two_workers_on_the_same_gpu(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);binary=root/'bin';binary.mkdir();log=root/'tmux.log'
+            tmux=binary/'tmux'
+            tmux.write_text('#!'+sys.executable+'\nimport os,sys,json\n'
+                'if sys.argv[1]=="has-session": sys.exit(1)\n'
+                'with open(os.environ["HIDE_TMUX_TEST_LOG"],"a") as f: f.write(json.dumps(sys.argv[1:])+"\\n")\n')
+            smi=binary/'nvidia-smi';smi.write_text('#!/bin/bash\nprintf "GPU-test-%s\\n" "$2"\n')
+            for file in [tmux,smi]: file.chmod(0o755)
+            env=dict(os.environ,PATH=str(binary)+os.pathsep+str(Path(sys.executable).parent)+os.pathsep+os.environ['PATH'],
+                     HIDE_TMUX_TEST_LOG=str(log))
+            subprocess.run(['bash','scripts/start_answer_tmux.sh','--detection-only','--llama-gpu','1',
+                            '--gemma-gpu','1','--root',str(root/'runs')],env=env,capture_output=True,text=True,check=True)
+            calls=[json.loads(line) for line in log.read_text().splitlines()]
+            self.assertEqual(len(calls),2)
+            self.assertTrue(all('GPU-test-1' in c[-1] and '-d' in c for c in calls))
+            self.assertTrue(all('timing' not in c[-1] for c in calls))
+            self.assertIn('llama3-8b',calls[0][-1]);self.assertIn('gemma-2-9b',calls[1][-1])
+            plan=json.loads((root/'runs/plan.json').read_text())
+            self.assertEqual(plan['suite'],'answer-detection')
+            self.assertEqual(len(plan['tasks']),234)
 
     def test_pilot_gate_preserves_low_accuracy_but_blocks_wrong_boundary_metadata(self):
         from hide.answer_runs import initialize,check_pilots

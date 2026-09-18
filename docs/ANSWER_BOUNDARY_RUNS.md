@@ -1,5 +1,52 @@
 # Corrected answer-boundary experiments
 
+## Current selection: both detection workers on GPU1, retain existing timings
+
+To run the corrected detection experiments only, sharing physical GPU1:
+
+```bash
+bash scripts/start_answer_tmux.sh --detection-only --llama-gpu 1 --gemma-gpu 1
+```
+
+This creates only `hide-answer-llama` and `hide-answer-gemma`, with both processes
+restricted to GPU1. Each worker runs its own pilot and then its full cohorts.
+There is no timing session. The separate `outputs/answer-detection` plan has
+**234 detection parts** plus its eight pilot jobs in the pilot subqueue. It is
+complete when main status shows 234 complete and 0 running; no timing parts are
+missing from this plan. Sharing a GPU is supported for detection; each worker
+still loads its own model/judge and needs sufficient combined free VRAM.
+
+```bash
+bash scripts/run_answers.sh status --root outputs/answer-detection
+```
+
+To resume an expired worker in an activated tmux session on GPU1:
+
+```bash
+export CUDA_VISIBLE_DEVICES=GPU-4957c764-5f46-b8cb-d688-a4a667c9e288
+export HIDE_DEVICE=cuda:0
+bash scripts/run_answers.sh detection --root outputs/answer-detection --models llama3-8b
+# For the other worker, use --models gemma-2-9b in its own session.
+```
+
+After all workers finish:
+
+```bash
+python -m hide.export_results --source outputs/answer-detection --output results/answer-detection-complete-01
+python -m hide.export_results --verify results/answer-detection-complete-01
+git add results/answer-detection-complete-01
+git commit -m "Save corrected detection-only experiments"
+git push origin main
+```
+
+The original eight timing jobs stay in the earlier review snapshot. They measure
+the earlier stopping protocol with the recorded shared-host limitations. Report
+them separately and label the generation protocol; they are not measurements of
+the corrected first-answer-line protocol. No additional timing run is scheduled.
+
+The rest of this guide also documents the optional full detection-plus-timing
+workflow. Use the detection-only command above for the current selection.
+
 ## Why these runs
 
 The completed review snapshot is preserved at `results/optimus-review-complete-01`.

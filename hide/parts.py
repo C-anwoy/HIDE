@@ -22,7 +22,7 @@ from hide.provenance import atomic_json, data_lock, file_sha256, queue_lock, run
 
 
 SUITES = ('review', 'full', 'consistency', 'ablations', 'decoding', 'timing',
-          'answer-review', 'answer-pilots')
+          'answer-review', 'answer-pilots', 'answer-detection')
 
 
 def is_timing(profile):

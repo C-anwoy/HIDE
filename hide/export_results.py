@@ -286,7 +286,7 @@ def main():
     p.add_argument('--allow-incomplete', action='store_true')
     p.add_argument('--require-suite', action='store_true', help='Compatibility alias for --suite review')
     p.add_argument('--suite', action='append', default=[], choices=['pilots','review','consistency','ablations','decoding','timing',
-                                                                 'answer-pilots','answer-review'])
+                                                                 'answer-pilots','answer-review','answer-detection'])
     args = p.parse_args()
     if args.verify:
         index = verify(args.verify)

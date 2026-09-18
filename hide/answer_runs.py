@@ -19,13 +19,18 @@ from hide.provenance import atomic_json, file_sha256, queue_lock, run_lock
 MODELS = ['llama3-8b', 'gemma-2-9b']
 
 
-def initialize(root):
+def initialize(root, detection_only=False):
     root = Path(root).resolve()
-    for path, suite in [(root/'plan.json', 'answer-review'),
+    main_suite = 'answer-detection' if detection_only else 'answer-review'
+    for path, suite in [(root/'plan.json', main_suite),
                         (root/'pilot/plan.json', 'answer-pilots')]:
         with run_lock(path):
             if path.exists():
-                if load_plan(path, check_source=True)['suite'] != suite:
+                actual = load_plan(path, check_source=True)['suite']
+                allowed = {suite}
+                if path == root/'plan.json' and not detection_only:
+                    allowed.add('answer-detection')  # Existing detection-only plans stay detection-only.
+                if actual not in allowed:
                     raise ValueError(f'Wrong suite at {path}; choose a new output root')
             else:
                 atomic_json(path, make_plan(suite))
@@ -185,6 +190,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('action', choices=['init','pilot','check-pilot','detection','timing','status'])
     p.add_argument('--root', default='outputs/answer-boundary')
+    p.add_argument('--detection-only', action='store_true',
+                   help='Create a 234-part plan without timing; use a new result root')
     p.add_argument('--models', nargs='+', choices=MODELS, default=MODELS)
     p.add_argument('--datasets', nargs='+', choices=['SQuAD','race','nq_open','triviaqa'],
                    help='Optional detection-only subset; the plan still retains every required job')
@@ -201,13 +208,18 @@ def main():
         p.error('--wait-for-detection is only valid for timing')
     if args.datasets and args.action != 'detection':
         p.error('--datasets is only valid for detection')
+    if args.detection_only and args.action == 'timing':
+        p.error('A detection-only plan cannot run timing')
     # Fix CPU thread budgets for these new runs and record them in each runtime.
     # These values take effect before the child imports Torch/NumPy.
     os.environ.update(OMP_NUM_THREADS='4', MKL_NUM_THREADS='4', OPENBLAS_NUM_THREADS='1',
                       TOKENIZERS_PARALLELISM='false')
-    root = initialize(args.root)
+    root = initialize(args.root, args.detection_only)
+    plan = load_plan(root/'plan.json', check_source=True)
+    if args.action == 'timing' and plan['suite'] == 'answer-detection':
+        p.error('This plan is detection-only; it does not include timing jobs')
     if args.action == 'init':
-        print(f'Plans ready: {root}/plan.json (242 parts); {root}/pilot/plan.json (8 pilots)')
+        print(f'Plans ready: {root}/plan.json ({len(plan["tasks"])} parts); {root}/pilot/plan.json (8 pilots)')
         return
     if args.action == 'status':
         from hide.parts import status
