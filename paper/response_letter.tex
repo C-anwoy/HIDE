@@ -2,15 +2,21 @@
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,booktabs,enumitem,xcolor,hyperref}
 \usepackage[most]{tcolorbox}
+% Keep a short heading with the text that follows it.
+\newcommand{\Needspace}[1]{\par\begingroup
+  \dimen0=\pagegoal\advance\dimen0 by -\pagetotal
+  \ifdim\dimen0<#1\relax\newpage\fi\endgroup}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
 \newcommand{\reviewcomment}[2]{%
+  \Needspace{9\baselineskip}%
   \subsection*{#1}%
   \begin{tcolorbox}[enhanced,breakable,colback=gray!8,colframe=gray!50,
     boxrule=0pt,borderline west={2pt}{0pt}{gray!55},sharp corners]
   \itshape #2
   \end{tcolorbox}}
 \newcommand{\response}{\textbf{Response.}\ }
+\newcommand{\location}[1]{\par\textbf{Location in the revised paper:} #1\par}
 
 \begin{document}
 \begin{center}\Large\textbf{Responses to Reviewers}\end{center}
@@ -21,81 +27,104 @@
 
 Dear Action Editor and Reviewer,
 
-Thank you for your detailed feedback and your positive assessment of the revised manuscript. We address each editorial and reviewer point below. Changes in the manuscript are marked in magenta using \texttt{\textbackslash revisionr3}. The additional experiments clarify both the strengths and the limitations of HIDE; we report the baseline comparisons even where HIDE does not retain an advantage.
+Thank you for your careful review and helpful suggestions. We address each comment below. Changes in the paper are marked in magenta using \texttt{\textbackslash revisionr3}. The locations below refer to the revised paper.
 
 \textbf{Summary of changes}
 \begin{itemize}[leftmargin=*,nosep]
-\item Added a matched comparison of HIDE, prompt attention mass, and an input-derived norm proxy on 2,000 fixed examples per dataset and model, using explicit first-answer-line stopping.
-\item Recomputed Figure 2 on these same cohorts, explicitly reported Gemma-2-9B, and qualified the mechanistic interpretation.
-\item Reconciled Figure 3 and the latency percentages against the timing sheet, and added paired overhead measurements and Figure 4 including Gemma-2-27B.
-\item Specified the hardware, cohort, comparator, and averaging rule for each timing experiment; optimized-serving arguments are explicitly untested.
-\item Corrected the listed presentation issues and expanded the limitations, including a selected-token-count control.
+\item Added attention mass and an input-derived norm as standalone detection baselines, evaluated alongside HIDE on the same answers.
+\item Updated Figure 2 and Section 4.4 for both Llama-3-8B and Gemma-2-9B, and qualified the interpretation of their correlations.
+\item Corrected the inconsistent latency example and made the timing figures, tables, and percentages agree.
+\item Added Gemma-2-27B to the timing analysis and limited the scaling claim to the tested models and the stated score complexity.
+\item Corrected the listed typos, made the requested captions self-contained, and explained the limits of the new results.
 \end{itemize}
-
-We also checked the benchmark narrative against its displayed tables without changing the per-dataset measurements. This corrects the factuality win count to 9/12, the factuality mean relative gain over the best evaluated uncertainty baseline to 23.3\%, and the faithfulness gain over the best evaluated multi-pass baseline to 4.2\%. The NQ supervised-probe discussion now reflects its mixed results. Full-benchmark tables and new paired results remain explicitly separated.
 
 \section*{Responses to the Action Editor}
 
 \reviewcomment{AE1. Consistency of latency numbers}{There are inconsistent descriptions regarding latency time in Section 6.4 and Figure 4.}
-\response We traced the inconsistency to mixing datasets. In the benchmark timing sheet, Llama-3-8B on SQuAD has base latency 1.6169~s and HIDE total 1.8445~s, giving 0.2276~s overhead (14.08\%). The 1.7107~s HIDE total belongs to RACE, whose base is 1.5021~s. We corrected this example and regenerated Figure 3 from the sheet. The separate A100 PCIe paired-overhead experiment gives 0.9277~s base and 1.1587~s HIDE total on SQuAD (0.2310~s, 24.90\%). Figure 4 and the paired timing table use that same experiment. Section 6.4 now identifies each platform and comparison explicitly; values from different experiments are never combined. All arithmetic uses unrounded values, and the constant-overhead claim is removed.
+\response We found that the example mixed SQuAD and RACE timings. For Llama-3-8B on SQuAD, the timing sheet gives 1.6169~s for base generation and 1.8445~s for HIDE, an overhead of 0.2276~s (14.08\%). The 1.7107~s HIDE value belongs to RACE, whose base is 1.5021~s. We corrected the example and regenerated Figure 3 from the sheet.
+
+The separate paired timing experiment on A100 PCIe gives 0.9277~s base and 1.1587~s HIDE total on Llama-3-8B/SQuAD, an overhead of 0.2310~s (24.90\%). Table 6 and Figure 4 use these same paired measurements. The text now identifies the hardware and protocol of each experiment, and never combines their values. Differences and percentages are calculated before rounding.
+\location{Section 6.4; Figures 3 and 4; Table 6.}
 
 \reviewcomment{AE2. Section 4.4 and Gemma-2-9B}{Rephrase the claims in Section 4.4 and explicitly discuss Gemma-2-9B in the main text.}
-\response Section 4.4 now describes observational associations rather than a validated causal mechanism. Figure 2 is recomputed on the corrected paired cohorts. Gemma-2-9B's HIDE--norm correlations are positive on SQuAD and NQ: 0.126 and 0.215. Llama-3-8B's corresponding correlations are 0.003 and 0.367. These revised values supersede the earlier figure's differently selected/generated observations. We withdraw a general inverse ``magnitude versus precision'' interpretation and distinguish the measured unprojected norm proxy from an actual residual update.
+\response We revised Section 4.4 to describe what the correlations show without treating them as a causal explanation. Figure 2 now uses the same answers as the new detector comparison. Gemma-2-9B has positive HIDE--norm correlations on SQuAD and NQ: +0.126 and +0.215. Llama-3-8B has +0.003 and +0.367, respectively. These values replace the previous figure's results, which used different stopping and example-selection conditions. We explain this protocol change in Section 5. The results do not support a general inverse relationship between update magnitude and precision. We also clarify that the measured norm omits value and output projections and is a proxy for the input-derived update.
+\location{Section 4.4 and Figure 2; Section 5, ``Direct comparison with attention and norm baselines.''}
 
 \reviewcomment{AE3. Model-size scaling}{Add at least one substantially larger model or soften the model-size scalability claim.}
-\response We add Gemma-2-27B to the paired timing analysis. Its mean overhead is 0.1969~s on SQuAD (95\% CI [0.1644, 0.2365]) and 0.0806~s on NQ ([0.0751, 0.0864]). We also narrow the claim: the results demonstrate feasibility at the tested scales, not constant overhead or a universal scaling law. Hidden widths span 3,072--4,608, and generated lengths differ across models. The retained $\mathcal O(d)$ argument concerns score arithmetic at fixed selected-token count, not total pipeline latency or parameter count.
+\response We added Gemma-2-27B. Its mean added overhead is 0.1969~s on SQuAD (95\% confidence interval [0.1644, 0.2365]) and 0.0806~s on NQ ([0.0751, 0.0864]). We also narrowed the claim: the measurements show that HIDE can run at these tested scales, but do not establish constant overhead across models. The tested hidden widths span 3,072--4,608, and answer lengths differ. The $\mathcal O(d)$ statement is retained only for computing the score at a fixed number of selected tokens, not for total pipeline latency.
+\location{Section 6.4, ``Model scale and complexity''; Figure 4; Tables 6 and F.4.}
 
-\reviewcomment{AE4. Standalone proxy baselines}{Add attention mass and input-derived update norm as standalone detection baselines, with discussion.}
-\response Section 6.2 now reports all three detectors on identical generations and labels for Llama-3-8B and Gemma-2-9B across SQuAD, RACE, NQ, and TriviaQA. Each cohort contains 2,000 examples from the existing seed-42 shuffled order; the choice is deadline-driven and not based on detector outcomes. AUC and PCC, paired confidence intervals, and complementary ROUGE-L results are provided. Attention has higher sentence-similarity AUROC in seven of eight settings; HIDE is stronger on Gemma/RACE. We explicitly report the losses, including all four closed-book factuality settings, and revise the claim of added value beyond attention accordingly. Panel A of the new detector tables reproduces the unchanged Appendix B HIDE values for reference. Panel B is the matched stopping-condition experiment; its caption explicitly prohibits interpreting cross-panel differences as detector comparisons.
+\reviewcomment{AE4. Standalone detection baselines}{Add attention mass and input-derived update norm as standalone detection baselines, with discussion.}
+\response We added AUC and PCC for HIDE, attention mass, and the input-derived norm on the same 2,000 examples per dataset and model, covering Llama-3-8B and Gemma-2-9B on all four QA datasets. Attention has higher AUC$_s$ in seven of eight settings, including all four closed-book factuality settings. HIDE performs better on Gemma-2-9B/RACE. We report both outcomes and discuss their implications.
+
+Panel A of the new tables repeats the full-benchmark HIDE values from Appendix B for reference. Panel B compares all three detectors on identical answers under the first-answer-line stopping conditions. The captions explain why values from the two panels cannot be compared directly.
+\location{Section 5; Section 6.2 and Table 4; Appendix F, Tables F.1--F.3.}
 
 \section*{Responses to Reviewer 1}
 
 \subsection*{Summary and strengths}
-We appreciate the reviewer's assessment that the problem is well motivated and that the single-generation, training-free design is useful. We also thank the reviewer for recognizing the added structural analysis, breadth of evaluation, and ablations. The present revision retains these experiments while qualifying conclusions where the new controls require it.
+Thank you for recognizing the motivation, single-pass design, evaluation, and ablations. We have retained these experiments and revised the interpretation where the additional comparisons call for it.
 
-\reviewcomment{Weakness 1. Necessity of HSIC beyond attention}{Would a cheaper attention-mass detector match HIDE? Report attention mass and the input-derived norm as standalone baselines.}
-\response We added the direct matched comparison and report attention's stronger result in seven of eight settings, including the four closed-book factuality settings. HIDE remains stronger on Gemma/RACE, with a paired AUC$_s$ advantage of 6.69 percentage points (pointwise 95\% CI [3.70, 9.69]); the direction also holds for ROUGE-L. Thus attention mass does not dominate in every tested setting, but these data do not demonstrate universal necessity of nonlinear HSIC. We frame HIDE's contribution as an evaluated, training-free, single-generation detector using hidden states without attention-weight extraction. This access requirement differs from the attention baseline; both are training-free. We do not claim an unmeasured speed advantage or ensemble improvement.
+\reviewcomment{Weakness 1. Value beyond attention mass}{Would a cheaper attention-mass detector match HIDE? Report attention mass and the input-derived norm as standalone baselines.}
+\response The direct comparison shows that attention mass is a strong baseline. HIDE performs better on Gemma-2-9B/RACE, with an AUC$_s$ advantage of 6.69 percentage points (95\% confidence interval [3.70, 9.69]); the advantage also holds with ROUGE-L. Attention performs better in the other seven settings. We therefore present HIDE as one useful detection option, without claiming that HSIC is necessary in every setting.
 
-The main text now relates this distinction to \href{https://aclanthology.org/2024.emnlp-main.84/}{Lookback Lens (Chuang et al., 2024)}, \href{https://aclanthology.org/2020.emnlp-main.574/}{Kobayashi et al. (2020)}, and \href{https://arxiv.org/abs/2205.14135}{FlashAttention (Dao et al., 2022)}. These works motivate attention baselines, distinguish attention weights from transformed value contributions, and explain why attention-weight access may require implementation work. They do not prove HIDE superior. The selected-token-count control is retained as a limitation on its nonlinear interpretation.
+HIDE uses hidden states without requiring attention weights. This can matter when an implementation exposes hidden states but not attention weights. We discuss this distinction using Lookback Lens, the analysis of attention and value-vector norms by Kobayashi et al., and FlashAttention. Both HIDE and our raw attention baseline are training-free. We do not claim a measured speed advantage over attention or an untested benefit from combining the detectors.
+
+We also report a selected-token-count control, which closely tracks HIDE. This limits attributing the score's performance specifically to nonlinear dependence, and is discussed in the paper.
+\location{Section 6.2, ``Matched comparison with attention and norm baselines'' and ``Interpretation of the baseline comparison''; Table 4; Tables F.1--F.3; Limitations.}
 
 \reviewcomment{Weakness 2. Model-dependent magnitude versus precision}{The negative HIDE--norm correlation for Llama reverses sign for Gemma, so the general interpretation is not supported.}
-\response We agree. The main text now explicitly reports Gemma's positive correlations and states that the relationship varies with model, dataset, and evaluation protocol. In the corrected cohorts, the earlier negative Llama/SQuAD correlation is not reproduced. We remove the causal account of noisy updates and no longer infer semantic precision from a negative correlation.
+\response We agree and have removed the general inverse interpretation. The main text now reports both models explicitly. Gemma's norm correlations are positive, and the earlier negative Llama/SQuAD correlation is not reproduced under the first-answer-line protocol. We state that the relationship depends on the model, dataset, and evaluation conditions. The QCBW comparison remains a way to examine incorrect answers that are close to the question in topic; it is not treated as causal evidence.
+\location{Section 4.4 and Figure 2; Section 5 for the stopping conditions.}
 
-\reviewcomment{Weakness 3. Efficiency inconsistency and limited scaling evidence}{The efficiency numbers are internally inconsistent, and two nearby hidden dimensions provide limited evidence for substantially larger models.}
-\response The dataset mix-up and the separate timing platforms are clarified under AE1. Figure 3 and its percentages are regenerated from the supplied timing sheet. Figure 4 uses paired generation-overhead measurements for four models up to Gemma-2-27B, with uncertainty intervals. We explicitly limit parameter-scale and hidden-width claims and distinguish score complexity from total runtime.
+\reviewcomment{Weakness 3. Efficiency and limited scaling evidence}{The efficiency numbers are internally inconsistent, and two nearby hidden dimensions provide limited evidence for substantially larger models.}
+\response We corrected the dataset mix-up described in AE1 and identified the two timing experiments clearly. Figure 3 reports the baseline comparison; Figure 4 reports paired overhead measurements for four models, including Gemma-2-27B. We removed the constant-overhead claim and distinguish score complexity from total runtime.
+\location{Section 6.4; Figures 3 and 4; Tables 6 and F.4.}
 
-\reviewcomment{Substantive encouragement. AUC/PCC for both proxies, especially factuality}{Report attention and norm alongside HIDE, especially on NQ and TriviaQA; discuss settings where HIDE does not retain an advantage.}
-\response We report AUC$_s$, PCC$_s$, AUC$_r$, and PCC$_r$ on common cohorts. PCC uses continuous reference similarity; AUROC uses thresholded correctness. Higher raw scores predict correctness, with no test-set choice of score direction. On TriviaQA, HIDE/attention AUC$_s$ is 57.01/73.68 for Llama and 49.83/66.94 for Gemma. The norm baseline also exceeds HIDE on both TriviaQA settings. Thus attention to the question remains useful even without retrieved evidence. NQ and TriviaQA are explicitly identified as closed-book, open-domain factuality tasks.
+\reviewcomment{Substantive encouragement. AUC/PCC, especially for factuality}{Report attention and norm alongside HIDE, especially on NQ and TriviaQA; discuss settings where HIDE does not retain an advantage.}
+\response We report AUC$_s$, PCC$_s$, AUC$_r$, and PCC$_r$ for all three detectors on the same answers. Attention performs better on both NQ and TriviaQA for both models. For example, TriviaQA AUC$_s$ is 57.01 for HIDE versus 73.68 for attention on Llama, and 49.83 versus 66.94 on Gemma. The norm also performs better than HIDE on both TriviaQA settings. The discussion explicitly recognizes attention to the question as a useful signal even without a supplied evidence passage.
 
-The stopping audit found that the earlier implementation could generate another question after an answer. We therefore use an explicit first-answer-line criterion for this new comparison and recompute all detectors on the same generations. We retain the full-benchmark tables separately, disclose their stopping limitation, and do not mix their HIDE aggregates with the new proxy results. All 16,000 selected records are retained, including capped and fallback cases.
+For this comparison, generation stops after the first nonempty answer line, avoiding continuations into another question. All three detectors were computed on these same generations. We retain all 16,000 selected records, including capped and empty answers and cases without output states. The sample size was chosen for the available compute time after earlier runs had been inspected; examples were not selected by detector performance. The full-benchmark results remain separate because their stopping conditions differ.
 
-An additional control evaluates the adapted score on all-ones Gram matrices, giving $(n-1)/n^2$ for selected count $n\geq1$ (zero for the no-state fallback). This control correlates with HIDE at least 0.9987 and differs in AUC$_s$ by less than 0.43 percentage points across the eight settings. We disclose this result and qualify attributing HIDE's predictive behavior specifically to nonlinear representational dependence.
+The additional control uses $(n-1)/n^2$, where $n$ is the actual selected-token count, and zero when no output states are available. Its PCC with HIDE is at least 0.9987, and its AUC$_s$ differs by less than 0.43 percentage points in every setting. We report this limitation on interpreting the score as evidence of nonlinear dependence. We also clarify the sampling assumptions of the asymptotic result in Appendix A.3 and make Algorithm 1 and Section 4.3.1 explicit about cached states, keyword matching, and the zero-score fallback, in agreement with the implementation.
+\location{Algorithm 1 and Section 4.3.1; Section 5; Section 6.2 and Table 4; Appendix A.3; Appendix F, Tables F.1--F.3; Limitations.}
 
 \reviewcomment{Required minor revision 1. Reconcile efficiency values}{Correct the inconsistent complete-pipeline and overhead values and ensure Section 6.4, Figure 4, and the response letter agree.}
-\response The corrected benchmark example is 1.6169~s base and 1.8445~s HIDE total on Llama-3-8B/SQuAD, hence 0.2276~s overhead (14.08\%); the 1.7107~s value is for RACE. The paired scaling suite is labeled separately and supplies both its table and Figure 4. Each paired model/dataset uses 200 queries, ten warm-up pairs, and three measured base/HIDE pairs per query. Repeats are averaged within queries; all observations are retained; pointwise intervals bootstrap queries. Total includes generation with state capture, keyword extraction, scoring, and bookkeeping, but excludes loading and correctness evaluation. Percentage overhead is mean incremental overhead divided by mean base latency. These timings use the benchmark stopping conditions, not the first-answer-line comparison.
+\response Corrected as detailed in AE1. The benchmark Llama-3-8B/SQuAD example is now 1.6169~s base, 1.8445~s total, and 0.2276~s overhead (14.08\%). The separate paired experiment supplies both Table 6 and Figure 4. It uses 200 queries per model/dataset, ten warm-up pairs, and three measured base/HIDE pairs per query. Repeats are averaged within each query before reporting means and confidence intervals. Total latency includes generation with hidden-state capture, keyword extraction, scoring, and bookkeeping; loading and correctness evaluation are excluded. All measurements are retained. These timings use the benchmark stopping conditions.
+\location{Section 6.4; Table 6; Figure 4.}
 
-\reviewcomment{Required minor revision 2. Explicit positive Gemma correlations}{Qualify the magnitude-versus-precision interpretation and explicitly state Gemma-2-9B's positive update-norm correlations.}
-\response Section 4.4 and the new Figure 2 give Gemma's corrected SQuAD/NQ correlations as +0.126/+0.215, and Llama's as +0.003/+0.367. We distinguish these from the earlier draft's values and remove the unsupported general inverse relationship. QCBW remains a descriptive topicality control, not causal evidence.
+\reviewcomment{Required minor revision 2. Explicit Gemma correlations}{Qualify the magnitude-versus-precision interpretation and explicitly state Gemma-2-9B's positive update-norm correlations.}
+\response Section 4.4 and Figure 2 now give Gemma's correlations as +0.126 on SQuAD and +0.215 on NQ, and Llama's as +0.003 and +0.367, respectively. The text explains that a larger norm does not by itself establish more precise use of input information. We removed the explanation that attributed hallucination to noisy updates based on a negative correlation.
+\location{Section 4.4 and Figure 2.}
 
-\reviewcomment{Encouraged minor revision 1. One efficiency framing}{Frame the 51\% figure as a standard-HuggingFace baseline comparison; optimized-serving and lower-bound statements must remain hypothetical.}
-\response We verified the percentage directly from the timing sheet. For each model and method we average the four dataset latencies equally, then average the six model-specific percentage reductions. The resulting reduction is 50.8\% relative to EigenScore, 50.8\% relative to lexical similarity, and 53.2\% relative to LN-Entropy. The mean across all three comparators is 51.6\%. The abstract, introduction, Figure 3 caption, and Section 6.4 consistently use 50.8\% relative to five-generation EigenScore as the headline comparison under standard HuggingFace inference. We remove lower-bound and guaranteed production-speedup claims. The vLLM/PagedAttention discussion remains an architectural argument; no optimized-serving measurement is claimed. Paired timing limitations acknowledge shared-host effects and absent continuous clock/power telemetry.
+\reviewcomment{Encouraged minor revision 1. Consistent efficiency framing}{Frame the 51\% figure as a standard-HuggingFace baseline comparison; optimized-serving and lower-bound statements must remain hypothetical.}
+\response We verified the percentage against the timing sheet. For each model and method, we first average the four dataset latencies equally. We then average the six model-specific percentage reductions. This gives 50.8\% relative to EigenScore, 50.8\% relative to lexical similarity, and 53.2\% relative to LN-Entropy. The paper consistently uses 50.8\% relative to five-generation EigenScore under standard HuggingFace inference. We removed guaranteed speedup and lower-bound claims. The discussion of optimized serving is explicitly an implementation argument, with no vLLM or PagedAttention measurements claimed.
+\location{Abstract; Section 1 contributions; Section 6.4; Figure 3; Conclusions.}
 
-\reviewcomment{Encouraged minor revision 2. Larger model or narrower scaling claim}{Add a substantially larger model or soften scalability claims; retain the scoped $\mathcal O(d)$ argument.}
-\response We do both: add Gemma-2-27B and narrow the empirical claim. Figure 4 reports measured overhead with intervals, while the appendix reports token lengths. At fixed selected count $n$, RBF Gram construction costs $\mathcal O(n^2d)$ and the implementation adds $\mathcal O(n^3)$ matrix arithmetic; this is $\mathcal O(d)$ in hidden width for fixed $n$. It is not an end-to-end scaling law.
+\reviewcomment{Encouraged minor revision 2. Larger model or narrower claim}{Add a substantially larger model or soften scalability claims; retain the scoped $\mathcal O(d)$ argument.}
+\response We did both: added Gemma-2-27B and narrowed the claim. At fixed selected count $n$, RBF Gram construction costs $\mathcal O(n^2d)$, and the matrix operations add $\mathcal O(n^3)$. This is $\mathcal O(d)$ in hidden width when $n$ is fixed. It does not describe the cost of generation, keyword extraction, or the complete pipeline. Answer lengths and timing uncertainty are reported so the scope of the comparison is clear.
+\location{Section 6.4, ``Model scale and complexity''; Figure 4; Tables 6 and F.4.}
 
 \reviewcomment{Typographic point 1}{Replace ``actuality hallucinations'' with ``factuality hallucinations'' in Section 6.2.}
-\response Corrected and checked throughout the manuscript.
+\response Corrected.
+\location{Section 6.2, opening paragraph.}
 
 \reviewcomment{Typographic point 2}{Replace ``perfromance'' with ``performance'' in the introduction to Section 6.}
-\response Corrected; the surrounding sentence's agreement is also corrected.
+\response Corrected and simplified the surrounding sentence.
+\location{Section 6, introductory paragraphs.}
 
 \reviewcomment{Typographic point 3}{Replace ``verbatim repeatation'' with ``verbatim repetition'' in Section 8.2.}
-\response Corrected and checked throughout the manuscript.
+\response Corrected.
+\location{Section 8.2, paragraph discussing prompt copying.}
 
 \reviewcomment{Typographic point 4}{Verify the apparent empty contribution bullet before ``Despite its single-pass nature''.}
-\response The contributions list contains three populated items, with no empty item. We also revised their wording to reflect the scope of the new baseline and efficiency results.
+\response We checked the rendered list. It has three populated items and no empty bullet. The wording now agrees with the baseline and timing results.
+\location{Section 1, contributions list.}
 
 \reviewcomment{Typographic point 5}{Confirm that the captions of Figures 3, 5, 6, and 8 are fully self-contained.}
-\response We revised these captions to identify the models, datasets, measured quantity, comparison, and relevant protocol. Figure 3 specifies the equal-weight averaging rule, standard-inference platform, and EigenScore comparator; Figure 4 and its timing table specify the paired-overhead platform. Figures 5, 6, and 8 name SQuAD/NQ and Llama/Gemma, define AUC$_s$ and its correctness threshold, and identify the varied budget, layer, or estimator. We remove mechanistic conclusions that cannot be established from these plots alone.
+\response We checked and revised all four captions. Figure 3 names the models, datasets, timing platform, averaging rule, and EigenScore comparison. Figures 5, 6, and 8 name the models and datasets, explain what is varied, and define AUC$_s$ using the sentence-similarity correctness threshold. They can be read without relying on the response letter.
+\location{Figure 3; Figures 5, 6, and 8 in Sections 7.2--7.5.}
+
+We also checked the numerical summaries against the displayed benchmark tables. Without changing their per-dataset values, we corrected the factuality win count to 9/12, its mean relative AUC gain over the better uncertainty baseline to 23.3\%, and the faithfulness gain over the best multi-pass baseline to 4.2\%. The probe discussion now describes the mixed NQ results. These corrections appear in Sections 6, 6.1, and 6.2.
 
 \end{document}

@@ -85,3 +85,14 @@ a second time. Full table definitions are supplied as separate `.tex` files.
   response letter, and **current original decision letter** together. The existing
   benchmark measurements are not newly validated by these controls. Acceptance
   cannot be guaranteed by the completed edits.
+
+## Final editorial and PDF review
+
+- Simplified the added prose and response letter; removed revision-process narration from the paper while retaining the sampling/stopping limitations.
+- Added a location to every editor/reviewer response and checked section, figure, and table numbering against the compiled paper.
+- Clarified Algorithm 1 and Section 4.3.1 against the existing implementation: cached state extraction, repeated keyword matches, effective selected count, and zero-score fallback. No code or score formula changed.
+- Scoped the theoretical statements to the adapted score, stated the independent paired-sampling assumption in Appendix A.3, and replaced the informal multiplicative approximation with a direct coefficient-bound proof.
+- Rechecked all added/replaced manuscript wording against revision markup; structural LaTeX commands and unchanged text are not colored.
+- Preserved all experimental table cells from the preceding version and all original Appendix B numeric rows.
+- Corrected orphan headings and response page breaks; rebuilt the paper (47 pages), response (6 pages), and source ZIP.
+- Exact Overleaf upload instructions are in `docs/OVERLEAF_UPLOAD.md`.

@@ -1,0 +1,35 @@
+{
+  "paper/files/tables/paired_s.tex": "numeric table rows unchanged",
+  "paper/files/tables/paired_r.tex": "numeric table rows unchanged",
+  "paper/files/tables/count_control.tex": "numeric table rows unchanged",
+  "paper/files/tables/timing_lengths.tex": "numeric table rows unchanged",
+  "paper/files/tables/paired_differences.tex": "numeric table rows unchanged",
+  "paper/files/tables/timing_revision.tex": "numeric table rows unchanged",
+  "paper/files/results_table.tex": "numeric table rows unchanged",
+  "paper/files/results_summ_table.tex": "numeric table rows unchanged",
+  "appendix_b_submitted_values": "unchanged",
+  "missing_tex_inputs_or_figures": [],
+  "pdfs": {
+    "COLI_template": {
+      "pages": 47,
+      "sha256": "0d48633de0cf799ec9552cfa00e3c260102fdd853c890e9a071ccdb78a1a49f0"
+    },
+    "response_letter": {
+      "pages": 6,
+      "sha256": "5f863c5208ea3b232bb9cd4e98088660cea89af453523015a0c830aa736c6c48"
+    }
+  },
+  "locations_verified": [
+    "4.4 and Figure 2",
+    "5 attention/norm protocol",
+    "6.2 and Table 4",
+    "6.4 and Figures 3/4 and Table 6",
+    "7.2/7.3/7.5 and Figures 5/6/8",
+    "8.2",
+    "Appendix A.3",
+    "Appendix F and Tables F.1-F.4"
+  ],
+  "revision_markup": "All changed visible manuscript wording and new table content enclosed in revisionr3; structural layout/input commands excluded.",
+  "visual_review": "All pages reviewed; expanded checks of changed tables, theory, appendix opening and final response page.",
+  "no_new_gpu_runs": true
+}

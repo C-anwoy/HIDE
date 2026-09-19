@@ -57,6 +57,10 @@
 % the typewriter font.
 \usepackage{inconsolata}
 \usepackage{enumitem}
+% Keep a short heading with the text that follows it.
+\newcommand{\Needspace}[1]{\par\begingroup
+  \dimen0=\pagegoal\advance\dimen0 by -\pagetotal
+  \ifdim\dimen0<#1\relax\newpage\fi\endgroup}
 %Including images in your LaTeX document requires adding
 %additional package(s)
 \usepackage{graphicx}

@@ -24,3 +24,5 @@ Before submission, review the qualifications of historical results and include
 the current original decision letter alongside the revised manuscript and response.
 
 Changes since the submitted source are marked with `\revisionr3{}` in magenta. The supported contribution and limits relative to attention are discussed with three primary references. Benchmark comparison and paired-overhead timing have explicit platforms and averaging rules; the manuscript does not label them as historical.
+
+Final editorial review completed: 47-page paper and 6-page response. Every comment has a location in the revised manuscript. Algorithm wording and Appendix A.3 assumptions now agree with the implementation and score limitations. See `OVERLEAF_UPLOAD.md` for upload instructions.

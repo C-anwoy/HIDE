@@ -1,6 +1,6 @@
 # Revision deliverables — 19 September 2026
 
-- `pdf/COLI_template.pdf`: compiled revised manuscript, 49 pages.
+- `pdf/COLI_template.pdf`: compiled revised manuscript, 47 pages.
 - `pdf/response_letter.pdf`: point-by-point response, 6 pages.
 - `pdf/llama3-8b_Mechanistic_Flow_updated.pdf` and
   `pdf/gemma-2-9b_Mechanistic_Flow_updated.pdf`: replacement Figure 2 panels.
@@ -22,3 +22,5 @@ Review the revised claims before submission. The journal's bundle also requires
 the current original decision letter, which is not generated or sent here.
 
 The paper uses magenta `\revisionr3{}` markup. The timing headline is verified as 50.8% reduction relative to EigenScore, with dataset/model averaging defined. The new detector tables reproduce Appendix B values in a reference panel and retain the separate matched comparison.
+
+Final editorial review: simplified wording, verified response locations, checked revision markup and rendered PDFs. See `../docs/OVERLEAF_UPLOAD.md` for the exact upload list.

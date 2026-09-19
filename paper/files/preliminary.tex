@@ -1,30 +1,10 @@
-
 \section{Theoretical Foundations}
 \label{sec:foundations_hsic}
-We propose that linguistic hallucination in LMs often stems from a statistical decoupling between the model's internal representation of the input and that of the generated output. \changed{\revisionr3{A natural question that arises is whether simpler geometric similarity measures, such as cosine similarity between aggregated input and output representations, are sufficient to capture representational coupling. However, the relationship between faithful input--output representations in LLMs is often highly non-linear, shaped by attention, residual connections, and layer-wise transformations. As a result, linear similarity measures may fail to detect meaningful dependence even when representations are strongly coupled in a non-linear sense (c.f.~\cref{sec:hsic_vs_cos}). To address this, we adopt the Hilbert--Schmidt Independence Criterion (HSIC), a kernel-based, non-parametric measure of statistical dependence. HSIC is sensitive to arbitrary non-linear relationships between random variables and evaluates dependence in a reproducing kernel Hilbert space, making it well-suited for capturing complex interactions between input and output representations in deep neural networks.
-}}
+\revisionr3{HIDE is motivated by the hypothesis that hallucinated outputs may be less strongly coupled to the input in the model's hidden representations. We use HSIC to study this possibility. HSIC measures statistical dependence through kernels, which can capture nonlinear relationships that a geometric comparison such as cosine similarity may miss. We distinguish these properties of HSIC from the behavior of the adapted score used in HIDE.}
 
-\revisionr3{We investigate whether lower values of the proposed score are associated with incorrect generation, without treating this association as evidence that hallucination is caused by statistical independence (\cref{sec:irid,sec:results}). To quantify this phenomenon, we leverage the Hilbert-Schmidt Independence Criterion (HSIC), a non-parametric measure that can capture complex, non-linear relationships in high-dimensional spaces, such as LMs' hidden states. We first introduce HSIC and discuss its properties, motivating its adaptation to our method for hallucination detection.}
+\Needspace{6\baselineskip}
+\subsection{\revisionr3{Measuring Representational Dependence}}
+\revisionr3{HSIC measures dependence between two random variables in a reproducing kernel Hilbert space, where a kernel defines similarities between observations. With suitable kernels, population HSIC is zero if and only if the variables are independent. Appendix A.1 gives the formal definition and assumptions. These properties motivate the method; they do not establish that a low HIDE score proves independence or that independence causes hallucination.}
 
-\changed{\revisionr3{
-\subsection{Measuring Representational Dependence}
-We hypothesize that hallucinations arise when an LM's internal representations of the input
-and generated output become statistically decoupled. While faithful generations preserve
-a strong dependence between these representations, hallucinated outputs exhibit weakened
-or near-independent representations.
-Kernel methods can represent nonlinear relationships that simple geometric similarities may miss. Their potential expressiveness does not by itself establish that the configured finite-sample score uses this information in practice.
-To this end, we adopt the Hilbert--Schmidt Independence Criterion (HSIC), a kernel-based,
-non-parametric measure that can detect arbitrary statistical dependence.
-We provide the formal definition of HSIC, its independence guarantees, and relevant theoretical
-properties in Appendix A.1.
-}}
-
-\changed{
 \subsection{Empirical Estimation}
-In practice, we estimate HSIC using an unbiased estimator that remains reliable under small
-sample sizes, which is critical for hallucination detection where only a limited number of
-input and output tokens are available. The estimator operates on kernelized hidden-state
-representations extracted from a single forward pass of the LM.
-Details of the estimator, including its derivation and statistical properties, are provided
-in Appendix A.2.
-}
+\revisionr3{In practice, HSIC is estimated from a finite sample. The unbiased estimator described in Appendix A.2 requires at least four observations. Because selected input or output token sets can be smaller, HIDE adapts that estimator to handle short sequences (Section~\ref{subsec:irid_algorithm_score}). This adaptation is biased at finite sample sizes. Its detection performance and its relation to simpler scores are evaluated separately in Sections~\ref{sec:results} and~\ref{sec:ablations}.}

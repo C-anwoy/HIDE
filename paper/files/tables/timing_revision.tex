@@ -14,5 +14,5 @@ Gemma-2-9B & NQ & 1.9465 & 2.3275 & 0.3809 & 19.57 & [0.3222, 0.4494] \\
 Gemma-2-27B & SQuAD & 4.1989 & 4.3958 & 0.1969 & 4.69 & [0.1644, 0.2365] \\
 Gemma-2-27B & NQ & 1.1389 & 1.2195 & 0.0806 & 7.08 & [0.0751, 0.0864] \\
 \bottomrule\end{tabular}}
-\caption{\revisionr3{Paired timing under the benchmark stopping protocol on an A100 80GB PCIe: 200 queries per model/dataset, 10 warm-up pairs, and three measured pairs per query. Total includes generation, hidden-state capture, keyword extraction, and HIDE scoring; model loading and correctness evaluation are excluded. Overhead is total minus base; percentages are ratios of means. All differences are computed before rounding. Intervals use 2,000 query bootstrap draws after averaging repeats; no observations are pruned.}}
+\caption{\revisionr3{Paired timing under the benchmark stopping protocol on an A100 80GB PCIe: 200 queries per model/dataset, 10 warm-up pairs, and three measured pairs per query. Total includes generation, hidden-state capture, keyword extraction, and HIDE scoring; model loading and correctness evaluation are excluded. Overhead is total minus base; percentages are ratios of means. All differences are computed before rounding. Intervals use 2,000 query bootstrap draws after averaging repeats; all observations are retained.}}
 \label{tab:timing_revision}\end{table*}

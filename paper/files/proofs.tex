@@ -12,7 +12,7 @@ Let's assume that we want to assess the statistical dependence between two rando
 % C_{XY} \coloneqq \mathbb{E}_{XY}[\phi(X) \otimes \psi(Y)] - \mathbb{E}_X[\phi(X)] \otimes \mathbb{E}_Y[\psi(Y)]
 % \end{small}
 % \end{equation*}
-% where $\otimes$ denotes the tensor product. Intuitively, $C_{XY}$ captures the covariance between the representations of $X$ and $Y$ in their respective RKHSs. If $X$ and $Y$ are independent, $C_{XY}$ is the zero operator. 
+% where $\otimes$ denotes the tensor product. Intuitively, $C_{XY}$ captures the covariance between the representations of $X$ and $Y$ in their respective RKHSs. If $X$ and $Y$ are independent, $C_{XY}$ is the zero operator.
 \changedtwo{\revisionr3{Intuitively, standard linear metrics (like cosine similarity) only capture direct geometric alignment. In contrast, evaluating dependence in an RKHS allows us to detect arbitrary, non-linear relationships. The cross-covariance operator, $C_{XY}$, acts as a high-dimensional analog to the standard covariance matrix, capturing the covariance between the transformed representations of $X$ and $Y$ in their respective feature spaces. A reduced cross-covariance magnitude motivates the decoupling hypothesis, but the observed score and proxy correlations do not establish this as a general consequence or cause of hallucination. Formally, given two RKHSs, $\mathcal{F}$ with kernel $k_X$ for variable $X$, and $\mathcal{G}$ with kernel $k_Y$ for variable $Y$ (corresponding to feature maps $\phi$ and $\psi$ respectively), the cross-covariance operator $C_{XY}: \mathcal{G} \to \mathcal{F}$ is defined as:}}
 \begin{equation*}
 C_{XY} \coloneqq \mathbb{E}_{XY}[\phi(X) \otimes \psi(Y)] - \mathbb{E}_X[\phi(X)] \otimes \mathbb{E}_Y[\psi(Y)]
@@ -56,7 +56,7 @@ A common, though biased, empirical estimator for HSIC is \citep{gretton05a}:
 \end{equation}
 where $\mathbf{H} = \mathbf{I} - \frac{1}{n}\mathbf{1}\mathbf{1}^T$ is the $n \times n$ centering matrix, $\mathbf{I}$ is the identity matrix, and $\mathbf{1}$ is an $n \times 1$ column vector of ones.
 
-For improved performance, particularly with smaller $n$, an unbiased estimator is preferred \citep{JMLR:v13:song12a}. The V-statistic based unbiased estimator is given by:
+For improved performance, particularly with smaller $n$, an unbiased estimator is preferred \citep{JMLR:v13:song12a}. \revisionr3{The unbiased estimator is given by:}
 \begin{multline}
 \widehat{\operatorname{HSIC}}_u(X,Y) = \frac{1}{n(n-3)} \bigg[ \text{Tr}(\tilde{\mathbf{K}}_X\tilde{\mathbf{K}}_Y) +   \frac{(\mathbf{1}^T \tilde{\mathbf{K}}_X \mathbf{1}) (\mathbf{1}^T \tilde{\mathbf{K}}_Y \mathbf{1})}{(n-1)(n-2)} -  \frac{2}{n-2} \mathbf{1}^T \tilde{\mathbf{K}}_X\tilde{\mathbf{K}}_Y \mathbf{1} \bigg]
 \label{eq:unbiased_HSIC_foundation}
@@ -65,7 +65,7 @@ Here, $n$ is the number of samples. The matrices $\tilde{\mathbf{K}}_X$ and $\ti
 
 \subsection*{A.3 Properties of the \method~Score}
 \label{sec:properties-hide}
-We now analyze the properties of our proposed \method~score (Equation ~\ref{eq:hide-score}), denoted as \(\widehat{\operatorname{HSIC}}_{\method}\), which adapts the standard unbiased V-statistic based HSIC estimator to be computable for any number of effective tokens \(n \equiv n_{\text{eff}} \ge 1\). 
+We now analyze the properties of our proposed \method~score (Equation ~\ref{eq:hide-score}), denoted as \(\widehat{\operatorname{HSIC}}_{\method}\), \revisionr3{which adapts the standard unbiased HSIC estimator} to be computable for any number of effective tokens \(n \equiv n_{\text{eff}} \ge 1\).
 
 Let \(\{(x_i,y_i)\}_{i=1}^{n}\) be the set of hidden state representations for the selected input and output tokens. We use the RBF kernel, which is bounded such that \(0 < k(u,v) \le 1\) for any vectors \(u,v\). The score is computed using Gram matrices with zeroed diagonals, \(\tilde{\mathbf{K}}_X\) and \(\tilde{\mathbf{K}}_Y\), as defined in Equation~\ref{eq:unbiased_HSIC_foundation}.
 
@@ -91,7 +91,7 @@ Since the RBF kernel ensures \(a, b \in (0,1]\) for distinct points, the result 
 
 \begin{lemma}[\textbf{Asymptotic Properties}]
 \label{lem:asymptotic_properties}
-\textit{The \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is asymptotically unbiased and strongly consistent.}
+\revisionr3{\textit{For independent and identically distributed paired observations $(x_i,y_i)$ and fixed bounded RBF kernels, the \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is asymptotically unbiased and strongly consistent.}}
 \begin{enumerate}
     \item[\textit{(i)}] \textit{(Asymptotic Bias) The bias of the estimator vanishes as \(n \to \infty\):
     \[ \bigl|\mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] - \operatorname{HSIC}(X,Y)\bigr| = O(1/n). \]}
@@ -124,7 +124,7 @@ Since the RBF kernel ensures \(a, b \in (0,1]\) for distinct points, the result 
 
 % \noindent\textbf{Lemma 4 (Asymptotic Properties).}
 % \label{lem:asymptotic_properties}
-% \textit{The \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is asymptotically unbiased and strongly consistent.}
+% \revisionr3{\textit{For independent and identically distributed paired observations $(x_i,y_i)$ and fixed bounded RBF kernels, the \(\widehat{\operatorname{HSIC}}_{\method}\) estimator is asymptotically unbiased and strongly consistent.}}
 % \begin{enumerate}
 %     \item[\textit{(i)}] \textit{(Asymptotic Bias) The bias of the estimator vanishes as \(n \to \infty\):
 %     \[ \bigl|\mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] - \operatorname{HSIC}(X,Y)\bigr| = O(1/n). \]}
@@ -133,12 +133,24 @@ Since the RBF kernel ensures \(a, b \in (0,1]\) for distinct points, the result 
 % \end{enumerate}
 
 \begin{proof}
-We relate our estimator to the standard V-statistic unbiased estimator, \(\widehat{\operatorname{HSIC}}_{u}\) (c.f. Equation~\ref{eq:unbiased_HSIC_foundation}), which is a strongly consistent estimator for the true population HSIC. For large \(n\) (\(n \ge 4\)), the denominators in Equation~\ref{eq:unbiased_HSIC_foundation} for \(\widehat{\operatorname{HSIC}}_{u}\) (e.g., \(n-1, n-2, n-3\)) become asymptotically equivalent to \(n\), i.e., $(n-1) \approx (n-2) \approx (n-3) = n(1-\frac{3}{n})$ when $n$ is large. This leads to the following relationship between the two estimators:
-\[ \widehat{\operatorname{HSIC}}_{\method}(X,Y) \approx \left(1 - \frac{3}{n}\right) \widehat{\operatorname{HSIC}}_{u}(X,Y). \]
-
-(i) To analyze the bias, we take the expectation of this approximate relation. Since \(\mathbb{E}[\widehat{\operatorname{HSIC}}_u] = \operatorname{HSIC}(X,Y)\), we have:
-\[ \mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] \approx \left(1 - \frac{3}{n}\right) \operatorname{HSIC}(X,Y). \]
-The absolute bias is therefore \( |\mathbb{E}[\widehat{\operatorname{HSIC}}_{\method}] - \operatorname{HSIC}(X,Y)| \approx |(1 - 3/n)\operatorname{HSIC} - \operatorname{HSIC}| = \frac{3}{n}|\operatorname{HSIC}(X,Y)| \). As \(|\operatorname{HSIC}(X,Y)| \le 1\) for a bounded RBF kernel, the bias is of order \(O(1/n)\) and vanishes as \(n \to \infty\).
-
-(ii) For consistency, we observe that as \(n \to \infty\), the scaling factor \((1 - 3/n) \to 1\). Since \(\widehat{\operatorname{HSIC}}_{u}(X,Y)\) converges almost surely to \(\operatorname{HSIC}(X,Y)\), their product also converges almost surely to \(\operatorname{HSIC}(X,Y)\) by the properties of limits of almost sure convergence. This establishes the strong consistency of our estimator.
+\revisionr3{Write $A_n=\operatorname{Tr}(\tilde K_X\tilde K_Y)$,
+$B_n=(\mathbf1^\top\tilde K_X\mathbf1)(\mathbf1^\top\tilde K_Y\mathbf1)$,
+and $C_n=\mathbf1^\top\tilde K_X\tilde K_Y\mathbf1$.
+Since the kernel entries are bounded by one, $|A_n|\leq n^2$,
+$|B_n|\leq n^4$, and $|C_n|\leq n^3$.
+The differences between the coefficients of these three terms in the adapted
+and unbiased estimators satisfy, as $n\to\infty$,}
+\revisionr3{\begin{align*}
+\left|\frac{1}{n^2}-\frac{1}{n(n-3)}\right|&=O(n^{-3}),\\
+\left|\frac{1}{n^4}-\frac{1}{n(n-3)(n-1)(n-2)}\right|&=O(n^{-5}),\\
+\left|\frac{2}{n^3}-\frac{2}{n(n-3)(n-2)}\right|&=O(n^{-4}).
+\end{align*}}
+\revisionr3{Multiplying these bounds gives
+$|\widehat{\operatorname{HSIC}}_{\method}-\widehat{\operatorname{HSIC}}_u|=O(1/n)$,
+uniformly over the observations. Since the standard estimator is unbiased
+under the stated sampling assumptions, taking expectations proves (i).
+Its strong consistency under the same assumptions, together with the vanishing
+uniform difference, proves (ii). This limiting result does not imply unbiasedness
+at a fixed small token count, nor does it establish independence for token
+representations selected from a single generated answer.}
 \end{proof}

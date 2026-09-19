@@ -50,7 +50,7 @@ Model & Method & AUC$_s$ & PCC$_s$ & AUC$_s$ & PCC$_s$ \\
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
         \caption{\revisionr3{
         %Variation in $AUC_s$ scores with the number of selected tokens used for \method-score calculation on SQuAD and NQ datasets using Llama-3-8B and Gemma-2-9B. We observe that a token budget of $15$-$20$ results in a near-optimal performance, with diminishing gains upon further increase in $n_{\text{eff}}$.
-        \changedtwo{Benchmark token-budget ablation on SQuAD and NQ using Llama-3-8B and Gemma-2-9B. The horizontal axis gives the configured selected-token budget; the vertical axis is AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The actual selected count may be smaller for short answers. Curves level off around 15--20 tokens; this is an observed sensitivity result, not proof of a structural mechanism.}}}
+        \changedtwo{Benchmark token-budget ablation on SQuAD and NQ using Llama-3-8B and Gemma-2-9B. The horizontal axis gives the configured selected-token budget; the vertical axis is AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The actual selected count may be smaller for short answers. Curves level off around 15--20 tokens.}}}
         \label{fig:keyword_sensitivity}
     \end{minipage}
 \end{figure}
@@ -68,7 +68,7 @@ We begin by analyzing how the number of selected tokens ($n_{\text{eff}}$) affec
 %     \label{fig:layer_sensitivity}
 % \end{figure}
 
-\revisionr3{Transformer architectures encode information at various abstraction levels across layers. To determine whether hallucination detection depends on the specific choice of decoder layer $\ell$, we systematically evaluate all 32 layers for Llama-3-8B and all 42 layers for Gemma-2-9B. As shown in Figure~\ref{fig:layer_sensitivity}, $AUC_s$ scores are stable across the full range of layers, with only minor fluctuations and a mild optimum near the network midpoint. Interestingly, neither model nor dataset exhibits significant performance drops at early or late layers that might be expected if hallucination detection using \method~required either low-level or high-level semantic features exclusively. This empirical stability alone does not show that causal dependence signals are distributed throughout the network, particularly given the selected-token-count diagnostic.}
+\revisionr3{We evaluate all 32 layers of Llama-3-8B and all 42 layers of Gemma-2-9B. Figure~\ref{fig:layer_sensitivity} shows little variation in AUC$_s$, with a mild optimum near the middle layers. This supports limited sensitivity to layer choice in these experiments. It does not show that the score detects the same semantic information at every layer; the selected-token-count result in Section~\ref{sec:paired_baselines} offers another explanation for the stability.}
 
 \begin{figure}[t!]
     \centering
@@ -78,7 +78,7 @@ We begin by analyzing how the number of selected tokens ($n_{\text{eff}}$) affec
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
         \caption{\revisionr3{%Comparison of $AUC_s$ scores when using representation from different layers of Llama-3-8B and Gemma-2-9B for \method-score calculation. We observe that the performance of \method~is almost agnostic to the chosen layer in case of both models, for both SQuAD and NQ datasets.
-        \changedtwo{Benchmark layer ablation for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. The horizontal axis gives the selected layer and the vertical axis AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). Curves show limited variation in these experiments; this does not identify distributed causal mechanisms.}}}
+        \changedtwo{Benchmark layer ablation for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. The horizontal axis gives the selected layer and the vertical axis AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). Curves show limited variation across the tested layers.}}}
     \label{fig:layer_sensitivity}
     \end{minipage}
 \end{figure}
@@ -107,7 +107,7 @@ Since \method~quantifies statistical dependence using HSIC, the choice of kernel
 
 Figure~\ref{fig:kernel_sensitivity} demonstrates that, with the exception of the polynomial kernel (which underperforms substantially), most kernels yield robust and similar $AUC_s$ scores for SQuAD and NQ, using Llama-3-8B. This suggests that the effectiveness of \method~is largely preserved regardless of kernel choice, with all kernels, except polynomial, providing strong performance.
 
-\revisionr3{For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method's performance is stable across several orders of magnitude for $\gamma$ ($10^{-9}$ to $10^{-3}$), but degrades rapidly for larger values ($\gamma \geq 10^{-1}$). Excessively high $\gamma$ makes the kernel overly sensitive to minute differences in the hidden states, leading to overfitting and poor generalization. Conversely, smaller $\gamma$ values maintain a broader sensitivity that is more robust to natural variation in hidden representations. These benchmark sensitivities do not establish that the default kernel isolates semantic dependence; the corrected count-control results highlight this limitation.}
+\revisionr3{For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows stable performance for $\gamma$ from $10^{-9}$ to $10^{-3}$ and a sharp decline for $\gamma\geq10^{-1}$. Larger values make the kernel more sensitive to distances between hidden states. These results describe sensitivity to the kernel parameter, but do not establish why the default value predicts correctness. The selected-token-count comparison in Section~\ref{sec:paired_baselines} helps assess that question.}
 
 \subsection{Effectiveness of HSIC Estimators}
 
@@ -119,7 +119,7 @@ Figure~\ref{fig:kernel_sensitivity} demonstrates that, with the exception of the
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
         \caption{\revisionr3{%Comparison of $AUC_s$ scores using the biased estimator $\widehat{\operatorname{HSIC}}_b$ and our adapted estimator $\widehat{\operatorname{HSIC}}_{\method}$ for \method~score computation, for SQuAD and NQ datasets using LLama-3-8B and Gemma-2-9B.
-        \changedtwo{Benchmark estimator comparison for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. Bars compare the adapted HIDE estimator with biased HSIC using AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The comparison concerns the configured estimators; the selected-token-count control in Appendix~\ref{app:paired_diagnostics} limits attributing the difference solely to nonlinear dependence.}}}
+        \changedtwo{Benchmark estimator comparison for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. Bars compare the adapted HIDE estimator with biased HSIC using AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). Each bar reports the corresponding model/dataset result under the benchmark generation protocol.}}}
     \label{fig:unbiased_biased}
     \end{minipage}
 \end{figure}
