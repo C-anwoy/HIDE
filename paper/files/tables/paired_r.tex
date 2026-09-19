@@ -1,7 +1,23 @@
 \begin{table*}[t]
 \centering\small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{llr rr rr rr}
+\revisionr3{\textbf{Panel A: HIDE full-benchmark reference (Appendix B)}\par\smallskip}
+\revisionr3{\begin{tabular}{llrrr}
+\toprule
+Model & Dataset & $N$ & AUC$_r$ & PCC$_r$ \\
+\midrule
+Llama-3-8B & SQuAD & 5928 & 77.45 & 50.43 \\
+Llama-3-8B & RACE & 3498 & 66.95 & 22.87 \\
+Llama-3-8B & NQ & 3610 & 79.17 & 33.91 \\
+Llama-3-8B & TriviaQA & 9960 & 66.82 & 35.19 \\
+Gemma-2-9B & SQuAD & 5928 & 76.66 & 48.43 \\
+Gemma-2-9B & RACE & 3498 & 57.99 & 16.50 \\
+Gemma-2-9B & NQ & 3610 & 75.96 & 15.41 \\
+Gemma-2-9B & TriviaQA & 9960 & 81.02 & 43.88 \\
+\bottomrule\end{tabular}}
+\par\medskip
+\revisionr3{\textbf{Panel B: Matched first-answer-line comparison}\par\smallskip}
+\revisionr3{\begin{tabular}{llr rr rr rr}
 \toprule
 & & & \multicolumn{2}{c}{HIDE} & \multicolumn{2}{c}{Attention $\Omega$} & \multicolumn{2}{c}{Norm $\widetilde\Delta_{\rm in}$} \\
 Model & Dataset & $N_+$ & AUC$_r$ & PCC$_r$ & AUC$_r$ & PCC$_r$ & AUC$_r$ & PCC$_r$ \\
@@ -16,7 +32,7 @@ Gemma-2-9B & RACE & 1185 & 58.12 & 16.29 & 50.41 & -1.90 & 50.95 & 1.93 \\
 Gemma-2-9B & NQ & 480 & 63.16 & 16.47 & 69.10 & 23.10 & 60.08 & 13.96 \\
 Gemma-2-9B & TriviaQA & 1359 & 51.18 & -5.81 & 66.30 & 32.04 & 62.86 & 21.04 \\
 \bottomrule
-\end{tabular}
-\caption{Matched detector comparison under first-answer-line stopping: 2,000 fixed seed-42 examples per model/dataset. $N_+$ counts answers with ROUGE-L greater than 0.5. AUC and PCC are multiplied by 100; PCC uses the continuous reference metric. All scores use the same examples and labels; higher raw scores predict correctness. No direction is selected using test performance. These results are separate from the historical full-cohort tables.}
+\end{tabular}}
+\caption{\revisionr3{Panel A reproduces HIDE values from Table~\ref{tab:results_exp} of Appendix B without alteration ($N$: full-benchmark sample size). Panel B evaluates all three scores on the same 2,000 fixed seed-42 examples per model/dataset under first-answer-line stopping; $N_+$ refers only to Panel B. Because cohorts and stopping differ, Panel A is a reference, not a matched comparator for Panel B. $N_+$ counts answers with ROUGE-L greater than 0.5. AUC and PCC are multiplied by 100; PCC uses the continuous reference metric. Within Panel B, all scores use the same examples and labels; higher raw scores predict correctness. No direction is selected using test performance.}}
 \label{tab:paired_r}
 \end{table*}

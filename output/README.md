@@ -1,9 +1,10 @@
 # Revision deliverables — 19 September 2026
 
-- `pdf/COLI_template.pdf`: compiled revised manuscript, 48 pages.
-- `pdf/response_letter.pdf`: point-by-point response, 5 pages.
+- `pdf/COLI_template.pdf`: compiled revised manuscript, 49 pages.
+- `pdf/response_letter.pdf`: point-by-point response, 6 pages.
 - `pdf/llama3-8b_Mechanistic_Flow_updated.pdf` and
   `pdf/gemma-2-9b_Mechanistic_Flow_updated.pdf`: replacement Figure 2 panels.
+- `pdf/computation_time_plot_updated.pdf`: replacement Figure 3, verified against the supplied timing CSV.
 - `pdf/Scalability_Analysis_updated.pdf`: replacement Figure 4.
 - `HIDE_final_revision_source.zip`: complete LaTeX source with figures and tables;
   manuscript and response are separate compilation targets.
@@ -19,3 +20,5 @@ from the corrected protocol. The retained timing suite has its own stated protoc
 
 Review the revised claims before submission. The journal's bundle also requires
 the current original decision letter, which is not generated or sent here.
+
+The paper uses magenta `\revisionr3{}` markup. The timing headline is verified as 50.8% reduction relative to EigenScore, with dataset/model averaging defined. The new detector tables reproduce Appendix B values in a reference panel and retain the separate matched comparison.

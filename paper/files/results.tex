@@ -1,9 +1,9 @@
 \section{Results and Discussions}
 \label{sec:results}
 
-Except for the explicitly identified corrected paired experiment, the detection tables in this section retain the original generation and evaluation protocol. The paired experiment is reported separately because answer-boundary changes affect both scores and correctness labels.
+\revisionr3{Except for the explicitly identified corrected paired experiment, the detection tables in this section retain the original generation and evaluation protocol. The paired experiment is reported separately because answer-boundary changes affect both scores and correctness labels.}
 
-We now present a thorough evaluation of \method~against both single-pass and multi-pass baseline methods, focusing on its ability to detect faithfulness and factuality hallucinations, as well as its computational efficiency. We further discuss notable trends and provide an assessment of areas where \method~is particularly effective, as well as scenarios where its advantages are less pronounced. The performance of \method~across four datasets and six models with $AUC_s$, $AUC_r$, $PCC_s$ and $PCC_r$ as evaluation metrics, compared against five baselines consisting of state-of-the-art single-pass and multi-pass detection techniques, are summarized in Table~\ref{tab:summary_results}, and the performance for individual datasets is further detailed in Table~\ref{tab:results_exp} of Appendix B. Further, the performances with AUC-ROC and PCC values calculated based on exact-match as the correctness measure are reported in Table~\ref{tab:exact_match} of Appendix C.
+\revisionr3{We now present a thorough evaluation of \method~against both single-pass and multi-pass baseline methods, focusing on its ability to detect faithfulness and factuality hallucinations, as well as its computational efficiency. We further discuss notable trends and provide an assessment of areas where \method~is particularly effective, as well as scenarios where its advantages are less pronounced. The performance of \method~across four datasets and six models with $AUC_s$, $AUC_r$, $PCC_s$ and $PCC_r$ as evaluation metrics, compared against five baselines consisting of state-of-the-art single-pass and multi-pass detection techniques, are summarized in Table~\ref{tab:summary_results}, and the performance for individual datasets is further detailed in Table~\ref{tab:results_exp} of Appendix B. Further, the performances with AUC-ROC and PCC values calculated based on exact-match as the correctness measure are reported in Table~\ref{tab:exact_match} of Appendix C.}
 
 \begin{table*}[t!]
 % \tiny
@@ -71,13 +71,13 @@ We additionally compare \method~against a supervised probing baseline following 
 Table~\ref{tab:probe_comparison} compares \method~against a supervised probing baseline across four datasets and four large-scale LMs. As expected, probing performs strongly on its training distribution. For example, on TriviaQA, probing achieves AUC$_s$ scores of 85.18 and 84.88 on Llama-3-8B and Llama-3-8B-Instruct respectively, with correspondingly high PCC values, reflecting the benefit of supervised alignment.
 }
 
-\changed{
+\changed{\revisionr3{
 However, this advantage does not consistently transfer across datasets. On SQuAD, \method~outperforms probing across all four models, with gains exceeding 8 AUC points on Llama-3-8B (76.87 vs.\ 68.79) and 17.27 points on Llama-3-8B-Instruct (80.15 vs.\ 62.88). The NQ comparison is mixed: for example, Gemma-2-9B has lower AUC$_s$ with HIDE than with the probe (79.08 versus 85.97), whereas Gemma-2-9B-Instruct has a small HIDE advantage (85.19 versus 84.75).
-}
+}}
 
-\changed{
-These results highlight a fundamental trade-off. While supervised probes excel when training and evaluation distributions align, their performance degrades under domain shift and requires labeled data and retraining to recover. In contrast, \method~operates entirely at inference time, requires no supervision, and performs strongly on SQuAD in these historical comparisons, while the NQ results do not support uniform cross-dataset superiority. This makes \method~particularly suitable for deployment scenarios where labeled hallucination data is unavailable or distribution shifts are expected.
-}
+\changed{\revisionr3{
+These results highlight a fundamental trade-off. While supervised probes excel when training and evaluation distributions align, their performance degrades under domain shift and requires labeled data and retraining to recover. In contrast, \method~operates entirely at inference time, requires no supervision, and performs strongly on SQuAD in these benchmark comparisons, while the NQ results do not support uniform cross-dataset superiority. This makes \method~particularly suitable for deployment scenarios where labeled hallucination data is unavailable or distribution shifts are expected.
+}}
 
 
 \subsection{Faithfulness Hallucination Detection}
@@ -85,12 +85,12 @@ These results highlight a fundamental trade-off. While supervised probes excel w
 
 Faithfulness hallucinations, characterized by outputs unsupported by the provided context, pose a critical challenge for reliable QA systems. Our results on SQuAD and RACE, as summarized in Tables~\ref{tab:results_exp} and~\ref{tab:exact_match}, demonstrate that \method~consistently outperforms single-pass baselines, such as Perplexity and Energy-score, in $10$ out of $12$ $(model, dataset)$ combinations. Across all models on SQuAD and RACE, \method~achieves respective average relative improvements of $47.4\%$ and $20.1\%$ in $AUC_s$ scores over the best-performing single-pass baseline.
 
-\method's advantage persists when compared to the state-of-the-art multi-pass methods. On SQuAD, for example, \method~achieves an $AUC_s$ score of $80.15\%$ with Llama-3-8B-Instruct, which is an absolute improvement of $8$ percentage points over Eigenscore, the state-of-the-art multi-pass baseline. The improvements are also reflected in PCC values, with \method~outperforming single-pass baselines and matching the best multi-pass alternatives in most settings. This trend is also mirrored on the RACE dataset, where \method~provides consistently robust performance across both base and instruction-tuned variants of all models. Overall, for faithfulness hallucination detection, \method~achieves an average relative gain of $33.7\%$ and $4.2\%$ in $AUC_s$ over the  single-pass and multi-pass baselines, respectively. These historical relative gains average the per-model/dataset improvement over the best evaluated uncertainty-based or multi-pass baseline in that cell; the corrected attention comparison below is a separate experiment.
+\revisionr3{\method's advantage persists when compared to the state-of-the-art multi-pass methods. On SQuAD, for example, \method~achieves an $AUC_s$ score of $80.15\%$ with Llama-3-8B-Instruct, which is an absolute improvement of $8$ percentage points over Eigenscore, the state-of-the-art multi-pass baseline. The improvements are also reflected in PCC values, with \method~outperforming single-pass baselines and matching the best multi-pass alternatives in most settings. This trend is also mirrored on the RACE dataset, where \method~provides consistently robust performance across both base and instruction-tuned variants of all models. Overall, for faithfulness hallucination detection, \method~achieves an average relative gain of $33.7\%$ and $4.2\%$ in $AUC_s$ over the  single-pass and multi-pass baselines, respectively. These benchmark relative gains average the per-model/dataset improvement over the best evaluated uncertainty-based or multi-pass baseline in that cell; the corrected attention comparison below is a separate experiment.}
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[width=\columnwidth]{files/figures/computation_time_plot.pdf}
-    \caption{Historical baseline architectural comparison under standard HuggingFace inference on an A100-SXM4-80GB: average per-example latency for six models, averaged across the original RACE, SQuAD, NQ, and TriviaQA evaluation instances. HIDE uses one generation; the multi-pass methods use five outputs per prompt. HIDE includes generation, keyword extraction, and score computation. These original measurements are retained separately from the new paired base/HIDE experiment in Table~\ref{tab:timing_revision}; their hardware/protocol and averaging populations differ. The reported approximately $51\%$ reduction pertains only to this baseline comparison and is neither an optimized-serving measurement nor a lower bound.}
+    \includegraphics[width=\columnwidth]{files/figures/computation_time_plot_updated.pdf}
+    \caption{\revisionr3{Benchmark latency comparison under standard HuggingFace inference on an A100-SXM4-80GB. Each bar is the equal-weight mean of the per-example latencies for RACE, SQuAD, NQ, and TriviaQA for the indicated model. HIDE uses one generation; multi-pass baselines use five outputs. The HIDE total includes generation, keyword extraction, and scoring. The mean reduction relative to EigenScore is $50.8\%$, calculated by averaging the six model-specific percentage reductions after averaging datasets within each model. Paired generation-overhead measurements on A100 PCIe are reported in Table~\ref{tab:timing_revision}; different hardware, cohorts, and measurement protocols are not pooled.}}
     \label{fig:time_analysis}
     \vspace{-5mm}
 \end{figure}
@@ -98,18 +98,27 @@ Faithfulness hallucinations, characterized by outputs unsupported by the provide
 \subsection{Factuality Hallucination Detection}
 \label{sec:factual_results}
 
-We further evaluate \method~on benchmarks designed to test factuality hallucinations, such as Natural Questions (NQ) and TriviaQA. Here, the outputs may be fluent yet factually unsupported. As shown in Tables~\ref{tab:results_exp} and~\ref{tab:exact_match}, even in the case of factuality hallucinations, \method~consistently provides improvements over single-pass baselines (in $9$ out of $12$ settings), with an average relative gain of $23.3\%$ in $AUC_s$ scores across models for NQ and TriviaQA. For instance, on NQ, \method~achieves $AUC_s$ score of $79.29\%$ with Llama-3-8B-Instruct, compared to $57.47\%$ for the best uncertainty-based single-pass competitor. The method also provides higher PCC values, indicating greater consistency with ground-truth correctness.
+\revisionr3{We further evaluate \method~on benchmarks designed to test factuality hallucinations, such as Natural Questions (NQ) and TriviaQA. Here, the outputs may be fluent yet factually unsupported. As shown in Tables~\ref{tab:results_exp} and~\ref{tab:exact_match}, even in the case of factuality hallucinations, \method~consistently provides improvements over single-pass baselines (in $9$ out of $12$ settings), with an average relative gain of $23.3\%$ in $AUC_s$ scores across models for NQ and TriviaQA. For instance, on NQ, \method~achieves $AUC_s$ score of $79.29\%$ with Llama-3-8B-Instruct, compared to $57.47\%$ for the best uncertainty-based single-pass competitor. The method also provides higher PCC values, indicating greater consistency with ground-truth correctness.}
 
-Compared to multi-pass methods, \method~is generally competitive and, in some settings, outperforms both Eigenscore and Lexical Similarity. For example, on the NQ dataset, \method~achieves higher AUC-ROC and PCC scores than all other methods for all six model variants. However, in certain configurations, such as TriviaQA with Llama-3-8B, the advantage of \method~is less pronounced, and Eigenscore achieves marginally higher AUC-ROC and PCC values. A closer examination of these cases suggests that datasets with extremely short or repetitive answers can reduce the discriminative power of representation-based dependence measures. We discuss such limitations in detail in \cref{sec:error_analysis}.
+Compared to multi-pass methods, \method~is generally competitive and, in some settings, outperforms both Eigenscore and Lexical Similarity. \revisionr3{For example, on NQ, \method~has higher AUC$_s$ than the five unsupervised baselines in Appendix B for all six model variants; PCC comparisons are more mixed.} However, in certain configurations, such as TriviaQA with Llama-3-8B, the advantage of \method~is less pronounced, and Eigenscore achieves marginally higher AUC-ROC and PCC values. A closer examination of these cases suggests that datasets with extremely short or repetitive answers can reduce the discriminative power of representation-based dependence measures. We discuss such limitations in detail in \cref{sec:error_analysis}.
 
 
-\paragraph{Matched comparison with attention and norm baselines}
+\paragraph{\revisionr3{Matched comparison with attention and norm baselines}}
 \label{sec:paired_baselines}
-Table~\ref{tab:paired_s} reports the new fixed 2,000-example comparison under the corrected protocol of Section~\ref{sec:paired_protocol}. HIDE is recomputed on the same answers as both proxies; historical HIDE table values are not reused here. Attention has higher AUC$_s$ in seven of eight model/dataset settings. HIDE exceeds attention on Gemma-2-9B/RACE ($57.93$ versus $51.23$), but attention is stronger in all four closed-book factuality settings: Llama/NQ ($84.24$ versus $78.47$), Llama/TriviaQA ($73.68$ versus $57.01$), Gemma/NQ ($67.97$ versus $62.74$), and Gemma/TriviaQA ($66.94$ versus $49.83$). The norm proxy is also stronger than HIDE on both TriviaQA settings. Thus attention to the question is not necessarily a weak detection baseline, and these experiments do not establish a general advantage for nonlinear HSIC over simpler proxies. ROUGE-L results, paired intervals, and the selected-token-count control are reported in Appendix~\ref{app:paired_diagnostics}.
+\revisionr3{Table~\ref{tab:paired_s} reproduces the Appendix B HIDE benchmark values in Panel A and reports the fixed 2,000-example comparison in Panel B under the corrected protocol of Section~\ref{sec:paired_protocol}. Panel A preserves the main benchmark exactly. Within Panel B, HIDE is recomputed on the same answers as both proxies; cross-panel differences are not interpreted as detector differences. Attention has higher AUC$_s$ in seven of eight model/dataset settings. HIDE exceeds attention on Gemma-2-9B/RACE ($57.93$ versus $51.23$), but attention is stronger in all four closed-book factuality settings: Llama/NQ ($84.24$ versus $78.47$), Llama/TriviaQA ($73.68$ versus $57.01$), Gemma/NQ ($67.97$ versus $62.74$), and Gemma/TriviaQA ($66.94$ versus $49.83$). The norm proxy is also stronger than HIDE on both TriviaQA settings. Thus attention to the question is not necessarily a weak detection baseline, and these experiments do not establish a general advantage for nonlinear HSIC over simpler proxies. ROUGE-L results, paired intervals, and the selected-token-count control are reported in Appendix~\ref{app:paired_diagnostics}.}
 
-The count control closely tracks HIDE in these runs (PCC at least $0.9987$); the absolute AUC$_s$ difference is below $0.43$ percentage points in every setting. This limits attributing predictive performance or layer robustness specifically to representation-dependent nonlinear structure. We retain the original estimator and kernel without test-set retuning and narrow the interpretation accordingly.
+\revisionr3{The count control closely tracks HIDE in these runs (PCC at least $0.9987$); the absolute AUC$_s$ difference is below $0.43$ percentage points in every setting. This limits attributing predictive performance or layer robustness specifically to representation-dependent nonlinear structure. We retain the original estimator and kernel without test-set retuning and narrow the interpretation accordingly.}
 
 \input{files/tables/paired_s}
+
+\paragraph{\revisionr3{What the comparison establishes}}
+\revisionr3{The relevant contribution is a useful detector under stated access and evaluation conditions, rather than universal necessity of HSIC. On Gemma/RACE, HIDE's paired AUC$_s$ advantage over attention is $6.69$ percentage points (pointwise 95\% CI $[3.70,9.69]$); the direction also holds for ROUGE-L. Thus a single attention-mass scalar does not dominate HIDE in every tested setting. The broader benchmark, probe comparison, and ablations characterize HIDE against their respective comparators; they do not establish an advantage over attention in untested transfer or robustness settings. We have not measured benefits from combining the detectors.}
+
+\revisionr3{Attention-based detection is a substantive alternative: Lookback Lens trains a classifier on attention-ratio features and reports strong detection and transfer results \citep{chuang2024lookbackr3}. HIDE requires no detector fitting, but the raw attention baseline tested here is also training-free; supervision is therefore not a distinguishing advantage over this baseline. The algorithms use different observables: attention weights determine mixing coefficients, whereas attention outputs also depend on transformed value vectors \citep{kobayashi2020normr3}. This motivates studying hidden-state scores, but does not prove that this HSIC adaptation captures additional semantic information. In particular, the count control limits that interpretation.}
+
+\revisionr3{HIDE does not require attention-weight extraction. This is a relevant interface distinction when hidden states are accessible but attention weights are not exposed. FlashAttention avoids storing the full attention matrix in GPU high-bandwidth memory \citep{dao2022flashr3}; extracting attention statistics can require implementation changes, although a custom kernel could accumulate a scalar mass without storing that matrix. This is an architectural consideration, not a measured HIDE speed advantage. Hidden-state extraction also has costs, and the standard-inference timings do not benchmark optimized serving.}
+
+
 
 \begin{table*}[t!]
 \tiny
@@ -201,41 +210,47 @@ Table~\ref{tab:dialogue_results} reports dialogue hallucination detection perfor
 At the same time, performance varies across models and metrics. On some smaller or instruction-tuned models, simpler signals such as lexical similarity or energy-based scores perform competitively, and in a few cases outperform HIDE on individual metrics. This variability highlights the increased difficulty of dialogue hallucination detection, where surface-level similarity or confidence cues may occasionally align with correctness.
 }
 
-\changed{
-Taken together, these results suggest that representational decoupling captures a meaningful signal for conversational hallucinations, though dialogue remains a more challenging setting than QA. Rather than claiming universal dominance, we view these findings as evidence that HIDE generalizes beyond QA without additional supervision or inference-time overhead, while leaving room for complementary signals in particularly ambiguous conversational cases.
-}
+\changed{\revisionr3{
+Taken together, these results suggest that representational decoupling captures a meaningful signal for conversational hallucinations, though dialogue remains a more challenging setting than QA. Rather than claiming universal dominance, we view these findings as evidence that HIDE generalizes beyond QA without additional supervision or extra sampled generations, while leaving room for complementary signals in particularly ambiguous conversational cases.
+}}
 
 
 \subsection{Computational Efficiency}
 \label{sec:compute_time}
-\paragraph{Two explicitly separated comparisons}
-Figure~\ref{fig:time_analysis} retains the original six-model, four-dataset comparison under standard HuggingFace inference. The approximately $51\%$ reduction reported there is a historical baseline architectural comparison with the evaluated five-generation methods. It is not an optimized-serving measurement, a guaranteed deployment speedup, or a measured lower bound. The new paired timing experiment below measures HIDE versus base generation only and does not re-estimate the $51\%$ figure.
+\paragraph{\revisionr3{Comparison with multi-generation baselines}}
+\revisionr3{Figure~\ref{fig:time_analysis} reports the six-model, four-dataset comparison under standard HuggingFace inference on an A100-SXM4-80GB. For model $m$ and method $b$, we first average the four dataset-specific mean latencies equally, obtaining $\bar T_{m,b}$. We then report the mean relative reduction}
+\revisionr3{\[
+R_b=\frac{100}{6}\sum_{m=1}^{6}\left(1-\frac{\bar T_{m,\mathrm{HIDE}}}{\bar T_{m,b}}\right).
+\]}
+\revisionr3{The reductions are $50.8\%$ relative to EigenScore, $50.8\%$ relative to lexical similarity, and $53.2\%$ relative to LN-Entropy. Averaging all three comparator-specific reductions gives $51.6\%$; the headline $50.8\%$ consistently uses EigenScore as its comparator. These are standard-inference architectural comparisons, not optimized-serving measurements or lower-bound guarantees.}
 
-\paragraph{Paired timing protocol and accounting}
-We evaluate Llama-3.2-3B, Llama-3-8B, Gemma-2-9B, and Gemma-2-27B on 200 fixed seed-42 queries from each of SQuAD and NQ. Measurements use standard HuggingFace Transformers/PyTorch, BF16, eager attention, and one A100 80GB PCIe GPU. After ten warm-up base/HIDE pairs, we collect three measured pairs per query, alternate base/HIDE order, synchronize CUDA around measurements, and verify identical generated token IDs within each pair. Model loading and correctness evaluation are outside the measured intervals. Base latency measures generation without hidden-state capture; HIDE total includes generation with hidden-state capture, keyword extraction, score computation, and associated bookkeeping.
+\revisionr3{The timing sheet also resolves the contradictory Llama-3-8B example: on SQuAD, base generation is $1.6169$~s and the HIDE total is $1.8445$~s, yielding $0.2276$~s overhead ($14.08\%$). The $1.7107$~s HIDE total belongs to RACE, whose base is $1.5021$~s. The earlier $1.71$~s total and $1.62$~s base therefore combined different datasets. Absolute differences and percentages throughout are computed before rounding.}
 
-These measurements retain the \emph{earlier stopping protocol}; they are not latency measurements of the new first-answer-line detector experiment. The GPU identity is shared across all eight timing jobs, but other workloads shared the host and continuous clock/power telemetry was not collected. Consequently, uncertainty intervals describe variation within the recorded runs and do not eliminate host-contention or other systematic effects.
+\paragraph{\revisionr3{Paired timing protocol and accounting}}
+\revisionr3{We evaluate Llama-3.2-3B, Llama-3-8B, Gemma-2-9B, and Gemma-2-27B on 200 fixed seed-42 queries from each of SQuAD and NQ. Measurements use standard HuggingFace Transformers/PyTorch, BF16, eager attention, and one A100 80GB PCIe GPU. After ten warm-up base/HIDE pairs, we collect three measured pairs per query, alternate base/HIDE order, synchronize CUDA around measurements, and verify identical generated token IDs within each pair. Model loading and correctness evaluation are outside the measured intervals. Base latency measures generation without hidden-state capture; HIDE total includes generation with hidden-state capture, keyword extraction, score computation, and associated bookkeeping.}
+
+\revisionr3{These measurements retain the \emph{benchmark stopping protocol}; they are not latency measurements of the new first-answer-line detector experiment. The GPU identity is shared across all eight timing jobs, but other workloads shared the host and continuous clock/power telemetry was not collected. Consequently, uncertainty intervals describe variation within the recorded runs and do not eliminate host-contention or other systematic effects.}
 
 \input{files/tables/timing_revision}
 
-\paragraph{Consistent overhead estimates}
-Table~\ref{tab:timing_revision} is the numerical source for this section and Figure~\ref{fig:scaling_latency}. We average the three repeats within each query, then average over queries. Incremental overhead is $T_{\rm HIDE}-T_{\rm base}$; relative overhead is $100(\overline T_{\rm HIDE}-\overline T_{\rm base})/\overline T_{\rm base}$, not the mean of per-query percentages. We bootstrap queries 2,000 times and retain all measurements, including negative paired differences.
-For Llama-3-8B on SQuAD, base generation is $0.9277$~s and HIDE total is $1.1587$~s, giving $0.2310$~s overhead ($24.90\%$). On NQ, the corresponding values are $0.7906$~s, $0.8832$~s, and $0.0925$~s ($11.70\%$). Differences are computed from unrounded measurements. These estimates replace the inconsistent latency examples in the previous version.
+\paragraph{\revisionr3{Consistent overhead estimates}}
+\revisionr3{Table~\ref{tab:timing_revision} is the numerical source for this section and Figure~\ref{fig:scaling_latency}. We average the three repeats within each query, then average over queries. Incremental overhead is $T_{\rm HIDE}-T_{\rm base}$; relative overhead is $100(\overline T_{\rm HIDE}-\overline T_{\rm base})/\overline T_{\rm base}$, not the mean of per-query percentages. We bootstrap queries 2,000 times and retain all measurements, including negative paired differences.}
+\revisionr3{For Llama-3-8B on SQuAD, base generation is $0.9277$~s and HIDE total is $1.1587$~s, giving $0.2310$~s overhead ($24.90\%$). On NQ, the corresponding values are $0.7906$~s, $0.8832$~s, and $0.0925$~s ($11.70\%$). Differences are computed from unrounded measurements. These paired measurements quantify generation overhead on A100 PCIe; they are not substituted into the SXM4 baseline comparison or used to calculate its $50.8\%$ reduction.}
 
-\paragraph{Model scale and complexity}
-Gemma-2-27B extends the parameter scale substantially: its SQuAD overhead is $0.1969$~s (95\% CI $[0.1644,0.2365]$), and its NQ overhead is $0.0806$~s ($[0.0751,0.0864]$). These observations support feasibility at the tested scales, not constant absolute overhead across models or datasets. The tested hidden widths range from $3,072$ to $4,608$; increasing parameter count does not imply proportionately increasing hidden width. Generated lengths also differ across models (Appendix~\ref{app:paired_diagnostics}), preventing a controlled parameter-only scaling inference.
+\paragraph{\revisionr3{Model scale and complexity}}
+\revisionr3{Gemma-2-27B extends the parameter scale substantially: its SQuAD overhead is $0.1969$~s (95\% CI $[0.1644,0.2365]$), and its NQ overhead is $0.0806$~s ($[0.0751,0.0864]$). These observations support feasibility at the tested scales, not constant absolute overhead across models or datasets. The tested hidden widths range from $3,072$ to $4,608$; increasing parameter count does not imply proportionately increasing hidden width. Generated lengths also differ across models (Appendix~\ref{app:paired_diagnostics}), preventing a controlled parameter-only scaling inference.}
 
-For fixed effective token count $n$, RBF Gram construction costs $\mathcal O(n^2d)$; the implementation's matrix products add $\mathcal O(n^3)$. Thus the score arithmetic is $\mathcal O(d)$ when $n$ is fixed. This statement does not cover autoregressive generation, sequence-dependent keyword extraction, hidden-state collection, or total model parameter count. We remove claims of constant end-to-end overhead and asymptotically negligible measured cost.
+\revisionr3{For fixed effective token count $n$, RBF Gram construction costs $\mathcal O(n^2d)$; the implementation's matrix products add $\mathcal O(n^3)$. Thus the score arithmetic is $\mathcal O(d)$ when $n$ is fixed. This statement does not cover autoregressive generation, sequence-dependent keyword extraction, hidden-state collection, or total model parameter count. Fixed-$n$ arithmetic complexity does not imply constant end-to-end overhead.}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{files/figures/Scalability_Analysis_updated.pdf}
-\caption{Measured incremental HIDE latency versus model parameter count on (a) SQuAD and (b) NQ, using the same paired measurements as Table~\ref{tab:timing_revision}. Each point averages 200 queries with three base/HIDE pairs per query; error bars are pointwise 95\% query-bootstrap intervals after averaging repeats. Labels include hidden width $d$. Measurements use an A100 80GB PCIe, standard HuggingFace inference, and the earlier stopping protocol. No observations are pruned. The four architectures and their generated lengths differ; these data do not establish constant overhead or optimized-serving performance.}
+\caption{\revisionr3{Measured incremental HIDE latency versus model parameter count on (a) SQuAD and (b) NQ, using the same paired measurements as Table~\ref{tab:timing_revision}. Each point averages 200 queries with three base/HIDE pairs per query; error bars are pointwise 95\% query-bootstrap intervals after averaging repeats. Labels include hidden width $d$. Measurements use an A100 80GB PCIe, standard HuggingFace inference, and the benchmark stopping protocol. No observations are pruned. The four architectures and their generated lengths differ; these data do not establish constant overhead or optimized-serving performance.}}
 \label{fig:scaling_latency}
 \end{figure}
 
-\paragraph{Optimized serving: architectural considerations only}
-A single-generation detector avoids requesting additional sampled responses. Whether this yields lower wall-clock latency in an optimized engine depends on batching, state-access interfaces, memory movement, and implementation. Access to hidden states or attention weights may require engineering changes, affecting HIDE and the proxy baselines as well as multi-pass white-box methods. We did not benchmark vLLM, PagedAttention, or another optimized serving engine. These considerations are arguments about possible deployment trade-offs, not empirical speedup evidence or a lower-bound guarantee.
+\paragraph{\revisionr3{Optimized serving: architectural considerations only}}
+\revisionr3{A single-generation detector avoids requesting additional sampled responses. Whether this yields lower wall-clock latency in an optimized engine depends on batching, state-access interfaces, memory movement, and implementation. Access to hidden states or attention weights may require engineering changes, affecting HIDE and the proxy baselines as well as multi-pass white-box methods. We did not benchmark vLLM, PagedAttention, or another optimized serving engine. These considerations are arguments about possible deployment trade-offs, not empirical speedup evidence or a lower-bound guarantee.}
 
 \subsection{Interpreting the \method~Score for Hallucination Detection}
 \label{sec:interpreting-hide}
@@ -243,7 +258,7 @@ A single-generation detector avoids requesting additional sampled responses. Whe
 \begin{table*}[t!]
 \centering
 \adjustbox{width=0.6\linewidth}{
-\begin{tabular}{lcccc|c}
+\revisionr3{\begin{tabular}{lcccc|c}
 \toprule
 \multirow{2}{*}{\textbf{Model}} & \multicolumn{2}{c}{\textbf{Faithfulness}} 
 & \multicolumn{2}{c}{\textbf{Factuality}} \\
@@ -277,7 +292,7 @@ Gemma-2-9B-Instruct & 0.08	&0.10	&0.09	&0.10 & \changed{0.09}\\
 \hline
 \textbf{Average} & 0.09 & 0.12 & 0.13 & 0.15 & \changed{0.12}\\
 \midrule
-\end{tabular}
+\end{tabular}}
 }
 \caption{Threshold values for various settings using exact match as the correctness measure.}
 \label{tab:threshold_values}
@@ -287,10 +302,10 @@ Gemma-2-9B-Instruct & 0.08	&0.10	&0.09	&0.10 & \changed{0.09}\\
 
 % In order to enable a binary decision of whether a given model generation is hallucinated or not, we need to convert the continuous \method~score into a decision by applying a threshold. Intuitively, a lower \method~score signals a decoupling between the representations of input and output, suggesting a higher likelihood that the output is a hallucination. Conversely, a higher \method~score reflects a strong coupling, consistent with outputs that are faithful to the input or grounded in factual knowledge.
 
-% \changed{
+% \changed{\revisionr3{
 % \paragraph{Threshold Selection via Balanced Operating Point}
 % To convert the continuous \method~score into a binary hallucination decision, we require a threshold $\tau$ that separates hallucinated from faithful generations. Rather than optimizing for accuracy---which can be misleading under class imbalance---we treat threshold calibration as a trade-off between sensitivity (detecting hallucinations) and specificity (avoiding false alarms on correct outputs).
-% }
+% }}
 % \changed{
 % Concretely, we select $\tau$ by maximizing the Geometric Mean (G-Mean) of the True Positive Rate (TPR) and True Negative Rate (TNR):
 % \[
@@ -311,9 +326,9 @@ Gemma-2-9B-Instruct & 0.08	&0.10	&0.09	&0.10 & \changed{0.09}\\
 % \subsection{Interpreting the \method~Score for Hallucination Detection}
 % \label{sec:threshold}
 
-\changed{
-Under the original decision convention, lower \method~scores are treated as evidence of a potentially incorrect answer. The threshold analysis below is retained for that historical protocol; its operating points have not been validated under the corrected stopping protocol. Given the count-control results in Section~\ref{sec:results}, a score threshold should not be interpreted as a calibrated measure of semantic dependence. We describe how a threshold $\tau$ converts the score into a binary decision and summarize its observed variation in the original experiments.
-}
+\changed{\revisionr3{
+Under the original decision convention, lower \method~scores are treated as evidence of a potentially incorrect answer. The threshold analysis below is reported for the benchmark protocol; its operating points have not been validated under the corrected stopping protocol. Given the count-control results in Section~\ref{sec:results}, a score threshold should not be interpreted as a calibrated measure of semantic dependence. We describe how a threshold $\tau$ converts the score into a binary decision and summarize its observed variation in the original experiments.
+}}
 
 \changed{
 \paragraph{Threshold Selection via Balanced Operating Point}
@@ -328,23 +343,23 @@ We sweep $\tau$ over the range of observed \method~scores on a validation set an
 % \paragraph{Threshold Stability Across Model Variants and Datasets}
 % Table~\ref{tab:threshold_values} reports the optimal thresholds obtained via G-Mean optimization across datasets and model variants. We observe that $\tau$ remains stable across base and instruction-tuned versions of the same architecture. For example, the optimal threshold for Llama-3-8B is 0.13 for both base and instruct variants, while Llama-3.2-3B exhibits thresholds of 0.14 (base) and 0.13 (instruct). Similarly, Gemma-2-9B yields closely aligned thresholds of 0.11 (base) and 0.09 (instruct). We also observe that across all four evaluated datasets, i.e., SQuAD, RACE, Natural Questions, and TriviaQA, the optimal thresholds are mostly consistent, as shown in Table~\ref{tab:threshold_values}, yielding an average threshold value $\tau_{\mathrm{avg}} = 0.12$. This consistency suggests that the representational decoupling captured by \method~reflects a structural property of the model that is largely preserved during instruction tuning, rather than a dataset- or training-specific artefact.}We provide examples of a few input prompts from various datasets and the corresponding generations from Llama-3-8B along with the respective \method~scores in Appendix C, to illustrate how hallucinated generations are detected by \method.
 
-\changed{
+\changed{\revisionr3{
 \paragraph{Variance of the Optimal Threshold}
-Beyond the consistency of the average optimal threshold ($\tau_{\text{avg}} \approx 0.12$), we further analyze the variance of $\tau$ across datasets and model variants to assess deployment stability. Overall, we observe that the optimal threshold remains largely consistent between base and instruction-tuned models. For example, Llama-3-8B exhibits an average optimal threshold of $\tau = 0.13$ for both its Base and Instruct variants, while Llama-3.2-3B shows similarly close values ($\tau = 0.14$ for Base and $\tau = 0.13$ for Instruct). Gemma-2-9B follows the same pattern, with $\tau = 0.11$ for the Base model and $\tau = 0.09$ for the Instruct variant. We also observe that across all four evaluated datasets, i.e., SQuAD, RACE, Natural Questions, and TriviaQA, the optimal thresholds are mostly consistent, as shown in Table~\ref{tab:threshold_values}, yielding an average threshold value $\tau_{\mathrm{avg}} = 0.12$. These are similarities in the historical operating points; they do not establish a structural mechanism or transfer to the corrected protocol.
-}We provide examples of a few input prompts from various datasets and the corresponding generations from Llama-3-8B along with the respective \method~scores in Appendix D, to illustrate how hallucinated generations are detected by \method.
+Beyond the consistency of the average optimal threshold ($\tau_{\text{avg}} \approx 0.12$), we further analyze the variance of $\tau$ across datasets and model variants to assess deployment stability. Overall, we observe that the optimal threshold remains largely consistent between base and instruction-tuned models. For example, Llama-3-8B exhibits an average optimal threshold of $\tau = 0.13$ for both its Base and Instruct variants, while Llama-3.2-3B shows similarly close values ($\tau = 0.14$ for Base and $\tau = 0.13$ for Instruct). Gemma-2-9B follows the same pattern, with $\tau = 0.11$ for the Base model and $\tau = 0.09$ for the Instruct variant. We also observe that across all four evaluated datasets, i.e., SQuAD, RACE, Natural Questions, and TriviaQA, the optimal thresholds are mostly consistent, as shown in Table~\ref{tab:threshold_values}, yielding an average threshold value $\tau_{\mathrm{avg}} = 0.12$. These are similarities in the benchmark operating points; they do not establish a structural mechanism or transfer to the corrected protocol.
+}}We provide examples of a few input prompts from various datasets and the corresponding generations from Llama-3-8B along with the respective \method~scores in Appendix D, to illustrate how hallucinated generations are detected by \method.
 
 \changed{
 Analyzing variance across datasets reveals a more nuanced picture. Instruction-tuned models often exhibit lower threshold variance than their base counterparts -- e.g., Llama-3.2-3B-Instruct shows a variance of $0.00087$ compared to $0.00141$ for its Base version, and Gemma-2-9B-Instruct shows a variance of $0.00005$ versus $0.00012$ for Gemma-2-9B Base. However, this trend is not universal: Llama-3-8B-Instruct exhibits slightly higher variance ($0.00114$) than its Base version ($0.00087$). These results indicate that while instruction tuning often stabilizes the optimal threshold, the effect is model-family dependent.
 }
 
 
-\changed{
-Taken together, these historical findings describe threshold variation within the evaluated protocol. Deployment under different generation, token-selection, or stopping conditions requires fresh validation-based calibration; the table does not establish a universally transferable threshold.
-}
+\changed{\revisionr3{
+Taken together, these benchmark findings describe threshold variation within the evaluated protocol. Deployment under different generation, token-selection, or stopping conditions requires fresh validation-based calibration; the table does not establish a universally transferable threshold.
+}}
 
-\changed{
+\changed{\revisionr3{
 \paragraph{Interpreting $\tau$ in Deployment}
 The threshold $\tau$ selected during validation defines a default operating point for inference: generations with \method~scores below $\tau$ are flagged as hallucinated. In practice, however, $\tau$ can be adjusted to reflect application-specific risk preferences. In safety-critical domains, such as medical or legal assistance, practitioners may raise $\tau$ to prioritize recall, accepting a higher false positive rate in order to minimize undetected hallucinations. Conversely, in user-experience-sensitive applications, such as creative writing or casual dialogue, a lower $\tau$ may be preferred to reduce unnecessary flags on correct outputs. Accordingly, while the G-Mean--optimized threshold provides a principled and balanced baseline, $\tau$ should be viewed as a tunable operating parameter rather than a fixed constant.
-}
+}}
 
 

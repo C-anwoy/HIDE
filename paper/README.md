@@ -4,8 +4,7 @@ Copied from the supplied `3205_HIDEandSeek_Revised_Round_3` directory. `SOURCE.j
 
 Main file: `COLI_template.tex`. Updated on 19 September 2026 using the verified fixed
 2,000-example paired detector comparison and the retained earlier paired timing
-suite. Figures 2 and 4 are replaced; historical detector/ablation tables and Figure
-3 remain explicitly labeled as earlier-protocol results. They are not claimed to
+suite. Figures 2 and 4 use the paired analyses. Figure 3 is regenerated from the supplied timing sheet, verifying 50.8% reduction versus EigenScore. Main detector/ablation values remain unchanged; reference panels reproduce Appendix B values alongside a separately labeled matched comparison. They are not claimed to
 have been regenerated or retroactively validated.
 
 The point-by-point letter is `response_letter.tex`. Ready PDFs and updated plot
@@ -23,3 +22,5 @@ The earlier planning documents are historical checklists. The completed changes
 are documented in [FINAL_MANUSCRIPT_CHANGES.md](../docs/FINAL_MANUSCRIPT_CHANGES.md).
 Before submission, review the qualifications of historical results and include
 the current original decision letter alongside the revised manuscript and response.
+
+Changes since the submitted source are marked with `\revisionr3{}` in magenta. The supported contribution and limits relative to attention are discussed with three primary references. Benchmark comparison and paired-overhead timing have explicit platforms and averaging rules; the manuscript does not label them as historical.

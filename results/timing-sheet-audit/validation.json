@@ -1,0 +1,10 @@
+{
+  "supplied_mean_cells_checked": 46,
+  "max_mean_cell_error": 6.500000537812411e-10,
+  "original_benchmark_rows_unchanged": true,
+  "source_sha256": "c3bc787937fdb5d1cb12704db2aaace1dd90ed7cd4d3c2fc035080906b728012",
+  "manuscript_pages": 49,
+  "response_pages": 6,
+  "table_formatter_idempotence": true,
+  "unresolved_references": 0
+}

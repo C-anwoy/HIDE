@@ -2,7 +2,7 @@
 
 ## Submission artifacts
 
-The fixed 2,000-example analysis is complete: 80 parts, 16,000 records, zero exclusions, and 144 independent sklearn/scipy checks. The revised manuscript and response are compiled and visually reviewed; Figures 2 and 4 and the new tables use verified results. See [SUBMISSION_NUMERICAL_AUDIT.md](SUBMISSION_NUMERICAL_AUDIT.md) and [FINAL_MANUSCRIPT_CHANGES.md](FINAL_MANUSCRIPT_CHANGES.md). No new GPU work was run.
+The fixed 2,000-example analysis is complete: 80 parts, 16,000 records, zero exclusions, and 144 independent sklearn/scipy checks. The revised manuscript and response are compiled and visually reviewed; Figures 2 and 4 and the new tables use verified results. See [SUBMISSION_NUMERICAL_AUDIT.md](SUBMISSION_NUMERICAL_AUDIT.md) and [FINAL_MANUSCRIPT_CHANGES.md](FINAL_MANUSCRIPT_CHANGES.md). No new GPU work was run. The timing-sheet follow-up checks all 46 populated average cells, regenerates Figure 3, preserves every Appendix B numeric row, and adds magenta revision markup. The latest paper has 49 pages and the response six pages; references and PDF layout were checked.
 
 ## Completed
 

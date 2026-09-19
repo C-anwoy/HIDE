@@ -4,8 +4,8 @@
 To assess the robustness and practical implications of \method, we conduct a series of ablation studies that examine the impact of core methodological choices. These analyses investigate the following: \changed{(i) effectiveness of linear similarity measure, like cosine similarity, in capturing decoupling},  (ii) impact of the number of selected tokens, (iii) dependence on the choice of transformer layer, (iv) the influence of kernel type and kernel hyperparameters, (v) the effect of biased versus our adapted HSIC estimators, and (vi) the relative merits of different token selection strategies. The results, summarized below, reinforce the robustness of \method~across different design choices.
 
 \subsection{Non-linear Dependence vs. Linear Similarity}\label{sec:hsic_vs_cos}
-\changed{Table~\ref{tab:hsic_vs_cosine} compares HSIC with cosine similarity using both ranking-based (AUC$_s$) and correlation-based (PCC$_s$) metrics. On SQuAD, cosine similarity performs near random guessing, achieving low AUC$_s$ and negligible correlation with ground-truth labels, whereas HSIC attains substantially higher values on both metrics across models. On Natural Questions, cosine similarity exhibits highly variable behavior across models --- including strong AUC$_s$ in isolated cases but weak correlation --- while HSIC provides more stable performance across metrics. This historical comparison establishes performance relative to the evaluated cosine baseline, but does not establish that nonlinear dependence is necessary. The new attention and token-count controls qualify that interpretation (Section~\ref{sec:paired_baselines}).
-}
+\changed{\revisionr3{Table~\ref{tab:hsic_vs_cosine} compares HSIC with cosine similarity using both ranking-based (AUC$_s$) and correlation-based (PCC$_s$) metrics. On SQuAD, cosine similarity performs near random guessing, achieving low AUC$_s$ and negligible correlation with ground-truth labels, whereas HSIC attains substantially higher values on both metrics across models. On Natural Questions, cosine similarity exhibits highly variable behavior across models --- including strong AUC$_s$ in isolated cases but weak correlation --- while HSIC provides more stable performance across metrics. This benchmark comparison establishes performance relative to the evaluated cosine baseline, but does not establish that nonlinear dependence is necessary. The new attention and token-count controls qualify that interpretation (Section~\ref{sec:paired_baselines}).
+}}
 
 \begin{table}[t]
 \small
@@ -48,9 +48,9 @@ Model & Method & AUC$_s$ & PCC$_s$ & AUC$_s$ & PCC$_s$ \\
     \end{minipage}%
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
-        \caption{
+        \caption{\revisionr3{
         %Variation in $AUC_s$ scores with the number of selected tokens used for \method-score calculation on SQuAD and NQ datasets using Llama-3-8B and Gemma-2-9B. We observe that a token budget of $15$-$20$ results in a near-optimal performance, with diminishing gains upon further increase in $n_{\text{eff}}$.
-        \changedtwo{Historical token-budget ablation on SQuAD and NQ using Llama-3-8B and Gemma-2-9B. The horizontal axis gives the configured selected-token budget; the vertical axis is AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The actual selected count may be smaller for short answers. Curves level off around 15--20 tokens; this is an observed sensitivity result, not proof of a structural mechanism.}}
+        \changedtwo{Benchmark token-budget ablation on SQuAD and NQ using Llama-3-8B and Gemma-2-9B. The horizontal axis gives the configured selected-token budget; the vertical axis is AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The actual selected count may be smaller for short answers. Curves level off around 15--20 tokens; this is an observed sensitivity result, not proof of a structural mechanism.}}}
         \label{fig:keyword_sensitivity}
     \end{minipage}
 \end{figure}
@@ -68,7 +68,7 @@ We begin by analyzing how the number of selected tokens ($n_{\text{eff}}$) affec
 %     \label{fig:layer_sensitivity}
 % \end{figure}
 
-Transformer architectures encode information at various abstraction levels across layers. To determine whether hallucination detection depends on the specific choice of decoder layer $\ell$, we systematically evaluate all 32 layers for Llama-3-8B and all 42 layers for Gemma-2-9B. As shown in Figure~\ref{fig:layer_sensitivity}, $AUC_s$ scores are stable across the full range of layers, with only minor fluctuations and a mild optimum near the network midpoint. Interestingly, neither model nor dataset exhibits significant performance drops at early or late layers that might be expected if hallucination detection using \method~required either low-level or high-level semantic features exclusively. This empirical stability alone does not show that causal dependence signals are distributed throughout the network, particularly given the selected-token-count diagnostic.
+\revisionr3{Transformer architectures encode information at various abstraction levels across layers. To determine whether hallucination detection depends on the specific choice of decoder layer $\ell$, we systematically evaluate all 32 layers for Llama-3-8B and all 42 layers for Gemma-2-9B. As shown in Figure~\ref{fig:layer_sensitivity}, $AUC_s$ scores are stable across the full range of layers, with only minor fluctuations and a mild optimum near the network midpoint. Interestingly, neither model nor dataset exhibits significant performance drops at early or late layers that might be expected if hallucination detection using \method~required either low-level or high-level semantic features exclusively. This empirical stability alone does not show that causal dependence signals are distributed throughout the network, particularly given the selected-token-count diagnostic.}
 
 \begin{figure}[t!]
     \centering
@@ -77,8 +77,8 @@ Transformer architectures encode information at various abstraction levels acros
     \end{minipage}%
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
-        \caption{%Comparison of $AUC_s$ scores when using representation from different layers of Llama-3-8B and Gemma-2-9B for \method-score calculation. We observe that the performance of \method~is almost agnostic to the chosen layer in case of both models, for both SQuAD and NQ datasets.
-        \changedtwo{Historical layer ablation for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. The horizontal axis gives the selected layer and the vertical axis AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). Curves show limited variation in these experiments; this does not identify distributed causal mechanisms.}}
+        \caption{\revisionr3{%Comparison of $AUC_s$ scores when using representation from different layers of Llama-3-8B and Gemma-2-9B for \method-score calculation. We observe that the performance of \method~is almost agnostic to the chosen layer in case of both models, for both SQuAD and NQ datasets.
+        \changedtwo{Benchmark layer ablation for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. The horizontal axis gives the selected layer and the vertical axis AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). Curves show limited variation in these experiments; this does not identify distributed causal mechanisms.}}}
     \label{fig:layer_sensitivity}
     \end{minipage}
 \end{figure}
@@ -107,7 +107,7 @@ Since \method~quantifies statistical dependence using HSIC, the choice of kernel
 
 Figure~\ref{fig:kernel_sensitivity} demonstrates that, with the exception of the polynomial kernel (which underperforms substantially), most kernels yield robust and similar $AUC_s$ scores for SQuAD and NQ, using Llama-3-8B. This suggests that the effectiveness of \method~is largely preserved regardless of kernel choice, with all kernels, except polynomial, providing strong performance.
 
-For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method's performance is stable across several orders of magnitude for $\gamma$ ($10^{-9}$ to $10^{-3}$), but degrades rapidly for larger values ($\gamma \geq 10^{-1}$). Excessively high $\gamma$ makes the kernel overly sensitive to minute differences in the hidden states, leading to overfitting and poor generalization. Conversely, smaller $\gamma$ values maintain a broader sensitivity that is more robust to natural variation in hidden representations. These historical sensitivities do not establish that the default kernel isolates semantic dependence; the corrected count-control results highlight this limitation.
+\revisionr3{For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method's performance is stable across several orders of magnitude for $\gamma$ ($10^{-9}$ to $10^{-3}$), but degrades rapidly for larger values ($\gamma \geq 10^{-1}$). Excessively high $\gamma$ makes the kernel overly sensitive to minute differences in the hidden states, leading to overfitting and poor generalization. Conversely, smaller $\gamma$ values maintain a broader sensitivity that is more robust to natural variation in hidden representations. These benchmark sensitivities do not establish that the default kernel isolates semantic dependence; the corrected count-control results highlight this limitation.}
 
 \subsection{Effectiveness of HSIC Estimators}
 
@@ -118,8 +118,8 @@ For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method's perf
     \end{minipage}%
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
-        \caption{%Comparison of $AUC_s$ scores using the biased estimator $\widehat{\operatorname{HSIC}}_b$ and our adapted estimator $\widehat{\operatorname{HSIC}}_{\method}$ for \method~score computation, for SQuAD and NQ datasets using LLama-3-8B and Gemma-2-9B.
-        \changedtwo{Historical estimator comparison for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. Bars compare the adapted HIDE estimator with biased HSIC using AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The comparison concerns the configured estimators; the selected-token-count control in Appendix~\ref{app:paired_diagnostics} limits attributing the difference solely to nonlinear dependence.}}
+        \caption{\revisionr3{%Comparison of $AUC_s$ scores using the biased estimator $\widehat{\operatorname{HSIC}}_b$ and our adapted estimator $\widehat{\operatorname{HSIC}}_{\method}$ for \method~score computation, for SQuAD and NQ datasets using LLama-3-8B and Gemma-2-9B.
+        \changedtwo{Benchmark estimator comparison for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. Bars compare the adapted HIDE estimator with biased HSIC using AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The comparison concerns the configured estimators; the selected-token-count control in Appendix~\ref{app:paired_diagnostics} limits attributing the difference solely to nonlinear dependence.}}}
     \label{fig:unbiased_biased}
     \end{minipage}
 \end{figure}
@@ -168,7 +168,7 @@ Finally, we compared two strategies for selecting token representations (as disc
 \centering
 \small
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{p{1.9cm} p{1.7cm} p{1.5cm} p{1.6cm} p{1.5cm} c c}
+\revisionr3{\begin{tabular}{p{1.9cm} p{1.7cm} p{1.5cm} p{1.6cm} p{1.5cm} c c}
 \hline
 \textbf{Prompt (Dataset)} &
 \textbf{Input Keywords} &
@@ -210,10 +210,10 @@ Canberra &
 0.034 &
 Yes \\
 \hline
-\end{tabular}
-\caption{
-\changed{Historical qualitative examples for Llama-3-8B, with input/output keywords, generated answers, first reference, and HIDE score. The displayed labels follow the original reference-based evaluation; aliases and surface-form differences can affect these labels. Selected examples do not establish a causal explanation of score differences.
-}}
+\end{tabular}}
+\caption{\revisionr3{
+\changed{Benchmark qualitative examples for Llama-3-8B, with input/output keywords, generated answers, first reference, and HIDE score. The displayed labels follow the original reference-based evaluation; aliases and surface-form differences can affect these labels. Selected examples do not establish a causal explanation of score differences.
+}}}
 \label{tab:qualitative_examples}
 \end{table}
 

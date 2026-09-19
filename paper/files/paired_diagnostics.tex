@@ -1,11 +1,11 @@
-\appendixsection{Corrected Paired Comparison: Additional Diagnostics}
+\appendixsection{\revisionr3{Corrected Paired Comparison: Additional Diagnostics}}
 \label{app:paired_diagnostics}
-Across the 16,000 selected records, we retain 252 generations reaching the 256-token cap, nine empty evaluated answers, and seven no-output-state zero fallbacks (all seven in Gemma/NQ). These sets can overlap. No record is excluded from the paired metrics.
+\revisionr3{Across the 16,000 selected records, we retain 252 generations reaching the 256-token cap, nine empty evaluated answers, and seven no-output-state zero fallbacks (all seven in Gemma/NQ). These sets can overlap. No record is excluded from the paired metrics.}
 
-These analyses use the same fixed corrected cohorts as Table~\ref{tab:paired_s}, without score filtering or class balancing. Table~\ref{tab:paired_r} reports ROUGE-L-based metrics; Table~\ref{tab:paired_differences} reports paired AUC$_s$ differences. PCC in the detector tables uses continuous reference similarity, whereas the structural plots correlate detector scores with one another. These are distinct quantities.
+\revisionr3{These analyses use the same fixed corrected cohorts as Table~\ref{tab:paired_s}, without score filtering or class balancing. Table~\ref{tab:paired_r} reports ROUGE-L-based metrics; Table~\ref{tab:paired_differences} reports paired AUC$_s$ differences. PCC in the detector tables uses continuous reference similarity, whereas the structural plots correlate detector scores with one another. These are distinct quantities.}
 \input{files/tables/paired_r}
 \input{files/tables/paired_differences}
 
-For realized selected count $n\geq1$, substituting all-ones Gram matrices into the adapted score gives $c(n)=(n-1)/n^2$ (and we define $c(0)=0$ for the no-state fallback). Table~\ref{tab:count_control} compares this diagnostic with HIDE on exactly the same examples. The near-unit correlations and small AUC differences indicate that the configured score is dominated by selected-token count in these runs; they do not establish a nonlinear-dependence advantage. We did not retune the kernel on the test labels.
+\revisionr3{For realized selected count $n\geq1$, substituting all-ones Gram matrices into the adapted score gives $c(n)=(n-1)/n^2$ (and we define $c(0)=0$ for the no-state fallback). Table~\ref{tab:count_control} compares this diagnostic with HIDE on exactly the same examples. The near-unit correlations and small AUC differences indicate that the configured score is dominated by selected-token count in these runs; they do not establish a nonlinear-dependence advantage. We did not retune the kernel on the test labels.}
 \input{files/tables/count_control}
 \input{files/tables/timing_lengths}

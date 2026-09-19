@@ -223,6 +223,8 @@ def main():
     (tables/'timing_lengths.tex').write_text('\n'.join(lines)+'\n')
     for path in figures.glob('*updated.pdf'):
         shutil.copyfile(path, Path('paper/files/figures')/path.name)
+    from scripts.format_revision_tables import format_revision_tables
+    format_revision_tables()
     hashes = {str(p.relative_to(out)):file_sha256(p) for p in sorted(out.rglob('*')) if p.is_file() and p.name != 'SHA256.json'}
     (out/'SHA256.json').write_text(json.dumps(hashes,indent=2)+'\n')
     print(out,flush=True)

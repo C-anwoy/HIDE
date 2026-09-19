@@ -1,6 +1,6 @@
 \begin{table*}[t]
 \centering\small
-\begin{tabular}{llrr}
+\revisionr3{\begin{tabular}{llrr}
 \toprule
 Model & Dataset & Mean input tokens & Mean generated tokens \\
 \midrule
@@ -12,6 +12,6 @@ Gemma-2-9B & SQuAD & 186.20 & 39.29 \\
 Gemma-2-9B & NQ & 21.14 & 22.16 \\
 Gemma-2-27B & SQuAD & 186.20 & 45.65 \\
 Gemma-2-27B & NQ & 21.14 & 12.14 \\
-\bottomrule\end{tabular}
-\caption{Mean token lengths for the timing queries in Table~\ref{tab:timing_revision}, under the earlier stopping protocol (maximum 256 generated tokens). Means include all queries and measured repeats; repeats share deterministic token sequences. These length differences limit a parameter-only interpretation of the scaling comparison.}
+\bottomrule\end{tabular}}
+\caption{\revisionr3{Mean token lengths for the timing queries in Table~\ref{tab:timing_revision}, under the benchmark stopping protocol (maximum 256 generated tokens). Means include all queries and measured repeats; repeats share deterministic token sequences. These length differences limit a parameter-only interpretation of the scaling comparison.}}
 \label{tab:timing_lengths}\end{table*}

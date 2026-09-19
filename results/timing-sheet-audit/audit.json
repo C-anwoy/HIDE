@@ -1,0 +1,80 @@
+{
+  "source_sha256": "c3bc787937fdb5d1cb12704db2aaace1dd90ed7cd4d3c2fc035080906b728012",
+  "source_hide_label": "unbiased_HSIC_16_key",
+  "dataset_order": [
+    "RACE",
+    "SQuAD",
+    "NQ",
+    "TriviaQA"
+  ],
+  "averages": {
+    "Llama3-8B": {
+      "Single Gen": 1.641468899925,
+      "Multiple Gen(5)": 5.06028335325,
+      "Perplexity": 1.66781812425,
+      "Energy": 1.667716440325,
+      "LN-Entropy": 5.225950355,
+      "Lexical Similarity": 5.067212264,
+      "Eigenscore": 5.062189914,
+      "unbiased_HSIC_16_key": 1.8471993145
+    },
+    "Llama3-8B-instruct": {
+      "Single Gen": 1.54374318965,
+      "Multiple Gen(5)": 3.7497393055,
+      "Perplexity": 1.570520418625,
+      "Energy": 1.5685432661,
+      "LN-Entropy": 3.8978380415,
+      "Lexical Similarity": 3.7546974454999997,
+      "Eigenscore": 3.75221574025,
+      "unbiased_HSIC_16_key": 1.7982879765
+    },
+    "Llama3-3b": {
+      "Single Gen": 0.971183737075,
+      "Multiple Gen(5)": 2.9417655125,
+      "Perplexity": 0.99311214265,
+      "Energy": 0.992546160275,
+      "LN-Entropy": 3.27077352775,
+      "Lexical Similarity": 2.9469551785,
+      "Eigenscore": 2.9441927075,
+      "unbiased_HSIC_16_key": 1.18074775805
+    },
+    "Llama3-3b-instruct": {
+      "Single Gen": 1.30413155855,
+      "Multiple Gen(5)": 3.3892822642500002,
+      "Perplexity": 1.34849637815,
+      "Energy": 1.34940064815,
+      "LN-Entropy": 3.94749212275,
+      "Lexical Similarity": 3.394047192,
+      "Eigenscore": 3.39489860225,
+      "unbiased_HSIC_16_key": 1.629477661
+    },
+    "Gemma2-9B": {
+      "Single Gen": 0.98365446295,
+      "Multiple Gen(5)": 1.92017503075,
+      "Perplexity": 0.98565551195,
+      "Energy": 0.985229457125,
+      "LN-Entropy": 1.9338906135,
+      "Lexical Similarity": 1.922524676,
+      "Eigenscore": 1.920822094,
+      "unbiased_HSIC_16_key": 1.129891908425
+    },
+    "Gemma2-9B-Instruct": {
+      "Single Gen": 0.8454871930250001,
+      "Multiple Gen(5)": 1.560133172,
+      "Perplexity": 0.847187831425,
+      "Energy": 0.8468327814250001,
+      "LN-Entropy": 1.5731887067499999,
+      "Lexical Similarity": 1.562402744,
+      "Eigenscore": 1.56082689575,
+      "unbiased_HSIC_16_key": 0.996329876575
+    }
+  },
+  "mean_model_relative_reduction_pct": {
+    "LN-Entropy": 53.23022169839541,
+    "Lexical Similarity": 50.83913043525844,
+    "Eigenscore": 50.80415142175457
+  },
+  "mean_over_all_three_baselines_pct": 51.62450118513614,
+  "formula": "For each model/method, average four dataset latencies equally; average 100*(1-HIDE/baseline) equally over six models.",
+  "caveat": "Aggregate timing cells only; no raw repetitions or confidence intervals supplied. The HIDE row label contains 16_key; this file alone does not establish actual token-budget metadata."
+}

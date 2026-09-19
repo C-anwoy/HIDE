@@ -162,34 +162,34 @@ sample size, $n_{\text{eff}}$, we consider two principled strategies:
 Each decoder layer captures different levels of abstraction; therefore, the choice of $\ell$ can, in principle, influence the measured dependence. Based on prior work suggesting that representations corresponding to the middle layers are often richer \citep{skean2025layerlayeruncoveringhidden} and provide stronger sentence-level semantic information suitable for detecting inconsistencies \citep{azaria2023internalstatellmknows}, we fix $\ell=\ell_{\text{mid}}$ for all our experiments to avoid an additional hyperparameter sweep. However, our framework is flexible to any layer choice and we observe the performance of \method~to be almost agnostic to the choice of $\ell$ (\cref{sec:layer_choice}).
 
 
-\subsection{Structural Analysis of Decoupling}
+\subsection{\revisionr3{Structural Analysis of Decoupling}}
 \label{sec:structural_validation}
-We examine associations between the HIDE score and attention-mediated information flow. These are observational diagnostics, not evidence that statistical decoupling causes hallucination. In particular, attention to a question in closed-book QA need not imply factual correctness, while attention to supplied evidence can support faithful generation.
+\revisionr3{We examine associations between the HIDE score and attention-mediated information flow. These are observational diagnostics, not evidence that statistical decoupling causes hallucination. In particular, attention to a question in closed-book QA need not imply factual correctness, while attention to supplied evidence can support faithful generation.}
 
-At the selected layer $\ell$, let $\alpha_{j,i}^{(h)}$ denote the causal self-attention weight from an observed generated-token position $j$ to prompt token $i$ in head $h$. Let $J$ be the number of generated-token positions with available cached states. We use
-\begin{align}
+\revisionr3{At the selected layer $\ell$, let $\alpha_{j,i}^{(h)}$ denote the causal self-attention weight from an observed generated-token position $j$ to prompt token $i$ in head $h$. Let $J$ be the number of generated-token positions with available cached states. We use}
+\revisionr3{\begin{align}
 \bar\alpha_{j,i} &= H^{-1}\sum_{h=1}^{H}\alpha_{j,i}^{(h)}, \\
 \Omega &= J^{-1}\sum_{j=1}^{J}\sum_{i=1}^{I}\bar\alpha_{j,i}, \\
 \widetilde\Delta_{\mathrm{in}} &= J^{-1}\sum_{j=1}^{J}
 \left\|\sum_{i=1}^{I}\bar\alpha_{j,i}h_{i,\mathrm{in}}^{(\ell-1)}\right\|_2.
-\end{align}
-The norm is an \emph{unprojected input-state proxy}. It omits the learned value and output projections and therefore is not the actual input-derived residual update. Attention and preceding-layer states are aligned to the layer producing the hidden states used by HIDE. Both proxies average over all available generated-token positions and use no keyword extraction. Cached generation excludes the final unforwarded token; if no output state is available, all three scores use the recorded zero fallback. The standalone detection comparison uses the raw positive direction of each score without choosing its sign on test labels.
+\end{align}}
+\revisionr3{The norm is an \emph{unprojected input-state proxy}. It omits the learned value and output projections and therefore is not the actual input-derived residual update. Attention and preceding-layer states are aligned to the layer producing the hidden states used by HIDE. Both proxies average over all available generated-token positions and use no keyword extraction. Cached generation excludes the final unforwarded token; if no output state is available, all three scores use the recorded zero fallback. The standalone detection comparison uses the raw positive direction of each score without choosing its sign on test labels.}
 
-Figure~\ref{fig:structural_flow} is recomputed on the corrected, matched cohorts described in Section~\ref{sec:paired_protocol}: 2,000 examples per model/dataset, with no score filtering or class rebalancing. For Llama-3-8B, PCC(HIDE,$\Omega$) is $0.560$ on SQuAD and $0.648$ on NQ; PCC(HIDE,$\widetilde\Delta_{\mathrm{in}}$) is $0.003$ and $0.367$, respectively. For Gemma-2-9B, the corresponding attention correlations are $0.565$ and $0.430$, and the norm correlations are explicitly \emph{positive}: $0.126$ on SQuAD and $0.215$ on NQ. These values replace the earlier figure's correlations, which used a different generation/selection protocol. Thus the previously foregrounded inverse ``magnitude versus precision'' relationship is not a general result. Neither update magnitude nor its correlation with HIDE establishes faithful information transfer or a causal mechanism.
+\revisionr3{Figure~\ref{fig:structural_flow} is recomputed on the corrected, matched cohorts described in Section~\ref{sec:paired_protocol}: 2,000 examples per model/dataset, with no score filtering or class rebalancing. For Llama-3-8B, PCC(HIDE,$\Omega$) is $0.560$ on SQuAD and $0.648$ on NQ; PCC(HIDE,$\widetilde\Delta_{\mathrm{in}}$) is $0.003$ and $0.367$, respectively. For Gemma-2-9B, the corresponding attention correlations are $0.565$ and $0.430$, and the norm correlations are explicitly \emph{positive}: $0.126$ on SQuAD and $0.215$ on NQ. These values replace the earlier figure's correlations, which used a different generation/selection protocol. Thus the previously foregrounded inverse ``magnitude versus precision'' relationship is not a general result. Neither update magnitude nor its correlation with HIDE establishes faithful information transfer or a causal mechanism.}
 
-\paragraph{Question-conditioned but wrong answers}
-For NQ, star markers identify incorrect answers in the upper quartile of question--answer embedding similarity among incorrect answers (including ties at the cutoff). This QCBW subset controls descriptively for superficial topicality; it is not an intervention and does not identify causal circuits. All other examples remain in the figure and in the reported correlations. The standalone baseline results in Section~\ref{sec:paired_baselines} provide a direct test of whether HIDE adds predictive value beyond these proxies.
+\paragraph{\revisionr3{Question-conditioned but wrong answers}}
+\revisionr3{For NQ, star markers identify incorrect answers in the upper quartile of question--answer embedding similarity among incorrect answers (including ties at the cutoff). This QCBW subset controls descriptively for superficial topicality; it is not an intervention and does not identify causal circuits. All other examples remain in the figure and in the reported correlations. The standalone baseline results in Section~\ref{sec:paired_baselines} provide a direct test of whether HIDE adds predictive value beyond these proxies.}
 
 \begin{figure*}[t]
 \centering
 \begin{subfigure}[b]{0.49\textwidth}
 \includegraphics[width=\textwidth]{files/figures/llama3-8b_Mechanistic_Flow_updated.pdf}
-\caption*{(i) Llama-3-8B}
+\caption*{\revisionr3{(i) Llama-3-8B}}
 \end{subfigure}\hfill
 \begin{subfigure}[b]{0.49\textwidth}
 \includegraphics[width=\textwidth]{files/figures/gemma-2-9b_Mechanistic_Flow_updated.pdf}
-\caption*{(ii) Gemma-2-9B}
+\caption*{\revisionr3{(ii) Gemma-2-9B}}
 \end{subfigure}
-\caption{Observational information-flow diagnostics on the corrected cohorts: 2,000 examples per model/dataset, seed 42, greedy first-answer-line stopping. Columns show SQuAD and NQ; rows show prompt attention mass $\Omega$ and the unprojected input-state norm $\widetilde\Delta_{\rm in}$. Correctness uses answer--reference sentence similarity $>0.9$. Teal squares denote incorrect answers, red circles correct answers, and gold stars the NQ QCBW subset (upper question--answer-similarity quartile among incorrect answers, including cutoff ties). Every example is included; PCC is computed before display rounding, without score filtering or class balancing. These associations do not establish causality.}
+\caption{\revisionr3{Observational information-flow diagnostics on the corrected cohorts: 2,000 examples per model/dataset, seed 42, greedy first-answer-line stopping. Columns show SQuAD and NQ; rows show prompt attention mass $\Omega$ and the unprojected input-state norm $\widetilde\Delta_{\rm in}$. Correctness uses answer--reference sentence similarity $>0.9$. Teal squares denote incorrect answers, red circles correct answers, and gold stars the NQ QCBW subset (upper question--answer-similarity quartile among incorrect answers, including cutoff ties). Every example is included; PCC is computed before display rounding, without score filtering or class balancing. These associations do not establish causality.}}
 \label{fig:structural_flow}
 \end{figure*}

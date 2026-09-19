@@ -1651,3 +1651,18 @@ url={https://openreview.net/forum?id=WGXb7UdvTX}
     pages = "12216--12235",
     abstract = "Transformer-based language models (LMs) are known to capture factual knowledge in their parameters. While previous work looked into where factual associations are stored, only little is known about how they are retrieved internally during inference. We investigate this question through the lens of information flow. Given a subject-relation query, we study how the model aggregates information about the subject and relation to predict the correct attribute. With interventions on attention edges, we first identify two critical points where information propagates to the prediction: one from the relation positions followed by another from the subject positions. Next, by analyzing the information at these points, we unveil a three-step internal mechanism for attribute extraction. First, the representation at the last-subject position goes through an enrichment process, driven by the early MLP sublayers, to encode many subject-related attributes. Second, information from the relation propagates to the prediction. Third, the prediction representation ``queries'' the enriched subject to extract the attribute. Perhaps surprisingly, this extraction is typically done via attention heads, which often encode subject-attribute mappings in their parameters. Overall, our findings introduce a comprehensive view of how factual associations are stored and extracted internally in LMs, facilitating future research on knowledge localization and editing."
 }
+@inproceedings{chuang2024lookbackr3,
+ title={Lookback Lens: Detecting and Mitigating Contextual Hallucinations in Large Language Models Using Only Attention Maps},
+ author={Chuang, Yung-Sung and Qiu, Linlu and Hsieh, Cheng-Yu and Krishna, Ranjay and Kim, Yoon and Glass, James},
+ booktitle={Proceedings of EMNLP}, year={2024}, pages={1419--1436},
+ url={https://aclanthology.org/2024.emnlp-main.84/}}
+@inproceedings{kobayashi2020normr3,
+ title={Attention is Not Only a Weight: Analyzing Transformers with Vector Norms},
+ author={Kobayashi, Goro and Kuribayashi, Tatsuki and Yokoi, Sho and Inui, Kentaro},
+ booktitle={Proceedings of EMNLP}, year={2020}, pages={7057--7075},
+ url={https://aclanthology.org/2020.emnlp-main.574/}}
+@article{dao2022flashr3,
+ title={FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness},
+ author={Dao, Tri and Fu, Daniel Y. and Ermon, Stefano and Rudra, Atri and R{\'e}, Christopher},
+ journal={Advances in Neural Information Processing Systems}, volume={35}, year={2022},
+ url={https://arxiv.org/abs/2205.14135}}

@@ -52,8 +52,7 @@ below probing 85.97; Gemma-2-9B-Instruct HIDE 85.19 is only slightly above probi
   residual update, or QCBW observations as evidence of causal circuits.
 - Retained historical detection/ablation cells and Figure 3 are explicitly separated
   from new corrected cohorts. The stopping limitation is stated in Limitations.
-- The 51% runtime figure remains a historical claim scoped to its original standard
-  inference comparison. It was not re-estimated from the new base/HIDE timing suite.
+- The supplied timing sheet has now been audited: the six-model mean reduction is 50.804151% versus EigenScore, 50.839130% versus lexical similarity, and 53.230222% versus LN-Entropy. The average across these comparators is 51.624501%. The paper consistently headlines 50.8% versus EigenScore and defines the aggregation. Figure 3 is regenerated from the sheet; Figure 4 remains the separate paired-overhead suite.
 
 ## Final review
 
@@ -63,3 +62,9 @@ These files address the comments with available data; they do not guarantee jour
 acceptance or retroactively validate the historical outputs.
 
 The historical threshold table SQuAD column mean is corrected from 0.11 to 0.12 (the displayed six thresholds average 0.1167). Per-model thresholds are unchanged; their applicability to corrected stopping is not established.
+
+## Timing sheet and presentation follow-up
+
+All 46 populated mean cells in the supplied timing CSV agree with recalculation within 1e-8 seconds. Llama-3-8B/SQuAD has base 1.616885471 s and total 1.844477796 s: overhead 0.227592325 s (14.07597069%). The total 1.710671223 s is for RACE, with base 1.5021086 s. No cross-dataset or cross-platform subtraction is used.
+
+The new detector tables reproduce Appendix B values in Panel A and retain the matched comparison in Panel B, with explicit noncomparability across panels. All Appendix B numeric rows remain unchanged. Revision text, new tables, changed captions and equations are magenta.

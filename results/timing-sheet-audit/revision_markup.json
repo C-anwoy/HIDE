@@ -1,0 +1,21 @@
+{
+  "paper/files/ablations.tex": 8,
+  "paper/files/abstract.tex": 2,
+  "paper/files/conclusion.tex": 4,
+  "paper/files/error_analysis.tex": 2,
+  "paper/files/exp_setup.tex": 6,
+  "paper/files/intro.tex": 7,
+  "paper/files/method.tex": 11,
+  "paper/files/paired_diagnostics.tex": 4,
+  "paper/files/preliminary.tex": 3,
+  "paper/files/proofs.tex": 1,
+  "paper/files/results.tex": 39,
+  "paper/files/results_summ_table.tex": 1,
+  "paper/files/results_table.tex": 1,
+  "paper/files/tables/count_control.tex": 2,
+  "paper/files/tables/paired_differences.tex": 2,
+  "paper/files/tables/paired_r.tex": 5,
+  "paper/files/tables/paired_s.tex": 5,
+  "paper/files/tables/timing_lengths.tex": 2,
+  "paper/files/tables/timing_revision.tex": 2
+}
