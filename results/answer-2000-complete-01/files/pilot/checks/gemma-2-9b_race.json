@@ -1,0 +1,214 @@
+{
+  "task": "answer-pilot__gemma-2-9b__race__00000-00025",
+  "raw_sha256": "57c0aedf89afa3ed3e2f98e5f4fac6c3408123f52b840c93ddc33acee661bfe8",
+  "n": 25,
+  "passed": true,
+  "issues": [],
+  "line_stops": 11,
+  "no_output_state": 0,
+  "empty_answers": 0,
+  "generation_cap": 0,
+  "n_correct": 12,
+  "samples": [
+    {
+      "id": "155_0",
+      "question": "What's the main idea of this article?",
+      "answer": "What have been done or will be done to rescue the people in the disaster.",
+      "generated_text": " Tell the stories about the snow storm in the southern part of China.",
+      "evaluated_text": "Tell the stories about the snow storm in the southern part of China.",
+      "sentence_similarity": 0.31618985533714294
+    },
+    {
+      "id": "617_1",
+      "question": "Scientists don't want to meet the Indians on the ground due to the fear that  _",
+      "answer": "they could pass disease to the Indians",
+      "generated_text": " they could pass disease to the Indians\n",
+      "evaluated_text": "they could pass disease to the Indians",
+      "sentence_similarity": 0.9999998807907104
+    },
+    {
+      "id": "395_1",
+      "question": "From the passage we can infer that   _  .                 .",
+      "answer": "Transcripts of high school students can be very important reference for students to go to college.",
+      "generated_text": " High school students can change their transcripts by transferring to another school or take a lot of courses in one term.",
+      "evaluated_text": "High school students can change their transcripts by transferring to another school or take a lot of courses in one term.",
+      "sentence_similarity": 0.7023134231567383
+    },
+    {
+      "id": "258_0",
+      "question": "At the top of the South Pole,your watch will   _  .",
+      "answer": "keep good time",
+      "generated_text": " keep good time\n",
+      "evaluated_text": "keep good time",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "243_1",
+      "question": "According to the passage, a lie works when   _  .",
+      "answer": "someone gives the liar cooperation",
+      "generated_text": " the liar's words are sweet enough\n",
+      "evaluated_text": "the liar's words are sweet enough",
+      "sentence_similarity": 0.7620481252670288
+    },
+    {
+      "id": "770_2",
+      "question": "Which of the following is NOT true?",
+      "answer": "The Center is run by the government.",
+      "generated_text": " Morgan has regained her health.",
+      "evaluated_text": "Morgan has regained her health.",
+      "sentence_similarity": 0.3869211673736572
+    },
+    {
+      "id": "38_1",
+      "question": "If nobody answers you after your signal, what should you do then?",
+      "answer": "Make a house.",
+      "generated_text": " Stop shouting.",
+      "evaluated_text": "Stop shouting.",
+      "sentence_similarity": 0.49642181396484375
+    },
+    {
+      "id": "580_1",
+      "question": "The second technique suggests that you just imagine",
+      "answer": "you have every resource to achieve your goal",
+      "generated_text": " setting a goal is as simple as skiing, new possibilities will soon appear",
+      "evaluated_text": "setting a goal is as simple as skiing, new possibilities will soon appear",
+      "sentence_similarity": 0.5503056049346924
+    },
+    {
+      "id": "123_1",
+      "question": "Which of the following statements about the loan is right?",
+      "answer": "It's well beyond what the author could be responsible for.",
+      "generated_text": " It's well beyond what the author could be responsible for.",
+      "evaluated_text": "It's well beyond what the author could be responsible for.",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "24_1",
+      "question": "Which of the following is TRUE according to the passage?",
+      "answer": "Tickets for the 2004 Glastonbury Festival were in great demand despite the high price.",
+      "generated_text": " The Glastonbury Festival is run on a profit-making basis.",
+      "evaluated_text": "The Glastonbury Festival is run on a profit-making basis.",
+      "sentence_similarity": 0.5334051251411438
+    },
+    {
+      "id": "140_0",
+      "question": "Kim Yuna felt relaxed because  _  .",
+      "answer": "her dream finally came true",
+      "generated_text": " the competition was over\n",
+      "evaluated_text": "the competition was over",
+      "sentence_similarity": 0.5862642526626587
+    },
+    {
+      "id": "149_0",
+      "question": "All the following are the reasons for the expansion of the deserts EXCEPT  _  .",
+      "answer": "the climate in northern China is colder and drier",
+      "generated_text": " the climate in northern China is colder and drier\n",
+      "evaluated_text": "the climate in northern China is colder and drier",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "919_2",
+      "question": "According to Sun Haiping, Liu Xiang might have won the gold if   _  .",
+      "answer": "he had run the track next to Ladji Doucoure of Allen Johnson",
+      "generated_text": " he had run the track next to Ladji Doucoure of Allen Johnson\n",
+      "evaluated_text": "he had run the track next to Ladji Doucoure of Allen Johnson",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "119_2",
+      "question": "It is implied that  _  .",
+      "answer": "the English might cry noisily for the dead in Dickens' time",
+      "generated_text": " B\n",
+      "evaluated_text": "B",
+      "sentence_similarity": 0.2114073634147644
+    },
+    {
+      "id": "745_0",
+      "question": "What did the writer's friend most probably complain about?",
+      "answer": "Her son's not having good table manners.",
+      "generated_text": " Her son's not having good table manners.",
+      "evaluated_text": "Her son's not having good table manners.",
+      "sentence_similarity": 0.9999998807907104
+    },
+    {
+      "id": "412_0",
+      "question": "The passage mainly talks about  _  .",
+      "answer": "the genetically modified foods",
+      "generated_text": " the world's food problem\n",
+      "evaluated_text": "the world's food problem",
+      "sentence_similarity": 0.5933675765991211
+    },
+    {
+      "id": "441_0",
+      "question": "The school new rules will help kids by telling them   _  .",
+      "answer": "what is right and what is wrong",
+      "generated_text": " what is right and what is wrong\n",
+      "evaluated_text": "what is right and what is wrong",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "345_1",
+      "question": "Why does Peffers ask people to say \"I'll have tap.\" Loudly?",
+      "answer": "To encourage them to set an example for others to follow.",
+      "generated_text": " To encourage them to set an example for others to follow.",
+      "evaluated_text": "To encourage them to set an example for others to follow.",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "973_1",
+      "question": "Why is Lacobelli elected the president of the Ugly Club every year?",
+      "answer": "Because he has won the members' trust and admiration.",
+      "generated_text": " Because he is a spokesperson for ugly people everywhere.",
+      "evaluated_text": "Because he is a spokesperson for ugly people everywhere.",
+      "sentence_similarity": 0.3647282123565674
+    },
+    {
+      "id": "315_2",
+      "question": "Why did Mrs. A hire Mrs. B?   _  .",
+      "answer": "She believed that Mrs. B was the very person to help her to improve management",
+      "generated_text": " Mrs.",
+      "evaluated_text": "Mrs.",
+      "sentence_similarity": 0.4995386600494385
+    },
+    {
+      "id": "471_1",
+      "question": "Why do women choose to stand in the front?",
+      "answer": "Because they are too shy to make eye contact with others.",
+      "generated_text": " Because they are too shy to make eye contact with others.",
+      "evaluated_text": "Because they are too shy to make eye contact with others.",
+      "sentence_similarity": 0.9999999403953552
+    },
+    {
+      "id": "789_3",
+      "question": "How do you understand agriculture? It means   _  .",
+      "answer": "growing plants and raising animals",
+      "generated_text": " growing plants and raising animals\n",
+      "evaluated_text": "growing plants and raising animals",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "466_0",
+      "question": "Which theatre offers the cheapest seat?",
+      "answer": "Halifax Playhouse.",
+      "generated_text": " Halifax Playhouse.",
+      "evaluated_text": "Halifax Playhouse.",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "315_0",
+      "question": "How many people in all were there in the two women's families?   _  .",
+      "answer": "At least 4",
+      "generated_text": " At least 6\n",
+      "evaluated_text": "At least 6",
+      "sentence_similarity": 0.6755356192588806
+    },
+    {
+      "id": "334_0",
+      "question": "What drove Shi to do the survey of migrant workers?",
+      "answer": "Her housekeeper's daughter was forced to move to her hometown to continue studying.",
+      "generated_text": " Her housekeeper's daughter was forced to move to her hometown to continue studying.",
+      "evaluated_text": "Her housekeeper's daughter was forced to move to her hometown to continue studying.",
+      "sentence_similarity": 0.9999999403953552
+    }
+  ]
+}

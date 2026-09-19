@@ -1,0 +1,214 @@
+{
+  "task": "answer-pilot__llama3-8b__nq_open__00000-00025",
+  "raw_sha256": "2bd48ae04d7bb6a248575995414ee18afd5cad0db5e84ed80525af98ff567dec",
+  "n": 25,
+  "passed": true,
+  "issues": [],
+  "line_stops": 17,
+  "no_output_state": 0,
+  "empty_answers": 0,
+  "generation_cap": 1,
+  "n_correct": 5,
+  "samples": [
+    {
+      "id": "1921",
+      "question": "where does the optic nerve cross the midline \u200b",
+      "answer": "optic chiasm",
+      "generated_text": " the optic nerve crosses the midline at the optic chiasm\n",
+      "evaluated_text": "the optic nerve crosses the midline at the optic chiasm",
+      "sentence_similarity": 0.7185930013656616
+    },
+    {
+      "id": "554",
+      "question": "when does walking dead season 8 second half start",
+      "answer": "October 22, 2017",
+      "generated_text": " The Walking Dead Season 8 will return on February 25, 2018.\n",
+      "evaluated_text": "The Walking Dead Season 8 will return on February 25, 2018.",
+      "sentence_similarity": 0.6091307997703552
+    },
+    {
+      "id": "1470",
+      "question": "who was the chief guest of 2014 republic day",
+      "answer": "Prime Minister Shinzo Abe",
+      "generated_text": " The chief guest of 2014 republic day was Mr.",
+      "evaluated_text": "The chief guest of 2014 republic day was Mr.",
+      "sentence_similarity": 0.38952863216400146
+    },
+    {
+      "id": "1429",
+      "question": "where does jack ryan live in patriot games",
+      "answer": "Baltimore, Maryland",
+      "generated_text": " Jack Ryan lives in Washington, D.C.",
+      "evaluated_text": "Jack Ryan lives in Washington, D.C.",
+      "sentence_similarity": 0.675955057144165
+    },
+    {
+      "id": "1283",
+      "question": "when was it was not death for i stood up published",
+      "answer": "1890",
+      "generated_text": " 2007\n",
+      "evaluated_text": "2007",
+      "sentence_similarity": 0.4739612340927124
+    },
+    {
+      "id": "3040",
+      "question": "who was the first chief minister of west bengal",
+      "answer": "Prafulla Chandra Ghosh",
+      "generated_text": " Bidhan Chandra Roy\n",
+      "evaluated_text": "Bidhan Chandra Roy",
+      "sentence_similarity": 0.8783143162727356
+    },
+    {
+      "id": "122",
+      "question": "where does new york drinking water come from",
+      "answer": "the eastern Catskill Mountains",
+      "generated_text": " New York City's drinking water comes from the Catskill Mountains, 125 miles northwest of the city.",
+      "evaluated_text": "New York City's drinking water comes from the Catskill Mountains, 125 miles northwest of the city.",
+      "sentence_similarity": 0.6519966125488281
+    },
+    {
+      "id": "1968",
+      "question": "who sings theme tune to orange is the new black",
+      "answer": "Spektor",
+      "generated_text": " Regina Spektor\n",
+      "evaluated_text": "Regina Spektor",
+      "sentence_similarity": 0.7914451956748962
+    },
+    {
+      "id": "581",
+      "question": "do you have to have a gun permit to shoot at a range",
+      "answer": "Typically, no",
+      "generated_text": " no, you don't need a permit to shoot at a range\n",
+      "evaluated_text": "no, you don't need a permit to shoot at a range",
+      "sentence_similarity": 0.3074217736721039
+    },
+    {
+      "id": "713",
+      "question": "which level of weight bearing often comes with a set number of pounds",
+      "answer": "Partial weight-bearing",
+      "generated_text": " partial weight bearing\n",
+      "evaluated_text": "partial weight bearing",
+      "sentence_similarity": 0.9809459447860718
+    },
+    {
+      "id": "3374",
+      "question": "how many nuclear power plants in washington state",
+      "answer": "3",
+      "generated_text": " There are no nuclear power plants in Washington State.",
+      "evaluated_text": "There are no nuclear power plants in Washington State.",
+      "sentence_similarity": 0.2782720625400543
+    },
+    {
+      "id": "1924",
+      "question": "where does the song 10 green bottles come from",
+      "answer": "United Kingdom",
+      "generated_text": " The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"",
+      "evaluated_text": "The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"10 in the Bed\" (or \"10 in the Blanket\"). The song is a counting-out rhyme, and is a variant of the song \"",
+      "sentence_similarity": 0.26417768001556396
+    },
+    {
+      "id": "3061",
+      "question": "who is singing in something just like this",
+      "answer": "Will Champion",
+      "generated_text": " the band is called the band\n",
+      "evaluated_text": "the band is called the band",
+      "sentence_similarity": 0.5053867697715759
+    },
+    {
+      "id": "2041",
+      "question": "who played lead guitar on 25 or 6 to 4",
+      "answer": "Terry Kath",
+      "generated_text": " Terry Kath\n",
+      "evaluated_text": "Terry Kath",
+      "sentence_similarity": 0.9999999403953552
+    },
+    {
+      "id": "1276",
+      "question": "the man in the high castle episode 1 season 1",
+      "answer": "The New World",
+      "generated_text": " The Man in the High Castle is an American alternate history web television series created by Frank Spotnitz and based on Philip K.",
+      "evaluated_text": "The Man in the High Castle is an American alternate history web television series created by Frank Spotnitz and based on Philip K.",
+      "sentence_similarity": 0.29712045192718506
+    },
+    {
+      "id": "1895",
+      "question": "who has the most goals in soccer 2018",
+      "answer": "Ali Daei",
+      "generated_text": " Lionel Messi has the most goals in soccer 2018\n",
+      "evaluated_text": "Lionel Messi has the most goals in soccer 2018",
+      "sentence_similarity": 0.07174612581729889
+    },
+    {
+      "id": "578",
+      "question": "who was the girl in the video brenda got a baby",
+      "answer": "Ethel \"Edy\" Proctor",
+      "generated_text": " The girl in the video is called Brenda.",
+      "evaluated_text": "The girl in the video is called Brenda.",
+      "sentence_similarity": 0.39802467823028564
+    },
+    {
+      "id": "497",
+      "question": "who did deion sanders go in the hall of fame as",
+      "answer": "Cornerback",
+      "generated_text": " deion sanders went into the hall of fame as a cornerback\n",
+      "evaluated_text": "deion sanders went into the hall of fame as a cornerback",
+      "sentence_similarity": 0.30089375376701355
+    },
+    {
+      "id": "424",
+      "question": "during the first world war against which country germany did not fight",
+      "answer": "Austria-Hungary",
+      "generated_text": " Germany did not fight against the United States of America\n",
+      "evaluated_text": "Germany did not fight against the United States of America",
+      "sentence_similarity": 0.3415452539920807
+    },
+    {
+      "id": "2722",
+      "question": "who has won the most world series in baseball",
+      "answer": "the New York Yankees",
+      "generated_text": " the new york yankees\n",
+      "evaluated_text": "the new york yankees",
+      "sentence_similarity": 0.9999998807907104
+    },
+    {
+      "id": "1646",
+      "question": "when did all night long come out lionel richie",
+      "answer": "1983",
+      "generated_text": " All Night Long (All Night) is a song by Lionel Richie from his 1983 album Can't Slow Down.",
+      "evaluated_text": "All Night Long (All Night) is a song by Lionel Richie from his 1983 album Can't Slow Down.",
+      "sentence_similarity": 0.44377821683883667
+    },
+    {
+      "id": "2223",
+      "question": "how many wing stops are there in the united states",
+      "answer": "1,000",
+      "generated_text": " 1,000\n",
+      "evaluated_text": "1,000",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "2354",
+      "question": "who wrote the declaration of man and citizen",
+      "answer": "General Lafayette",
+      "generated_text": " Thomas Jefferson wrote the Declaration of Independence.\n",
+      "evaluated_text": "Thomas Jefferson wrote the Declaration of Independence.",
+      "sentence_similarity": 0.4708242416381836
+    },
+    {
+      "id": "3188",
+      "question": "how many episodes in game if thrones season 7",
+      "answer": "7",
+      "generated_text": " 7\n",
+      "evaluated_text": "7",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "2408",
+      "question": "where does the red badge of courage take place",
+      "answer": "the field of battle",
+      "generated_text": " The Red Badge of Courage takes place in the American Civil War.\n",
+      "evaluated_text": "The Red Badge of Courage takes place in the American Civil War.",
+      "sentence_similarity": 0.44437626004219055
+    }
+  ]
+}

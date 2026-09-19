@@ -1,0 +1,29 @@
+{
+  "profiles": {
+    "pilot": {"mode": "detection", "samples": 25},
+    "qa": {"mode": "detection", "samples": 0},
+    "comparison": {"mode": "detection", "samples": 0, "multipass_samples": 5},
+    "ablations": {"mode": "detection", "samples": 0, "ablations": true},
+    "temperature-0.3": {"mode": "detection", "samples": 0, "decoding": "temperature", "temperature": 0.3},
+    "temperature-0.6": {"mode": "detection", "samples": 0, "decoding": "temperature", "temperature": 0.6},
+    "temperature-0.9": {"mode": "detection", "samples": 0, "decoding": "temperature", "temperature": 0.9},
+    "nucleus-0.7": {"mode": "detection", "samples": 0, "decoding": "nucleus", "top_p": 0.7},
+    "nucleus-0.8": {"mode": "detection", "samples": 0, "decoding": "nucleus", "top_p": 0.8},
+    "nucleus-0.9": {"mode": "detection", "samples": 0, "decoding": "nucleus", "top_p": 0.9},
+    "timing": {"mode": "timing", "samples": 200},
+    "answer-pilot": {"mode": "detection", "samples": 25, "answer_boundary": "first-line"},
+    "answer-qa": {"mode": "detection", "samples": 0, "answer_boundary": "first-line"},
+    "answer-timing": {"mode": "timing", "samples": 200, "answer_boundary": "first-line"}
+  },
+  "suites": {
+    "pilots": [{"profiles": ["pilot"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["SQuAD", "nq_open"]}],
+    "review": [{"profiles": ["qa"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}, {"include": "timing"}],
+    "consistency": [{"profiles": ["comparison"], "models": ["llama3-3b", "llama3-3b-instruct", "llama3-8b", "llama3-8b-instruct", "gemma-2-9b", "gemma-2-9b-instruct"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}],
+    "ablations": [{"profiles": ["ablations"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["SQuAD", "nq_open"]}],
+    "decoding": [{"profiles": ["temperature-0.3", "temperature-0.6", "temperature-0.9", "nucleus-0.7", "nucleus-0.8", "nucleus-0.9"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["SQuAD", "nq_open"]}],
+    "timing": [{"profiles": ["timing"], "models": ["llama3-3b", "llama3-8b", "gemma-2-9b", "gemma-2-27b"], "datasets": ["SQuAD", "nq_open"]}],
+    "answer-pilots": [{"profiles": ["answer-pilot"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}],
+    "answer-detection": [{"profiles": ["answer-qa"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}],
+    "answer-review": [{"profiles": ["answer-qa"], "models": ["llama3-8b", "gemma-2-9b"], "datasets": ["nq_open", "triviaqa", "SQuAD", "race"]}, {"profiles": ["answer-timing"], "models": ["llama3-3b", "llama3-8b", "gemma-2-9b", "gemma-2-27b"], "datasets": ["SQuAD", "nq_open"]}]
+  }
+}

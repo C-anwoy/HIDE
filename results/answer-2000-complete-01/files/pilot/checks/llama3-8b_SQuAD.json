@@ -1,0 +1,214 @@
+{
+  "task": "answer-pilot__llama3-8b__SQuAD__00000-00025",
+  "raw_sha256": "07bc3ab15124c6680b0c107e04e561720107a353645359d6b6a636d1689cfbc9",
+  "n": 25,
+  "passed": true,
+  "issues": [],
+  "line_stops": 1,
+  "no_output_state": 0,
+  "empty_answers": 0,
+  "generation_cap": 0,
+  "n_correct": 12,
+  "samples": [
+    {
+      "id": "573020f7b2c2fd14005688fa",
+      "question": "When did Hamas drive the PLO out of Gaza?",
+      "answer": "2007",
+      "generated_text": " In 2007.",
+      "evaluated_text": "In 2007.",
+      "sentence_similarity": 0.9501132965087891
+    },
+    {
+      "id": "57335ddbd058e614000b5932",
+      "question": "Where can Aeolian sand with a number of dunes be found?",
+      "answer": "plain Vistula terraces",
+      "generated_text": " The highest terrace.",
+      "evaluated_text": "The highest terrace.",
+      "sentence_similarity": 0.5125276446342468
+    },
+    {
+      "id": "572646655951b619008f6ec0",
+      "question": "What do ctenophores have that no other animals have?",
+      "answer": "colloblasts",
+      "generated_text": " Colloblasts.",
+      "evaluated_text": "Colloblasts.",
+      "sentence_similarity": 0.9897047877311707
+    },
+    {
+      "id": "57092322efce8f15003a7db3",
+      "question": "What is the name of the holding company for BSkyB?",
+      "answer": "Sky plc",
+      "generated_text": " British Sky Broadcasting Group plc.",
+      "evaluated_text": "British Sky Broadcasting Group plc.",
+      "sentence_similarity": 0.7689850330352783
+    },
+    {
+      "id": "572751b4708984140094dc1e",
+      "question": "Contracts must be designed to ensure what?",
+      "answer": "that each side is capable of performing the obligations set out",
+      "generated_text": " That each side is capable of performing the obligations set out.",
+      "evaluated_text": "That each side is capable of performing the obligations set out.",
+      "sentence_similarity": 0.9987900257110596
+    },
+    {
+      "id": "57300ec0947a6a140053d006",
+      "question": "What did the conflict galvanize Muslims around the world to do?",
+      "answer": "send aid and sometimes to go themselves to fight for their faith",
+      "generated_text": " Send aid and sometimes to go themselves to fight for their faith.",
+      "evaluated_text": "Send aid and sometimes to go themselves to fight for their faith.",
+      "sentence_similarity": 0.9981824159622192
+    },
+    {
+      "id": "570d4030fed7b91900d45da1",
+      "question": "What entity owns V/Line?",
+      "answer": "Victorian Government",
+      "generated_text": " V/Line is a business unit of the Department of Transport.",
+      "evaluated_text": "V/Line is a business unit of the Department of Transport.",
+      "sentence_similarity": 0.5444893836975098
+    },
+    {
+      "id": "5727cb4b2ca10214002d967a",
+      "question": "What historical figure was Jacksonville named after?",
+      "answer": "Andrew Jackson",
+      "generated_text": " Andrew Jackson, the seventh President of the United States.",
+      "evaluated_text": "Andrew Jackson, the seventh President of the United States.",
+      "sentence_similarity": 0.6532315611839294
+    },
+    {
+      "id": "5709686c200fba1400367f7b",
+      "question": "What was the total number of homes Sky announced that had Sky+HD in March of 2012?",
+      "answer": "4,222,000",
+      "generated_text": " 4,222,000.",
+      "evaluated_text": "4,222,000.",
+      "sentence_similarity": 0.9964402914047241
+    },
+    {
+      "id": "5725c28a271a42140099d14f",
+      "question": "What are the three sources of European Union law?",
+      "answer": "primary law, secondary law and supplementary law",
+      "generated_text": " The three sources of European Union law are primary law, secondary law and supplementary law.",
+      "evaluated_text": "The three sources of European Union law are primary law, secondary law and supplementary law.",
+      "sentence_similarity": 0.7026220560073853
+    },
+    {
+      "id": "57106d2fb654c5140001f8f1",
+      "question": "France laid siege to Montpellier in what year?",
+      "answer": "1622",
+      "generated_text": " 1622.",
+      "evaluated_text": "1622.",
+      "sentence_similarity": 0.9712250828742981
+    },
+    {
+      "id": "572755b7708984140094dc51",
+      "question": "How many women were employed in construction in 2011?",
+      "answer": "828,000",
+      "generated_text": " 828,000.",
+      "evaluated_text": "828,000.",
+      "sentence_similarity": 0.9958723783493042
+    },
+    {
+      "id": "572a058aaf94a219006aa753",
+      "question": "What is the nature of the relationship between T-cells and vitamin D?",
+      "answer": "symbiotic relationship",
+      "generated_text": " T-cells have a symbiotic relationship with vitamin D.",
+      "evaluated_text": "T-cells have a symbiotic relationship with vitamin D.",
+      "sentence_similarity": 0.5831108093261719
+    },
+    {
+      "id": "572ffce5a23a5019007fcc16",
+      "question": "How many major ice ages have occurred? ",
+      "answer": "six",
+      "generated_text": " Six major ice ages have occurred since approximately 600,000 years ago.",
+      "evaluated_text": "Six major ice ages have occurred since approximately 600,000 years ago.",
+      "sentence_similarity": 0.6435019373893738
+    },
+    {
+      "id": "5711623e50c2381900b54aba",
+      "question": "What is restrained with a lever in the top of a boiler?",
+      "answer": "plug valve",
+      "generated_text": " The plug valve.",
+      "evaluated_text": "The plug valve.",
+      "sentence_similarity": 0.9378647804260254
+    },
+    {
+      "id": "57265aaf5951b619008f706b",
+      "question": "What does the lobata have pair of?",
+      "answer": "lobes",
+      "generated_text": " The Lobata have a pair of lobes, which are muscular, cuplike extensions of the body that project beyond the mouth.",
+      "evaluated_text": "The Lobata have a pair of lobes, which are muscular, cuplike extensions of the body that project beyond the mouth.",
+      "sentence_similarity": 0.5622626543045044
+    },
+    {
+      "id": "57108d69b654c5140001f984",
+      "question": "How many refugees emigrated to the Dutch Republic?",
+      "answer": "an estimated total of 75,000 to 100,000 people",
+      "generated_text": " The number of Huguenots who emigrated to the Dutch Republic is estimated at 75,000 to 100,000 people.",
+      "evaluated_text": "The number of Huguenots who emigrated to the Dutch Republic is estimated at 75,000 to 100,000 people.",
+      "sentence_similarity": 0.8492200374603271
+    },
+    {
+      "id": "572754fff1498d1400e8f661",
+      "question": "Having existing utility lines marked lessens the likelihood of what?",
+      "answer": "damage",
+      "generated_text": " Damage to existing electrical, water, sewage, phone, and cable facilities, which could cause outages and potentially hazardous situations.",
+      "evaluated_text": "Damage to existing electrical, water, sewage, phone, and cable facilities, which could cause outages and potentially hazardous situations.",
+      "sentence_similarity": 0.6236853003501892
+    },
+    {
+      "id": "572a0a686aef0514001551ed",
+      "question": "Who was the main proponent of the cellular theory of immunity?",
+      "answer": "Elie Metchnikoff",
+      "generated_text": " Elie Metchnikoff.",
+      "evaluated_text": "Elie Metchnikoff.",
+      "sentence_similarity": 0.996148943901062
+    },
+    {
+      "id": "572fad30a23a5019007fc870",
+      "question": "When did Prime Minister Wilson commit to some form of devolved legislature?",
+      "answer": "1974",
+      "generated_text": " 1974 Q: When was the final legislative proposals for a Scottish Assembly passed by the United Kingdom Parliament? A: 1978\n",
+      "evaluated_text": "1974 Q: When was the final legislative proposals for a Scottish Assembly passed by the United Kingdom Parliament? A: 1978",
+      "sentence_similarity": 0.39560049772262573
+    },
+    {
+      "id": "5727515f708984140094dc11",
+      "question": "What South African law recognized two types of schools?",
+      "answer": "South African Schools Act",
+      "generated_text": " The South African Schools Act of 1996.",
+      "evaluated_text": "The South African Schools Act of 1996.",
+      "sentence_similarity": 0.8250571489334106
+    },
+    {
+      "id": "57264586f1498d1400e8dac9",
+      "question": "Was the Use of the DATANET 1 name correct ",
+      "answer": "use of the name was incorrect all these services were managed by the same people within one department of KPN contributed to the confusion",
+      "generated_text": " No, the name was used for the public switched data network, the public PAD service and the Videotex service.",
+      "evaluated_text": "No, the name was used for the public switched data network, the public PAD service and the Videotex service.",
+      "sentence_similarity": 0.4654732346534729
+    },
+    {
+      "id": "5729f8516aef05140015516e",
+      "question": "Antibodies are transferred to the gut of the infant through what means?",
+      "answer": "Breast milk or colostrum",
+      "generated_text": " Breast milk or colostrum.",
+      "evaluated_text": "Breast milk or colostrum.",
+      "sentence_similarity": 0.996016800403595
+    },
+    {
+      "id": "5733e5a14776f4190066145c",
+      "question": "Who was given land by British goovernment for development of Ohio Country?",
+      "answer": "Ohio Company of Virginia",
+      "generated_text": " Ohio Company of Virginia.",
+      "evaluated_text": "Ohio Company of Virginia.",
+      "sentence_similarity": 0.9874259233474731
+    },
+    {
+      "id": "5728455bff5b5019007da07b",
+      "question": "How much Saharan dust remains in the air over the Amazon each year?",
+      "answer": "132 million tons",
+      "generated_text": " 132 million tons.",
+      "evaluated_text": "132 million tons.",
+      "sentence_similarity": 0.9948533177375793
+    }
+  ]
+}

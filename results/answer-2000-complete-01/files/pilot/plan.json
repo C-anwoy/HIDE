@@ -1,0 +1,107 @@
+{
+  "format": "hide-work-plan-v1",
+  "suite": "answer-pilots",
+  "part_size": 200,
+  "source_sha256": {
+    "hide____init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "hide__ablations.py": "1b1789ab1601f86f4fbdf89fdcb50329efe42ffa27edbdddf5fbdc9f27d21d9b",
+    "hide__analyze.py": "ff23f6b7fe937ab92097f2900693ffecd454ab2ab26095d51cb8b63a20bade1e",
+    "hide__analyze_ablations.py": "dc597e2aeaa86bddd52b53079d41b7127082a3e75223b53e35b15b8aca17aae3",
+    "hide__answer_boundary.py": "a52726efa55e41659ac0c9fd609028afc639f5523d872f3ce098df4f751b8b54",
+    "hide__answer_runs.py": "3637ef88186ec4927389787cd02802a6183bd58f520e71f2849c7d1f9d3dbb34",
+    "hide__baselines.py": "b877078dadd03df4ae178313af0d449a99beff7c82ba37a8970d5006fdafb93c",
+    "hide__checkpoints.py": "a156470f62442961f2a89bb2a03af9fca534cffcd30ad49351742b3c5e7fee98",
+    "config__checkpoints.json": "7ee99181c96e90a1db5b9c8ca6d53ace2e82aebf3959657ada847aa139bad981",
+    "config__compatibility.json": "6145875012245db2b4d36f171dcfdb7e918353b181a50eee8075fc9d8a2e1b76",
+    "config__experiments.json": "7e59e0e3d6791896603fac5787cb19f6094e6dbc280ca8a47ff967368702ec3f",
+    "config__models.json": "b4ee8802a0ca9c482ebb29ea7abbd1dba61acb9e367bbd869e245b53d59b35c3",
+    "hide__core.py": "30bdf4266416ee0d99e4bfd46382bca9e5ebe715d8daeaae5a6fa2a24dc45cd2",
+    "datasets__SQuAD.py": "7ae548ddb9e642a8c8d65182240fc541d4c7597cd3f78d9c912f1c36b07f6628",
+    "datasets____init__.py": "a95ac739313afaa099e459e4ac6d5e852420fcf5ea4119e071f90a1ad6226ade",
+    "datasets__nq_open.py": "9269d39459b40e2b34345434ff3e71d569bda6680bb563c6f93ab9cfb8220702",
+    "datasets__race.py": "a9eb5a6eeaf229b6e8fe1a9baabe1beeed35d56bbcdaba170ee8cf2682e48ffb",
+    "datasets__triviaqa.py": "7cfb79e7194f7f53d1d49ccc9e47b0ecfd9fc2d256685439241151334430f106",
+    "hide__evaluate.py": "21b28cc1c50a478b01e4219a9cffbaf3ae98297aced6ad1bcab26feee2a338fe",
+    "hide__execution.py": "f19f8d24f36a7c1cc579452c44c47d16e541aa2f95f1d8b0bab6253aaef5a964",
+    "hide__export_results.py": "b263383e459db3e703ce5b27317a5cb29ae5344ac28954872e15a0c4512c3d20",
+    "hide__kernels.py": "414e9c313d9f42e10eae7fffe2fa626961aacc02f36b0dec15762044490dad5d",
+    "hide__launch.py": "19add0516c09b5c3014517ef8f40e2f31f20b09e047599561dc60f78535dd0d0",
+    "hide__parts.py": "3c22417c7391dbb89282350dfb26f623c39a1e01e9b6da7cf8ec5e05af4cfbe7",
+    "hide__plot_mechanistic.py": "dd31c833b8151aa6d10798a6dbdd7b0a50d9f08be32f746d2cac418585797286",
+    "hide__prepare_data.py": "15a3db5e0734cad22fcf1896356243f7ec52c5ec65d75d20a80024858c37a847",
+    "hide__provenance.py": "1db26b764ee249342ed696a31a06b1ba5564002f59e2c641d282dc7be000d122",
+    "hide__recover.py": "eb2b219264131e055c8656135d740cf10e30c70c4cc62a7207a3e5bc8530ae39",
+    "hide__runner.py": "faec84f57fd4a885cebc87e0ee74cb70189865ccafd32d331d7a62f097f26f80",
+    "hide__settings.py": "672ce1ccacfa60180915bf7238c5aed28d2ed60f4e37c7329e480869e7097fe1",
+    "hide__summarize_runs.py": "1ec36f829efd3003f2233444d3b96bd712c74e6f316c52b74d1fb38e0c50c146",
+    "hide__summarize_timing.py": "033f90e51de782102e6a1bf2074879c27a9adb29772c115261a2dfeea996461f",
+    "HIDE__pyproject.toml": "ffa6345185e5d85573b080f8f691142f2c7b996d1582e35ca2ad78e862b737a4"
+  },
+  "tasks": [
+    {
+      "id": "answer-pilot__llama3-8b__nq_open__00000-00025",
+      "profile": "answer-pilot",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__llama3-8b__triviaqa__00000-00025",
+      "profile": "answer-pilot",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__llama3-8b__SQuAD__00000-00025",
+      "profile": "answer-pilot",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__llama3-8b__race__00000-00025",
+      "profile": "answer-pilot",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__gemma-2-9b__nq_open__00000-00025",
+      "profile": "answer-pilot",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__gemma-2-9b__triviaqa__00000-00025",
+      "profile": "answer-pilot",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__gemma-2-9b__SQuAD__00000-00025",
+      "profile": "answer-pilot",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 0,
+      "stop": 25
+    },
+    {
+      "id": "answer-pilot__gemma-2-9b__race__00000-00025",
+      "profile": "answer-pilot",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 0,
+      "stop": 25
+    }
+  ],
+  "sha256": "2c2c88725b262b7e28fb077af31a81809bc631f95114f0ce1f9a7a49463b63a7"
+}

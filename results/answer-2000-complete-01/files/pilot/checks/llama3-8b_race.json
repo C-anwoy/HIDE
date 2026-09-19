@@ -1,0 +1,214 @@
+{
+  "task": "answer-pilot__llama3-8b__race__00000-00025",
+  "raw_sha256": "c90c4903656f88ae784d24547bbff69bb65d205b7ddfe0bd7b1452ba72ee28d9",
+  "n": 25,
+  "passed": true,
+  "issues": [],
+  "line_stops": 13,
+  "no_output_state": 0,
+  "empty_answers": 0,
+  "generation_cap": 0,
+  "n_correct": 6,
+  "samples": [
+    {
+      "id": "155_0",
+      "question": "What's the main idea of this article?",
+      "answer": "What have been done or will be done to rescue the people in the disaster.",
+      "generated_text": " The snow storm in the southern part of China has caused a lot of damage.",
+      "evaluated_text": "The snow storm in the southern part of China has caused a lot of damage.",
+      "sentence_similarity": 0.5065594911575317
+    },
+    {
+      "id": "617_1",
+      "question": "Scientists don't want to meet the Indians on the ground due to the fear that  _",
+      "answer": "they could pass disease to the Indians",
+      "generated_text": " they could accidentally spread disease to members of the tribes.",
+      "evaluated_text": "they could accidentally spread disease to members of the tribes.",
+      "sentence_similarity": 0.7896133065223694
+    },
+    {
+      "id": "395_1",
+      "question": "From the passage we can infer that   _  .                 .",
+      "answer": "Transcripts of high school students can be very important reference for students to go to college.",
+      "generated_text": " The prep school scheme sends a dangerous message to poor neighborhoods, where young people too often ignore their studies, believing that they will magically become millionaires once the world sees their athletic talents.",
+      "evaluated_text": "The prep school scheme sends a dangerous message to poor neighborhoods, where young people too often ignore their studies, believing that they will magically become millionaires once the world sees their athletic talents.",
+      "sentence_similarity": 0.5593596696853638
+    },
+    {
+      "id": "258_0",
+      "question": "At the top of the South Pole,your watch will   _  .",
+      "answer": "keep good time",
+      "generated_text": " At the top of the South Pole,any clock or watch keeps good time because all meridians join there.All kinds of local time are completely suitable there.It is even difficult to distinguish New Year's Eve from New Year's Day.\n",
+      "evaluated_text": "At the top of the South Pole,any clock or watch keeps good time because all meridians join there.All kinds of local time are completely suitable there.It is even difficult to distinguish New Year's Eve from New Year's Day.",
+      "sentence_similarity": 0.3151598572731018
+    },
+    {
+      "id": "243_1",
+      "question": "According to the passage, a lie works when   _  .",
+      "answer": "someone gives the liar cooperation",
+      "generated_text": " the liar's words are sweet enough\n",
+      "evaluated_text": "the liar's words are sweet enough",
+      "sentence_similarity": 0.7620481252670288
+    },
+    {
+      "id": "770_2",
+      "question": "Which of the following is NOT true?",
+      "answer": "The Center is run by the government.",
+      "generated_text": " The Center is run by the government.",
+      "evaluated_text": "The Center is run by the government.",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "38_1",
+      "question": "If nobody answers you after your signal, what should you do then?",
+      "answer": "Make a house.",
+      "generated_text": " Stop shouting.",
+      "evaluated_text": "Stop shouting.",
+      "sentence_similarity": 0.49642181396484375
+    },
+    {
+      "id": "580_1",
+      "question": "The second technique suggests that you just imagine",
+      "answer": "you have every resource to achieve your goal",
+      "generated_text": " The second technique suggests that you just imagine the best possible situation.",
+      "evaluated_text": "The second technique suggests that you just imagine the best possible situation.",
+      "sentence_similarity": 0.42138949036598206
+    },
+    {
+      "id": "123_1",
+      "question": "Which of the following statements about the loan is right?",
+      "answer": "It's well beyond what the author could be responsible for.",
+      "generated_text": " It's well beyond what the author could be responsible for.",
+      "evaluated_text": "It's well beyond what the author could be responsible for.",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "24_1",
+      "question": "Which of the following is TRUE according to the passage?",
+      "answer": "Tickets for the 2004 Glastonbury Festival were in great demand despite the high price.",
+      "generated_text": " The Glastonbury Festival is run on a profit-making basis.\n",
+      "evaluated_text": "The Glastonbury Festival is run on a profit-making basis.",
+      "sentence_similarity": 0.5334051251411438
+    },
+    {
+      "id": "140_0",
+      "question": "Kim Yuna felt relaxed because  _  .",
+      "answer": "her dream finally came true",
+      "generated_text": " the competition was over, her dream finally came true, she won a large amount of money, she became well-known overnight \n",
+      "evaluated_text": "the competition was over, her dream finally came true, she won a large amount of money, she became well-known overnight",
+      "sentence_similarity": 0.7534562349319458
+    },
+    {
+      "id": "149_0",
+      "question": "All the following are the reasons for the expansion of the deserts EXCEPT  _  .",
+      "answer": "the climate in northern China is colder and drier",
+      "generated_text": " the soil of the grasslands is exposed \n",
+      "evaluated_text": "the soil of the grasslands is exposed",
+      "sentence_similarity": 0.31040892004966736
+    },
+    {
+      "id": "919_2",
+      "question": "According to Sun Haiping, Liu Xiang might have won the gold if   _  .",
+      "answer": "he had run the track next to Ladji Doucoure of Allen Johnson",
+      "generated_text": " he had done better during his reaction period, he had run the track next to Ladji Doucoure of Allen Johnson, he had practiced clearance more before that race, he hadn't touched a few hurdles in the race \n",
+      "evaluated_text": "he had done better during his reaction period, he had run the track next to Ladji Doucoure of Allen Johnson, he had practiced clearance more before that race, he hadn't touched a few hurdles in the race",
+      "sentence_similarity": 0.618827223777771
+    },
+    {
+      "id": "119_2",
+      "question": "It is implied that  _  .",
+      "answer": "the English might cry noisily for the dead in Dickens' time",
+      "generated_text": " . \n",
+      "evaluated_text": ".",
+      "sentence_similarity": -0.29973840713500977
+    },
+    {
+      "id": "745_0",
+      "question": "What did the writer's friend most probably complain about?",
+      "answer": "Her son's not having good table manners.",
+      "generated_text": " Her son's not having good table manners.",
+      "evaluated_text": "Her son's not having good table manners.",
+      "sentence_similarity": 0.9999998807907104
+    },
+    {
+      "id": "412_0",
+      "question": "The passage mainly talks about  _  .",
+      "answer": "the genetically modified foods",
+      "generated_text": " The passage mainly talks about the genetically modified foods.",
+      "evaluated_text": "The passage mainly talks about the genetically modified foods.",
+      "sentence_similarity": 0.8845247626304626
+    },
+    {
+      "id": "441_0",
+      "question": "The school new rules will help kids by telling them   _  .",
+      "answer": "what is right and what is wrong",
+      "generated_text": " how they can study well \n",
+      "evaluated_text": "how they can study well",
+      "sentence_similarity": 0.4744059443473816
+    },
+    {
+      "id": "345_1",
+      "question": "Why does Peffers ask people to say \"I'll have tap.\" Loudly?",
+      "answer": "To encourage them to set an example for others to follow.",
+      "generated_text": " To encourage them to set an example for others to follow.",
+      "evaluated_text": "To encourage them to set an example for others to follow.",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "973_1",
+      "question": "Why is Lacobelli elected the president of the Ugly Club every year?",
+      "answer": "Because he has won the members' trust and admiration.",
+      "generated_text": " Because he is the ugliest person in the whole world.\n",
+      "evaluated_text": "Because he is the ugliest person in the whole world.",
+      "sentence_similarity": 0.23005303740501404
+    },
+    {
+      "id": "315_2",
+      "question": "Why did Mrs. A hire Mrs. B?   _  .",
+      "answer": "She believed that Mrs. B was the very person to help her to improve management",
+      "generated_text": " Mrs.",
+      "evaluated_text": "Mrs.",
+      "sentence_similarity": 0.4995386600494385
+    },
+    {
+      "id": "471_1",
+      "question": "Why do women choose to stand in the front?",
+      "answer": "Because they are too shy to make eye contact with others.",
+      "generated_text": " Because they are too shy to make eye contact with others.\n",
+      "evaluated_text": "Because they are too shy to make eye contact with others.",
+      "sentence_similarity": 0.9999999403953552
+    },
+    {
+      "id": "789_3",
+      "question": "How do you understand agriculture? It means   _  .",
+      "answer": "growing plants and raising animals",
+      "generated_text": " . \n",
+      "evaluated_text": ".",
+      "sentence_similarity": 0.17014390230178833
+    },
+    {
+      "id": "466_0",
+      "question": "Which theatre offers the cheapest seat?",
+      "answer": "Halifax Playhouse.",
+      "generated_text": " Halifax Playhouse.",
+      "evaluated_text": "Halifax Playhouse.",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "315_0",
+      "question": "How many people in all were there in the two women's families?   _  .",
+      "answer": "At least 4",
+      "generated_text": " At least 8\n",
+      "evaluated_text": "At least 8",
+      "sentence_similarity": 0.7229810953140259
+    },
+    {
+      "id": "334_0",
+      "question": "What drove Shi to do the survey of migrant workers?",
+      "answer": "Her housekeeper's daughter was forced to move to her hometown to continue studying.",
+      "generated_text": " Her curiosity about migrant workers' lives\n",
+      "evaluated_text": "Her curiosity about migrant workers' lives",
+      "sentence_similarity": 0.5856647491455078
+    }
+  ]
+}

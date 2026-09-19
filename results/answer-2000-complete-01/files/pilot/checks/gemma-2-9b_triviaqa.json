@@ -1,0 +1,214 @@
+{
+  "task": "answer-pilot__gemma-2-9b__triviaqa__00000-00025",
+  "raw_sha256": "faf1983bd6bd41198e96d755da37276244df71f3839430f195c9fe942ee563a4",
+  "n": 25,
+  "passed": true,
+  "issues": [],
+  "line_stops": 19,
+  "no_output_state": 0,
+  "empty_answers": 0,
+  "generation_cap": 0,
+  "n_correct": 19,
+  "samples": [
+    {
+      "id": "wh_4198",
+      "question": "Of which organ is otitis an inflammation ?",
+      "answer": "EAR",
+      "generated_text": " Of the ear.",
+      "evaluated_text": "Of the ear.",
+      "sentence_similarity": 0.8723341226577759
+    },
+    {
+      "id": "dpql_4350",
+      "question": "In which country could you drive along the 1700 kilometre Bruce Highway?",
+      "answer": "Australia",
+      "generated_text": " Australia\n\n",
+      "evaluated_text": "Australia",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "sfq_14787",
+      "question": "In which district of East London did Jack the Ripper operate?",
+      "answer": "Whitechapel",
+      "generated_text": " Whitechapel\n\n",
+      "evaluated_text": "Whitechapel",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "sfq_22756",
+      "question": "Established in 1903, what was Britain's first designated Garden City?",
+      "answer": "Letchworth",
+      "generated_text": " Letchworth\n\n",
+      "evaluated_text": "Letchworth",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "qb_5097",
+      "question": "A rinkhals is what type of creature?",
+      "answer": "Snake",
+      "generated_text": " A snake.",
+      "evaluated_text": "A snake.",
+      "sentence_similarity": 0.9524451494216919
+    },
+    {
+      "id": "sfq_21166",
+      "question": "To within five years either way, in which year was the Boy Scout movement founded by Robert Baden-Powell?",
+      "answer": "1907",
+      "generated_text": " 1907\n\n",
+      "evaluated_text": "1907",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "sfq_4281",
+      "question": "In which month of the year does pheasant shooting legally begin?",
+      "answer": "OCTOBER",
+      "generated_text": " August 1st.",
+      "evaluated_text": "August 1st.",
+      "sentence_similarity": 0.6665050983428955
+    },
+    {
+      "id": "odql_4883",
+      "question": "'Signal Failures' written by Dr. B. Ching is the title of a column that has appeared in which magazine?",
+      "answer": "PRIVATE EYE",
+      "generated_text": " The Railway Gazette International\n\n",
+      "evaluated_text": "The Railway Gazette International",
+      "sentence_similarity": 0.4033321142196655
+    },
+    {
+      "id": "sfq_6163",
+      "question": "Manhattan Island is bounded by three rivers, the Hudson, the East and which other?",
+      "answer": "The Harlem River",
+      "generated_text": " The Harlem River.",
+      "evaluated_text": "The Harlem River.",
+      "sentence_similarity": 0.9972493648529053
+    },
+    {
+      "id": "qg_2596",
+      "question": "Who's missing: George Costanza, Elaine Bennes, Cosmo Kramer",
+      "answer": "Jerry Seinfeld",
+      "generated_text": " Jerry Seinfeld\n\n",
+      "evaluated_text": "Jerry Seinfeld",
+      "sentence_similarity": 0.9999998807907104
+    },
+    {
+      "id": "qw_4039",
+      "question": "Gabriel Loire, Mordecai Ardon and Marcelle Ferron are known for their art work in what medium?",
+      "answer": "Stained glass",
+      "generated_text": " stained glass\n\n",
+      "evaluated_text": "stained glass",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "jp_3082",
+      "question": "\"Who wrote \"\"Leaves of Grass\"\"?\"",
+      "answer": "Walt Whitman",
+      "generated_text": " Walt Whitman\n\n",
+      "evaluated_text": "Walt Whitman",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "qg_3932",
+      "question": "October 27, 1858 saw the birth of what totally bad assed US president, the 26th, who spent time as a North Dakota rancher before becoming assistant Secretary of the Navy in 1899?",
+      "answer": "Theodore Roosevelt",
+      "generated_text": " Theodore Roosevelt\n\n",
+      "evaluated_text": "Theodore Roosevelt",
+      "sentence_similarity": 0.9999999403953552
+    },
+    {
+      "id": "sfq_25614",
+      "question": "Which football team plays its home games at Portman Road?",
+      "answer": "Ipswich Town",
+      "generated_text": " Ipswich Town\n\n",
+      "evaluated_text": "Ipswich Town",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "qw_1792",
+      "question": "What is the term used for a driver on Memorial Day weekend attempting to race in the Indianapolis 500 during the day and the Coca-Cola 600 during the night?",
+      "answer": "The Double",
+      "generated_text": " A driver who is a little too ambitious.",
+      "evaluated_text": "A driver who is a little too ambitious.",
+      "sentence_similarity": 0.40395188331604004
+    },
+    {
+      "id": "qw_2752",
+      "question": "In June 2009, General Motors announced that it would sell which of its brands to Tengzhong Heavy Industrial Machinery, based in China?",
+      "answer": "Hummer",
+      "generated_text": " Hummer\n\n",
+      "evaluated_text": "Hummer",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "qw_3826",
+      "question": "\"In the song \"\"The Twelve Days of Christmas\"\", what were there five of?\"",
+      "answer": "Gold rings",
+      "generated_text": " \"Gold rings\"\n",
+      "evaluated_text": "\"Gold rings\"",
+      "sentence_similarity": 0.9529539346694946
+    },
+    {
+      "id": "sfq_21334",
+      "question": "What part of the human body is known by doctors as the pollex?",
+      "answer": "THE THUMB",
+      "generated_text": " The thumb.",
+      "evaluated_text": "The thumb.",
+      "sentence_similarity": 0.9907336235046387
+    },
+    {
+      "id": "dpql_2767",
+      "question": "Which English town is home to the Stephen Joseph Theatre?",
+      "answer": "SCARBOROUGH",
+      "generated_text": " Scarborough\n\n",
+      "evaluated_text": "Scarborough",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "sfq_16169",
+      "question": "Andrew Robson writes a daily column for The Times on what topic?",
+      "answer": "BRIDGE",
+      "generated_text": " Bridge\n\n",
+      "evaluated_text": "Bridge",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "qw_5712",
+      "question": "\"In the original British series of \"\"Who Wants To Be A Millionaire\"\", question 8 was worth what amount?\"",
+      "answer": "8,000",
+      "generated_text": " \u00a31,000\n\n",
+      "evaluated_text": "\u00a31,000",
+      "sentence_similarity": 0.6937885284423828
+    },
+    {
+      "id": "sfq_888",
+      "question": "Who was the brother of the Bronte sisters?",
+      "answer": "Branwell",
+      "generated_text": " Branwell Bronte\n\n",
+      "evaluated_text": "Branwell Bronte",
+      "sentence_similarity": 0.8404057025909424
+    },
+    {
+      "id": "sfq_1971",
+      "question": "Who was the British Admiral who died in 1707 when four of his ships were wrecked in the Scilly Isles?",
+      "answer": "Sir Cloudesley Shovell",
+      "generated_text": " Sir Cloudesley Shovell\n\n",
+      "evaluated_text": "Sir Cloudesley Shovell",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "sfq_10508",
+      "question": "In 2010 which country saw the Red Shirt Rebellion?",
+      "answer": "THAILAND",
+      "generated_text": " Thailand\n\n",
+      "evaluated_text": "Thailand",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "sfq_26044",
+      "question": "\"Who wrote the trilogy of books \"\"The Millennium Trilogy\"\" featuring the character Lisbeth Salander?\"",
+      "answer": "Stieg Larsson",
+      "generated_text": " Stieg Larsson\n\n",
+      "evaluated_text": "Stieg Larsson",
+      "sentence_similarity": 1.0
+    }
+  ]
+}

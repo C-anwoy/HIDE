@@ -1,0 +1,214 @@
+{
+  "task": "answer-pilot__gemma-2-9b__nq_open__00000-00025",
+  "raw_sha256": "14a2a7025c4b818a4bde4597076858a0bc2e2fbe9cc0bd19b359af7e634ed11a",
+  "n": 25,
+  "passed": true,
+  "issues": [],
+  "line_stops": 20,
+  "no_output_state": 0,
+  "empty_answers": 0,
+  "generation_cap": 0,
+  "n_correct": 6,
+  "samples": [
+    {
+      "id": "1921",
+      "question": "where does the optic nerve cross the midline \u200b",
+      "answer": "optic chiasm",
+      "generated_text": " optic chiasm\n\n",
+      "evaluated_text": "optic chiasm",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "554",
+      "question": "when does walking dead season 8 second half start",
+      "answer": "October 22, 2017",
+      "generated_text": " February 25th\n\n",
+      "evaluated_text": "February 25th",
+      "sentence_similarity": 0.584545910358429
+    },
+    {
+      "id": "1470",
+      "question": "who was the chief guest of 2014 republic day",
+      "answer": "Prime Minister Shinzo Abe",
+      "generated_text": " the chief guest of 2014 republic day was the president of south africa jacob zuma\n\n",
+      "evaluated_text": "the chief guest of 2014 republic day was the president of south africa jacob zuma",
+      "sentence_similarity": 0.3239551782608032
+    },
+    {
+      "id": "1429",
+      "question": "where does jack ryan live in patriot games",
+      "answer": "Baltimore, Maryland",
+      "generated_text": " in the book he lives in a house in the country side of england.",
+      "evaluated_text": "in the book he lives in a house in the country side of england.",
+      "sentence_similarity": 0.3577383756637573
+    },
+    {
+      "id": "1283",
+      "question": "when was it was not death for i stood up published",
+      "answer": "1890",
+      "generated_text": " 1995\n\n",
+      "evaluated_text": "1995",
+      "sentence_similarity": 0.6543139815330505
+    },
+    {
+      "id": "3040",
+      "question": "who was the first chief minister of west bengal",
+      "answer": "Prafulla Chandra Ghosh",
+      "generated_text": " Dr.",
+      "evaluated_text": "Dr.",
+      "sentence_similarity": 0.5479531288146973
+    },
+    {
+      "id": "122",
+      "question": "where does new york drinking water come from",
+      "answer": "the eastern Catskill Mountains",
+      "generated_text": " the Catskill/Delaware system\n\n",
+      "evaluated_text": "the Catskill/Delaware system",
+      "sentence_similarity": 0.7563289403915405
+    },
+    {
+      "id": "1968",
+      "question": "who sings theme tune to orange is the new black",
+      "answer": "Spektor",
+      "generated_text": " Regina Spektor\n\n",
+      "evaluated_text": "Regina Spektor",
+      "sentence_similarity": 0.7914451956748962
+    },
+    {
+      "id": "581",
+      "question": "do you have to have a gun permit to shoot at a range",
+      "answer": "Typically, no",
+      "generated_text": " no, you do not need a permit to shoot at a range.",
+      "evaluated_text": "no, you do not need a permit to shoot at a range.",
+      "sentence_similarity": 0.33093276619911194
+    },
+    {
+      "id": "713",
+      "question": "which level of weight bearing often comes with a set number of pounds",
+      "answer": "Partial weight-bearing",
+      "generated_text": " 1.",
+      "evaluated_text": "1.",
+      "sentence_similarity": 0.6255283951759338
+    },
+    {
+      "id": "3374",
+      "question": "how many nuclear power plants in washington state",
+      "answer": "3",
+      "generated_text": " 1\n\n",
+      "evaluated_text": "1",
+      "sentence_similarity": 0.812985897064209
+    },
+    {
+      "id": "1924",
+      "question": "where does the song 10 green bottles come from",
+      "answer": "United Kingdom",
+      "generated_text": " it comes from a nursery rhyme\n\n",
+      "evaluated_text": "it comes from a nursery rhyme",
+      "sentence_similarity": 0.3994898796081543
+    },
+    {
+      "id": "3061",
+      "question": "who is singing in something just like this",
+      "answer": "Will Champion",
+      "generated_text": " I think it's the same person who sings in the song \"I'm not the only one\"\n\n",
+      "evaluated_text": "I think it's the same person who sings in the song \"I'm not the only one\"",
+      "sentence_similarity": 0.5599673986434937
+    },
+    {
+      "id": "2041",
+      "question": "who played lead guitar on 25 or 6 to 4",
+      "answer": "Terry Kath",
+      "generated_text": " Terry Kath\n\n",
+      "evaluated_text": "Terry Kath",
+      "sentence_similarity": 0.9999999403953552
+    },
+    {
+      "id": "1276",
+      "question": "the man in the high castle episode 1 season 1",
+      "answer": "The New World",
+      "generated_text": " The Man in the High Castle is an American science fiction drama television series created by Frank Spotnitz and based on the 1962 novel of the same name by Philip K.",
+      "evaluated_text": "The Man in the High Castle is an American science fiction drama television series created by Frank Spotnitz and based on the 1962 novel of the same name by Philip K.",
+      "sentence_similarity": 0.22947946190834045
+    },
+    {
+      "id": "1895",
+      "question": "who has the most goals in soccer 2018",
+      "answer": "Ali Daei",
+      "generated_text": " Cristiano Ronaldo\n\n",
+      "evaluated_text": "Cristiano Ronaldo",
+      "sentence_similarity": 0.6840906143188477
+    },
+    {
+      "id": "578",
+      "question": "who was the girl in the video brenda got a baby",
+      "answer": "Ethel \"Edy\" Proctor",
+      "generated_text": " the girl in the video is brenda's daughter\n",
+      "evaluated_text": "the girl in the video is brenda's daughter",
+      "sentence_similarity": 0.22427339851856232
+    },
+    {
+      "id": "497",
+      "question": "who did deion sanders go in the hall of fame as",
+      "answer": "Cornerback",
+      "generated_text": " deion sanders went in the hall of fame as a cornerback\n\n",
+      "evaluated_text": "deion sanders went in the hall of fame as a cornerback",
+      "sentence_similarity": 0.3277934193611145
+    },
+    {
+      "id": "424",
+      "question": "during the first world war against which country germany did not fight",
+      "answer": "Austria-Hungary",
+      "generated_text": " USA\n\n",
+      "evaluated_text": "USA",
+      "sentence_similarity": 0.7170712947845459
+    },
+    {
+      "id": "2722",
+      "question": "who has won the most world series in baseball",
+      "answer": "the New York Yankees",
+      "generated_text": " the New York Yankees\n\n",
+      "evaluated_text": "the New York Yankees",
+      "sentence_similarity": 0.9999998807907104
+    },
+    {
+      "id": "1646",
+      "question": "when did all night long come out lionel richie",
+      "answer": "1983",
+      "generated_text": " 1983\n\n",
+      "evaluated_text": "1983",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "2223",
+      "question": "how many wing stops are there in the united states",
+      "answer": "1,000",
+      "generated_text": " 1,000\n\n",
+      "evaluated_text": "1,000",
+      "sentence_similarity": 1.0
+    },
+    {
+      "id": "2354",
+      "question": "who wrote the declaration of man and citizen",
+      "answer": "General Lafayette",
+      "generated_text": " Thomas Jefferson\n\n",
+      "evaluated_text": "Thomas Jefferson",
+      "sentence_similarity": 0.6914990544319153
+    },
+    {
+      "id": "3188",
+      "question": "how many episodes in game if thrones season 7",
+      "answer": "7",
+      "generated_text": " 7\n\n",
+      "evaluated_text": "7",
+      "sentence_similarity": 1.0000001192092896
+    },
+    {
+      "id": "2408",
+      "question": "where does the red badge of courage take place",
+      "answer": "the field of battle",
+      "generated_text": " the civil war\n\n",
+      "evaluated_text": "the civil war",
+      "sentence_similarity": 0.6891142129898071
+    }
+  ]
+}
