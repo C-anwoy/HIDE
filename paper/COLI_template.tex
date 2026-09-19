@@ -1,3 +1,4 @@
+\PassOptionsToPackage{table,dvipsnames}{xcolor}
 \documentclass[final]{clv2025}
 
 \jvol{vv}
@@ -22,7 +23,7 @@
 \usepackage{multirow}
 \usepackage{pifont}
 \usepackage{booktabs}
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{adjustbox}
 \usepackage{colortbl}
@@ -31,7 +32,7 @@
 \usepackage{subcaption}
 \usepackage[most]{tcolorbox}
 \usepackage{xcolor}
-\usepackage[dvipsnames]{xcolor}
+% xcolor options are passed before the document class to avoid option clashes.
 \usepackage{wrapfig}
 \usepackage{pdflscape}
 \usepackage{graphicx}
@@ -77,7 +78,7 @@
 \newcommand{\mcite}{\textcolor{red}{cite}}
 \newcommand{\cmark}{\ding{51}} % check mark
 \newcommand{\xmark}{\ding{55}} % cross mark
-\usepackage[dvipsnames]{xcolor}
+% xcolor already loaded.
 %\newcommand{\changed}[1]{\textcolor{magenta}{#1}}
 \newcommand{\changed}[1]{#1}
 % \newcommand{\changedtwo}[1]{\textcolor{magenta}{#1}}
@@ -129,10 +130,18 @@ Representations}
 \input{files/conclusion}
 
 \appendix
+\makeatletter
+\let\hideoriginalappendixsection\appendixsection
+\renewcommand{\appendixsection}[1]{%
+  \hideoriginalappendixsection{#1}%
+  \phantomsection\protected@edef\@currentlabel{\Alph{section}}}
+\makeatother
+\renewcommand{\theHequation}{appendix.\arabic{equation}}
 % \appendixsection{This is an Example of Appendix Section}
 \input{files/proofs}
 \input{files/exact_match_results}
 \input{files/Prompting_techniques}
+\input{files/paired_diagnostics}
 \newpage
 \bibliographystyle{compling}
 \bibliography{COLI_template}
@@ -253,6 +262,7 @@ Representations}
 % Table \ref{tab:ex} the doctor's office. Most kids put a heating pad on their forehead so they could fake illness and stay home from school. When I'd have a fever, I'd use a damp cloth to cool myself down so I could go. I knew it shouldn't be that way. I shouldn't be afraid of the doctor. My goal is to make the experience for children enjoyable. My office will be different. Beanbag chairs instead of couches. The Disney Channel instead of CNN. Coloring books instead of Newsweek. All patients will be given a prescription for candy when they walk in with the instructions to ``Take two M\&M's and call me in the morning.'' The focus will be on the child from the moment he or she walks in the office.
 
 % \appendix
+\renewcommand{\theHequation}{appendix.\arabic{equation}}
 
 % \appendixsection{This is an Example of Appendix Section}
 

@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{llrr}
+\toprule
+Model & Dataset & Mean input tokens & Mean generated tokens \\
+\midrule
+Llama-3.2-3B & SQuAD & 186.47 & 33.44 \\
+Llama-3.2-3B & NQ & 20.30 & 17.34 \\
+Llama-3-8B & SQuAD & 186.47 & 21.39 \\
+Llama-3-8B & NQ & 20.30 & 20.50 \\
+Gemma-2-9B & SQuAD & 186.20 & 39.29 \\
+Gemma-2-9B & NQ & 21.14 & 22.16 \\
+Gemma-2-27B & SQuAD & 186.20 & 45.65 \\
+Gemma-2-27B & NQ & 21.14 & 12.14 \\
+\bottomrule\end{tabular}
+\caption{Mean token lengths for the timing queries in Table~\ref{tab:timing_revision}, under the earlier stopping protocol (maximum 256 generated tokens). Means include all queries and measured repeats; repeats share deterministic token sequences. These length differences limit a parameter-only interpretation of the scaling comparison.}
+\label{tab:timing_lengths}\end{table*}

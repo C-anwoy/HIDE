@@ -1,4 +1,8 @@
-# Validation status — 2026-09-18
+# Validation status — 2026-09-19
+
+## Submission artifacts
+
+The fixed 2,000-example analysis is complete: 80 parts, 16,000 records, zero exclusions, and 144 independent sklearn/scipy checks. The revised manuscript and response are compiled and visually reviewed; Figures 2 and 4 and the new tables use verified results. See [SUBMISSION_NUMERICAL_AUDIT.md](SUBMISSION_NUMERICAL_AUDIT.md) and [FINAL_MANUSCRIPT_CHANGES.md](FINAL_MANUSCRIPT_CHANGES.md). No new GPU work was run.
 
 ## Completed
 
@@ -47,10 +51,10 @@ Tests used Python 3.12 with isolated temporary dependencies including Torch 2.5.
 - Official Hub metadata resolved for the nine required repositories; pinned revisions and download file lists are stored in `hide/config/checkpoints.json`. No real model weights were downloaded locally.
 - Current tests use the pinned Hugging Face Hub 0.36.2 alongside Torch 2.5.1 and Transformers 4.51.3. Download/authorization behavior with actual gated large checkpoints still needs validation on the user's server.
 
-## Still requires the A100 environment
+## GPU evidence and remaining scope
 
-The old 242-part A100 review suite is now saved and analyzed; see [its report](../results/optimus-review-analysis-01/README.md). The new first-answer-line protocol still requires real-checkpoint pilots and CUDA runs to measure stopping/cap rates, memory and throughput. The local tests alone make no real-model accuracy or latency claim.
+The old 242-part A100 review suite is saved and analyzed; see [its report](../results/optimus-review-analysis-01/README.md). The corrected first-answer-line fixed-subset runs have also finished and their uploaded results are analyzed. No further GPU runs are scheduled for this submission. These completed detector runs do not provide a corrected-protocol timing benchmark; the retained timing suite uses the earlier stopping conditions.
 
 The main comparison implements the five described training-free baselines with explicit corrected conventions. This does not certify missing supervised-probe training artifacts, dialogue experiment provenance or a batched/optimized-serving multipass benchmark.
 
-No revised manuscript PDF was compiled: TeX/latexmk is not available locally. Original numeric tables/figures remain unchanged. Proposed manuscript changes and the response template contain explicit result-dependent placeholders.
+Historical validation note (superseded on 19 September): the earlier planning phase had not compiled a revised manuscript. The final artifacts now compile using the temporary Tectonic runtime; historical table cells remain labeled as earlier-protocol results, and the new tables/plots contain measured values.

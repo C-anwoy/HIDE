@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{llrrr}
+\toprule
+Model & Dataset & HIDE $-$ attention & 95\% CI & HIDE $-$ norm \\
+\midrule
+Llama-3-8B & SQuAD & -9.01 & [-11.43, -6.69] & +22.55 \\
+Llama-3-8B & RACE & -3.00 & [-5.27, -0.82] & +11.69 \\
+Llama-3-8B & NQ & -5.77 & [-9.66, -2.21] & +6.42 \\
+Llama-3-8B & TriviaQA & -16.67 & [-19.96, -13.56] & -7.67 \\
+Gemma-2-9B & SQuAD & -10.82 & [-13.37, -8.56] & +21.58 \\
+Gemma-2-9B & RACE & +6.69 & [+3.70, +9.69] & +7.37 \\
+Gemma-2-9B & NQ & -5.23 & [-8.69, -1.86] & +4.11 \\
+Gemma-2-9B & TriviaQA & -17.11 & [-20.84, -13.51] & -11.70 \\
+\bottomrule\end{tabular}
+\caption{Paired AUC$_s$ differences in percentage points on the corrected 2,000-example cohorts. Intervals use 2,000 paired example bootstrap draws (seed 42), are pointwise, and are not adjusted for multiple comparisons.}
+\label{tab:paired_differences}\end{table*}

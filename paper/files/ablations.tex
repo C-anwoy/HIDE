@@ -4,7 +4,7 @@
 To assess the robustness and practical implications of \method, we conduct a series of ablation studies that examine the impact of core methodological choices. These analyses investigate the following: \changed{(i) effectiveness of linear similarity measure, like cosine similarity, in capturing decoupling},  (ii) impact of the number of selected tokens, (iii) dependence on the choice of transformer layer, (iv) the influence of kernel type and kernel hyperparameters, (v) the effect of biased versus our adapted HSIC estimators, and (vi) the relative merits of different token selection strategies. The results, summarized below, reinforce the robustness of \method~across different design choices.
 
 \subsection{Non-linear Dependence vs. Linear Similarity}\label{sec:hsic_vs_cos}
-\changed{Table~\ref{tab:hsic_vs_cosine} compares HSIC with cosine similarity using both ranking-based (AUC$_s$) and correlation-based (PCC$_s$) metrics. On SQuAD, cosine similarity performs near random guessing, achieving low AUC$_s$ and negligible correlation with ground-truth labels, whereas HSIC attains substantially higher values on both metrics across models. On Natural Questions, cosine similarity exhibits highly variable behavior across models --- including strong AUC$_s$ in isolated cases but weak correlation --- while HSIC provides more stable performance across metrics. These results indicate that faithful input-output representations are not reliably aligned in a linear geometric sense, and that capturing non-linear statistical dependence is crucial for robust hallucination detection.
+\changed{Table~\ref{tab:hsic_vs_cosine} compares HSIC with cosine similarity using both ranking-based (AUC$_s$) and correlation-based (PCC$_s$) metrics. On SQuAD, cosine similarity performs near random guessing, achieving low AUC$_s$ and negligible correlation with ground-truth labels, whereas HSIC attains substantially higher values on both metrics across models. On Natural Questions, cosine similarity exhibits highly variable behavior across models --- including strong AUC$_s$ in isolated cases but weak correlation --- while HSIC provides more stable performance across metrics. This historical comparison establishes performance relative to the evaluated cosine baseline, but does not establish that nonlinear dependence is necessary. The new attention and token-count controls qualify that interpretation (Section~\ref{sec:paired_baselines}).
 }
 
 \begin{table}[t]
@@ -50,7 +50,7 @@ Model & Method & AUC$_s$ & PCC$_s$ & AUC$_s$ & PCC$_s$ \\
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
         \caption{
         %Variation in $AUC_s$ scores with the number of selected tokens used for \method-score calculation on SQuAD and NQ datasets using Llama-3-8B and Gemma-2-9B. We observe that a token budget of $15$-$20$ results in a near-optimal performance, with diminishing gains upon further increase in $n_{\text{eff}}$.
-        \changedtwo{Sensitivity analysis of detection performance to the token budget ($n_{eff}$). The detection performance ($AUC_s$) for both model families saturates at approximately $20$ tokens, suggesting that representational decoupling is a structural property that can be reliably estimated from a small subset of salient semantic pivots rather than requiring the full sequence length.}}
+        \changedtwo{Historical token-budget ablation on SQuAD and NQ using Llama-3-8B and Gemma-2-9B. The horizontal axis gives the configured selected-token budget; the vertical axis is AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The actual selected count may be smaller for short answers. Curves level off around 15--20 tokens; this is an observed sensitivity result, not proof of a structural mechanism.}}
         \label{fig:keyword_sensitivity}
     \end{minipage}
 \end{figure}
@@ -68,7 +68,7 @@ We begin by analyzing how the number of selected tokens ($n_{\text{eff}}$) affec
 %     \label{fig:layer_sensitivity}
 % \end{figure}
 
-Transformer architectures encode information at various abstraction levels across layers. To determine whether hallucination detection depends on the specific choice of decoder layer $\ell$, we systematically evaluate all 32 layers for Llama-3-8B and all 42 layers for Gemma-2-9B. As shown in Figure~\ref{fig:layer_sensitivity}, $AUC_s$ scores are stable across the full range of layers, with only minor fluctuations and a mild optimum near the network midpoint. Interestingly, neither model nor dataset exhibits significant performance drops at early or late layers that might be expected if hallucination detection using \method~required either low-level or high-level semantic features exclusively. This cross-architecture consistency suggests that the representational dependence signals captured by \method~are distributed throughout transformer networks rather than being concentrated in specific architectural regions, regardless of the underlying model design. 
+Transformer architectures encode information at various abstraction levels across layers. To determine whether hallucination detection depends on the specific choice of decoder layer $\ell$, we systematically evaluate all 32 layers for Llama-3-8B and all 42 layers for Gemma-2-9B. As shown in Figure~\ref{fig:layer_sensitivity}, $AUC_s$ scores are stable across the full range of layers, with only minor fluctuations and a mild optimum near the network midpoint. Interestingly, neither model nor dataset exhibits significant performance drops at early or late layers that might be expected if hallucination detection using \method~required either low-level or high-level semantic features exclusively. This empirical stability alone does not show that causal dependence signals are distributed throughout the network, particularly given the selected-token-count diagnostic.
 
 \begin{figure}[t!]
     \centering
@@ -78,7 +78,7 @@ Transformer architectures encode information at various abstraction levels acros
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
         \caption{%Comparison of $AUC_s$ scores when using representation from different layers of Llama-3-8B and Gemma-2-9B for \method-score calculation. We observe that the performance of \method~is almost agnostic to the chosen layer in case of both models, for both SQuAD and NQ datasets.
-        \changedtwo{Consistency of the \method~signal across the full layer stack of Llama-3-8B and Gemma-2-9B. The stable $AUC_s$ scores across all layers indicate that representational decoupling is a globally distributed property of the transformer rather than an artifact localized to a specific architectural region, ensuring robust detection regardless of the target layer.}}
+        \changedtwo{Historical layer ablation for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. The horizontal axis gives the selected layer and the vertical axis AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). Curves show limited variation in these experiments; this does not identify distributed causal mechanisms.}}
     \label{fig:layer_sensitivity}
     \end{minipage}
 \end{figure}
@@ -107,7 +107,7 @@ Since \method~quantifies statistical dependence using HSIC, the choice of kernel
 
 Figure~\ref{fig:kernel_sensitivity} demonstrates that, with the exception of the polynomial kernel (which underperforms substantially), most kernels yield robust and similar $AUC_s$ scores for SQuAD and NQ, using Llama-3-8B. This suggests that the effectiveness of \method~is largely preserved regardless of kernel choice, with all kernels, except polynomial, providing strong performance.
 
-For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method’s performance is stable across several orders of magnitude for $\gamma$ ($10^{-9}$ to $10^{-3}$), but degrades rapidly for larger values ($\gamma \geq 10^{-1}$). Excessively high $\gamma$ makes the kernel overly sensitive to minute differences in the hidden states, leading to overfitting and poor generalization. Conversely, smaller $\gamma$ values maintain a broader sensitivity that is more robust to natural variation in hidden representations. Together, these findings confirm that \method~is flexible to kernel choices and hyperparameters, but for optimal and consistent results, the RBF kernel with a moderate $\gamma$ remains a sound default.
+For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method's performance is stable across several orders of magnitude for $\gamma$ ($10^{-9}$ to $10^{-3}$), but degrades rapidly for larger values ($\gamma \geq 10^{-1}$). Excessively high $\gamma$ makes the kernel overly sensitive to minute differences in the hidden states, leading to overfitting and poor generalization. Conversely, smaller $\gamma$ values maintain a broader sensitivity that is more robust to natural variation in hidden representations. These historical sensitivities do not establish that the default kernel isolates semantic dependence; the corrected count-control results highlight this limitation.
 
 \subsection{Effectiveness of HSIC Estimators}
 
@@ -119,7 +119,7 @@ For the RBF kernel, Figure~\ref{fig:gamma_sensitivity} shows that \method’s pe
     \quad
     \begin{minipage}{0.3\linewidth}  % Adjust width of caption
         \caption{%Comparison of $AUC_s$ scores using the biased estimator $\widehat{\operatorname{HSIC}}_b$ and our adapted estimator $\widehat{\operatorname{HSIC}}_{\method}$ for \method~score computation, for SQuAD and NQ datasets using LLama-3-8B and Gemma-2-9B.
-        \changedtwo{Performance advantage of our adapted estimator ($\widehat{\operatorname{HSIC}}_{\method}$) over the biased baseline ($\widehat{\operatorname{HSIC}}_b$). The adapted estimator yields considerably higher $AUC_s$ scores by improving the separability between hallucinated and faithful generations, whereas the biased estimator compresses scores close to zero, making threshold determination unreliable.}}
+        \changedtwo{Historical estimator comparison for Llama-3-8B and Gemma-2-9B on SQuAD and NQ. Bars compare the adapted HIDE estimator with biased HSIC using AUC$_s$ (sentence-similarity correctness threshold $0.9$, higher is better). The comparison concerns the configured estimators; the selected-token-count control in Appendix~\ref{app:paired_diagnostics} limits attributing the difference solely to nonlinear dependence.}}
     \label{fig:unbiased_biased}
     \end{minipage}
 \end{figure}
@@ -167,7 +167,8 @@ Finally, we compared two strategies for selecting token representations (as disc
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{p{2cm} p{1.8cm} p{1.5cm} p{1.2cm} p{1.2cm} c c}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{1.9cm} p{1.7cm} p{1.5cm} p{1.6cm} p{1.5cm} c c}
 \hline
 \textbf{Prompt (Dataset)} &
 \textbf{Input Keywords} &
@@ -195,8 +196,8 @@ No \\\hline
 
 Who was the man behind The Chipmunks? \textbf{(TriviaQA)} &
 \emph{The, Chipmunks, Who, ...} &
-\emph{Bagdasarian, Songbook, Ross, name, first, Sr, ...} &
-Ross Bagdasarian, Sr. &
+\emph{Bagda\-sarian, Songbook, Ross, name, first, Sr, ...} &
+Ross Bagda\-sarian, Sr. &
 David Seville &
 0.066 &
 Yes \\\hline
@@ -211,10 +212,7 @@ Yes \\
 \hline
 \end{tabular}
 \caption{
-\changed{Qualitative examples illustrating representational coupling and decoupling for Llama-3-8B.
-Faithful generations exhibit strong alignment between salient input and output concepts,
-resulting in high \method~scores. Hallucinated generations introduce unsupported entities or
-semantic drift, leading to substantially lower dependence scores.
+\changed{Historical qualitative examples for Llama-3-8B, with input/output keywords, generated answers, first reference, and HIDE score. The displayed labels follow the original reference-based evaluation; aliases and surface-form differences can affect these labels. Selected examples do not establish a causal explanation of score differences.
 }}
 \label{tab:qualitative_examples}
 \end{table}

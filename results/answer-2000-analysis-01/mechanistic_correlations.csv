@@ -1,0 +1,9 @@
+model,dataset,metric,pcc,n,n_qcbw
+llama3-8b,SQuAD,Omega,0.5603226742240425,2000,0
+llama3-8b,SQuAD,Delta_in,0.0028204859124236897,2000,0
+llama3-8b,nq_open,Omega,0.647703832164755,2000,439
+llama3-8b,nq_open,Delta_in,0.3672200116196717,2000,439
+gemma-2-9b,SQuAD,Omega,0.5654128518008579,2000,0
+gemma-2-9b,SQuAD,Delta_in,0.1260059412732651,2000,0
+gemma-2-9b,nq_open,Omega,0.42979817480657834,2000,388
+gemma-2-9b,nq_open,Delta_in,0.21518187786751009,2000,388

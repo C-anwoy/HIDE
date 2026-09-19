@@ -1,0 +1,274 @@
+[
+  {
+    "model": "llama3-8b",
+    "dataset": "SQuAD",
+    "n": 2000,
+    "n_correct": 741,
+    "n_cap": 67,
+    "n_empty": 0,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 22.3505
+  },
+  {
+    "model": "llama3-8b",
+    "dataset": "race",
+    "n": 2000,
+    "n_correct": 778,
+    "n_cap": 5,
+    "n_empty": 2,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 11.1795
+  },
+  {
+    "model": "llama3-8b",
+    "dataset": "nq_open",
+    "n": 2000,
+    "n_correct": 245,
+    "n_cap": 14,
+    "n_empty": 0,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 13.7375
+  },
+  {
+    "model": "llama3-8b",
+    "dataset": "triviaqa",
+    "n": 2000,
+    "n_correct": 1153,
+    "n_cap": 2,
+    "n_empty": 0,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 5.4455
+  },
+  {
+    "model": "gemma-2-9b",
+    "dataset": "SQuAD",
+    "n": 2000,
+    "n_correct": 679,
+    "n_cap": 149,
+    "n_empty": 0,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 33.644
+  },
+  {
+    "model": "gemma-2-9b",
+    "dataset": "race",
+    "n": 2000,
+    "n_correct": 1150,
+    "n_cap": 0,
+    "n_empty": 0,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 7.9855
+  },
+  {
+    "model": "gemma-2-9b",
+    "dataset": "nq_open",
+    "n": 2000,
+    "n_correct": 448,
+    "n_cap": 14,
+    "n_empty": 7,
+    "n_no_state": 7,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 8.8515
+  },
+  {
+    "model": "gemma-2-9b",
+    "dataset": "triviaqa",
+    "n": 2000,
+    "n_correct": 1257,
+    "n_cap": 1,
+    "n_empty": 0,
+    "n_no_state": 0,
+    "boundary_token_suffix_nonempty": 0,
+    "excluded": [
+      {
+        "target": "sentence_similarity",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "rouge_l",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      },
+      {
+        "target": "exact_match",
+        "total": 2000,
+        "retained": 2000,
+        "excluded": 0,
+        "excluded_ids": []
+      }
+    ],
+    "mean_output_tokens": 4.229
+  }
+]

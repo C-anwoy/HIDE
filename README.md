@@ -4,7 +4,7 @@ Reproducible code for **HIDE and Seek: Detecting Hallucinations in Language Mode
 
 HIDE scores a generated answer using selected prompt/output hidden states collected during one autoregressive generation. This repository contains the detector, audited QA data loaders, paired baseline experiments, score ablations, synchronized timing, analysis, and verifiable result snapshots.
 
-**Status:** the 242-part review suite is complete and its [analysis](results/optimus-review-analysis-01/README.md) is saved. It exposed answer-continuation and interpretation issues that must be resolved before submission. The [corrected answer-boundary workflow](docs/ANSWER_BOUNDARY_RUNS.md) provides pilot-gated detection, timing, tmux launchers and retained provenance. It has offline unit and tiny-model integration tests; its real-checkpoint pilots must run on the server. The supplied manuscript in `paper/` still contains its submitted numbers.
+**Status (19 September 2026):** the uploaded fixed 2,000-example comparison is complete (16,000 paired answers). Its [analysis](results/answer-2000-analysis-01/README.md), [updated manuscript and response](paper/README.md), [compiled PDFs](output/pdf/), and [change guide](docs/FINAL_MANUSCRIPT_CHANGES.md) are ready for author review. The new results favor attention in seven of eight settings and expose a selected-token-count limitation; the manuscript reports both. The earlier timing suite is reused without GPU reruns. Historical full-cohort results are retained separately, with their protocol limitations stated.
 
 ## Repository layout
 
@@ -16,7 +16,8 @@ scripts/               Setup, individual/suite launch, analysis, export, paper b
 configs/               Example local environment configuration
 tests/                Offline numerical, persistence, protocol and integration tests
 docs/                 Method specification, audit, experiment plan and manuscript checklist
-paper/                LaTeX source and original figures; provenance in SOURCE.json
+paper/                Revised LaTeX, response letter and figures; original provenance in SOURCE.json
+output/pdf/           Compiled manuscript, response and replacement vector plots
 outputs/              Local raw runs and analyses (created at runtime; Git-ignored)
 results/              Verified, compressed snapshots intended for Git
 archive/original/     Original code for provenance and parity tests; unsupported entry points
@@ -24,8 +25,9 @@ archive/original/     Original code for provenance and parity tests; unsupported
 
 ## Update an existing GPU checkout
 
-For the current ten-hour deadline, use the [fixed 2,000-example comparison](docs/ANSWER_SUBSET_RUNS.md).
-It reuses completed corrected runs, prioritizes factuality datasets, and runs both
+The deadline comparison has finished. The following workflows are retained for reproduction, not as additional submission requirements.
+
+For the [fixed 2,000-example comparison](docs/ANSWER_SUBSET_RUNS.md), the launcher reuses completed corrected runs, prioritizes factuality datasets, and runs both
 models on GPU1 without scheduling timing experiments.
 
 For the current correction, follow [ANSWER_BOUNDARY_RUNS.md](docs/ANSWER_BOUNDARY_RUNS.md).

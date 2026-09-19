@@ -1,0 +1,333 @@
+{
+  "bundle": "results/answer-2000-complete-01",
+  "bundle_index_sha256": "a6112f68f510cdac29dfad6986ccf8f1e7250b79533ca28b1e19dd169837ee6d",
+  "bootstrap": 2000,
+  "seed": 42,
+  "precision": "json.loads; no score rounding before ranking",
+  "selection": "Positions [0, 2000) in the existing seed-42 shuffled cohort; chosen for the deadline after earlier full-cohort results were inspected; no selection using individual detector scores or correctness labels.",
+  "sources": [
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__00000-00200/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "86990123060ea3bb2c7b17fcf65f3a7de1fc6587bea7d7b8096b3eaa00d4b1ad"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__00200-00400/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "e282d9bd556ddcd70b8dfe8efc26bdf160749f04177a59c871bc5c575d494e50"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__00400-00600/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "5e4565ba95681e0ba7b9e62bad314280f9e3bbd044dc041e6c47ce691d9ae5e2"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__00600-00800/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "08d9048f9e1875b868040ca4a4e6c1e02f4791cefcf8e75cd9c04f78059252c2"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__00800-01000/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "06f76d8fd34a6af9669679d6412ba04bb5b2fa4a29bc324cea94f13fb8b9c80e"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__01000-01200/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "2bd99d86713c76ffc1359fb282a17cd334ec38bb6aae4cf64c88bd9afda12bd2"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__01200-01400/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "85f3ab47a6f92982ff102b638e1a7cd5e7ea5a7c84950e1c1f873a23c4c173a6"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__01400-01600/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "292e76c8cadd49c30d9327c0c5439d9878441c356264f7e79cbf3b0572d7e813"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__01600-01800/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "04d20445d3e2226a43f6507a44a066c8ead689e43df32c265d60f4b78acb4f11"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__SQuAD__01800-02000/answer-qa/llama3-8b_SQuAD.jsonl",
+      "sha256": "112116e210fbdd7ada3fc217b514171c9d9f93727fcf732584f18046fe9a4de1"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__00000-00200/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "372ba008992e8388cfea587055a2d036b317c1aea8b3aa0bf8095bf6055769ed"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__00200-00400/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "ad1f17f77f87d99c1330cb90c9d99457467fa7b40e3fbe70cdea90fc2625a52d"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__00400-00600/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "1da2b26f2c43474f12511421f1efafe464be5a73648ba4d724294b89fabf118b"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__00600-00800/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "425c201178b53a72dc42930347994d525b80408dfcf11f11370d06c21f839e36"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__00800-01000/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "8690ffe1c45c3c79d0c4b30131006049017553848a9406059a9b1b0aa84f8d58"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__01000-01200/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "c4e583a4ba97c1214db3729a8f03b7242793136adb46a7b68e2023d86e1b7b1e"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__01200-01400/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "03b7f56ab277fb028351247a4eb921c3b20ab73429fe1861dea99f9135556abb"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__01400-01600/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "3a07b9ed04efcd230686a8041e49d850f179ebcbaea902ef84bc9bdae8d92961"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__01600-01800/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "0b054a26825bc6034d2057ac61ec62a314cc6d0fd08ed9d379a6d9fb69e599dd"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__race__01800-02000/answer-qa/llama3-8b_race.jsonl",
+      "sha256": "c16589cadd434165715dc3d2a838c00bf29f194bf27d438cc9a54d4f371f3e51"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__00000-00200/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "86444eed2c3ac77235a0bf2e74da50f665f4d47c77af340af59e5f1eadaec0c4"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__00200-00400/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "56bc7afb07c3b794e3084165682bf53b9c41df6cc05fa2c97b8ba3a8373bbc25"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__00400-00600/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "34502ee2370c1cb53343b0a67714b9f9235a3b208119561002fec15f1c69aae1"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__00600-00800/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "ef6a32813f7eb89ed09b05906a9791569f61571ac7c0a6d03340450388b43c86"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__00800-01000/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "430acd1cf81d5661c0114d7217cc4948c50edc73ff10deefc151e560201323e8"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__01000-01200/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "58902872eba9c74fb8b7eff09e79e3e0b3462fabefa80d68bccc6ed7d473f4ed"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__01200-01400/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "3c7fd9e5eb88141da1fdf7014f077a9b28125bfcc8a9751e5b60828a47f4ca3f"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__01400-01600/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "3a360446ec24971fb2b84c2cafde0c304400bc9e5512c8deb3ad69d9d1606697"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__01600-01800/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "a5208f12b04db33c1853cc251944e93a81cdb70109b41db0a02a7312f702ca95"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__nq_open__01800-02000/answer-qa/llama3-8b_nq_open.jsonl",
+      "sha256": "1532b364c04678d36d1ab87ffeac0582af88ef6db06af369a85834a7bc306753"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__00000-00200/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "adf4b8e9b9e42d9a54909d5c466f104e51cca2f1417a0d3bd04b745ab8649591"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__00200-00400/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "6c20e5769e7ba09646b4a66432752425d1a10463d30df5e7939ad0dc7ff2e3a7"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__00400-00600/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "dcb6ff18e83337f28b38dcafda38dda23b8d6e8e34366ccfb21feaa544b33aff"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__00600-00800/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "775dc77090ada821abce700634ba894540ce0bbbf24f4bb464fc18a31da13cd2"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__00800-01000/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "08c4e657aa7965444833ae2122b325ad24b35d6c37656df47c3805609b677e41"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__01000-01200/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "13e4f46eaf66bf78f5a4cf8a1f17f9770f9b418164a636ed28886d43f62b4a6f"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__01200-01400/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "3dbc44a1f22f36964d187bd33ed99c8d775851447ea159d133e2680282a0616b"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__01400-01600/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "ecd124e0bf3150c4ee2156ccda5585cb1a94b722e33e5c99fcb5ea9a01b7dc2a"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__01600-01800/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "fb307ae40819047783a0a7fad00bf155131988cb59ebd4c8d3c2400121882149"
+    },
+    {
+      "path": "runs/answer-qa__llama3-8b__triviaqa__01800-02000/answer-qa/llama3-8b_triviaqa.jsonl",
+      "sha256": "78fd337ddb26854ecb660517bed205e8cff7e78ff212de54c5a8c45c4d63cebe"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__00000-00200/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "9a159cef6d7ed4cdc1ede2b52af8ede089fe7dd319e201ed2ca6d5ab26ef26e7"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__00200-00400/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "9ec4a60c7631dc1acc4ba73f6c11db3782e84d5e82e62c61446975df945d6115"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__00400-00600/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "0f31a35ee34eecf0c6125ab193f77da20aac6fff14c481bddbf11218ab4f34cf"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__00600-00800/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "4434ee8f280e364998ae25d60ef98b2deee136b197f6b92433962871a4151623"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__00800-01000/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "3610abb0e11b0f54b59547ab9ddd5ce45cea928d177c3ae46ae1129942ea0ac4"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__01000-01200/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "43ed1f1d6432d0ce6cf96bb0b8b0df2e366b582970a48aa74be964426e6f2102"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__01200-01400/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "2810f68880b3f11fb937cac5c0fc49840ee0d1dd9539e6010ebdc387a4531093"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__01400-01600/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "9ed20cdbd92f317caa3f847fc76efe92629cad707d5c18586ecaa56340487f2f"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__01600-01800/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "c808c7787afe31b4c02f228d44c5cc4f8946cacf0c9b729e4f52e9f3826be277"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__SQuAD__01800-02000/answer-qa/gemma-2-9b_SQuAD.jsonl",
+      "sha256": "7f534cabf81f0ba1221597205ebd339c05734acd9254d29e4ce1a42a1c886d3f"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__00000-00200/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "f08c7d2305ce1d1e2eb64a3eecae3e555c00d846618e57acab0162e77d4f63a3"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__00200-00400/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "10d2a50529c25d1a3057b35cdc9a56167420cf86d6ba9dd41d35784d9ed1c16d"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__00400-00600/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "32cfbf73d4f015c0b6b65258aa8627deeba7055ef555ef0d8767046b78f23bab"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__00600-00800/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "0874d4957ad9e1037ba752e0d02665517421ec211666e236f4ae93c7cafd8aa0"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__00800-01000/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "85a0fc0beb6533587a665eed42b50c256c9f76896d79f0664ec951af60a9bed0"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__01000-01200/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "1f4f2726000bbe1a8fd8b4bf65c8cd6172e59c602abcfe0437b43bed13ded2d0"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__01200-01400/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "98d5ff22d08dbb0635d26d7a8054910dc011d54f88d6dec897223e5d574f138d"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__01400-01600/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "fd8be32179b0287fa21d1605eaaf1ac6dd084236bb63d6875a89e8fb755dca4e"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__01600-01800/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "3130f24a4dad8067f1cfdf554ce81a4c4578ab92948fd2f9e2cf401c8983b8f1"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__race__01800-02000/answer-qa/gemma-2-9b_race.jsonl",
+      "sha256": "98f434b37a30a6da67b538483c8dc036d6fa168b35cf956ee23ad33370645237"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__00000-00200/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "209b67956a4cf0d146ee1c327c2a66d882fd1b98bf6078eea36b99288cae37ce"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__00200-00400/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "6c546f475302b6a7e2811852d55b8314d728dd584bc213f90205429b53492e3e"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__00400-00600/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "f21fd28eadf581dda626aea4b09824958abe047725df2213f42fd87e612e1b22"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__00600-00800/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "f6d4fb6ded2fd889925967fe523971e77f2a93d29d9477f580ad919c4f7845e2"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__00800-01000/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "36130687e896bae34caf3d65fb2637630239896e6f8e9984f4744762d775bb98"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__01000-01200/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "5906d51aaafdf81a8ad2766226708294548387cbc4f356fd386ce3f960402ed0"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__01200-01400/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "7ca175e6f1916f92895889958d0e508c6e210480b297240562a4f1db32e182e9"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__01400-01600/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "ca0803f3842ef2a7633406aa8edc6f77e17344de7622f02a8f291f2bb3da0140"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__01600-01800/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "8d85e40d3bf4c176473c44871543b20a4b43073db57e09ee6b01f945451c22b3"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__nq_open__01800-02000/answer-qa/gemma-2-9b_nq_open.jsonl",
+      "sha256": "1b73bbfcb70df627f6301dd1c50a2ddb018c56748b5b84b48ceeb06f0ac77444"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__00000-00200/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "72b67ad329a36fd6e45ec2eadd839630f82afb8d6e675b77cfdfa6f6618a82ac"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__00200-00400/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "13dcab922f4b70460a33e54cadc0eb6180c3161f0934eb619d34dfd275488f36"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__00400-00600/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "b7684f63b6826cd63632528b1a8897d62780953bc385e77015cf0a449725cc2b"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__00600-00800/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "ff5c203c5850c534c85ffe8aab232bac16a429ac35420e517671636e2d2937ef"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__00800-01000/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "bcad2637dee0293d408dcc2204a92da65edd84a6faddd2b6d786b759ef97db89"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__01000-01200/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "7d4140542132b63cc51a741e5749a6538133b28ab5d000622403da7376b44346"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__01200-01400/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "a6f494300a1ebb9028221925328de4dbb15ea6cb482240d1f7a86b8f51881fa2"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__01400-01600/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "a8d64b16e74c2bfe2524245400cb5b5e7d7ae1cd92fb3280381fd90d472a70bb"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__01600-01800/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "2d558abe1942256d7b7e65be4bff9dea9dafe9cfdef937a327aba2b65b529494"
+    },
+    {
+      "path": "runs/answer-qa__gemma-2-9b__triviaqa__01800-02000/answer-qa/gemma-2-9b_triviaqa.jsonl",
+      "sha256": "6b61120b6ae947c8fc0bf3769913cdda28f11cd3856dba87ab9b30e04e3c60b9"
+    }
+  ],
+  "evaluator_sha256": "21b28cc1c50a478b01e4219a9cffbaf3ae98297aced6ad1bcab26feee2a338fe",
+  "timing_source": "results/optimus-review-analysis-01/timing/timing_summary.csv",
+  "timing_source_sha256": "452ab64208c7873778fc0acc7b96496111a8611c59cca5a384bf8bae874f7bea"
+}

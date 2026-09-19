@@ -1,0 +1,9 @@
+model,dataset,mean_input_length,mean_output_length,max_output_length
+gemma-2-27b,SQuAD,186.2,45.645,256.0
+gemma-2-27b,nq_open,21.145,12.145,256.0
+gemma-2-9b,SQuAD,186.2,39.29,256.0
+gemma-2-9b,nq_open,21.145,22.155,256.0
+llama3-3b,SQuAD,186.47,33.44,256.0
+llama3-3b,nq_open,20.305,17.345,256.0
+llama3-8b,SQuAD,186.47,21.395,256.0
+llama3-8b,nq_open,20.305,20.5,256.0

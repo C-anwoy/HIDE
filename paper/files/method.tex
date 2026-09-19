@@ -162,49 +162,34 @@ sample size, $n_{\text{eff}}$, we consider two principled strategies:
 Each decoder layer captures different levels of abstraction; therefore, the choice of $\ell$ can, in principle, influence the measured dependence. Based on prior work suggesting that representations corresponding to the middle layers are often richer \citep{skean2025layerlayeruncoveringhidden} and provide stronger sentence-level semantic information suitable for detecting inconsistencies \citep{azaria2023internalstatellmknows}, we fix $\ell=\ell_{\text{mid}}$ for all our experiments to avoid an additional hyperparameter sweep. However, our framework is flexible to any layer choice and we observe the performance of \method~to be almost agnostic to the choice of $\ell$ (\cref{sec:layer_choice}).
 
 
-\subsection{Structural Validation of Decoupling}
+\subsection{Structural Analysis of Decoupling}
 \label{sec:structural_validation}
-\changedtwo{
-While HIDE provides a statistical measure of input-output dependence, we seek to ground this decoupling in the internal operations of the autoregressive transformer. Specifically, we investigate how reductions in the HSIC score correlate with bottlenecks in the attention-mediated information flow to the residual stream, and how this dynamic differentiates faithfulness from factuality hallucinations.
-}
-\changedtwo{
-As defined in \cref{sec:background}, $\mathbf{S}_{in} = \{s_1, s_2, \ldots, s_I\}$ is the input prompt and $\mathbf{S}_{out} = \{t_1, t_2, \ldots, t_O\}$ is the generated output sequence.
-In a standard transformer decoder, the hidden state of the $j$-th generated token at layer $l$, denoted $h_{j,out}^{(l)} \in \mathbb{R}^d$, is constructed via successive updates to the residual stream:
-$$h_{j,out}^{(l)} = h_{j,out}^{(l-1)} + \text{MHA}(h_{j,out}^{(l-1)}, H_{ctx}^{(l-1)}) + \text{MLP}(\tilde{h}_{j,out}^{(l)})$$
-where $H_{ctx}^{(l-1)}$ represents the concatenated context of the input and preceding output tokens. The Multi-Head Attention (MHA) mechanism projects information from the context into the current token's representation across $H$ heads. The contextual update $A_j$ written to the residual stream is bounded by the convex combination of value vectors:
-$$A_j = \sum_{h=1}^H W_O^{(h)} \left( \sum_{i=1}^I \alpha_{j,i}^{(h)} W_V^{(h)} h_{i,in}^{(l-1)} + \sum_{k=1}^j \beta_{j,k}^{(h)} W_V^{(h)} h_{k,out}^{(l-1)} \right)$$
-where $W_O^{(h)}$ and $W_V^{(h)}$ are the output and value projection matrices, and $\alpha_{j,i}^{(h)}$ and $\beta_{j,k}^{(h)}$ are the softmax attention weights.
-}
+We examine associations between the HIDE score and attention-mediated information flow. These are observational diagnostics, not evidence that statistical decoupling causes hallucination. In particular, attention to a question in closed-book QA need not imply factual correctness, while attention to supplied evidence can support faithful generation.
 
-\changedtwo{
-To trace this flow at our target layer ($l=l_{mid}$), we extract two structural proxies. The first is the \textit{Attention Mass to Prompt} ($\Omega$), representing the aggregate cross-attention probability mass directed from the generated output tokens back to the input prompt context. For a given token $j$, this is defined as $\Omega_j = \frac{1}{H} \sum_{h=1}^H \sum_{i=1}^I \alpha_{j,i}^{(h)}$. The second proxy is the \textit{Input-Derived Update Norm} ($\Delta_{in}$), which measures the $L_2$ norm of the specific residual stream vector updates originating exclusively from the input tokens. This is formally defined as $\Delta_{j,in} = ||\sum_{h=1}^H W_O^{(h)} \sum_{i=1}^I \alpha_{j,i}^{(h)} W_V^{(h)} h_{i,in}^{(l-1)}||_2$, and approximated in our experiments as the magnitude of the raw cross-attention probabilities multiplied by the preceding layer's hidden states.
-}
+At the selected layer $\ell$, let $\alpha_{j,i}^{(h)}$ denote the causal self-attention weight from an observed generated-token position $j$ to prompt token $i$ in head $h$. Let $J$ be the number of generated-token positions with available cached states. We use
+\begin{align}
+\bar\alpha_{j,i} &= H^{-1}\sum_{h=1}^{H}\alpha_{j,i}^{(h)}, \\
+\Omega &= J^{-1}\sum_{j=1}^{J}\sum_{i=1}^{I}\bar\alpha_{j,i}, \\
+\widetilde\Delta_{\mathrm{in}} &= J^{-1}\sum_{j=1}^{J}
+\left\|\sum_{i=1}^{I}\bar\alpha_{j,i}h_{i,\mathrm{in}}^{(\ell-1)}\right\|_2.
+\end{align}
+The norm is an \emph{unprojected input-state proxy}. It omits the learned value and output projections and therefore is not the actual input-derived residual update. Attention and preceding-layer states are aligned to the layer producing the hidden states used by HIDE. Both proxies average over all available generated-token positions and use no keyword extraction. Cached generation excludes the final unforwarded token; if no output state is available, all three scores use the recorded zero fallback. The standalone detection comparison uses the raw positive direction of each score without choosing its sign on test labels.
 
-\changedtwo{
-A critical consideration is whether a single dependence-based lens can capture both faithfulness and factuality errors. We postulate that while the underlying failure modes differ, both are strongly associated with structural decoupling in the residual stream. In faithfulness tasks, accurate generation requires explicit routing from the source evidence ($\Omega \gg 0$). When the model hallucinates, it frequently bypasses the input context ($\Omega \to 0$) to rely on internal priors or local decoding history. Consequently, the output representation becomes substantially less dependent on the input, leading the joint probability distribution to factorize ($P_{XY} \approx P_X P_Y$). Conversely, factuality hallucinations for closed-book queries represent a parametric failure. Faithful factual recall requires strong attention to specific subject-relation tokens to trigger correct associative memories in the MLP sub-layers. If this knowledge is absent, the specific structural circuit weakens, reducing the mutual information $I(X;Y)$. In both scenarios, the structural breakdown corresponds to a shrinking of the cross-covariance operator $C_{XY}$, which directly yields a reduced HIDE score.
-}
+Figure~\ref{fig:structural_flow} is recomputed on the corrected, matched cohorts described in Section~\ref{sec:paired_protocol}: 2,000 examples per model/dataset, with no score filtering or class rebalancing. For Llama-3-8B, PCC(HIDE,$\Omega$) is $0.560$ on SQuAD and $0.648$ on NQ; PCC(HIDE,$\widetilde\Delta_{\mathrm{in}}$) is $0.003$ and $0.367$, respectively. For Gemma-2-9B, the corresponding attention correlations are $0.565$ and $0.430$, and the norm correlations are explicitly \emph{positive}: $0.126$ on SQuAD and $0.215$ on NQ. These values replace the earlier figure's correlations, which used a different generation/selection protocol. Thus the previously foregrounded inverse ``magnitude versus precision'' relationship is not a general result. Neither update magnitude nor its correlation with HIDE establishes faithful information transfer or a causal mechanism.
 
-\changedtwo{
-As illustrated in Figure \ref{fig:structural_flow}, empirical evaluation validates this explanatory framework. The HIDE score exhibits a strong positive correlation with $\Omega$ across both Llama-3-8B and Gemma-2-9B on faithfulness (SQuAD) and factuality (Natural Questions) benchmarks (e.g., Pearson Correlation Coefficient $PCC=0.749$ and $0.805$ for Llama-3-8B). When generations are faithful, the model anchors its attention to the input. During hallucinations, the model bypasses the input, causing the HIDE score to collapse. Conversely, we observe a weak or negative correlation between the HIDE score and the update norm $\Delta_{in}$ (e.g., $PCC=-0.207$ for Llama-3-8B on SQuAD). This highlights a critical magnitude versus precision dynamic: massive residual updates do not guarantee faithful information transfer. During a hallucination, the model often pulls a noisy, unrefined amalgamation of states into the residual stream, inflating $\Delta_{in}$ without preserving semantic alignment. By capturing non-linear dependencies via HSIC, HIDE successfully isolates genuine statistical alignment from mere vector magnitude.
-}
-
-{\paragraph{Differentiating Faithfulness and Factuality} 
-\changedtwo{To verify that HIDE isolates causal operations rather than merely exploiting dataset regularities (such as detecting strictly off-topic text), we evaluated the Question-Conditioned but Wrong (QCBW) subset within the Natural Questions dataset. This subset comprises factuality hallucinations that maintain high semantic similarity (top 25\%) to the input prompt. As shown in Figure \ref{fig:structural_flow} (indicated by star markers), QCBW instances heavily cluster in the low-HIDE, low-$\Omega$ region. Even if the output remains superficially on-topic, the failure of precise associative mapping forces the model to default to diffuse, high-entropy priors, confirming that representational decoupling accurately captures the underlying structural collapse across both failure modes.
-}
+\paragraph{Question-conditioned but wrong answers}
+For NQ, star markers identify incorrect answers in the upper quartile of question--answer embedding similarity among incorrect answers (including ties at the cutoff). This QCBW subset controls descriptively for superficial topicality; it is not an intervention and does not identify causal circuits. All other examples remain in the figure and in the reported correlations. The standalone baseline results in Section~\ref{sec:paired_baselines} provide a direct test of whether HIDE adds predictive value beyond these proxies.
 
 \begin{figure*}[t]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{files/figures/llama3-8b_Mechanistic_Flow.pdf}
-        \caption*{(i) Llama-3-8B}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{files/figures/gemma-2-9b_Mechanistic_Flow.pdf}
-        \caption*{(ii) Gemma-2-9B}
-    \end{subfigure}
-    \caption{\changedtwo{Internal flow analysis of Llama-3-8B and Gemma-2-9B. The HIDE score strongly correlates with Attention Mass ($\Omega$) but shows weak/negative correlation with the Update Norm ($\Delta_{in}$), illustrating the magnitude vs. precision dynamic. QCBW hallucinations (star markers) demonstrate structural decoupling even when semantically on-topic.}}
-    \label{fig:structural_flow}
+\centering
+\begin{subfigure}[b]{0.49\textwidth}
+\includegraphics[width=\textwidth]{files/figures/llama3-8b_Mechanistic_Flow_updated.pdf}
+\caption*{(i) Llama-3-8B}
+\end{subfigure}\hfill
+\begin{subfigure}[b]{0.49\textwidth}
+\includegraphics[width=\textwidth]{files/figures/gemma-2-9b_Mechanistic_Flow_updated.pdf}
+\caption*{(ii) Gemma-2-9B}
+\end{subfigure}
+\caption{Observational information-flow diagnostics on the corrected cohorts: 2,000 examples per model/dataset, seed 42, greedy first-answer-line stopping. Columns show SQuAD and NQ; rows show prompt attention mass $\Omega$ and the unprojected input-state norm $\widetilde\Delta_{\rm in}$. Correctness uses answer--reference sentence similarity $>0.9$. Teal squares denote incorrect answers, red circles correct answers, and gold stars the NQ QCBW subset (upper question--answer-similarity quartile among incorrect answers, including cutoff ties). Every example is included; PCC is computed before display rounding, without score filtering or class balancing. These associations do not establish causality.}
+\label{fig:structural_flow}
 \end{figure*}

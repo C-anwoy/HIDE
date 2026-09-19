@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llr rr rr rr}
+\toprule
+& & & \multicolumn{2}{c}{HIDE} & \multicolumn{2}{c}{Attention $\Omega$} & \multicolumn{2}{c}{Norm $\widetilde\Delta_{\rm in}$} \\
+Model & Dataset & $N_+$ & AUC$_s$ & PCC$_s$ & AUC$_s$ & PCC$_s$ & AUC$_s$ & PCC$_s$ \\
+\midrule
+Llama-3-8B & SQuAD & 741 & 76.33 & 47.83 & 85.34 & 58.63 & 53.79 & 2.15 \\
+Llama-3-8B & RACE & 778 & 61.66 & 5.35 & 64.67 & 9.28 & 49.97 & -15.36 \\
+Llama-3-8B & NQ & 245 & 78.47 & 47.85 & 84.24 & 51.08 & 72.05 & 37.03 \\
+Llama-3-8B & TriviaQA & 1153 & 57.01 & 13.01 & 73.68 & 54.76 & 64.68 & 29.55 \\
+\midrule
+Gemma-2-9B & SQuAD & 679 & 75.90 & 48.53 & 86.72 & 63.97 & 54.32 & 14.68 \\
+Gemma-2-9B & RACE & 1150 & 57.93 & 20.78 & 51.23 & -0.84 & 50.56 & 0.18 \\
+Gemma-2-9B & NQ & 448 & 62.74 & 30.06 & 67.97 & 46.71 & 58.63 & 28.29 \\
+Gemma-2-9B & TriviaQA & 1257 & 49.83 & -1.76 & 66.94 & 39.88 & 61.53 & 20.04 \\
+\bottomrule
+\end{tabular}
+\caption{Matched detector comparison under first-answer-line stopping: 2,000 fixed seed-42 examples per model/dataset. $N_+$ counts answers with sentence similarity greater than 0.9. AUC and PCC are multiplied by 100; PCC uses the continuous reference metric. All scores use the same examples and labels; higher raw scores predict correctness. No direction is selected using test performance. These results are separate from the historical full-cohort tables.}
+\label{tab:paired_s}
+\end{table*}

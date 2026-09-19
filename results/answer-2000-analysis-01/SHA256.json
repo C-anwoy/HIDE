@@ -1,0 +1,16 @@
+{
+  "README.md": "55b95dd6e081a427079c0d72b16c69296d989999cc120bf3bf76fb18fb603ad7",
+  "analysis_manifest.json": "14090b078f61a75206f04cc0335756bd3e8e28030eb2f6f7262423cd4c6b2180",
+  "analysis_source.py": "e42c26306c24ac7466b63a6ffe959ea0c13c3837d487f2e939f6fb9ed6a23b5d",
+  "count_control.csv": "0d41baf099b73d3b2fbd54c196371b22cf748f254bdc8904b552b6e2b39abbf8",
+  "diagnostics.json": "4c450e5bd2b18d86a13ca11d19cc5c5fec3021ca1c84f29735257d988e82e441",
+  "gemma-2-9b_mechanistic.png": "a268a21a2d66da2c7fae189ad87e4748a7881df44c90e084509177ed34d89ed4",
+  "llama3-8b_mechanistic.png": "ec6b0ec49de2228171f319e58649124cadec1b70bd20743df11dd15fa4546ae8",
+  "mechanistic_correlations.csv": "ec15d3ba89a1b8eaa49f8d12560bfcecd022924dfbf0c706663ec9b52b9871d7",
+  "metrics.csv": "9f9ff5679e908815c6bcdf8b37e760fc0fd6fa04d94cc684acb11f5602ed83f0",
+  "scaling.png": "fd5ad371e15fda76682c03258412d892af71f99206dea8e9b81dc6abf1c5d7c2",
+  "subset.json": "c1bde0480a3134f5974a7443d317f1a1386a44518ecebc0c07d437e494afd41d",
+  "timing_lengths.csv": "c2057783354ed2b594019a7f435049ff9709bc43d1b38ba34d3182474f4549d0",
+  "timing_summary.csv": "452ab64208c7873778fc0acc7b96496111a8611c59cca5a384bf8bae874f7bea",
+  "validation.json": "793a7332c3a29a757dc1c344b1b639d77b90d40a619e8b6e40638deb50089b7a"
+}

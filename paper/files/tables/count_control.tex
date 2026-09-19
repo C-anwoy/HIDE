@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{llrrr}
+\toprule
+Model & Dataset & HIDE AUC$_s$ & Count-control AUC$_s$ & PCC(HIDE, control) \\
+\midrule
+Llama-3-8B & SQuAD & 76.33 & 76.38 & 1.000000 \\
+Llama-3-8B & RACE & 61.66 & 61.92 & 1.000000 \\
+Llama-3-8B & NQ & 78.47 & 78.57 & 1.000000 \\
+Llama-3-8B & TriviaQA & 57.01 & 56.58 & 1.000000 \\
+Gemma-2-9B & SQuAD & 75.90 & 75.92 & 0.998759 \\
+Gemma-2-9B & RACE & 57.93 & 57.83 & 0.998718 \\
+Gemma-2-9B & NQ & 62.74 & 63.01 & 0.999911 \\
+Gemma-2-9B & TriviaQA & 49.83 & 49.78 & 0.999988 \\
+\bottomrule\end{tabular}
+\caption{Selected-token-count diagnostic on the same corrected cohorts. The control is $(n_{\rm eff}-1)/n_{\rm eff}^2$ for $n_{\rm eff}\geq1$, and zero otherwise. AUC is multiplied by 100; PCC is unscaled. This is a control for realized selected-token count, not raw output length.}
+\label{tab:count_control}\end{table*}

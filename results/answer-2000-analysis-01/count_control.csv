@@ -1,0 +1,9 @@
+model,dataset,pcc_hide_count
+llama3-8b,SQuAD,0.9999999999894318
+llama3-8b,race,0.9999999999819971
+llama3-8b,nq_open,0.9999999999904128
+llama3-8b,triviaqa,0.9999999999902224
+gemma-2-9b,SQuAD,0.9987594354459348
+gemma-2-9b,race,0.9987184459729964
+gemma-2-9b,nq_open,0.9999112665291502
+gemma-2-9b,triviaqa,0.9999877450762794

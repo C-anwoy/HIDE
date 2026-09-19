@@ -1,0 +1,650 @@
+{
+  "format": "hide-fixed-subset-v1",
+  "parent_plan_sha256": "8697a956511988311ee445ff9fae8cbac6bac84d167fef8e851f962acaaef95f",
+  "examples_per_dataset_per_model": 2000,
+  "seed": 42,
+  "selection": "Positions [0, 2000) in the existing seed-42 shuffled cohort; chosen for the deadline after earlier full-cohort results were inspected; no selection using individual detector scores or correctness labels.",
+  "answer_boundary": "first-line",
+  "tasks": [
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__00000-00200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__00000-00200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__00000-00200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__00000-00200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__00200-00400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__00200-00400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__00200-00400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__00200-00400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__00400-00600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__00400-00600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__00400-00600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__00400-00600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__00600-00800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__00600-00800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__00600-00800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__00600-00800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__00800-01000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__00800-01000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__00800-01000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__00800-01000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__01000-01200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__01000-01200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__01000-01200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__01000-01200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__01200-01400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__01200-01400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__01200-01400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__01200-01400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__01400-01600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__01400-01600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__01400-01600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__01400-01600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__01600-01800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__01600-01800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__01600-01800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__01600-01800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__nq_open__01800-02000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "nq_open",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__llama3-8b__nq_open__01800-02000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "nq_open",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__triviaqa__01800-02000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "triviaqa",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__llama3-8b__triviaqa__01800-02000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "triviaqa",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__00000-00200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__00000-00200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__00000-00200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__00000-00200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 0,
+      "stop": 200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__00200-00400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__00200-00400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__00200-00400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__00200-00400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 200,
+      "stop": 400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__00400-00600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__00400-00600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__00400-00600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__00400-00600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 400,
+      "stop": 600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__00600-00800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__00600-00800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__00600-00800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__00600-00800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 600,
+      "stop": 800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__00800-01000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__00800-01000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__00800-01000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__00800-01000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 800,
+      "stop": 1000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__01000-01200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__01000-01200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__01000-01200",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__01000-01200",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 1000,
+      "stop": 1200
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__01200-01400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__01200-01400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__01200-01400",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__01200-01400",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 1200,
+      "stop": 1400
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__01400-01600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__01400-01600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__01400-01600",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__01400-01600",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 1400,
+      "stop": 1600
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__01600-01800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__01600-01800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__01600-01800",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__01600-01800",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 1600,
+      "stop": 1800
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__SQuAD__01800-02000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "SQuAD",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__llama3-8b__SQuAD__01800-02000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "SQuAD",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__gemma-2-9b__race__01800-02000",
+      "profile": "answer-qa",
+      "model": "gemma-2-9b",
+      "dataset": "race",
+      "start": 1800,
+      "stop": 2000
+    },
+    {
+      "id": "answer-qa__llama3-8b__race__01800-02000",
+      "profile": "answer-qa",
+      "model": "llama3-8b",
+      "dataset": "race",
+      "start": 1800,
+      "stop": 2000
+    }
+  ]
+}
