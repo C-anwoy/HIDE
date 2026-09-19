@@ -1,0 +1,2 @@
+# Preserve the supplied CSV byte-for-byte, including its CRLF line endings.
+/results/timing-sheet-audit/source.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

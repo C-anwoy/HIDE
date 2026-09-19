@@ -32,7 +32,7 @@ def main():
             rows.append(dict(model=model, dataset=ds, base_s=base, total_s=total,
                              overhead_s=total-base, overhead_pct=100*(total-base)/base))
     with (OUT/'overheads.csv').open('w') as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
+        w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator='\n'); w.writeheader(); w.writerows(rows)
     report = dict(source_sha256=hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
         source_hide_label=HIDE, dataset_order=DATASETS, averages=averages,
         mean_model_relative_reduction_pct=reductions,
